@@ -1,0 +1,156 @@
+'use client'
+
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Grid, List } from 'lucide-react'
+import { mockArtists } from '@/data/artists'
+import type { ArtistFilter } from '@/types'
+
+type ViewType = 'grid' | 'list'
+
+export default function ArtistsPage() {
+  const [filter, setFilter] = useState<ArtistFilter>('all')
+  const [viewType, setViewType] = useState<ViewType>('grid')
+  const [visibleCount, setVisibleCount] = useState(12)
+
+  const filteredArtists = mockArtists.filter((artist) => {
+    if (filter === 'all') return true
+    return artist.category === filter
+  })
+
+  const visibleArtists = filteredArtists.slice(0, visibleCount)
+
+  const filterLabels: Record<ArtistFilter, string> = {
+    all: '전체',
+    featured: '대표 작가',
+    emerging: '신진 작가',
+  }
+
+  return (
+    <div className="pt-20 min-h-screen bg-white">
+      {/* Header Section */}
+      <section className="py-12 px-6 border-b border-gray-200">
+        <div className="max-w-[1440px] mx-auto">
+          <h1 className="text-4xl text-center mb-8 tracking-widest font-light">
+            ARTISTS
+          </h1>
+
+          {/* Filter Options */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex gap-4 flex-wrap justify-center">
+              {(['all', 'featured', 'emerging'] as ArtistFilter[]).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => {
+                    setFilter(f)
+                    setVisibleCount(12) // Reset visible count when filtering
+                  }}
+                  className={`px-6 py-2 text-xs tracking-widest uppercase transition-all ${
+                    filter === f
+                      ? 'bg-black text-white'
+                      : 'bg-white text-black border border-black hover:bg-gray-100'
+                  }`}
+                >
+                  {filterLabels[f]}
+                </button>
+              ))}
+            </div>
+
+            {/* View Toggle */}
+            <div className="flex gap-2 border border-gray-300">
+              <button
+                onClick={() => setViewType('grid')}
+                className={`p-2 ${viewType === 'grid' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                aria-label="Grid view"
+              >
+                <Grid size={20} />
+              </button>
+              <button
+                onClick={() => setViewType('list')}
+                className={`p-2 ${viewType === 'list' ? 'bg-black text-white' : 'bg-white text-black'}`}
+                aria-label="List view"
+              >
+                <List size={20} />
+              </button>
+            </div>
+          </div>
+
+          <p className="text-center mt-6 text-sm text-gray-600">
+            {filteredArtists.length}명의 작가
+          </p>
+        </div>
+      </section>
+
+      {/* Artists Grid/List */}
+      <section className="py-16 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          {viewType === 'grid' ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {visibleArtists.map((artist) => (
+                <Link
+                  key={artist.id}
+                  href={`/artists/${artist.id}`}
+                  className="group cursor-pointer"
+                >
+                  <div className="relative overflow-hidden mb-4 aspect-square">
+                    <Image
+                      src={artist.image}
+                      alt={artist.name.ko}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-white text-sm tracking-widest">VIEW ARTIST</span>
+                    </div>
+                  </div>
+                  <h3 className="tracking-wide mb-1 font-medium">{artist.name.ko}</h3>
+                  <p className="text-sm text-gray-600">{artist.nationality}</p>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {visibleArtists.map((artist) => (
+                <Link
+                  key={artist.id}
+                  href={`/artists/${artist.id}`}
+                  className="flex items-center gap-6 p-4 border border-gray-200 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="relative w-24 h-24 overflow-hidden flex-shrink-0">
+                    <Image
+                      src={artist.image}
+                      alt={artist.name.ko}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="tracking-wide mb-1 font-medium">{artist.name.ko}</h3>
+                    <p className="text-sm text-gray-600">{artist.nationality}</p>
+                    <p className="text-sm text-gray-500 mt-2 line-clamp-2">{artist.bio.ko}</p>
+                  </div>
+                  <button className="px-6 py-2 border border-black text-xs tracking-widest hover:bg-black hover:text-white transition-all">
+                    VIEW
+                  </button>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Load More Button */}
+          {visibleCount < filteredArtists.length && (
+            <div className="mt-16 text-center">
+              <button
+                onClick={() => setVisibleCount((prev) => prev + 8)}
+                className="px-12 py-3 border border-black text-sm tracking-widest uppercase hover:bg-black hover:text-white transition-all duration-300"
+              >
+                더 보기
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
