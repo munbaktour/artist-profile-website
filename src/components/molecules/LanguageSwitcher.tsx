@@ -7,7 +7,6 @@
 
 import { cn } from '@/lib/utils'
 
-import type { Language } from '@/types'
 import type { LanguageSwitcherProps } from '@/types/components'
 
 export function LanguageSwitcher({

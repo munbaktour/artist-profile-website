@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: SEO_DEFAULTS.DEFAULT_TITLE,
   description: SEO_DEFAULTS.DESCRIPTION.ko,
-  keywords: SEO_DEFAULTS.KEYWORDS,
+  keywords: [...SEO_DEFAULTS.KEYWORDS],
 }
 
 export default function RootLayout({

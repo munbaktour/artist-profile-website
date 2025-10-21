@@ -24,7 +24,7 @@ export interface HeaderProps extends BaseProps {
   fixed?: boolean
 }
 
-export interface FooterProps extends BaseProps {}
+export type FooterProps = BaseProps
 
 export interface NavigationProps extends BaseProps {
   mobile?: boolean
@@ -96,8 +96,16 @@ export interface FormFieldProps extends BaseProps {
   onChange: (value: string) => void
 }
 
+export interface ContactFormData {
+  name: string
+  email: string
+  phone?: string
+  subject?: string
+  message: string
+}
+
 export interface ContactFormProps extends BaseProps {
-  onSubmit: (data: any) => void
+  onSubmit: (data: ContactFormData) => void
   isSubmitting?: boolean
 }
 

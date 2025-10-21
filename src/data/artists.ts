@@ -23,7 +23,7 @@ export const artistsData: Artist[] = [
     name: { ko: '유근영', en: 'Yoo Geun Young' },
     category: 'featured',
     bio: {
-      kr: "유근영 작가는 추상과 구상의 경계를 넘나들며 독자적인 조형 언어를 구축해왔다. 강렬한 색채와 역동적인 붓질로 내면의 감정을 캔버스에 표현하며, 한국 현대회화의 새로운 가능성을 제시하고 있다.",
+      ko: "유근영 작가는 추상과 구상의 경계를 넘나들며 독자적인 조형 언어를 구축해왔다. 강렬한 색채와 역동적인 붓질로 내면의 감정을 캔버스에 표현하며, 한국 현대회화의 새로운 가능성을 제시하고 있다.",
       en: "Yoo Geun Young has developed a unique visual language crossing between abstract and figurative art."
     },
     image: "/images/artists/yoo-geun-young.jpg",

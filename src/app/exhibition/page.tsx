@@ -78,7 +78,9 @@ export default function ExhibitionPage() {
                         day: 'numeric'
                       })}
                     </p>
-                    <p className="text-sm text-gray-300">{featuredExhibition.location.ko}</p>
+                    {featuredExhibition.location && (
+                      <p className="text-sm text-gray-300">{featuredExhibition.location.ko}</p>
+                    )}
                     <button className="mt-6 px-8 py-3 bg-white text-black text-xs tracking-widest hover:bg-gray-200 transition-all">
                       전시 상세보기
                     </button>
@@ -125,7 +127,9 @@ export default function ExhibitionPage() {
                         day: 'numeric'
                       })}
                     </p>
-                    <p className="text-sm tracking-wide">{exhibition.location.ko}</p>
+                    {exhibition.location && (
+                      <p className="text-sm tracking-wide">{exhibition.location.ko}</p>
+                    )}
                   </div>
                 </Link>
               ))}

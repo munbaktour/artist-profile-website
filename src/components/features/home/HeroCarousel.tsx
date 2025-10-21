@@ -13,7 +13,6 @@ import Image from 'next/image'
 import { ChevronDown } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules'
-import type { Swiper as SwiperType } from 'swiper'
 
 // Swiper styles
 import 'swiper/css'
@@ -28,7 +27,6 @@ import type { CarouselProps } from '@/types/components'
 
 export function HeroCarousel({ images, className }: CarouselProps) {
   const [isMobile, setIsMobile] = useState(false)
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
   // 모바일 감지
   useEffect(() => {
@@ -54,7 +52,6 @@ export function HeroCarousel({ images, className }: CarouselProps) {
       className={cn('relative h-screen w-full overflow-hidden', className)}
     >
       <Swiper
-        onSwiper={setSwiperInstance}
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
         spaceBetween={isMobile ? 0 : 30}
         slidesPerView={isMobile ? 1 : 'auto'}
