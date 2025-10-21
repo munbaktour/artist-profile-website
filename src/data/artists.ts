@@ -4,104 +4,72 @@ import type { Artist } from '@/types'
  * KWANHOONARTE 작가 데이터
  * Single Source of Truth - 모든 작가 정보는 이 파일에만 정의
  */
-export const mockArtists: Artist[] = [
+export const artistsData: Artist[] = [
   {
-    id: '1',
+    id: "jung-sun-young",
     name: { ko: '정선영', en: 'Jung Sun Young' },
     category: 'featured',
     bio: {
-      ko: '동물과 식물이 아름답게 공존하는 낙원의 모습을 그리는 작가',
-      en: 'Artist depicting paradise where animals and plants beautifully coexist'
+      ko: "정선영 작가는 동양화의 전통적 기법을 현대적으로 재해석하는 작업을 통해 한국 현대미술계에서 독특한 위치를 차지하고 있다. 전통 재료와 현대적 감각의 조화를 추구하며, 자연과 인간의 관계를 섬세한 필치로 표현한다.",
+      en: "Jung Sun Young reinterprets traditional Korean painting techniques through a contemporary lens, holding a unique position in Korean contemporary art."
     },
-    image: '/images/artists/jung-sun-young.jpg',
-    nationality: '대한민국',
-    location: '인도네시아 자카르타',
-    exhibitions: [
-      '<공존> 시리즈',
-      '<공존의 숲> 시리즈',
-      '<이국적인 풍경> 시리즈',
-      '<봄의 정원> 시리즈'
-    ],
+    image: "/images/artists/jung-sun-young.jpg",
+    birthYear: 1972,
+    nationality: "한국"
   },
+
   {
-    id: '2',
+    id: "yoo-geun-young",
     name: { ko: '유근영', en: 'Yoo Geun Young' },
     category: 'featured',
     bio: {
-      ko: '한국적 표현주의 화가로 구상과 비구상의 경계를 자유롭게 넘나드는 작가',
-      en: 'Korean expressionist painter freely crossing boundaries between figurative and non-figurative art'
+      kr: "유근영 작가는 추상과 구상의 경계를 넘나들며 독자적인 조형 언어를 구축해왔다. 강렬한 색채와 역동적인 붓질로 내면의 감정을 캔버스에 표현하며, 한국 현대회화의 새로운 가능성을 제시하고 있다.",
+      en: "Yoo Geun Young has developed a unique visual language crossing between abstract and figurative art."
     },
-    image: '/images/artists/yoo-geun-young.jpg',
-    nationality: '대한민국',
-    birthYear: 1948,
-    education: [
-      '1974 홍익대학교 미술대학 회화과 졸업',
-      '1985 홍익대학교 대학원 미학과 졸업'
-    ],
-    exhibitions: [
-      '2005 대전시립미술관 개인전',
-      '2001-2007 총 35회 개인전 개최',
-      '한남대, 목원대, 충남대 출강'
-    ],
+    image: "/images/artists/yoo-geun-young.jpg",
+    birthYear: 1968,
+    nationality: "한국"
   },
+
   {
-    id: '3',
+    id: "son-moon-il",
     name: { ko: '손문일', en: 'Son Moon Il' },
     category: 'featured',
     bio: {
-      ko: '동서양 회화를 융합하며 재료와 작가의 관계를 탐구하는 작가',
-      en: 'Artist exploring the relationship between materials and artist by fusing Eastern and Western painting'
+      ko: "손문일은 서울대학교 동양화과를 졸업하고 북경 중앙미술학원에서 수학했다. 대상의 본질에 대한 물음에서 출발하여 오브제를 활용한 독특한 작업 세계를 구축했다. 전통과 현대, 동양과 서양의 경계를 넘나들며 독자적인 예술 언어를 탐구하고 있다.",
+      en: "Son Moon Il graduated from Seoul National University and studied at the Central Academy of Fine Arts in Beijing. He explores unique artistic language crossing boundaries between tradition and contemporary."
     },
-    image: '/images/artists/son-moon-il.jpg',
-    nationality: '대한민국',
-    education: [
-      '서울대학교 미술대학 동양화 전공',
-      '북경 중앙미술대학원 벽화과 졸업',
-      '중앙대학교 예술학 수료'
-    ],
-    exhibitions: [
-      '서울, 북경, 베니스 등에서 총 10회 개인전',
-      '북경 중앙미술관, 성곡미술관, 암웨이 미술관 등 단체전 참여'
-    ],
+    image: "/images/artists/son-moon-il.jpg",
+    birthYear: 1980,
+    nationality: "한국"
   },
+
   {
-    id: '4',
+    id: "byun-geon-ho",
     name: { ko: '변건호', en: 'Byun Geon Ho' },
-    category: 'featured',
+    category: 'emerging',
     bio: {
-      ko: '전통과 현대, 동양과 서양의 조화를 추구하는 작가',
-      en: 'Artist pursuing harmony between tradition and modernity, East and West'
+      ko: "변건호 작가는 도시 풍경과 일상의 순간을 독특한 시각으로 포착하는 작업을 이어오고 있다. 사진과 회화의 경계를 탐구하며, 현실과 환상 사이의 모호한 지점을 시각화한다.",
+      en: "Byun Geon Ho captures urban landscapes and everyday moments through a unique perspective, exploring the boundary between photography and painting."
     },
-    image: '/images/artists/byun-geon-ho.jpg',
-    nationality: '대한민국',
-    education: [
-      '중앙대학교 예술대학 한국화과 졸업',
-      '중앙대학교 일반대학원 회화과 석사 졸업'
-    ],
-    exhibitions: [
-      '개인전 18회 개최',
-      '국내외 그룹전 다수 참여'
-    ],
+    image: "/images/artists/byun-geon-ho.jpg",
+    birthYear: 1975,
+    nationality: "한국"
   },
+
   {
-    id: '5',
+    id: "kim-hyung-dae",
     name: { ko: '김형대', en: 'Kim Hyung Dae' },
     category: 'featured',
     bio: {
-      ko: '한국 앵포르멜 미술의 선구자로 추상미술의 제도적 승인에 기여한 작가',
-      en: 'Pioneer of Korean Art Informel who contributed to the institutional recognition of abstract art'
+      ko: "김형대는 한국 추상미술의 선구자로, 1960년대 앵포르멜 운동을 주도했다. 1961년 국전에서 추상회화로는 최초로 수상하며 한국 추상미술의 권위를 인정받았다. 2024년 대한민국예술원 회원으로 선출되었다.",
+      en: "Kim Hyung Dae is a pioneer of Korean abstract art who led the Informel movement in the 1960s. Elected as a member of the National Academy of Arts in 2024."
     },
-    image: '/images/artists/kim-hyung-dae.jpg',
-    nationality: '대한민국',
+    image: "/images/artists/kim-hyung-dae.jpg",
     birthYear: 1936,
-    education: [
-      '홍익대학교 미술대학 회화과 졸업'
-    ],
-    exhibitions: [
-      '2016 김형대 회고전, 국립현대미술관, 개인전',
-      '1961 대한민국미술전람회 국가재건최고회의 의장상 수상',
-      '<환원 B> (1961) - 한국 추상미술사의 기념비적 작품',
-      '<후광> 연작 (1970년대-2012년)'
-    ],
-  },
+    nationality: "한국"
+  }
 ]
+
+// 기존 코드 호환성을 위한 별칭
+export const mockArtists = artistsData

@@ -29,8 +29,6 @@ export interface Artist {
   nationality?: string
   location?: string // 현재 거주지
   education?: string[]
-  exhibitions?: string[]
-  awards?: string[]
   works?: ArtWork[]
 }
 

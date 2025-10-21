@@ -1,11 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { Grid, List } from 'lucide-react'
-import { mockArtists } from '@/data/artists'
-import type { ArtistFilter } from '@/types'
+import { artistsData } from '@/data/artists'
+import { ArtistCard } from '@/components/molecules/ArtistCard'
+import type { ArtistFilter, Language } from '@/types'
 
 type ViewType = 'grid' | 'list'
 
@@ -13,8 +12,9 @@ export default function ArtistsPage() {
   const [filter, setFilter] = useState<ArtistFilter>('all')
   const [viewType, setViewType] = useState<ViewType>('grid')
   const [visibleCount, setVisibleCount] = useState(12)
+  const locale: Language = 'ko' // TODO: 다국어 컨텍스트에서 가져오기
 
-  const filteredArtists = mockArtists.filter((artist) => {
+  const filteredArtists = artistsData.filter((artist) => {
     if (filter === 'all') return true
     return artist.category === filter
   })
@@ -88,52 +88,23 @@ export default function ArtistsPage() {
           {viewType === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {visibleArtists.map((artist) => (
-                <Link
+                <ArtistCard
                   key={artist.id}
-                  href={`/artists/${artist.id}`}
-                  className="group cursor-pointer"
-                >
-                  <div className="relative overflow-hidden mb-4 aspect-square">
-                    <Image
-                      src={artist.image}
-                      alt={artist.name.ko}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white text-sm tracking-widest">VIEW ARTIST</span>
-                    </div>
-                  </div>
-                  <h3 className="tracking-wide mb-1 font-medium">{artist.name.ko}</h3>
-                  <p className="text-sm text-gray-600">{artist.nationality}</p>
-                </Link>
+                  artist={artist}
+                  locale={locale}
+                  viewType="grid"
+                />
               ))}
             </div>
           ) : (
             <div className="space-y-4">
               {visibleArtists.map((artist) => (
-                <Link
+                <ArtistCard
                   key={artist.id}
-                  href={`/artists/${artist.id}`}
-                  className="flex items-center gap-6 p-4 border border-gray-200 hover:bg-gray-50 transition-colors"
-                >
-                  <div className="relative w-24 h-24 overflow-hidden flex-shrink-0">
-                    <Image
-                      src={artist.image}
-                      alt={artist.name.ko}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="tracking-wide mb-1 font-medium">{artist.name.ko}</h3>
-                    <p className="text-sm text-gray-600">{artist.nationality}</p>
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2">{artist.bio.ko}</p>
-                  </div>
-                  <button className="px-6 py-2 border border-black text-xs tracking-widest hover:bg-black hover:text-white transition-all">
-                    VIEW
-                  </button>
-                </Link>
+                  artist={artist}
+                  locale={locale}
+                  viewType="list"
+                />
               ))}
             </div>
           )}
