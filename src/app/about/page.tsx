@@ -26,33 +26,6 @@ export default function AboutPage() {
     },
   ]
 
-  const team = [
-    {
-      id: 1,
-      name: 'Kim Kwanhoon',
-      title: { ko: '설립자 및 관장', en: 'Founder & Director' },
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400'
-    },
-    {
-      id: 2,
-      name: 'Lee Minjae',
-      title: { ko: '큐레이터', en: 'Curator' },
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400'
-    },
-    {
-      id: 3,
-      name: 'Park Soyeon',
-      title: { ko: '갤러리 매니저', en: 'Gallery Manager' },
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400'
-    },
-    {
-      id: 4,
-      name: 'Choi Junho',
-      title: { ko: '마케팅 이사', en: 'Marketing Director' },
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400'
-    },
-  ]
-
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -131,61 +104,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-[1440px] mx-auto">
-          <h2 className="text-3xl mb-12 text-center tracking-wider font-light">우리 팀</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {team.map((member) => (
-              <div key={member.id} className="text-center">
-                <div className="relative mb-4 overflow-hidden rounded-full w-40 h-40 mx-auto">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h4 className="tracking-wide mb-1 font-medium">{member.name}</h4>
-                <p className="text-sm text-gray-600">{member.title.ko}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Info Footer */}
-      <section className="py-16 px-6 bg-black text-white">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-              <h4 className="mb-4 tracking-wider font-light">주소</h4>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                서울시 강남구<br />
-                강남대로 123<br />
-                우편번호 06090
-              </p>
-            </div>
-            <div>
-              <h4 className="mb-4 tracking-wider font-light">운영 시간</h4>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                화요일 - 토요일<br />
-                오전 11시 - 오후 7시<br />
-                일요일: 오후 12시 - 오후 6시<br />
-                월요일 휴관
-              </p>
-            </div>
-            <div>
-              <h4 className="mb-4 tracking-wider font-light">연락처</h4>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                Tel: +82 2 1234 5678<br />
-                Email: info@kwanhoonarte.com<br />
-                Instagram: @kwanhoonarte
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import Image from 'next/image'
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -88,8 +88,7 @@ export default function ContactPage() {
                       <p className="tracking-wide mb-1 font-medium">주소</p>
                       <p className="text-sm text-gray-600 leading-relaxed">
                         서울 종로구 관훈동<br />
-                        인사동5길 12<br />
-                        우편번호 06090
+                        인사동5길 12 2층
                       </p>
                     </div>
                   </div>
@@ -106,7 +105,7 @@ export default function ContactPage() {
                     <Mail size={20} className="text-gray-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="tracking-wide mb-1 font-medium">이메일</p>
-                      <p className="text-sm text-gray-600">artstory@kwanhoonarte.com</p>
+                      <p className="text-sm text-gray-600">kwanhoonarte@gmail.com</p>
                     </div>
                   </div>
 
@@ -115,9 +114,8 @@ export default function ContactPage() {
                     <div>
                       <p className="tracking-wide mb-1 font-medium">운영 시간</p>
                       <p className="text-sm text-gray-600 leading-relaxed">
-                        화요일 - 토요일: 오전 11시 - 오후 7시<br />
-                        일요일: 오후 12시 - 오후 6시<br />
-                        월요일 및 공휴일 휴관
+                        월 - 금: 오전 11시 - 오후 7시<br />
+                        토 - 일: 오후 1시 - 오후 6시
                       </p>
                     </div>
                   </div>
@@ -246,25 +244,13 @@ export default function ContactPage() {
           </p>
           <div className="flex justify-center gap-6">
             <a
-              href="#"
+              href="https://instagram.com/kwanhoonarte"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all"
               aria-label="Instagram"
             >
               <Instagram size={20} />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all"
-              aria-label="Facebook"
-            >
-              <Facebook size={20} />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all"
-              aria-label="Twitter"
-            >
-              <Twitter size={20} />
             </a>
           </div>
         </div>

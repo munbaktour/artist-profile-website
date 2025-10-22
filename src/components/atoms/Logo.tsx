@@ -18,7 +18,7 @@ export function Logo({ className, onClick }: LogoProps) {
       href="/"
       onClick={onClick}
       className={cn(
-        'tracking-wider hover:text-gray-600 transition-colors text-base font-medium',
+        'tracking-tight hover:text-gray-600 transition-colors text-2xl font-bold text-black',
         className
       )}
     >

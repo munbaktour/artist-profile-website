@@ -40,7 +40,7 @@ export function Navigation({
       className={cn(
         mobile
           ? 'flex flex-col gap-4'
-          : 'hidden lg:flex items-center gap-8',
+          : 'hidden lg:flex items-center gap-10',
         className
       )}
     >
@@ -54,9 +54,9 @@ export function Navigation({
             href={item.href}
             onClick={handleClick}
             className={cn(
-              'tracking-wider transition-colors',
-              mobile ? 'text-sm text-left' : 'text-xs',
-              isActive ? 'text-black' : 'text-gray-500 hover:text-gray-900'
+              'tracking-wide transition-colors font-medium',
+              mobile ? 'text-base text-left' : 'text-lg',
+              isActive ? 'text-black' : 'text-gray-700 hover:text-black'
             )}
           >
             {label}

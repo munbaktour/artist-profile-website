@@ -74,11 +74,9 @@ export function Header({
           {/* Logo */}
           <Logo onClick={closeMobileMenu} />
 
-          {/* Desktop Navigation */}
-          <Navigation language={language} />
-
-          {/* Desktop Language Switcher */}
-          <div className="hidden lg:block">
+          {/* Desktop Navigation & Language Switcher - Right Aligned */}
+          <div className="hidden lg:flex items-center gap-8 ml-auto">
+            <Navigation language={language} />
             <LanguageSwitcher
               currentLanguage={language}
               onLanguageChange={onLanguageChange}

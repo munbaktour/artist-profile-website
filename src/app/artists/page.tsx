@@ -75,10 +75,6 @@ export default function ArtistsPage() {
               </button>
             </div>
           </div>
-
-          <p className="text-center mt-6 text-sm text-gray-600">
-            {filteredArtists.length}명의 작가
-          </p>
         </div>
       </section>
 

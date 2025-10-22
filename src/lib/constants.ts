@@ -94,11 +94,11 @@ export const SOCIAL_LINKS = {
 // ============================================
 export const GALLERY_INFO = {
   NAME: 'KWANHOONARTE',
-  EMAIL: 'artstory@kwanhoonarte.com',
+  EMAIL: 'kwanhoonarte@gmail.com',
   PHONE: '02-720-4028',
   ADDRESS: {
-    ko: '서울 종로구 관훈동 인사동5길 12',
-    en: '12, Insadong 5-gil, Gwanhun-dong, Jongno-gu, Seoul',
+    ko: '서울 종로구 관훈동 인사동5길 12 2층',
+    en: '2F, 12, Insadong 5-gil, Gwanhun-dong, Jongno-gu, Seoul',
   },
 } as const
 

@@ -6,10 +6,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Instagram, Facebook } from 'lucide-react'
+import { Instagram } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-import { GALLERY_INFO, SOCIAL_LINKS, NAVIGATION_ITEMS } from '@/lib/constants'
+import { GALLERY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import type { Language } from '@/types'
 import type { FooterProps } from '@/types/components'
 
@@ -28,93 +28,49 @@ export function Footer({ language, className }: FooterComponentProps) {
         className
       )}
     >
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Gallery Info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold tracking-wider">
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Left Column - Gallery Info (2 columns wide) */}
+          <div className="md:col-span-2 space-y-2">
+            <h3 className="text-lg font-semibold tracking-wider mb-4">
               {GALLERY_INFO.NAME}
             </h3>
-            <div className="space-y-2 text-sm text-gray-600">
-              <p>{address}</p>
-              <p>
-                <a
-                  href={`tel:${GALLERY_INFO.PHONE}`}
-                  className="hover:text-gray-900 transition-colors"
-                >
-                  {GALLERY_INFO.PHONE}
-                </a>
-              </p>
-              <p>
-                <a
-                  href={`mailto:${GALLERY_INFO.EMAIL}`}
-                  className="hover:text-gray-900 transition-colors"
-                >
-                  {GALLERY_INFO.EMAIL}
-                </a>
-              </p>
-            </div>
+            <p className="text-sm text-gray-600">{address}</p>
+            <p className="text-sm text-gray-600">
+              <a
+                href={`tel:${GALLERY_INFO.PHONE}`}
+                className="hover:text-gray-900 transition-colors"
+              >
+                {GALLERY_INFO.PHONE}
+              </a>
+            </p>
+            <p className="text-sm text-gray-600">
+              <a
+                href={`mailto:${GALLERY_INFO.EMAIL}`}
+                className="hover:text-gray-900 transition-colors"
+              >
+                {GALLERY_INFO.EMAIL}
+              </a>
+            </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold tracking-wider">
-              {language === 'ko' ? '바로가기' : 'Quick Links'}
-            </h3>
-            <nav className="flex flex-col space-y-2 text-sm">
-              {NAVIGATION_ITEMS.slice(0, 4).map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  {item.label[language]}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          {/* Middle Column - Empty spacer */}
+          <div className="hidden md:block md:col-span-1" />
 
-          {/* More Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold tracking-wider">
-              {language === 'ko' ? '정보' : 'Information'}
-            </h3>
-            <nav className="flex flex-col space-y-2 text-sm">
-              {NAVIGATION_ITEMS.slice(4).map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  {item.label[language]}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Social Media */}
-          <div className="space-y-4">
+          {/* Right Column - Social Media */}
+          <div className="md:col-span-1 space-y-4 md:text-right">
             <h3 className="text-lg font-semibold tracking-wider">
               {language === 'ko' ? '소셜 미디어' : 'Follow Us'}
             </h3>
-            <div className="flex gap-4">
+            <div className="flex gap-4 md:justify-end">
               <a
                 href={SOCIAL_LINKS.INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+                className="w-6 h-6 flex items-center justify-center hover:opacity-70 transition-opacity"
                 aria-label="Instagram"
               >
-                <Instagram size={20} />
-              </a>
-              <a
-                href={SOCIAL_LINKS.FACEBOOK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
+                <Instagram size={24} />
               </a>
             </div>
           </div>
