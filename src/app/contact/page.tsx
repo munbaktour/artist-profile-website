@@ -3,8 +3,14 @@
 import { useState, FormEvent } from 'react'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
+import { NaverMap } from '@/components/molecules/NaverMap'
+import { NavermapsProvider } from 'react-naver-maps'
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
+import { TRANSLATIONS, GALLERY_INFO } from '@/lib/constants'
 
 export default function ContactPage() {
+  const { language } = useLanguage()
+  const t = TRANSLATIONS.contact
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -46,7 +52,9 @@ export default function ContactPage() {
       {/* Header */}
       <section className="py-12 px-6 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto">
-          <h1 className="text-4xl text-center tracking-widest font-light">CONTACT</h1>
+          <h1 className="text-4xl text-center tracking-widest font-light">
+            {t.header.title[language]}
+          </h1>
         </div>
       </section>
 
@@ -65,30 +73,33 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 h-[400px] flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <MapPin size={48} className="mx-auto mb-4" />
-                  <p className="tracking-wide">Interactive Map</p>
-                  <p className="text-sm mt-2">서울 종로구 관훈동 인사동5길 12</p>
-                </div>
-              </div>
+              {/* Naver Map */}
+              <NavermapsProvider ncpClientId={process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID || ''}>
+                <NaverMap
+                  center={{ lat: 37.5729503, lng: 126.9856214 }}
+                  zoom={16}
+                  className="w-full h-[400px]"
+                />
+              </NavermapsProvider>
             </div>
 
             {/* Right Side - Contact Info & Form */}
             <div>
               {/* Contact Information */}
               <div className="mb-12">
-                <h2 className="text-3xl mb-8 tracking-wider font-light">방문 안내</h2>
+                <h2 className="text-3xl mb-8 tracking-wider font-light">
+                  {t.visitInfo.title[language]}
+                </h2>
 
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <MapPin size={20} className="text-gray-600 flex-shrink-0 mt-1" />
                     <div>
-                      <p className="tracking-wide mb-1 font-medium">주소</p>
+                      <p className="tracking-wide mb-1 font-medium">
+                        {t.visitInfo.address.label[language]}
+                      </p>
                       <p className="text-sm text-gray-600 leading-relaxed">
-                        서울 종로구 관훈동<br />
-                        인사동5길 12 2층
+                        {GALLERY_INFO.ADDRESS[language]}
                       </p>
                     </div>
                   </div>
@@ -96,26 +107,32 @@ export default function ContactPage() {
                   <div className="flex gap-4">
                     <Phone size={20} className="text-gray-600 flex-shrink-0 mt-1" />
                     <div>
-                      <p className="tracking-wide mb-1 font-medium">전화</p>
-                      <p className="text-sm text-gray-600">02-720-4028</p>
+                      <p className="tracking-wide mb-1 font-medium">
+                        {t.visitInfo.phone.label[language]}
+                      </p>
+                      <p className="text-sm text-gray-600">{GALLERY_INFO.PHONE}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
                     <Mail size={20} className="text-gray-600 flex-shrink-0 mt-1" />
                     <div>
-                      <p className="tracking-wide mb-1 font-medium">이메일</p>
-                      <p className="text-sm text-gray-600">kwanhoonarte@gmail.com</p>
+                      <p className="tracking-wide mb-1 font-medium">
+                        {t.visitInfo.email.label[language]}
+                      </p>
+                      <p className="text-sm text-gray-600">{GALLERY_INFO.EMAIL}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
                     <Clock size={20} className="text-gray-600 flex-shrink-0 mt-1" />
                     <div>
-                      <p className="tracking-wide mb-1 font-medium">운영 시간</p>
+                      <p className="tracking-wide mb-1 font-medium">
+                        {t.visitInfo.hours.label[language]}
+                      </p>
                       <p className="text-sm text-gray-600 leading-relaxed">
-                        월 - 금: 오전 11시 - 오후 7시<br />
-                        토 - 일: 오후 1시 - 오후 6시
+                        {t.visitInfo.hours.weekdays[language]}<br />
+                        {t.visitInfo.hours.weekends[language]}
                       </p>
                     </div>
                   </div>
@@ -124,7 +141,9 @@ export default function ContactPage() {
 
               {/* Inquiry Form */}
               <div>
-                <h3 className="text-2xl mb-6 tracking-wider font-light">문의하기</h3>
+                <h3 className="text-2xl mb-6 tracking-wider font-light">
+                  {t.form.title[language]}
+                </h3>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -133,7 +152,7 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="이름 *"
+                      placeholder={t.form.fields.name[language]}
                       required
                       className="px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
@@ -142,7 +161,7 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="이메일 *"
+                      placeholder={t.form.fields.email[language]}
                       required
                       className="px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-black"
                     />
@@ -153,7 +172,7 @@ export default function ContactPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="전화번호"
+                    placeholder={t.form.fields.phone[language]}
                     className="w-full px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-black"
                   />
 
@@ -163,19 +182,19 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-black text-gray-600"
                   >
-                    <option value="">문의 유형</option>
-                    <option value="general">일반 문의</option>
-                    <option value="exhibition">전시 정보</option>
-                    <option value="artwork">작품 구매</option>
-                    <option value="press">언론 & 미디어</option>
-                    <option value="other">기타</option>
+                    <option value="">{t.form.fields.subject[language]}</option>
+                    <option value="general">{t.form.subjects.general[language]}</option>
+                    <option value="exhibition">{t.form.subjects.exhibition[language]}</option>
+                    <option value="artwork">{t.form.subjects.artwork[language]}</option>
+                    <option value="press">{t.form.subjects.press[language]}</option>
+                    <option value="other">{t.form.subjects.other[language]}</option>
                   </select>
 
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="메시지 *"
+                    placeholder={t.form.fields.message[language]}
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-black resize-none"
@@ -183,13 +202,13 @@ export default function ContactPage() {
 
                   {submitStatus === 'success' && (
                     <div className="p-4 bg-green-50 border border-green-200 text-green-800 text-sm">
-                      메시지가 성공적으로 전송되었습니다. 곧 연락드리겠습니다.
+                      {t.form.success[language]}
                     </div>
                   )}
 
                   {submitStatus === 'error' && (
                     <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-sm">
-                      메시지 전송에 실패했습니다. 다시 시도해주세요.
+                      {t.form.error[language]}
                     </div>
                   )}
 
@@ -198,7 +217,7 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                     className="w-full py-3 bg-black text-white text-xs tracking-widest hover:bg-gray-800 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? '전송 중...' : '메시지 보내기'}
+                    {isSubmitting ? t.form.submitting[language] : t.form.submit[language]}
                   </button>
                 </form>
               </div>
@@ -212,23 +231,27 @@ export default function ContactPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-lg mb-4 tracking-wider font-medium">주차</h4>
+              <h4 className="text-lg mb-4 tracking-wider font-medium">
+                {t.additional.parking.title[language]}
+              </h4>
               <p className="text-sm text-gray-700 leading-relaxed">
-                방문객을 위한 무료 주차가 건물 지하 주차장에서 가능합니다.
-                갤러리 리셉션에서 주차권을 확인받으시기 바랍니다.
+                {t.additional.parking.description[language]}
               </p>
             </div>
             <div>
-              <h4 className="text-lg mb-4 tracking-wider font-medium">대중교통</h4>
+              <h4 className="text-lg mb-4 tracking-wider font-medium">
+                {t.additional.publicTransit.title[language]}
+              </h4>
               <p className="text-sm text-gray-700 leading-relaxed">
-                안국역(3호선) - 6번 출구에서 도보 약 5분 거리입니다.
+                {t.additional.publicTransit.description[language]}
               </p>
             </div>
             <div>
-              <h4 className="text-lg mb-4 tracking-wider font-medium">예약 관람</h4>
+              <h4 className="text-lg mb-4 tracking-wider font-medium">
+                {t.additional.appointments.title[language]}
+              </h4>
               <p className="text-sm text-gray-700 leading-relaxed">
-                정규 시간 외 프라이빗 관람 및 예약이 가능합니다.
-                맞춤형 방문을 준비하시려면 최소 48시간 전에 문의해주세요.
+                {t.additional.appointments.description[language]}
               </p>
             </div>
           </div>
@@ -238,9 +261,11 @@ export default function ContactPage() {
       {/* Social Media */}
       <section className="py-16 px-6">
         <div className="max-w-[600px] mx-auto text-center">
-          <h3 className="text-2xl mb-6 tracking-wider font-light">팔로우하기</h3>
+          <h3 className="text-2xl mb-6 tracking-wider font-light">
+            {t.social.title[language]}
+          </h3>
           <p className="text-gray-700 mb-8">
-            소셜 미디어에서 관훈아르테를 팔로우하여 최신 업데이트, 비하인드 스토리, 독점 미리보기를 받아보세요.
+            {t.social.description[language]}
           </p>
           <div className="flex justify-center gap-6">
             <a
@@ -259,22 +284,24 @@ export default function ContactPage() {
       {/* Newsletter Signup */}
       <section className="py-16 px-6 bg-black text-white">
         <div className="max-w-[600px] mx-auto text-center">
-          <h3 className="text-2xl mb-4 tracking-wider text-white font-light">뉴스레터</h3>
+          <h3 className="text-2xl mb-4 tracking-wider text-white font-light">
+            {t.newsletter.title[language]}
+          </h3>
           <p className="text-gray-300 mb-8">
-            전시 공지, 미술계 인사이트, 독점 초대를 받아보시려면 구독하세요.
+            {t.newsletter.description[language]}
           </p>
           <div className="flex gap-2 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="이메일 주소 입력"
+              placeholder={t.newsletter.placeholder[language]}
               className="flex-1 px-4 py-3 bg-white text-black text-sm focus:outline-none"
             />
             <button className="px-8 py-3 bg-white text-black text-xs tracking-widest hover:bg-gray-200 transition-all">
-              구독하기
+              {t.newsletter.submit[language]}
             </button>
           </div>
           <p className="text-xs text-gray-400 mt-4">
-            구독하시면 개인정보 처리방침에 동의하는 것으로 간주됩니다
+            {t.newsletter.privacy[language]}
           </p>
         </div>
       </section>

@@ -1,31 +1,25 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { mockNews } from '@/data/news'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'News | KWANHOONARTE',
-  description: 'Latest news and updates from KWANHOONARTE gallery',
-}
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
+import { TRANSLATIONS } from '@/lib/constants'
 
 export default function NewsPage() {
+  const { language } = useLanguage()
+  const t = TRANSLATIONS.news
   const featuredNews = mockNews[0]
   const regularNews = mockNews.slice(1)
-
-  const categoryLabels = {
-    exhibition: '전시',
-    artist: '작가',
-    award: '수상',
-    press: '언론',
-    general: '일반'
-  }
 
   return (
     <div className="pt-20 min-h-screen bg-white">
       {/* Header */}
       <section className="py-12 px-6 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto">
-          <h1 className="text-4xl text-center tracking-widest font-light">NEWS</h1>
+          <h1 className="text-4xl text-center tracking-widest font-light">
+            {t.header.title[language]}
+          </h1>
         </div>
       </section>
 
@@ -46,23 +40,23 @@ export default function NewsPage() {
                 </div>
                 <div className="flex flex-col justify-center">
                   <p className="text-xs tracking-widest text-gray-500 mb-2">
-                    {categoryLabels[featuredNews.category]}
+                    {t.categories[featuredNews.category][language]}
                   </p>
                   <h2 className="text-3xl md:text-4xl mb-4 tracking-wider font-light">
-                    {featuredNews.title.ko}
+                    {featuredNews.title[language]}
                   </h2>
                   <p className="text-gray-600 mb-4">
-                    {new Date(featuredNews.date).toLocaleDateString('ko-KR', {
+                    {new Date(featuredNews.date).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
                     })}
                   </p>
                   <p className="text-gray-700 leading-relaxed mb-6">
-                    {featuredNews.content.ko}
+                    {featuredNews.content[language]}
                   </p>
                   <div className="inline-block px-8 py-3 border border-black text-xs tracking-widest hover:bg-black hover:text-white transition-all w-fit">
-                    자세히 보기 →
+                    {t.readMore[language]}
                   </div>
                 </div>
               </div>
@@ -93,20 +87,20 @@ export default function NewsPage() {
                 )}
                 <div className="p-6">
                   <p className="text-xs tracking-widest text-gray-500 mb-2">
-                    {categoryLabels[news.category]}
+                    {t.categories[news.category][language]}
                   </p>
                   <h3 className="text-xl mb-3 tracking-wide font-medium group-hover:text-gray-600 transition-colors">
-                    {news.title.ko}
+                    {news.title[language]}
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">
-                    {new Date(news.date).toLocaleDateString('ko-KR', {
+                    {new Date(news.date).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
                     })}
                   </p>
                   <p className="text-gray-700 line-clamp-3 leading-relaxed text-sm">
-                    {news.content.ko}
+                    {news.content[language]}
                   </p>
                 </div>
               </Link>

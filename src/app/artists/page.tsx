@@ -4,15 +4,18 @@ import { useState } from 'react'
 import { Grid, List } from 'lucide-react'
 import { artistsData } from '@/data/artists'
 import { ArtistCard } from '@/components/molecules/ArtistCard'
-import type { ArtistFilter, Language } from '@/types'
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
+import { TRANSLATIONS } from '@/lib/constants'
+import type { ArtistFilter } from '@/types'
 
 type ViewType = 'grid' | 'list'
 
 export default function ArtistsPage() {
+  const { language } = useLanguage()
+  const t = TRANSLATIONS.artists
   const [filter, setFilter] = useState<ArtistFilter>('all')
   const [viewType, setViewType] = useState<ViewType>('grid')
   const [visibleCount, setVisibleCount] = useState(12)
-  const locale: Language = 'ko' // TODO: 다국어 컨텍스트에서 가져오기
 
   const filteredArtists = artistsData.filter((artist) => {
     if (filter === 'all') return true
@@ -21,19 +24,13 @@ export default function ArtistsPage() {
 
   const visibleArtists = filteredArtists.slice(0, visibleCount)
 
-  const filterLabels: Record<ArtistFilter, string> = {
-    all: '전체',
-    featured: '대표 작가',
-    emerging: '신진 작가',
-  }
-
   return (
     <div className="pt-20 min-h-screen bg-white">
       {/* Header Section */}
       <section className="py-12 px-6 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto">
           <h1 className="text-4xl text-center mb-8 tracking-widest font-light">
-            ARTISTS
+            {t.header.title[language]}
           </h1>
 
           {/* Filter Options */}
@@ -52,7 +49,7 @@ export default function ArtistsPage() {
                       : 'bg-white text-black border border-black hover:bg-gray-100'
                   }`}
                 >
-                  {filterLabels[f]}
+                  {t.filters[f][language]}
                 </button>
               ))}
             </div>
@@ -87,7 +84,7 @@ export default function ArtistsPage() {
                 <ArtistCard
                   key={artist.id}
                   artist={artist}
-                  locale={locale}
+                  locale={language}
                   viewType="grid"
                 />
               ))}
@@ -98,7 +95,7 @@ export default function ArtistsPage() {
                 <ArtistCard
                   key={artist.id}
                   artist={artist}
-                  locale={locale}
+                  locale={language}
                   viewType="list"
                 />
               ))}
@@ -112,7 +109,7 @@ export default function ArtistsPage() {
                 onClick={() => setVisibleCount((prev) => prev + 8)}
                 className="px-12 py-3 border border-black text-sm tracking-widest uppercase hover:bg-black hover:text-white transition-all duration-300"
               >
-                더 보기
+                {t.loadMore[language]}
               </button>
             </div>
           )}

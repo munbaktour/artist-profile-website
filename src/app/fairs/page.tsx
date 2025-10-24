@@ -1,14 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { mockFairs } from '@/data/fairs'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Art Fairs | KWANHOONARTE',
-  description: 'Upcoming and past art fair participations',
-}
+import { useLanguage } from '@/lib/i18n/LanguageProvider'
+import { TRANSLATIONS } from '@/lib/constants'
 
 export default function FairsPage() {
+  const { language } = useLanguage()
+  const t = TRANSLATIONS.fairs
   const upcomingFairs = mockFairs.filter(fair => new Date(fair.startDate) > new Date())
   const pastFairs = mockFairs.filter(fair => new Date(fair.endDate) < new Date())
 
@@ -17,7 +17,9 @@ export default function FairsPage() {
       {/* Header */}
       <section className="py-12 px-6 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto">
-          <h1 className="text-4xl text-center tracking-widest font-light">ART FAIRS</h1>
+          <h1 className="text-4xl text-center tracking-widest font-light">
+            {t.header.title[language]}
+          </h1>
         </div>
       </section>
 
@@ -25,7 +27,7 @@ export default function FairsPage() {
       <section className="py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
           <h2 className="text-3xl mb-12 tracking-wider font-light text-center">
-            예정된 페어
+            {t.upcoming.title[language]}
           </h2>
 
           <div className="space-y-12">
@@ -58,30 +60,30 @@ export default function FairsPage() {
                       <h3 className="text-2xl mb-4 tracking-wider font-light">{fair.name}</h3>
                       <div className="space-y-2 text-sm text-gray-600">
                         <p className="flex items-center gap-2">
-                          <span className="font-medium">날짜:</span>
-                          {new Date(fair.startDate).toLocaleDateString('ko-KR', {
+                          <span className="font-medium">{t.fields.date[language]}:</span>
+                          {new Date(fair.startDate).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
                             month: 'long',
                             day: 'numeric'
-                          })} - {new Date(fair.endDate).toLocaleDateString('ko-KR', {
+                          })} - {new Date(fair.endDate).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
                             month: 'long',
                             day: 'numeric',
                             year: 'numeric'
                           })}
                         </p>
                         <p className="flex items-center gap-2">
-                          <span className="font-medium">장소:</span>
+                          <span className="font-medium">{t.fields.location[language]}:</span>
                           {fair.location}
                         </p>
                         {fair.booth && (
                           <p className="flex items-center gap-2">
-                            <span className="font-medium">부스:</span>
+                            <span className="font-medium">{t.fields.booth[language]}:</span>
                             {fair.booth}
                           </p>
                         )}
                       </div>
                       {fair.description && (
                         <p className="mt-4 text-gray-700 leading-relaxed">
-                          {fair.description.ko}
+                          {fair.description[language]}
                         </p>
                       )}
                       {fair.link && (
@@ -91,7 +93,7 @@ export default function FairsPage() {
                           rel="noopener noreferrer"
                           className="inline-block mt-6 px-6 py-2 border border-black text-xs tracking-widest hover:bg-black hover:text-white transition-all"
                         >
-                          상세 정보 →
+                          {t.moreInfo[language]}
                         </Link>
                       )}
                     </div>
@@ -102,7 +104,7 @@ export default function FairsPage() {
           </div>
 
           {upcomingFairs.length === 0 && (
-            <p className="text-center text-gray-500">현재 예정된 아트페어가 없습니다.</p>
+            <p className="text-center text-gray-500">{t.empty[language]}</p>
           )}
         </div>
       </section>
@@ -112,7 +114,7 @@ export default function FairsPage() {
         <section className="py-16 px-6 bg-gray-50">
           <div className="max-w-[1200px] mx-auto">
             <h2 className="text-3xl mb-12 tracking-wider font-light text-center">
-              지난 참여
+              {t.past.title[language]}
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {pastFairs.map((fair) => (
