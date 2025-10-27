@@ -21,25 +21,37 @@ function NaverMapContent({
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    let isMounted = true
+    let checkAttempts = 0
+    const maxAttempts = 50 // 5 seconds with 100ms intervals
+
     // Wait for Naver Maps API to load
     const initMap = () => {
+      if (!isMounted) return
+
       if (!window.naver || !window.naver.maps) {
-        setError('네이버 지도 API를 불러올 수 없습니다.')
-        return
+        console.warn('네이버 지도 API가 아직 로드되지 않았습니다.')
+        return false
       }
 
-      if (!mapRef.current) return
+      if (!mapRef.current) {
+        console.warn('맵 컨테이너가 준비되지 않았습니다.')
+        return false
+      }
 
       try {
+        const naver = window.naver
+        const maps = naver.maps
+
         // Create map
         const mapOptions = {
-          center: new window.naver.maps.LatLng(center.lat, center.lng),
+          center: new maps.LatLng(center.lat, center.lng),
           zoom: zoom,
           minZoom: 10,
           maxZoom: 21,
           zoomControl: true,
           zoomControlOptions: {
-            position: window.naver.maps.Position.TOP_RIGHT,
+            position: maps.Position?.TOP_RIGHT || 9,
           },
           mapTypeControl: false,
           scaleControl: true,
@@ -47,49 +59,59 @@ function NaverMapContent({
           mapDataControl: false,
         }
 
-        const map = new window.naver.maps.Map(mapRef.current, mapOptions)
+        const map = new maps.Map(mapRef.current, mapOptions)
 
         // Add marker
-        new window.naver.maps.Marker({
-          position: new window.naver.maps.LatLng(center.lat, center.lng),
+        new maps.Marker({
+          position: new maps.LatLng(center.lat, center.lng),
           map: map,
           title: 'KWANHOONARTE',
         })
 
-        setIsLoaded(true)
-        setError(null)
+        if (isMounted) {
+          setIsLoaded(true)
+          setError(null)
+        }
+        return true
       } catch (err) {
         console.error('네이버 지도 초기화 실패:', err)
-        setError('지도 초기화에 실패했습니다.')
+        if (isMounted) {
+          setError('지도 초기화에 실패했습니다.')
+        }
+        return false
       }
     }
 
-    // Check if script is already loaded
-    if (window.naver && window.naver.maps) {
-      initMap()
-    } else {
-      // Wait for script to load
+    // Try to initialize immediately
+    const success = initMap()
+
+    if (!success) {
+      // If not successful, keep trying with interval
       const checkInterval = setInterval(() => {
-        if (window.naver && window.naver.maps) {
+        checkAttempts++
+
+        const initialized = initMap()
+
+        if (initialized) {
           clearInterval(checkInterval)
-          initMap()
+        } else if (checkAttempts >= maxAttempts) {
+          clearInterval(checkInterval)
+          if (isMounted && !isLoaded) {
+            setError('네이버 지도 API를 불러올 수 없습니다. Client ID를 확인해주세요.')
+          }
         }
       }, 100)
 
-      // Timeout after 5 seconds
-      const timeout = setTimeout(() => {
-        clearInterval(checkInterval)
-        if (!window.naver || !window.naver.maps) {
-          setError('네이버 지도 로딩 시간 초과')
-        }
-      }, 5000)
-
       return () => {
+        isMounted = false
         clearInterval(checkInterval)
-        clearTimeout(timeout)
       }
     }
-  }, [center.lat, center.lng, zoom])
+
+    return () => {
+      isMounted = false
+    }
+  }, [center.lat, center.lng, zoom, isLoaded])
 
   if (error) {
     return (
