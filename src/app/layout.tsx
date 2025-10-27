@@ -62,9 +62,9 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: '', // 구글 서치 콘솔에서 발급받은 코드 입력
+    google: '', // 구글 서치 콘솔에서 발급받은 코드 입력 (HTML 태그 방식 권장)
     other: {
-      'naver-site-verification': '', // 네이버 서치어드바이저에서 발급받은 코드 입력
+      'naver-site-verification': '31f59a529455e59ad6d36fa0e5c3c556b7a95843',
     },
   },
 }
