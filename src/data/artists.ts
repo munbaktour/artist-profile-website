@@ -100,8 +100,8 @@ export const artistsData: Artist[] = [
       {
         id: "jsy-work-01",
         artistId: "jung-sun-young",
-        title: { ko: "청자무늬 민화그릇", en: "Celadon Pattern Folk Painting Bowl" },
-        year: 1970,
+        title: { ko: "달항아리 백자", en: "Moon Jar White Porcelain" },
+        year: 1980,
         medium: "도자기",
         dimensions: "직경 40cm",
         image: "/images/artists/jung-sun-young/artwork-01.jpg",
