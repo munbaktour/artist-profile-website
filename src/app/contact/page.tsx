@@ -4,7 +4,6 @@ import { useState, FormEvent } from 'react'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
 import { NaverMap } from '@/components/molecules/NaverMap'
-import { NavermapsProvider } from 'react-naver-maps'
 import { useLanguage } from '@/lib/i18n/LanguageProvider'
 import { TRANSLATIONS, GALLERY_INFO } from '@/lib/constants'
 
@@ -74,13 +73,11 @@ export default function ContactPage() {
               </div>
 
               {/* Naver Map */}
-              <NavermapsProvider ncpClientId={process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID || ''}>
-                <NaverMap
-                  center={{ lat: 37.5729503, lng: 126.9856214 }}
-                  zoom={16}
-                  className="w-full h-[400px]"
-                />
-              </NavermapsProvider>
+              <NaverMap
+                center={{ lat: 37.5729503, lng: 126.9856214 }}
+                zoom={16}
+                className="w-full h-[400px]"
+              />
             </div>
 
             {/* Right Side - Contact Info & Form */}
