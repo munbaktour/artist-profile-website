@@ -107,12 +107,28 @@ export const GALLERY_INFO = {
 // ============================================
 export const SEO_DEFAULTS = {
   TITLE_TEMPLATE: '%s | KWANHOONARTE',
-  DEFAULT_TITLE: 'KWANHOONARTE - Contemporary Art Gallery',
+  DEFAULT_TITLE: 'KWANHOONARTE (관훈아르떼) - Contemporary Art Gallery',
   DESCRIPTION: {
-    ko: '현대 미술 갤러리 KWANHOONARTE',
-    en: 'KWANHOONARTE Contemporary Art Gallery',
+    ko: '관훈아르떼(KWANHOONARTE)는 서울 종로구에 위치한 현대미술 갤러리입니다. 국내외 우수 작가들의 작품을 전시하고 있습니다.',
+    en: 'KWANHOONARTE is a contemporary art gallery located in Jongno-gu, Seoul, showcasing works by outstanding Korean and international artists.',
   },
-  KEYWORDS: ['art', 'gallery', 'contemporary art', '미술', '갤러리', '현대미술'],
+  KEYWORDS: [
+    '관훈아르떼',
+    'KWANHOONARTE',
+    '갤러리',
+    '미술관',
+    '현대미술',
+    '아트갤러리',
+    '서울갤러리',
+    '종로갤러리',
+    'art gallery',
+    'contemporary art',
+    'Seoul gallery',
+    'art exhibition',
+    '전시',
+    '미술작품',
+    '작가',
+  ],
 } as const
 
 // ============================================
