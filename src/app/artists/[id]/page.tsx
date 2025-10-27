@@ -33,8 +33,8 @@ export default function ArtistDetailPage({ params }: PageProps) {
         if (res.ok) {
           setProfileImage(profilePath)
         }
-      } catch (error) {
-        console.log('Profile image not found, using default')
+      } catch {
+        // Profile image not found, using default
       }
     }
 
@@ -59,7 +59,7 @@ export default function ArtistDetailPage({ params }: PageProps) {
           } else {
             break // 이미지가 없으면 중단
           }
-        } catch (error) {
+        } catch {
           break
         }
       }
