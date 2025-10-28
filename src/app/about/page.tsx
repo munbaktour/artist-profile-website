@@ -38,8 +38,8 @@ export default function AboutPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-5xl md:text-6xl tracking-widest font-light">
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest font-light text-center">
             {t.hero.title[language]}
           </h1>
         </div>

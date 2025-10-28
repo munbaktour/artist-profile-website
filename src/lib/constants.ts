@@ -81,12 +81,11 @@ export const CONTACT_FORM_VALIDATION = {
 } as const
 
 // ============================================
-// 소셜 미디어 (예시)
+// 소셜 미디어
 // ============================================
 export const SOCIAL_LINKS = {
-  INSTAGRAM: 'https://instagram.com/kwanhoonarte',
+  INSTAGRAM: 'https://www.instagram.com/kwanhoonarte?igsh=MWVhcjZ1aTVyd2N1Zg%3D%3D&utm_source=qr',
   FACEBOOK: 'https://facebook.com/kwanhoonarte',
-  // 실제 링크로 교체 필요
 } as const
 
 // ============================================

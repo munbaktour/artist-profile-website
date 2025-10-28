@@ -25,14 +25,25 @@ export default function ContactPage() {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    // TODO: 실제 API 호출 또는 EmailJS 통합
     try {
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || '전송에 실패했습니다.')
+      }
 
       setSubmitStatus('success')
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-    } catch {
+    } catch (error) {
+      console.error('Form submission error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
