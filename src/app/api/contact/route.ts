@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Resend 인스턴스를 함수 내에서 생성하여 빌드 타임 에러 방지
+const getResendClient = () => {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(apiKey)
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,6 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Resend로 이메일 전송
+    const resend = getResendClient()
     const { data, error } = await resend.emails.send({
       from: 'KWANHOONARTE <onboarding@resend.dev>', // Resend 테스트 도메인
       to: ['kwanhoonarte@gmail.com'], // 수신 이메일

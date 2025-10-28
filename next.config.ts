@@ -25,9 +25,6 @@ const nextConfig: NextConfig = {
   // PoweredBy header removal for security
   poweredByHeader: false,
 
-  // Production optimizations
-  swcMinify: true,
-
   // Strict mode for better development experience
   reactStrictMode: true,
 };
