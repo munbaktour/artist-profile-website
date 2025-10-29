@@ -168,7 +168,7 @@ export const TRANSLATIONS = {
       },
       paragraphs: {
         ko: [
-          '관훈아르테는 서울을 기반으로 한 현대 미술 갤러리로, 한국과 전 세계의 신진 및 기성 작가들의 혁신적인 작품을 선보이는 데 전념하고 있습니다. 설립 이래 우리는 동서양 예술 전통 간의 대화를 촉진하는 데 헌신해 왔습니다.',
+          '관훈아르떼는 서울을 기반으로 한 현대 미술 갤러리로, 한국과 전 세계의 신진 및 기성 작가들의 혁신적인 작품을 선보이는 데 전념하고 있습니다. 설립 이래 우리는 동서양 예술 전통 간의 대화를 촉진하는 데 헌신해 왔습니다.',
           '우리 갤러리는 비평적 담론과 문화 교류를 위한 플랫폼 역할을 하며, 기존의 경계에 도전하고 현대 미술의 새로운 관점을 탐구하는 전시를 선보입니다. 우리는 예술의 변혁적 힘이 영감을 주고, 자극하며, 공동체를 연결한다고 믿습니다.',
           '신중하게 기획된 전시, 작가 협업, 공공 프로그램을 통해 우리는 현대 미술을 다양한 관객에게 접근 가능하게 만들고, 미래의 예술을 형성하는 비전있는 작가들의 경력을 지원하고자 합니다.',
         ],
@@ -195,7 +195,7 @@ export const TRANSLATIONS = {
         en: 'Our Vision',
       },
       content: {
-        ko: '우리의 비전은 관훈아르테를 아시아 현대 미술계의 중요한 문화 허브로 확립하는 것입니다. 우리는 예술적 우수성에 대한 헌신과 획기적인 작가들의 경력을 발전시키는 역할로 국제적으로 인정받기를 열망합니다. 전 세계 박물관, 갤러리, 컬렉터들과의 전략적 파트너십을 통해 우리가 대표하는 작가들의 글로벌 영향력과 임팩트를 확장하고자 합니다.',
+        ko: '우리의 비전은 관훈아르떼를 아시아 현대 미술계의 중요한 문화 허브로 확립하는 것입니다. 우리는 예술적 우수성에 대한 헌신과 획기적인 작가들의 경력을 발전시키는 역할로 국제적으로 인정받기를 열망합니다. 전 세계 박물관, 갤러리, 컬렉터들과의 전략적 파트너십을 통해 우리가 대표하는 작가들의 글로벌 영향력과 임팩트를 확장하고자 합니다.',
         en: 'Our vision is to establish KWANHOONARTE as a vital cultural hub within the contemporary art scene in Asia. We aspire to be recognized internationally for our commitment to artistic excellence and our role in advancing the careers of groundbreaking artists. Through strategic partnerships with museums, galleries, and collectors worldwide, we aim to expand the global reach and impact of the artists we represent.',
       },
     },
@@ -287,8 +287,8 @@ export const TRANSLATIONS = {
       parking: {
         title: { ko: '주차', en: 'Parking' },
         description: {
-          ko: '방문객을 위한 무료 주차가 건물 지하 주차장에서 가능합니다. 갤러리 리셉션에서 주차권을 확인받으시기 바랍니다.',
-          en: 'Complimentary parking is available for visitors in the building underground parking. Please validate your parking ticket at the gallery reception.',
+          ko: '주차 불가\n서인사마당 공용 주차장(유료)에 주차하시기 바랍니다.',
+          en: 'No parking available\nPlease use Seoinsadang public parking lot (paid).',
         },
       },
       publicTransit: {
@@ -312,7 +312,7 @@ export const TRANSLATIONS = {
         en: 'Follow Us',
       },
       description: {
-        ko: '소셜 미디어에서 관훈아르테를 팔로우하여 최신 업데이트, 비하인드 스토리, 독점 미리보기를 받아보세요.',
+        ko: '소셜 미디어에서 관훈아르떼를 팔로우하여 최신 업데이트, 비하인드 스토리, 독점 미리보기를 받아보세요.',
         en: 'Follow KWANHOONARTE on social media for the latest updates, behind-the-scenes content, and exclusive previews.',
       },
     },

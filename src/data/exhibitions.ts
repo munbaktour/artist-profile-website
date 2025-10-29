@@ -13,10 +13,10 @@ export const mockExhibitions: Exhibition[] = [
       en: 'CONTEMPORARY VISIONS'
     },
     status: 'current',
-    startDate: '2024-10-15',
-    endDate: '2024-12-20',
+    startDate: '2025-10-29',
+    endDate: '2025-12-31',
     location: {
-      ko: '관훈아르테 서울',
+      ko: '관훈아르떼 서울',
       en: 'kwanhoonarte Seoul'
     },
     description: {
@@ -78,7 +78,7 @@ export const mockExhibitions: Exhibition[] = [
     startDate: '2025-01-15',
     endDate: '2025-03-20',
     location: {
-      ko: '관훈아르테 서울',
+      ko: '관훈아르떼 서울',
       en: 'kwanhoonarte Seoul'
     },
     description: {
@@ -120,7 +120,7 @@ export const mockExhibitions: Exhibition[] = [
     startDate: '2024-07-10',
     endDate: '2024-09-20',
     location: {
-      ko: '관훈아르테 서울',
+      ko: '관훈아르떼 서울',
       en: 'kwanhoonarte Seoul'
     },
     description: {

@@ -7,14 +7,14 @@ export const mockNews: News[] = [
   {
     id: '1',
     title: {
-      ko: '관훈아르테 뉴욕 확장 발표',
+      ko: '관훈아르떼 뉴욕 확장 발표',
       en: 'kwanhoonarte Announces Major Expansion to New York'
     },
     category: 'press',
     date: '2024-10-18',
     thumbnailImage: 'https://images.unsplash.com/photo-1591643018014-431ac4cd4edc?w=1080&q=80',
     content: {
-      ko: '현대 미술 갤러리 관훈아르테가 뉴욕 첼시 지구에 새로운 갤러리 공간을 오픈한다고 발표했습니다.',
+      ko: '현대 미술 갤러리 관훈아르떼가 뉴욕 첼시 지구에 새로운 갤러리 공간을 오픈한다고 발표했습니다.',
       en: 'Leading contemporary art gallery kwanhoonarte announces the opening of a new gallery space in New York\'s Chelsea district.'
     },
     author: '갤러리 편집부',
