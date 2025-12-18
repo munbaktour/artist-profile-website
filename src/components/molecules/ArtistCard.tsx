@@ -13,7 +13,7 @@ interface ArtistCardProps {
 export function ArtistCard({ artist, locale = 'ko', viewType = 'grid' }: ArtistCardProps) {
   const artistName = artist.name[locale]
   const artistBio = artist.bio[locale]
-  const imageUrl = artist.image || '/images/placeholder-artist.jpg'
+  const imageUrl = artist.thumbnailImage || artist.image || '/images/placeholder-artist.jpg'
 
   if (viewType === 'list') {
     return (

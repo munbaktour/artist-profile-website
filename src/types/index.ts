@@ -16,6 +16,27 @@ export interface LocalizedText {
 // ============================================
 // Artist 타입
 // ============================================
+export interface WorkCategory {
+  id: string                 // 폴더명 (예: 'bowls')
+  label: LocalizedText       // 표시명 (예: { ko: '그릇', en: 'Bowls' })
+}
+
+// CV 관련 타입
+export interface CVItem {
+  year: string
+  title: LocalizedText
+  subtitle?: LocalizedText
+}
+
+export interface ArtistCV {
+  education?: CVItem[]
+  soloExhibitions?: CVItem[]
+  groupExhibitions?: CVItem[]
+  awards?: CVItem[]
+  collections?: CVItem[]
+  current?: CVItem[]
+}
+
 export interface Artist {
   id: string
   name: LocalizedText
@@ -24,12 +45,15 @@ export interface Artist {
   category: 'featured' | 'emerging'
   bio: LocalizedText
   image: string
-  thumbnailImage?: string
+  thumbnailImage?: string    // 목록 페이지용
+  featuredImage?: string     // 상세 페이지 Biography용
   birthYear?: number
   nationality?: string
   location?: string // 현재 거주지
   education?: string[]
   works?: ArtWork[]
+  workCategories?: WorkCategory[]  // 작품 카테고리 목록
+  cv?: ArtistCV                    // 작가 CV
 }
 
 export interface ArtWork {
@@ -43,6 +67,7 @@ export interface ArtWork {
   description?: LocalizedText
   price?: number
   available: boolean
+  category?: string  // 카테고리 ID (예: 'bowls')
 }
 
 // ============================================
