@@ -135,7 +135,7 @@ COSMOS is the signature series where Ilseok Jung Sun-Young poured the essence of
 Each of the 25 bowls captures 13.7 billion years of cosmic history—from the moment of the Big Bang to the birth of galaxies, stellar nurseries, supernova explosions, and the 'Pale Blue Dot' that Carl Sagan named—our Earth.`
     },
     image: "/images/artists/jung-sun-young.jpg",
-    thumbnailImage: "/images/artists/jung-sun-young/thumbnail.jpg",
+    thumbnailImage: "/images/artists/jung-sun-young/thumbnail.png",
     featuredImage: "/images/artists/jung-sun-young/featured.jpg",
     birthYear: 1961,
     nationality: "한국",
