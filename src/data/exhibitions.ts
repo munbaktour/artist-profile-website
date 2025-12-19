@@ -17,7 +17,7 @@ export const mockExhibitions: Exhibition[] = [
     endDate: '2025-12-31',
     location: {
       ko: '관훈아르떼 서울',
-      en: 'kwanhoonarte Seoul'
+      en: 'KWANHOON ARTE Seoul'
     },
     description: {
       ko: '동시대 한국 작가들의 다양한 시각을 담은 그룹전',
@@ -79,7 +79,7 @@ export const mockExhibitions: Exhibition[] = [
     endDate: '2025-03-20',
     location: {
       ko: '관훈아르떼 서울',
-      en: 'kwanhoonarte Seoul'
+      en: 'KWANHOON ARTE Seoul'
     },
     description: {
       ko: '김서연 작가의 디지털 미디어 아트 개인전',
@@ -121,7 +121,7 @@ export const mockExhibitions: Exhibition[] = [
     endDate: '2024-09-20',
     location: {
       ko: '관훈아르떼 서울',
-      en: 'kwanhoonarte Seoul'
+      en: 'KWANHOON ARTE Seoul'
     },
     description: {
       ko: '박지훈 작가의 사진과 디지털 미디어 작업',

@@ -22,7 +22,7 @@ export function Logo({ className, onClick }: LogoProps) {
         className
       )}
     >
-      KWANHOONARTE
+      KWANHOON ARTE
     </Link>
   )
 }

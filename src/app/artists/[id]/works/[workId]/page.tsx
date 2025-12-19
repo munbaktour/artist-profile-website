@@ -111,9 +111,18 @@ export default function ArtworkDetailPage() {
             {artwork.dimensions && <p>{artwork.dimensions}</p>}
           </div>
 
+          {/* 부제 */}
+          {artwork.subtitle && (
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 italic">
+                {artwork.subtitle[language]}
+              </p>
+            </div>
+          )}
+
           {/* 작품 설명 */}
           {artwork.description && (
-            <div className="mt-8">
+            <div className="mt-6">
               <p className="text-sm text-gray-600 leading-relaxed">
                 {artwork.description[language]}
               </p>

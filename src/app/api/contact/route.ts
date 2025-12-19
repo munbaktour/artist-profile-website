@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     // Resend로 이메일 전송
     const resend = getResendClient()
     const { data, error } = await resend.emails.send({
-      from: 'KWANHOONARTE <onboarding@resend.dev>', // Resend 테스트 도메인
+      from: 'KWANHOON ARTE <onboarding@resend.dev>', // Resend 테스트 도메인
       to: ['kwanhoonarte@gmail.com'], // 수신 이메일
       replyTo: email, // 문의자 이메일로 답장 가능
       subject: `[갤러리 문의] ${subject || '제목 없음'}`,
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
-            <p>이 메일은 KWANHOONARTE 갤러리 웹사이트에서 자동으로 발송되었습니다.</p>
+            <p>이 메일은 KWANHOON ARTE 갤러리 웹사이트에서 자동으로 발송되었습니다.</p>
             <p>문의자에게 답장하려면 "답장" 버튼을 클릭하세요.</p>
           </div>
         </div>

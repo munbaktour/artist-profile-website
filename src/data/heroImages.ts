@@ -14,8 +14,8 @@ export const HERO_IMAGES: CarouselImage[] = [
       en: 'Gallery Exhibition Space 1',
     },
     title: {
-      ko: 'KWANHOONARTE',
-      en: 'KWANHOONARTE',
+      ko: 'KWANHOON ARTE',
+      en: 'KWANHOON ARTE',
     },
   },
   {

@@ -62,8 +62,9 @@ export interface ArtWork {
   title: LocalizedText
   year: number
   medium: string
-  dimensions: string // 예: "100 x 100 cm"
+  dimensions?: string // 예: "100 x 100 cm"
   image: string
+  subtitle?: LocalizedText      // 부제
   description?: LocalizedText
   price?: number
   available: boolean

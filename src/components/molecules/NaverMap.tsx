@@ -65,7 +65,7 @@ function NaverMapContent({
         new maps.Marker({
           position: new maps.LatLng(center.lat, center.lng),
           map: map,
-          title: 'KWANHOONARTE',
+          title: 'KWANHOON ARTE',
         })
 
         if (isMounted) {

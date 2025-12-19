@@ -92,7 +92,7 @@ export const SOCIAL_LINKS = {
 // 갤러리 정보
 // ============================================
 export const GALLERY_INFO = {
-  NAME: 'KWANHOONARTE',
+  NAME: 'KWANHOON ARTE',
   EMAIL: 'kwanhoonarte@gmail.com',
   PHONE: '02-720-4028',
   ADDRESS: {
@@ -105,15 +105,15 @@ export const GALLERY_INFO = {
 // SEO 기본값
 // ============================================
 export const SEO_DEFAULTS = {
-  TITLE_TEMPLATE: '%s | KWANHOONARTE',
-  DEFAULT_TITLE: 'KWANHOONARTE (관훈아르떼) - Contemporary Art Gallery',
+  TITLE_TEMPLATE: '%s | KWANHOON ARTE',
+  DEFAULT_TITLE: 'KWANHOON ARTE (관훈아르떼) - Contemporary Art Gallery',
   DESCRIPTION: {
-    ko: '관훈아르떼(KWANHOONARTE)는 서울 종로구에 위치한 현대미술 갤러리입니다. 국내외 우수 작가들의 작품을 전시하고 있습니다.',
-    en: 'KWANHOONARTE is a contemporary art gallery located in Jongno-gu, Seoul, showcasing works by outstanding Korean and international artists.',
+    ko: '관훈아르떼(KWANHOON ARTE)는 서울 종로구에 위치한 현대미술 갤러리입니다. 국내외 우수 작가들의 작품을 전시하고 있습니다.',
+    en: 'KWANHOON ARTE is a contemporary art gallery located in Jongno-gu, Seoul, showcasing works by outstanding Korean and international artists.',
   },
   KEYWORDS: [
     '관훈아르떼',
-    'KWANHOONARTE',
+    'KWANHOON ARTE',
     '갤러리',
     '미술관',
     '현대미술',
@@ -157,8 +157,8 @@ export const TRANSLATIONS = {
   about: {
     hero: {
       title: {
-        ko: 'ABOUT KWANHOONARTE',
-        en: 'ABOUT KWANHOONARTE',
+        ko: 'ABOUT KWANHOON ARTE',
+        en: 'ABOUT KWANHOON ARTE',
       },
     },
     introduction: {
@@ -173,7 +173,7 @@ export const TRANSLATIONS = {
           '신중하게 기획된 전시, 작가 협업, 공공 프로그램을 통해 우리는 현대 미술을 다양한 관객에게 접근 가능하게 만들고, 미래의 예술을 형성하는 비전있는 작가들의 경력을 지원하고자 합니다.',
         ],
         en: [
-          'KWANHOONARTE is a contemporary art gallery based in Seoul, dedicated to showcasing innovative work by both emerging and established artists from Korea and around the world. Since our founding, we have been committed to fostering dialogue between Eastern and Western artistic traditions.',
+          'KWANHOON ARTE is a contemporary art gallery based in Seoul, dedicated to showcasing innovative work by both emerging and established artists from Korea and around the world. Since our founding, we have been committed to fostering dialogue between Eastern and Western artistic traditions.',
           'Our gallery serves as a platform for critical discourse and cultural exchange, presenting exhibitions that challenge conventional boundaries and explore new perspectives in contemporary art. We believe in the transformative power of art to inspire, provoke, and connect communities.',
           'Through carefully curated exhibitions, artist collaborations, and public programs, we strive to make contemporary art accessible to diverse audiences and support the careers of visionary artists who are shaping the future of art.',
         ],
@@ -196,7 +196,7 @@ export const TRANSLATIONS = {
       },
       content: {
         ko: '우리의 비전은 관훈아르떼를 아시아 현대 미술계의 중요한 문화 허브로 확립하는 것입니다. 우리는 예술적 우수성에 대한 헌신과 획기적인 작가들의 경력을 발전시키는 역할로 국제적으로 인정받기를 열망합니다. 전 세계 박물관, 갤러리, 컬렉터들과의 전략적 파트너십을 통해 우리가 대표하는 작가들의 글로벌 영향력과 임팩트를 확장하고자 합니다.',
-        en: 'Our vision is to establish KWANHOONARTE as a vital cultural hub within the contemporary art scene in Asia. We aspire to be recognized internationally for our commitment to artistic excellence and our role in advancing the careers of groundbreaking artists. Through strategic partnerships with museums, galleries, and collectors worldwide, we aim to expand the global reach and impact of the artists we represent.',
+        en: 'Our vision is to establish KWANHOON ARTE as a vital cultural hub within the contemporary art scene in Asia. We aspire to be recognized internationally for our commitment to artistic excellence and our role in advancing the careers of groundbreaking artists. Through strategic partnerships with museums, galleries, and collectors worldwide, we aim to expand the global reach and impact of the artists we represent.',
       },
     },
     spaces: {
@@ -313,7 +313,7 @@ export const TRANSLATIONS = {
       },
       description: {
         ko: '소셜 미디어에서 관훈아르떼를 팔로우하여 최신 업데이트, 비하인드 스토리, 독점 미리보기를 받아보세요.',
-        en: 'Follow KWANHOONARTE on social media for the latest updates, behind-the-scenes content, and exclusive previews.',
+        en: 'Follow KWANHOON ARTE on social media for the latest updates, behind-the-scenes content, and exclusive previews.',
       },
     },
     newsletter: {
