@@ -549,7 +549,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       ko: "변건호 작가는 도시 풍경과 일상의 순간을 독특한 시각으로 포착하는 작업을 이어오고 있다. 사진과 회화의 경계를 탐구하며, 현실과 환상 사이의 모호한 지점을 시각화한다.",
       en: "Byun Geon Ho captures urban landscapes and everyday moments through a unique perspective, exploring the boundary between photography and painting."
     },
-    image: "/images/artists/byun-geon-ho.jpg",
+    image: "/images/artists/byun-geon-ho/thumbnail.jpg",
     birthYear: 1948,
     nationality: "한국",
     works: [
@@ -594,7 +594,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       ko: "손문일은 서울대학교 동양화과를 졸업하고 북경 중앙미술학원에서 수학했다. 대상의 본질에 대한 물음에서 출발하여 오브제를 활용한 독특한 작업 세계를 구축했다. 전통과 현대, 동양과 서양의 경계를 넘나들며 독자적인 예술 언어를 탐구하고 있다.",
       en: "Son Moon Il graduated from Seoul National University and studied at the Central Academy of Fine Arts in Beijing. He explores unique artistic language crossing boundaries between tradition and contemporary."
     },
-    image: "/images/artists/son-moon-il.jpg",
+    image: "/images/artists/son-moon-il/thumbnail.jpg",
     birthYear: 1980,
     nationality: "한국",
     works: [
