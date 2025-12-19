@@ -550,6 +550,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       en: "Byun Geon Ho captures urban landscapes and everyday moments through a unique perspective, exploring the boundary between photography and painting."
     },
     image: "/images/artists/byun-geon-ho/thumbnail.jpg",
+    featuredImage: "/images/artists/byun-geon-ho/featured.jpg",
     birthYear: 1948,
     nationality: "한국",
     works: [
