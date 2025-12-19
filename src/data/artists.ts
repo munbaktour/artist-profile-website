@@ -605,7 +605,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         year: 2019,
         medium: "한지에 먹과 오브제",
         dimensions: "70 x 100 cm",
-        image: "/images/artists/son-moon-il/artwork-01.jpg",
+        image: "/images/artists/son-moon-il/works/artwork-01.jpg",
         available: true
       },
       {
@@ -615,7 +615,43 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         year: 2021,
         medium: "혼합재료",
         dimensions: "90 x 90 cm",
-        image: "/images/artists/son-moon-il/artwork-02.jpg",
+        image: "/images/artists/son-moon-il/works/artwork-02.jpg",
+        available: true
+      },
+      {
+        id: "smi-work-03",
+        artistId: "son-moon-il",
+        title: { ko: "작품 03", en: "Artwork 03" },
+        year: 2022,
+        medium: "혼합재료",
+        image: "/images/artists/son-moon-il/works/artwork-03.jpg",
+        available: true
+      },
+      {
+        id: "smi-courage-01",
+        artistId: "son-moon-il",
+        title: { ko: "용기 01", en: "Courage 01" },
+        year: 2023,
+        medium: "혼합재료",
+        image: "/images/artists/son-moon-il/works/courage-01.jpg",
+        available: true
+      },
+      {
+        id: "smi-courage-02",
+        artistId: "son-moon-il",
+        title: { ko: "용기 02", en: "Courage 02" },
+        year: 2023,
+        medium: "혼합재료",
+        image: "/images/artists/son-moon-il/works/courage-02.jpg",
+        available: true
+      },
+      {
+        id: "smi-love-01",
+        artistId: "son-moon-il",
+        title: { ko: "사랑 01", en: "Love 01" },
+        year: 2023,
+        medium: "혼합재료",
+        image: "/images/artists/son-moon-il/works/love-01.jpg",
         available: true
       }
     ]
