@@ -552,107 +552,95 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     image: "/images/artists/byun-geon-ho/thumbnail.jpg",
     birthYear: 1948,
     nationality: "한국",
-    workCategories: [
-      { id: 'neo-cosmos', label: { ko: 'Neo Cosmos', en: 'Neo Cosmos' } }
-    ],
     works: [
       {
-        id: "bgh-neo-cosmos-01",
+        id: "bgh-work-01",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos", en: "Neo Cosmos" },
+        title: { ko: "작품 01", en: "Artwork 01" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-01.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-02",
+        id: "bgh-work-02",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2023-No.12 (Flowers & Birds)", en: "Neo Cosmos 2023-No.12 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.12", en: "Flowers & Birds No.12" },
         year: 2023,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "147 x 99 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-02.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-03",
+        id: "bgh-work-03",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.02 (Flowers & Birds)", en: "Neo Cosmos 2025-No.02 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.02", en: "Flowers & Birds No.02" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "117 x 91 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-03.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-04",
+        id: "bgh-work-04",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.03 (Flowers & Birds)", en: "Neo Cosmos 2025-No.03 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.03", en: "Flowers & Birds No.03" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "100 x 72 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-04.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-05",
+        id: "bgh-work-05",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.04 (Flowers & Birds)", en: "Neo Cosmos 2025-No.04 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.04", en: "Flowers & Birds No.04" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "91 x 117 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-05.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-06",
+        id: "bgh-work-06",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.05 (Flowers & Birds)", en: "Neo Cosmos 2025-No.05 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.05", en: "Flowers & Birds No.05" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "91 x 117 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-06.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-07",
+        id: "bgh-work-07",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.06 (Flowers & Birds)", en: "Neo Cosmos 2025-No.06 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.06", en: "Flowers & Birds No.06" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "91 x 117 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-07.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-08",
+        id: "bgh-work-08",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.07 (Flowers & Birds)", en: "Neo Cosmos 2025-No.07 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.07", en: "Flowers & Birds No.07" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "91 x 117 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-08.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       },
       {
-        id: "bgh-neo-cosmos-09",
+        id: "bgh-work-09",
         artistId: "byun-geon-ho",
-        title: { ko: "Neo Cosmos 2025-No.08 (Flowers & Birds)", en: "Neo Cosmos 2025-No.08 (Flowers & Birds)" },
+        title: { ko: "Flowers & Birds No.08", en: "Flowers & Birds No.08" },
         year: 2025,
         medium: "아크릴, 카본, 크레용, 오일 파스텔",
         dimensions: "105 x 148 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-09.jpg",
-        available: true,
-        category: "neo-cosmos"
+        available: true
       }
     ]
   },
