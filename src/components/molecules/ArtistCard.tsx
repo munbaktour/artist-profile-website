@@ -49,7 +49,7 @@ export function ArtistCard({ artist, locale = 'ko', viewType = 'grid' }: ArtistC
       href={`/artists/${artist.id}`}
       className="group cursor-pointer block"
     >
-      <div className="relative overflow-hidden mb-4 aspect-square bg-gray-100">
+      <div className="relative overflow-hidden mb-2 aspect-square bg-gray-100">
         <Image
           src={imageUrl}
           alt={artistName}
@@ -65,7 +65,7 @@ export function ArtistCard({ artist, locale = 'ko', viewType = 'grid' }: ArtistC
       <p className="text-sm text-gray-600">
         {artist.birthYear && `b. ${artist.birthYear}`}
       </p>
-      <p className="text-sm text-gray-500 mt-1">{artist.nationality}</p>
+      <p className="text-xs text-gray-500">{artist.nationality}</p>
     </Link>
   )
 }

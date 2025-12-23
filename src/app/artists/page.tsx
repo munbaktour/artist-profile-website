@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Grid, List } from 'lucide-react'
 import { artistsData } from '@/data/artists'
 import { ArtistCard } from '@/components/molecules/ArtistCard'
+import { ArtistsCollageGrid } from '@/components/features/artists-beta/ArtistsCollageGrid'
 import { useLanguage } from '@/lib/i18n/LanguageProvider'
 import { TRANSLATIONS } from '@/lib/constants'
 import type { ArtistFilter } from '@/types'
@@ -25,11 +26,11 @@ export default function ArtistsPage() {
   const visibleArtists = filteredArtists.slice(0, visibleCount)
 
   return (
-    <div className="pt-20 min-h-screen bg-white">
+    <div className="pt-16 min-h-screen bg-white">
       {/* Header Section */}
-      <section className="py-12 px-6 border-b border-gray-200">
+      <section className="py-3 px-6 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto">
-          <h1 className="text-4xl text-center mb-8 tracking-widest font-light">
+          <h1 className="text-3xl text-center mb-4 tracking-widest font-light">
             {t.header.title[language]}
           </h1>
 
@@ -76,19 +77,10 @@ export default function ArtistsPage() {
       </section>
 
       {/* Artists Grid/List */}
-      <section className="py-16 px-6">
+      <section className="py-2 px-6">
         <div className="max-w-[1440px] mx-auto">
           {viewType === 'grid' ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {visibleArtists.map((artist) => (
-                <ArtistCard
-                  key={artist.id}
-                  artist={artist}
-                  locale={language}
-                  viewType="grid"
-                />
-              ))}
-            </div>
+            <ArtistsCollageGrid artists={artistsData} />
           ) : (
             <div className="space-y-4">
               {visibleArtists.map((artist) => (

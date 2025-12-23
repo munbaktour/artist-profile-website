@@ -216,6 +216,16 @@ export interface AboutPageData {
 }
 
 // ============================================
+// Collage/Gallery 레이아웃 타입
+// ============================================
+export type CollageTileSize = 'small' | 'medium' | 'wide' | 'tall' | 'featured'
+
+export interface CollageTileConfig {
+  artistId: string
+  size: CollageTileSize
+}
+
+// ============================================
 // Utility 타입
 // ============================================
 export type Nullable<T> = T | null

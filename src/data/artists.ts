@@ -14,6 +14,7 @@ export const artistsData: Artist[] = [
       en: "Kim Hyung Dae is a pioneer of Korean abstract art who led the Informel movement in the 1960s. Elected as a member of the National Academy of Arts in 2024."
     },
     image: "/images/artists/kim-hyung-dae.jpg",
+    featuredImage: "/images/artists/kim-hyung-dae/collage.png",
     birthYear: 1936,
     nationality: "한국",
     works: [
@@ -59,6 +60,7 @@ export const artistsData: Artist[] = [
       en: "Yoo Geun Young has developed a unique visual language crossing between abstract and figurative art."
     },
     image: "/images/artists/yoo-geun-young.jpg",
+    featuredImage: "/images/artists/yoo-geun-young/collage.png",
     birthYear: 1948,
     nationality: "한국",
     works: [
@@ -136,7 +138,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     },
     image: "/images/artists/jung-sun-young.jpg",
     thumbnailImage: "/images/artists/jung-sun-young/thumbnail.png",
-    featuredImage: "/images/artists/jung-sun-young/featured.jpg",
+    featuredImage: "/images/artists/jung-sun-young/collage.png",
     birthYear: 1961,
     nationality: "한국",
     workCategories: [
@@ -1065,7 +1067,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       en: "Byun Geon Ho captures urban landscapes and everyday moments through a unique perspective, exploring the boundary between photography and painting."
     },
     image: "/images/artists/byun-geon-ho/thumbnail.jpg",
-    featuredImage: "/images/artists/byun-geon-ho/featured.jpg",
+    featuredImage: "/images/artists/byun-geon-ho/collage.jpg",
     birthYear: 1948,
     nationality: "한국",
     works: [
@@ -1170,6 +1172,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       en: "Son Moon Il graduated from Seoul National University and studied at the Central Academy of Fine Arts in Beijing. He explores unique artistic language crossing boundaries between tradition and contemporary."
     },
     image: "/images/artists/son-moon-il/thumbnail.jpg",
+    featuredImage: "/images/artists/son-moon-il/collage.png",
     birthYear: 1980,
     nationality: "한국",
     works: [
@@ -1230,6 +1233,162 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         available: true
       }
     ]
+  },
+
+  {
+    id: "yoon-miran",
+    name: { ko: '윤미란', en: 'Yoon Miran' },
+    category: 'featured',
+    bio: {
+      ko: "윤미란은 1983년 서울 국제판화 비엔날레 대상을 수상한 한국 현대 판화의 대표적인 작가이다. 홍익대학교 미술대학 교수를 역임하며 후학 양성에도 힘썼다. '靜·和音(정·화음)' 시리즈로 잘 알려져 있으며, 한지와 종이를 활용한 독창적인 작업 세계를 구축해왔다.",
+      en: "Yoon Miran is a leading Korean contemporary printmaker who won the Grand Prize at the 14th Seoul International Print Biennale in 1983. She served as a professor at Hongik University College of Fine Arts. Known for her 'Tranquility and Accord' series, she has built a unique artistic world using Korean paper."
+    },
+    image: "/images/artists/yoon-miran/works/01_born_again_3.jpg",
+    thumbnailImage: "/images/artists/yoon-miran/works/01_born_again_3.jpg",
+    featuredImage: "/images/artists/yoon-miran/collage.jpg",
+    birthYear: 1948,
+    nationality: "한국",
+    works: [
+      {
+        id: "ymr-work-01",
+        artistId: "yoon-miran",
+        title: { ko: "Born-Again 3", en: "Born-Again 3" },
+        year: 2002,
+        medium: "Korean Paper Work",
+        dimensions: "100 x 100 cm",
+        image: "/images/artists/yoon-miran/works/01_born_again_3.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-02",
+        artistId: "yoon-miran",
+        title: { ko: "Born-Again", en: "Born-Again" },
+        year: 2002,
+        medium: "Korean Paper Work",
+        dimensions: "100 x 100 cm",
+        image: "/images/artists/yoon-miran/works/02_born_again.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-03",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1989,
+        medium: "Mixed Media",
+        dimensions: "165 x 135 cm",
+        image: "/images/artists/yoon-miran/works/03_tranquility_1989.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-04",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1988,
+        medium: "Mixed Media",
+        dimensions: "95 x 63.5 cm",
+        image: "/images/artists/yoon-miran/works/04_tranquility_1988_a.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-05",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1988,
+        medium: "Mixed Media",
+        dimensions: "84 x 54.5 cm",
+        image: "/images/artists/yoon-miran/works/05_tranquility_1988_b.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-06",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1987,
+        medium: "Mixed Media",
+        dimensions: "81 x 51 cm",
+        image: "/images/artists/yoon-miran/works/06_tranquility_1987.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-07",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1984,
+        medium: "2-block Woodcut",
+        dimensions: "40 x 30 cm",
+        image: "/images/artists/yoon-miran/works/07_tranquility_1984.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-08",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1983,
+        medium: "Paper with Paper on Canvas",
+        dimensions: "194 x 132 cm",
+        image: "/images/artists/yoon-miran/works/08_tranquility_1983_a.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-09",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1983,
+        medium: "Deep Etching",
+        dimensions: "39 x 59 cm",
+        image: "/images/artists/yoon-miran/works/09_tranquility_1983_b.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-10",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 80-7 (정·화음)", en: "Tranquility and Accord 80-7" },
+        year: 1980,
+        medium: "Paper with Paper on Canvas",
+        dimensions: "103 x 103 cm",
+        image: "/images/artists/yoon-miran/works/10_tranquility_1980_a.jpg",
+        available: true
+      },
+      {
+        id: "ymr-work-11",
+        artistId: "yoon-miran",
+        title: { ko: "靜·和音 (정·화음)", en: "Tranquility and Accord" },
+        year: 1980,
+        medium: "Paper with Paper on Canvas",
+        dimensions: "194 x 132 cm",
+        image: "/images/artists/yoon-miran/works/11_tranquility_1980_b.jpg",
+        available: true
+      }
+    ],
+    cv: {
+      education: [
+        { year: '-', title: { ko: '홍익대학교 미술대학 서양화과 졸업', en: 'B.F.A., Hongik University College of Fine Arts' } },
+        { year: '-', title: { ko: '홍익대학교 대학원 졸업 (M.F.A.)', en: 'M.F.A., Hongik University Graduate School' } },
+        { year: '-', title: { ko: 'San Francisco Art Institute 수학', en: 'San Francisco Art Institute' } },
+        { year: '-', title: { ko: 'KALA Institute, Berkeley 수학', en: 'KALA Institute, Berkeley' } }
+      ],
+      awards: [
+        { year: '1983', title: { ko: '제14회 서울 국제판화 비엔날레 대상', en: 'Grand Prize, 14th Seoul International Print Biennale' } },
+        { year: '1982', title: { ko: '제17회 한국현대판화가 협회 공모전 우수상', en: 'Excellence Award, 17th Korean Contemporary Printmakers Association' } }
+      ],
+      soloExhibitions: [
+        { year: '2024', title: { ko: '제20회 개인전', en: '20th Solo Exhibition' }, subtitle: { ko: '관훈갤러리, 서울', en: 'Kwanhoon Gallery, Seoul' } },
+        { year: '2011', title: { ko: '제19회 개인전', en: '19th Solo Exhibition' }, subtitle: { ko: '갤러리인, 서울', en: 'Gallery In, Seoul' } },
+        { year: '1987', title: { ko: '제10회 개인전', en: '10th Solo Exhibition' }, subtitle: { ko: '국립현대미술관, 과천', en: 'National Museum of Contemporary Art, Gwacheon' } },
+        { year: '1983', title: { ko: '제1회 개인전', en: '1st Solo Exhibition' }, subtitle: { ko: '관훈미술관, 서울', en: 'Kwanhoon Museum, Seoul' } }
+      ],
+      collections: [
+        { year: '-', title: { ko: '국립현대미술관', en: 'National Museum of Contemporary Art' } },
+        { year: '-', title: { ko: '호암갤러리', en: 'Hoam Gallery' } },
+        { year: '-', title: { ko: '서울시립미술관', en: 'Seoul Museum of Art' } },
+        { year: '-', title: { ko: '珍아트갤러리', en: 'Jin Art Gallery' } }
+      ],
+      current: [
+        { year: '-', title: { ko: '홍익대학교 미술대학 교수 역임', en: 'Former Professor, Hongik University College of Fine Arts' } },
+        { year: '-', title: { ko: '한국미술협회 회원', en: 'Member, Korean Fine Arts Association' } },
+        { year: '-', title: { ko: '현대판화가협회 회원', en: 'Member, Korean Contemporary Printmakers Association' } }
+      ]
+    }
   }
 ]
 
