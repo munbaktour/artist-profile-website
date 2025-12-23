@@ -143,7 +143,8 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
       { id: 'cosmos', label: { ko: 'COSMOS', en: 'COSMOS' } },
       { id: 'full-moon', label: { ko: '四季月影 달항아리', en: 'FULL MOON' } },
       { id: 'small-jars', label: { ko: 'FATE 소호', en: 'FATE Small Jars' } },
-      { id: 'old-bowls', label: { ko: '寂照 옛사발', en: 'Traditional Bowls' } }
+      { id: 'old-bowls', label: { ko: '寂照 옛사발', en: 'Traditional Bowls' } },
+      { id: 'vases', label: { ko: '器道 화병', en: 'Vase Series' } }
     ],
     works: [
       {
@@ -963,6 +964,73 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         koreanPoetry: {
           ko: "홀로 천 년 흙 속에 서서\n적막함이 절로 아름다움이 되네\n노부부가 손잡고 걸으며\n석양 아래 함께 미소 짓네",
           en: "Standing alone in thousand-year earth,\nsolitude becomes beauty itself.\nAn elderly couple walks hand in hand,\nsmiling together beneath the sunset."
+        }
+      },
+      // 器道 화병 시리즈 — Vase Series
+      {
+        id: "KA-VASE-001",
+        artistId: "jung-sun-young",
+        title: { ko: "器道\nⅠ 천공병(穿空甁)", en: "GIDO\nⅠ Vessel of Ten Thousand Marks" },
+        medium: "화도 송곳질기법",
+        dimensions: "38cm × H 48cm",
+        image: "/images/artists/jung-sun-young/works/vases/01_ten_thousand_marks.jpg",
+        available: true,
+        category: "vases",
+        subtitle: {
+          ko: "인내가 질감이 되는 곳",
+          en: "Where Patience Becomes Texture"
+        },
+        description: {
+          ko: "수만 번의 송곳질로 완성된 표면의 질감. 인내와 시간이 빚어낸 소박한 아름다움. 한 땀 한 땀, 수만 번의 송곳질이 흙 위에 시간을 새겼습니다. 인내가 질감이 되고, 반복이 아름다움이 되는 순간. 일상의 화병이 예술로 피어납니다.",
+          en: "Surface texture completed through ten thousand marks. Simple beauty forged by patience and time. Stitch by stitch, ten thousand marks carved time into clay. The moment when patience becomes texture and repetition becomes beauty. An everyday vase blossoms into art."
+        },
+        koreanPoetry: {
+          ko: "만 번의 송곳질로 흙을 이루고\n청동과 불이 한 마음으로 만나\n일상의 쓰임이 예술이 되니\n그릇 속에 절로 도가 있네",
+          en: "Ten thousand marks shape the clay,\nbronze and fire meet as one heart.\nDaily utility becomes art,\nthe Way lives naturally in vessels."
+        }
+      },
+      {
+        id: "KA-VASE-002",
+        artistId: "jung-sun-young",
+        title: { ko: "器道\nⅡ 와동병(渦銅甁)", en: "GIDO\nⅡ Bronze Whispers" },
+        medium: "화도 청동코일기법",
+        dimensions: "20cm × H 30cm",
+        image: "/images/artists/jung-sun-young/works/vases/02_bronze_whispers.jpg",
+        available: true,
+        category: "vases",
+        subtitle: {
+          ko: "흙과 금속의 소용돌이 춤",
+          en: "Spirals Dancing in Earth and Metal"
+        },
+        description: {
+          ko: "청동과 결합된 화병의 고유한 이미지를 재해석. 절제된 아름다움이 배어있는 작품. 청동빛 소용돌이가 흙 위에서 춤을 춥니다. 금속과 흙의 절제된 만남, 화려하지 않으나 깊은 울림을 전하는 절제된 아름다움의 정수입니다.",
+          en: "Reinterpreting the unique image of vases combined with bronze. A work imbued with restrained beauty. Bronze spirals dance upon the clay. A restrained meeting of metal and earth—not flashy, but conveying deep resonance. The essence of restrained beauty."
+        },
+        koreanPoetry: {
+          ko: "만 번의 송곳질로 흙을 이루고\n청동과 불이 한 마음으로 만나\n일상의 쓰임이 예술이 되니\n그릇 속에 절로 도가 있네",
+          en: "Ten thousand marks shape the clay,\nbronze and fire meet as one heart.\nDaily utility becomes art,\nthe Way lives naturally in vessels."
+        }
+      },
+      {
+        id: "KA-VASE-003",
+        artistId: "jung-sun-young",
+        title: { ko: "器道\nⅢ 쌍와동병(雙渦銅甁)", en: "GIDO\nⅢ Twin Bronze Whispers" },
+        medium: "화도 청동코일기법",
+        dimensions: "20×30cm, 24×36cm (SET)",
+        image: "/images/artists/jung-sun-young/works/vases/03_twin_bronze.jpg",
+        available: true,
+        category: "vases",
+        subtitle: {
+          ko: "고요한 침묵 속 두 목소리",
+          en: "Two Voices in Harmonious Silence"
+        },
+        description: {
+          ko: "와동병의 세트 작품. 큰 화병과 작은 화병이 서로를 비추며 조화를 이룹니다. 같은 손에서 태어났으나 각자의 목소리로 노래하고, 함께 있을 때 비로소 완성되는 조화.",
+          en: "A set of Bronze Whispers vases. Large and small vases reflect each other in harmony. Born from the same hands yet singing with their own voices, their harmony is only complete when together."
+        },
+        koreanPoetry: {
+          ko: "만 번의 송곳질로 흙을 이루고\n청동과 불이 한 마음으로 만나\n일상의 쓰임이 예술이 되니\n그릇 속에 절로 도가 있네",
+          en: "Ten thousand marks shape the clay,\nbronze and fire meet as one heart.\nDaily utility becomes art,\nthe Way lives naturally in vessels."
         }
       }
     ],
