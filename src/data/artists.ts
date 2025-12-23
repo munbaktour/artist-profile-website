@@ -142,7 +142,8 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     workCategories: [
       { id: 'cosmos', label: { ko: 'COSMOS', en: 'COSMOS' } },
       { id: 'full-moon', label: { ko: '四季月影 달항아리', en: 'FULL MOON' } },
-      { id: 'small-jars', label: { ko: 'FATE 소호', en: 'FATE Small Jars' } }
+      { id: 'small-jars', label: { ko: 'FATE 소호', en: 'FATE Small Jars' } },
+      { id: 'old-bowls', label: { ko: '寂照 옛사발', en: 'Traditional Bowls' } }
     ],
     works: [
       {
@@ -895,6 +896,73 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         koreanPoetry: {
           ko: "동이 트는 새벽의 고요함 속에서,\n별들이 태어나는 성운의 꿈을 꾸네.\n말없이 곁에 서서 만 년을 기다렸고,\n달빛처럼 영원히 서로를 비추리라.",
           en: "In the stillness of breaking dawn,\nI dream of nebulae where stars are born.\nStanding silently beside you for ten thousand years,\nwe shall illuminate each other eternally like moonlight."
+        }
+      },
+      // 寂照 옛사발 시리즈 — Traditional Bowl Series
+      {
+        id: "KA-OLDBOWL-001",
+        artistId: "jung-sun-young",
+        title: { ko: "寂照\nⅠ 화영완(火影碗)", en: "JEOGJO\nⅠ Shadow of Fire" },
+        medium: "화도 적갈사발",
+        dimensions: "Ø 19cm × H 11cm",
+        image: "/images/artists/jung-sun-young/works/old-bowls/01_shadow_of_fire.jpg",
+        available: true,
+        category: "old-bowls",
+        subtitle: {
+          ko: "불꽃이 남긴 기억",
+          en: "Where Flames Leave Their Memory"
+        },
+        description: {
+          ko: "가마 불길이 남긴 그림자처럼 적갈색과 흑색이 자연스럽게 어우러진 사발. 불의 기억을 간직한 고독한 아름다움. 적갈색 흙 위에 검은 그림자가 춤추듯 번져 마치 가마 속 불길의 마지막 숨결을 담은 듯합니다.",
+          en: "A bowl where reddish-brown and black naturally blend like shadows left by kiln flames. A solitary beauty holding the memory of fire, as if capturing the last breath of flames dancing in the kiln."
+        },
+        koreanPoetry: {
+          ko: "홀로 천 년 흙 속에 서서\n적막함이 절로 아름다움이 되네\n노부부가 손잡고 걸으며\n석양 아래 함께 미소 짓네",
+          en: "Standing alone in thousand-year earth,\nsolitude becomes beauty itself.\nAn elderly couple walks hand in hand,\nsmiling together beneath the sunset."
+        }
+      },
+      {
+        id: "KA-OLDBOWL-002",
+        artistId: "jung-sun-young",
+        title: { ko: "寂照\nⅡ 토심완(土心碗)", en: "JEOGJO\nⅡ Heart of Earth" },
+        medium: "화도 황토사발",
+        dimensions: "Ø 17cm × H 10cm",
+        image: "/images/artists/jung-sun-young/works/old-bowls/02_heart_of_earth.jpg",
+        available: true,
+        category: "old-bowls",
+        subtitle: {
+          ko: "흙의 고요한 노래",
+          en: "The Quiet Song of Clay"
+        },
+        description: {
+          ko: "흙의 본심을 그대로 드러낸 황토빛 사발. 무위적 자연미의 정수. 꾸밈없는 황토빛이 자연의 노래를 들려줍니다. 노부부가 석양빛 아래 걷는 모습처럼 화려하지 않으나 깊고 따스한 아름다움.",
+          en: "A yellow earth-toned bowl revealing the true heart of clay. The essence of artless natural beauty, singing nature's quiet song. Like an elderly couple walking in sunset light—not flashy, but deep and warm."
+        },
+        koreanPoetry: {
+          ko: "홀로 천 년 흙 속에 서서\n적막함이 절로 아름다움이 되네\n노부부가 손잡고 걸으며\n석양 아래 함께 미소 짓네",
+          en: "Standing alone in thousand-year earth,\nsolitude becomes beauty itself.\nAn elderly couple walks hand in hand,\nsmiling together beneath the sunset."
+        }
+      },
+      {
+        id: "KA-OLDBOWL-003",
+        artistId: "jung-sun-young",
+        title: { ko: "寂照\nⅢ 설향완(雪香碗)", en: "JEOGJO\nⅢ Fragrance of Snow" },
+        medium: "화도 분백사발",
+        dimensions: "Ø 14cm × H 9cm",
+        image: "/images/artists/jung-sun-young/works/old-bowls/03_fragrance_of_snow.jpg",
+        available: true,
+        category: "old-bowls",
+        subtitle: {
+          ko: "오래된 돌 위의 첫빛",
+          en: "First Light on Weathered Stone"
+        },
+        description: {
+          ko: "첫눈이 내린 돌 위의 고요함처럼 분홍빛과 백색이 섬세하게 어우러진 사발. 세월이 내려앉은 돌 위에 첫눈이 내린 풍경. 섬세한 시간의 결이 담긴 사발, 하나뿐인 고독이 가장 아름다운 순간입니다.",
+          en: "A bowl where pink and white delicately blend like the stillness of first snow on weathered stone. A landscape of first snow settling on time-worn stones. Holding the delicate grain of time, where singular solitude becomes most beautiful."
+        },
+        koreanPoetry: {
+          ko: "홀로 천 년 흙 속에 서서\n적막함이 절로 아름다움이 되네\n노부부가 손잡고 걸으며\n석양 아래 함께 미소 짓네",
+          en: "Standing alone in thousand-year earth,\nsolitude becomes beauty itself.\nAn elderly couple walks hand in hand,\nsmiling together beneath the sunset."
         }
       }
     ],
