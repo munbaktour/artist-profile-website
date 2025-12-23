@@ -141,7 +141,8 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     nationality: "한국",
     workCategories: [
       { id: 'cosmos', label: { ko: 'COSMOS', en: 'COSMOS' } },
-      { id: 'full-moon', label: { ko: '四季月影 달항아리', en: 'FULL MOON' } }
+      { id: 'full-moon', label: { ko: '四季月影 달항아리', en: 'FULL MOON' } },
+      { id: 'small-jars', label: { ko: 'FATE 소호', en: 'FATE Small Jars' } }
     ],
     works: [
       {
@@ -713,6 +714,127 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         koreanPoetry: {
           ko: "단풍이 지는 밤,\n불꽃이 흙을 만나 가을을 품었다.\n타오르는 붉음 속에\n달은 익어간다.",
           en: "On a night when autumn leaves fall,\nflame met clay and embraced autumn.\nIn the burning crimson,\nthe moon ripens."
+        }
+      },
+      // FATE 소호 시리즈 — 小壺 컬렉션
+      {
+        id: "KA-SMALLJAR-001",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE\nⅠ 극광소호(極光小壺)", en: "FATE\nⅠ Aurora's Whisper" },
+        medium: "화도 청갈유항",
+        dimensions: "Ø 21cm × H 19cm",
+        image: "/images/artists/jung-sun-young/works/small-jars/01_aurora_whisper.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "한밤에 춤추는 색채",
+          en: "Where Colors Dance at Midnight"
+        },
+        description: {
+          ko: "북극의 오로라처럼 청록과 갈색이 신비롭게 교차하며 춤추는 소품. 청록과 갈색 유약이 고온에서 자연스럽게 어우러져 오로라처럼 신비로운 색채를 구현했다.",
+          en: "A piece where turquoise and brown mystically cross and dance like the Northern Lights. Turquoise and brown glazes naturally blend at high temperatures to create mystical aurora-like colors."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "極光靑流共一心", korean: "극광과 청류가 한 마음으로" },
+            { chinese: "千載相逢火裡尋", korean: "천 년을 기다려 불 속에서 만났네" },
+            { chinese: "縱使滄桑山海變", korean: "비록 세월이 산과 바다를 바꿀지라도" },
+            { chinese: "情深不改似陶魂", korean: "도자기 혼처럼 변치 않는 깊은 사랑" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "오로라가 춤추는 밤하늘 아래,\n푸른 폭포가 쏟아지듯 그대를 만났네.\n1,280도의 불꽃이 우리를 하나로 빚었고,\n천 년의 시간도 이 사랑을 녹이지 못하리.",
+          en: "Beneath the night sky where auroras dance,\nI met you like a blue waterfall cascading down.\nThe flames of 1,280 degrees forged us as one,\nand a thousand years cannot melt this love."
+        }
+      },
+      {
+        id: "KA-SMALLJAR-002",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE\nⅡ 청류소호(靑流小壺)", en: "FATE\nⅡ Cascade of Blue" },
+        medium: "화도 청유병",
+        dimensions: "Ø 20cm × H 22cm",
+        image: "/images/artists/jung-sun-young/works/small-jars/02_cascade_blue.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "하늘이 땅으로 쏟아지는 곳",
+          en: "Where Skies Fall into Earth"
+        },
+        description: {
+          ko: "하늘이 땅으로 쏟아지듯 푸른 유약이 자연스럽게 흘러내린 병. 극광소호와 함께 서면 마치 오랜 연인처럼 서로를 비추며 완성되는 한 쌍의 이야기.",
+          en: "A vessel where blue glaze flows naturally as if the sky pours into the earth. When placed with Aurora's Whisper, they illuminate each other like longtime lovers, completing a paired story."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "極光靑流共一心", korean: "극광과 청류가 한 마음으로" },
+            { chinese: "千載相逢火裡尋", korean: "천 년을 기다려 불 속에서 만났네" },
+            { chinese: "縱使滄桑山海變", korean: "비록 세월이 산과 바다를 바꿀지라도" },
+            { chinese: "情深不改似陶魂", korean: "도자기 혼처럼 변치 않는 깊은 사랑" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "오로라가 춤추는 밤하늘 아래,\n푸른 폭포가 쏟아지듯 그대를 만났네.\n1,280도의 불꽃이 우리를 하나로 빚었고,\n천 년의 시간도 이 사랑을 녹이지 못하리.",
+          en: "Beneath the night sky where auroras dance,\nI met you like a blue waterfall cascading down.\nThe flames of 1,280 degrees forged us as one,\nand a thousand years cannot melt this love."
+        }
+      },
+      {
+        id: "KA-SMALLJAR-003",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE\nⅢ 여명소호(黎明小壺)", en: "FATE\nⅢ Dawn's First Breath" },
+        medium: "화도 회적녹유항",
+        dimensions: "Ø 20cm × H 17cm",
+        image: "/images/artists/jung-sun-young/works/small-jars/03_dawn_breath.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "산이 아침 빛과 만나는 곳",
+          en: "Where Mountains Meet Morning Light"
+        },
+        description: {
+          ko: "이른 아침 산자락에 피어나는 안개처럼 분홍과 녹색이 어우러진 항아리. 동이 트기 직전의 그 고요한 순간, 산과 하늘이 처음 인사를 나누는 시간을 담았다.",
+          en: "A jar where pink and green blend like morning mist rising from mountain slopes. It captures that quiet moment just before dawn, when mountains and sky first exchange greetings."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "黎明星雲共此生", korean: "여명과 성운이 이 생을 함께하니" },
+            { chinese: "無聲相守萬年情", korean: "말없이 지키는 만 년의 사랑이라" },
+            { chinese: "霞光淡淡融天際", korean: "노을빛이 담담히 하늘 끝에 스며들 때" },
+            { chinese: "兩心如月照長明", korean: "두 마음은 달처럼 길이 빛나리" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "동이 트는 새벽의 고요함 속에서,\n별들이 태어나는 성운의 꿈을 꾸네.\n말없이 곁에 서서 만 년을 기다렸고,\n달빛처럼 영원히 서로를 비추리라.",
+          en: "In the stillness of breaking dawn,\nI dream of nebulae where stars are born.\nStanding silently beside you for ten thousand years,\nwe shall illuminate each other eternally like moonlight."
+        }
+      },
+      {
+        id: "KA-SMALLJAR-004",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE\nⅣ 성운소호(星雲小壺)", en: "FATE\nⅣ Nebula Dreams" },
+        medium: "화도 청자유항",
+        dimensions: "Ø 24cm × H 20cm",
+        image: "/images/artists/jung-sun-young/works/small-jars/04_nebula_dreams.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "별이 태어나는 곳",
+          en: "Where Stars Are Born"
+        },
+        description: {
+          ko: "은하수의 별들이 탄생하는 순간처럼 청자색이 은은하게 번지는 항아리. 여명소호와 함께 놓이면 새벽에서 밤까지, 영원을 품은 두 영혼의 조용한 약속이 된다.",
+          en: "A jar where celadon color spreads softly like the moment stars are born in the Milky Way. When placed with Dawn's First Breath, from dawn to night, it becomes a quiet promise of two souls embracing eternity."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "黎明星雲共此生", korean: "여명과 성운이 이 생을 함께하니" },
+            { chinese: "無聲相守萬年情", korean: "말없이 지키는 만 년의 사랑이라" },
+            { chinese: "霞光淡淡融天際", korean: "노을빛이 담담히 하늘 끝에 스며들 때" },
+            { chinese: "兩心如月照長明", korean: "두 마음은 달처럼 길이 빛나리" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "동이 트는 새벽의 고요함 속에서,\n별들이 태어나는 성운의 꿈을 꾸네.\n말없이 곁에 서서 만 년을 기다렸고,\n달빛처럼 영원히 서로를 비추리라.",
+          en: "In the stillness of breaking dawn,\nI dream of nebulae where stars are born.\nStanding silently beside you for ten thousand years,\nwe shall illuminate each other eternally like moonlight."
         }
       }
     ],
