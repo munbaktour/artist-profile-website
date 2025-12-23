@@ -140,14 +140,14 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     birthYear: 1961,
     nationality: "한국",
     workCategories: [
-      { id: 'cosmos', label: { ko: 'COSMOS', en: 'COSMOS' } }
+      { id: 'cosmos', label: { ko: 'COSMOS', en: 'COSMOS' } },
+      { id: 'full-moon', label: { ko: '四季月影 달항아리', en: 'FULL MOON' } }
     ],
     works: [
       {
         id: "KA-COSMOS-001",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅠ 은하의 탄생", en: "COSMOS\nⅠ Birth of a Galaxy" },
-        year: 2024,
         medium: "화도 청백빙렬대접",
         dimensions: "Ø 42cm × H 7.5cm",
         image: "/images/artists/jung-sun-young/works/bowls/01_galaxy_birth.jpg",
@@ -166,7 +166,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-002",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅡ 창백한 푸른 점", en: "COSMOS\nⅡ Pale Blue Dot" },
-        year: 2024,
         medium: "화도 청회대빙렬대접",
         dimensions: "Ø 75cm × H 15cm",
         image: "/images/artists/jung-sun-young/works/bowls/02_pale_blue_dot.jpg",
@@ -185,7 +184,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-003",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅢ 화성의 세포", en: "COSMOS\nⅢ Cells of Mars" },
-        year: 2024,
         medium: "화도 적갈빙렬대접",
         dimensions: "Ø 43cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/03_cells_mars.jpg",
@@ -204,7 +202,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-004",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅣ 푸른 조류", en: "COSMOS\nⅣ Blue Tides" },
-        year: 2024,
         medium: "화도 청백유동대접",
         dimensions: "Ø 51cm × H 9cm",
         image: "/images/artists/jung-sun-young/works/bowls/04_blue_tides.jpg",
@@ -223,7 +220,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-005",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅤ 얼어붙은 숲", en: "COSMOS\nⅤ Frozen Forest" },
-        year: 2024,
         medium: "화도 흑청수지대접",
         dimensions: "Ø 47cm × H 8cm",
         image: "/images/artists/jung-sun-young/works/bowls/05_frozen_forest.jpg",
@@ -242,7 +238,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-006",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅥ 고대의 지도", en: "COSMOS\nⅥ Ancient Maps" },
-        year: 2024,
         medium: "화도 갈색미로대접",
         dimensions: "Ø 42cm × H 5cm",
         image: "/images/artists/jung-sun-young/works/bowls/06_ancient_maps.jpg",
@@ -261,7 +256,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-007",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅦ 새벽의 산호", en: "COSMOS\nⅦ Dawn Coral" },
-        year: 2024,
         medium: "화도 분홍빙렬대접",
         dimensions: "Ø 44cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/07_dawn_coral.jpg",
@@ -280,7 +274,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-008",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅧ 심해의 정원", en: "COSMOS\nⅧ Garden of the Deep" },
-        year: 2024,
         medium: "화도 청색유기대접",
         dimensions: "Ø 41cm × H 6cm",
         image: "/images/artists/jung-sun-young/works/bowls/08_garden_deep.jpg",
@@ -299,7 +292,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-009",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅨ 황혼의 경계", en: "COSMOS\nⅨ Twilight Boundary" },
-        year: 2024,
         medium: "화도 자청음양대접",
         dimensions: "Ø 52cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/09_twilight.jpg",
@@ -318,7 +310,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-010",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩ 우주의 눈", en: "COSMOS\nⅩ Eye of the Universe" },
-        year: 2024,
         medium: "화도 청갈동심대접",
         dimensions: "Ø 38cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/10_eye_universe.jpg",
@@ -337,7 +328,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-011",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅠ 빙하의 숨결", en: "COSMOS\nⅩⅠ Breath of Glaciers" },
-        year: 2024,
         medium: "화도 백청빙렬대접",
         dimensions: "Ø 42cm × H 8cm",
         image: "/images/artists/jung-sun-young/works/bowls/11_glaciers.jpg",
@@ -356,7 +346,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-012",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅡ 별의 요람", en: "COSMOS\nⅩⅡ Cradle of Stars" },
-        year: 2024,
         medium: "화도 오색성운대접",
         dimensions: "Ø 50cm × H 8cm",
         image: "/images/artists/jung-sun-young/works/bowls/12_cradle_stars.jpg",
@@ -375,7 +364,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-013",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅢ 초신성", en: "COSMOS\nⅩⅢ Supernova" },
-        year: 2024,
         medium: "화도 청백폭발대접",
         dimensions: "Ø 54cm × H 10cm",
         image: "/images/artists/jung-sun-young/works/bowls/13_supernova.jpg",
@@ -394,7 +382,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-014",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅣ 은하의 안개", en: "COSMOS\nⅩⅣ Galactic Mist" },
-        year: 2024,
         medium: "화도 유백안개대접",
         dimensions: "Ø 48cm × H 9cm",
         image: "/images/artists/jung-sun-young/works/bowls/14_galactic_mist.jpg",
@@ -413,7 +400,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-015",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅤ 공허의 노래", en: "COSMOS\nⅩⅤ Song of the Void" },
-        year: 2024,
         medium: "화도 상아고요대접",
         dimensions: "Ø 50cm × H 10cm",
         image: "/images/artists/jung-sun-young/works/bowls/15_void_song.jpg",
@@ -432,7 +418,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-016",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅥ 은하의 폭포", en: "COSMOS\nⅩⅥ Galactic Falls" },
-        year: 2024,
         medium: "화도 청록폭포대접",
         dimensions: "Ø 52cm × H 10cm",
         image: "/images/artists/jung-sun-young/works/bowls/16_galactic_falls.jpg",
@@ -451,7 +436,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-017",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅦ 우주의 맥박", en: "COSMOS\nⅩⅦ Pulse of the Cosmos" },
-        year: 2024,
         medium: "화도 회청방사대접",
         dimensions: "Ø 52cm × H 10cm",
         image: "/images/artists/jung-sun-young/works/bowls/17_pulse_cosmos.jpg",
@@ -470,7 +454,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-018",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅧ 사건의 지평선", en: "COSMOS\nⅩⅧ Event Horizon" },
-        year: 2024,
         medium: "화도 심청심연대접",
         dimensions: "Ø 49cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/18_event_horizon.jpg",
@@ -489,7 +472,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-019",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅨ 원시의 소용돌이", en: "COSMOS\nⅩⅨ Primordial Vortex" },
-        year: 2024,
         medium: "화도 청갈회오리대접",
         dimensions: "Ø 38cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/19_primordial.jpg",
@@ -508,7 +490,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-020",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩ 빅뱅", en: "COSMOS\nⅩⅩ Big Bang" },
-        year: 2024,
         medium: "화도 오색폭발대접",
         dimensions: "Ø 34cm × H 4cm",
         image: "/images/artists/jung-sun-young/works/bowls/20_big_bang.jpg",
@@ -527,7 +508,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-021",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩⅠ 판게아의 분리", en: "COSMOS\nⅩⅩⅠ Pangaea Divided" },
-        year: 2024,
         medium: "화도 삼색분할대접",
         dimensions: "Ø 38cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/21_pangaea.jpg",
@@ -546,7 +526,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-022",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩⅡ 특이점", en: "COSMOS\nⅩⅩⅡ Singularity" },
-        year: 2024,
         medium: "화도 삼색우주대접",
         dimensions: "Ø 31cm × H 6cm",
         image: "/images/artists/jung-sun-young/works/bowls/22_singularity.jpg",
@@ -565,7 +544,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-023",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩⅢ 심해의 숲", en: "COSMOS\nⅩⅩⅢ Forest of the Deep" },
-        year: 2024,
         medium: "화도 청백산호대접",
         dimensions: "Ø 42cm × H 8cm",
         image: "/images/artists/jung-sun-young/works/bowls/23_forest_deep.jpg",
@@ -584,7 +562,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-024",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩⅣ 별의 유언", en: "COSMOS\nⅩⅩⅣ Testament of Stars" },
-        year: 2024,
         medium: "화도 다색성운대접",
         dimensions: "Ø 38cm × H 7cm",
         image: "/images/artists/jung-sun-young/works/bowls/24_testament.jpg",
@@ -603,7 +580,6 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         id: "KA-COSMOS-025",
         artistId: "jung-sun-young",
         title: { ko: "COSMOS\nⅩⅩⅤ 태양의 왕관", en: "COSMOS\nⅩⅩⅤ Corona of the Sun" },
-        year: 2024,
         medium: "화도 녹백태양대접",
         dimensions: "Ø 40cm × H 4cm",
         image: "/images/artists/jung-sun-young/works/bowls/25_corona.jpg",
@@ -616,6 +592,127 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         description: {
           ko: "개기일식 때만 볼 수 있는 태양의 코로나. 100만 도가 넘는 플라즈마가 만드는 장엄한 왕관. COSMOS 시리즈의 마지막 작품은 우리에게 가장 가까운 별을 기념한다.",
           en: "The sun's corona, visible only during total eclipses. A majestic crown of plasma exceeding one million degrees. The final work in the COSMOS series celebrates the star closest to us."
+        }
+      },
+      // FULL MOON 시리즈 — 四季月影 달항아리 컬렉션
+      {
+        id: "KA-FULLMOON-001",
+        artistId: "jung-sun-young",
+        title: { ko: "FULL MOON\nⅠ 동월청영(冬月淸影)", en: "FULL MOON\nⅠ Winter Moon's Clear Reflection" },
+        medium: "화도 백자달항아리",
+        dimensions: "Ø 46cm × H 49cm",
+        image: "/images/artists/jung-sun-young/works/moon-jars/01_winter_moon.jpg",
+        available: true,
+        category: "full-moon",
+        subtitle: {
+          ko: "고요가 서리를 만나는 곳",
+          en: "Where Silence Meets the Frost"
+        },
+        description: {
+          ko: "순백의 백자토에 고온(1,280°C) 환원 소성으로 순수한 백색을 구현한 작품. 겨울 보름달의 청명한 빛을 담아, 차갑지만 맑은 겨울밤의 고요함을 달항아리에 새겼다.",
+          en: "A work achieving pure white through high-temperature (1,280°C) reduction firing on pristine white porcelain clay. Capturing the clear light of the winter full moon, the quiet serenity of a cold yet clear winter night is inscribed in this moon jar."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "玉壺冬夜月", korean: "옥 항아리에 담긴 겨울밤 달" },
+            { chinese: "皓雪映寒光", korean: "흰 눈이 차가운 빛을 비추네" },
+            { chinese: "無言天地靜", korean: "말없이 천지가 고요하고" },
+            { chinese: "一輪滿胸懷", korean: "보름달이 가슴을 채우네" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "눈 내린 밤, 고요가 흰 옷을 입고\n달 아래 서 있다.\n불이 빚은 순백의 빛 속에\n온 세상의 침묵이 머문다.",
+          en: "On a snowy night, silence dressed in white\nstands beneath the moon.\nIn the pure light born of fire,\nthe hush of the whole world lingers."
+        }
+      },
+      {
+        id: "KA-FULLMOON-002",
+        artistId: "jung-sun-young",
+        title: { ko: "FULL MOON\nⅡ 춘월온화(春月溫華)", en: "FULL MOON\nⅡ Spring Moon's Warm Glow" },
+        medium: "화도 분청달항아리",
+        dimensions: "Ø 49cm × H 47cm",
+        image: "/images/artists/jung-sun-young/works/moon-jars/02_spring_moon.jpg",
+        available: true,
+        category: "full-moon",
+        subtitle: {
+          ko: "깨어나는 대지 위의 첫 빛",
+          en: "First Light on Waking Earth"
+        },
+        description: {
+          ko: "철분이 함유된 분장토로 자연스러운 흙빛과 질감을 표현한 작품. 봄 대지가 깨어나는 달빛의 온기를 담아, 생명이 움트는 계절의 따스함을 형상화했다.",
+          en: "A work expressing natural earth tones and textures through iron-rich slip clay. Capturing the warmth of moonlight as spring earth awakens, it embodies the gentle warmth of the season when life begins to sprout."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "春泥融月色", korean: "봄 흙이 달빛에 녹아들고" },
+            { chinese: "和暖入窯煙", korean: "따스함이 가마 연기에 스며드네" },
+            { chinese: "大地初醒夜", korean: "대지가 처음 깨어나는 밤" },
+            { chinese: "滿輪抱萬緣", korean: "보름달이 만 가지 인연을 안는다" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "얼음이 풀리는 밤,\n흙이 숨을 쉬기 시작한다.\n따스한 손길이 빚어낸 곡선 위로\n봄의 첫 달이 조용히 내려앉는다.",
+          en: "On a night when ice melts,\nthe earth begins to breathe.\nOver curves shaped by warm hands,\nthe first spring moon quietly settles."
+        }
+      },
+      {
+        id: "KA-FULLMOON-003",
+        artistId: "jung-sun-young",
+        title: { ko: "FULL MOON\nⅢ 하월청량(夏月淸凉)", en: "FULL MOON\nⅢ Summer Moon's Serene Light" },
+        medium: "화도 청자달항아리",
+        dimensions: "Ø 47cm × H 46cm",
+        image: "/images/artists/jung-sun-young/works/moon-jars/03_summer_moon.jpg",
+        available: true,
+        category: "full-moon",
+        subtitle: {
+          ko: "비취빛 물결, 달빛의 꿈",
+          en: "Jade Waters, Moonlit Dreams"
+        },
+        description: {
+          ko: "비취색 유약이 환원염에서 은은한 청록빛으로 발현된 작품. 여름 호수에 비친 푸른 달의 청량함을 담아, 무더운 계절에 시원한 달빛의 위안을 전한다.",
+          en: "A work where jade-colored glaze emerges as a subtle blue-green in the reduction flame. Capturing the refreshing quality of a blue moon reflected in a summer lake, it conveys the comfort of cool moonlight in the hot season."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "碧水夏宵月", korean: "푸른 물에 비친 여름밤 달" },
+            { chinese: "翠影入深壺", korean: "비취빛 그림자가 깊은 항아리에 드네" },
+            { chinese: "涼風吹火跡", korean: "서늘한 바람이 불의 흔적을 스치고" },
+            { chinese: "一片靑瓷湖", korean: "한 조각 청자가 호수가 되었네" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "한여름 밤의 호수 위,\n달이 푸른 물결을 일으킨다.\n비취색 꿈을 담은 항아리 속에\n청량한 바람이 잠든다.",
+          en: "Over the lake of a midsummer night,\nthe moon stirs blue ripples.\nIn the jar holding jade-colored dreams,\na cool breeze falls asleep."
+        }
+      },
+      {
+        id: "KA-FULLMOON-004",
+        artistId: "jung-sun-young",
+        title: { ko: "FULL MOON\nⅣ 추월진홍(秋月眞紅)", en: "FULL MOON\nⅣ Autumn Moon's True Crimson" },
+        medium: "화도 진사달항아리",
+        dimensions: "Ø 44cm × H 44cm",
+        image: "/images/artists/jung-sun-young/works/moon-jars/04_autumn_moon.jpg",
+        available: true,
+        category: "full-moon",
+        subtitle: {
+          ko: "불꽃달이 떠오르다",
+          en: "Ember Moon Rising"
+        },
+        description: {
+          ko: "산화동 유약이 가마 불길에서 자연스럽게 번지며 붉은 발색을 이룬 작품. 가을 단풍 물든 보름달의 진홍빛을 담아, 수확의 계절 풍요로움과 그리움을 담았다.",
+          en: "A work where copper oxide glaze naturally spreads in the kiln's flames to achieve red coloring. Capturing the true crimson of the full moon dyed by autumn foliage, it embodies the abundance and longing of the harvest season."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "丹楓秋夜月", korean: "붉은 단풍 사이 가을밤 달" },
+            { chinese: "火畫染長天", korean: "불로 그린 그림이 하늘을 물들이네" },
+            { chinese: "流霞入陶魄", korean: "흐르는 노을이 도자기 혼에 스며들어" },
+            { chinese: "萬山紅葉圓", korean: "만 산의 붉은 잎처럼 둥글구나" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "단풍이 지는 밤,\n불꽃이 흙을 만나 가을을 품었다.\n타오르는 붉음 속에\n달은 익어간다.",
+          en: "On a night when autumn leaves fall,\nflame met clay and embraced autumn.\nIn the burning crimson,\nthe moon ripens."
         }
       }
     ],

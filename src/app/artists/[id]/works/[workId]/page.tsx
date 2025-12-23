@@ -102,7 +102,7 @@ export default function ArtworkDetailPage() {
 
           {/* 작품 제목 */}
           <h1 className="text-sm font-medium tracking-[0.1em] uppercase text-gray-900 mb-1">
-            {artwork.title[language]}, {artwork.year}
+            {artwork.title[language]}{artwork.year ? `, ${artwork.year}` : ''}
           </h1>
 
           {/* 기법, 크기 */}
@@ -125,6 +125,35 @@ export default function ArtworkDetailPage() {
             <div className="mt-6">
               <p className="text-sm text-gray-600 leading-relaxed">
                 {artwork.description[language]}
+              </p>
+            </div>
+          )}
+
+          {/* 漢詩 (한시) */}
+          {artwork.chinesePoetry && (
+            <div className="mt-8 pt-6 border-t border-gray-100">
+              <p className="text-xs text-gray-400 tracking-widest mb-4 font-light">漢詩</p>
+              <div className="space-y-2">
+                {artwork.chinesePoetry.lines.map((line, idx) => (
+                  <div key={idx} className="flex items-baseline gap-3">
+                    <span className="text-sm font-serif text-gray-800 tracking-wider">
+                      {line.chinese}
+                    </span>
+                    <span className="text-xs text-gray-500">
+                      {line.korean}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 詩 (한글시) */}
+          {artwork.koreanPoetry && (
+            <div className="mt-6 pt-4 border-t border-gray-100">
+              <p className="text-xs text-gray-400 tracking-widest mb-3 font-light">詩</p>
+              <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line italic">
+                {artwork.koreanPoetry[language]}
               </p>
             </div>
           )}

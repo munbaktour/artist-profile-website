@@ -56,11 +56,19 @@ export interface Artist {
   cv?: ArtistCV                    // 작가 CV
 }
 
+// Poetry 타입 (한시/한글 시)
+export interface ChinesePoetry {
+  lines: {
+    chinese: string    // 한자 원문
+    korean: string     // 한글 번역
+  }[]
+}
+
 export interface ArtWork {
   id: string
   artistId: string
   title: LocalizedText
-  year: number
+  year?: number
   medium: string
   dimensions?: string // 예: "100 x 100 cm"
   image: string
@@ -69,6 +77,8 @@ export interface ArtWork {
   price?: number
   available: boolean
   category?: string  // 카테고리 ID (예: 'bowls')
+  chinesePoetry?: ChinesePoetry  // 漢詩 (한시)
+  koreanPoetry?: LocalizedText   // 詩 (한글 시)
 }
 
 // ============================================
