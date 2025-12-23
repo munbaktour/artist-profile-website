@@ -68,26 +68,6 @@ export default function ArtworkDetailPage() {
         <X className="w-6 h-6" />
       </button>
 
-      {/* 이전/다음 네비게이션 */}
-      {prevWork && (
-        <Link
-          href={`/artists/${artistId}/works/${prevWork.id}`}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-2 text-gray-300 hover:text-black transition-colors"
-          aria-label="Previous"
-        >
-          <ChevronLeft className="w-8 h-8" />
-        </Link>
-      )}
-      {nextWork && (
-        <Link
-          href={`/artists/${artistId}/works/${nextWork.id}`}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-2 text-gray-300 hover:text-black transition-colors"
-          aria-label="Next"
-        >
-          <ChevronRight className="w-8 h-8" />
-        </Link>
-      )}
-
       {/* 메인 콘텐츠 - 아라리오 스타일 */}
       <div className="h-full flex">
         {/* 왼쪽 정보 패널 */}
@@ -167,7 +147,27 @@ export default function ArtworkDetailPage() {
         </div>
 
         {/* 오른쪽 이미지 영역 - 호버 시 확대 */}
-        <div className="flex-1 flex items-center justify-center bg-gray-50 p-8">
+        <div className="flex-1 relative flex items-center justify-center bg-gray-50 p-8">
+          {/* 이전/다음 네비게이션 - 이미지 컨테이너 내부 */}
+          {prevWork && (
+            <Link
+              href={`/artists/${artistId}/works/${prevWork.id}`}
+              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-all"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </Link>
+          )}
+          {nextWork && (
+            <Link
+              href={`/artists/${artistId}/works/${nextWork.id}`}
+              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-all"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Link>
+          )}
+
           <div
             ref={imageRef}
             className="relative max-w-full max-h-full cursor-zoom-in overflow-hidden"
