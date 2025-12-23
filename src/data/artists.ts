@@ -717,6 +717,36 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         }
       },
       // FATE 소호 시리즈 — 小壺 컬렉션
+      // SET Ⅰ: 極光 × 靑流 (시공을 넘은 사랑)
+      {
+        id: "KA-SMALLJAR-SET1",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE SET Ⅰ\n時空을 넘은 사랑", en: "FATE SET Ⅰ\nLove Beyond Time and Space" },
+        medium: "화도 청갈유항 · 청유병",
+        image: "/images/artists/jung-sun-young/works/small-jars/00_set1_aurora_cascade.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "극광소호 · 청류소호",
+          en: "Aurora's Whisper & Cascade of Blue"
+        },
+        description: {
+          ko: "오로라가 춤추는 밤하늘 아래 만난 두 영혼. 1,280도의 불꽃이 빚어낸 시공을 초월한 사랑의 세트.",
+          en: "Two souls that met beneath the dancing aurora. A set of love transcending time and space, forged by flames of 1,280 degrees."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "極光靑流共一心", korean: "극광과 청류가 한 마음으로" },
+            { chinese: "千載相逢火裡尋", korean: "천 년을 기다려 불 속에서 만났네" },
+            { chinese: "縱使滄桑山海變", korean: "비록 세월이 산과 바다를 바꿀지라도" },
+            { chinese: "情深不改似陶魂", korean: "도자기 혼처럼 변치 않는 깊은 사랑" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "오로라가 춤추는 밤하늘 아래,\n푸른 폭포가 쏟아지듯 그대를 만났네.\n1,280도의 불꽃이 우리를 하나로 빚었고,\n천 년의 시간도 이 사랑을 녹이지 못하리.",
+          en: "Beneath the night sky where auroras dance,\nI met you like a blue waterfall cascading down.\nThe flames of 1,280 degrees forged us as one,\nand a thousand years cannot melt this love."
+        }
+      },
       {
         id: "KA-SMALLJAR-001",
         artistId: "jung-sun-young",
@@ -777,13 +807,43 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
           en: "Beneath the night sky where auroras dance,\nI met you like a blue waterfall cascading down.\nThe flames of 1,280 degrees forged us as one,\nand a thousand years cannot melt this love."
         }
       },
+      // SET Ⅱ: 黎明 × 星雲 (시공을 넘은 사랑)
+      {
+        id: "KA-SMALLJAR-SET2",
+        artistId: "jung-sun-young",
+        title: { ko: "FATE SET Ⅱ\n時空을 넘은 사랑", en: "FATE SET Ⅱ\nLove Beyond Time and Space" },
+        medium: "화도 회적녹유항 · 청자유항",
+        image: "/images/artists/jung-sun-young/works/small-jars/03_set2_dawn_nebula.jpg",
+        available: true,
+        category: "small-jars",
+        subtitle: {
+          ko: "여명소호 · 성운소호",
+          en: "Dawn's First Breath & Nebula Dreams"
+        },
+        description: {
+          ko: "동이 트는 새벽부터 별이 태어나는 밤까지. 말없이 곁에 서서 만 년을 기다린 두 영혼의 조용한 약속.",
+          en: "From the breaking dawn to the night when stars are born. A quiet promise of two souls who waited ten thousand years, standing silently side by side."
+        },
+        chinesePoetry: {
+          lines: [
+            { chinese: "黎明星雲共此生", korean: "여명과 성운이 이 생을 함께하니" },
+            { chinese: "無聲相守萬年情", korean: "말없이 지키는 만 년의 사랑이라" },
+            { chinese: "霞光淡淡融天際", korean: "노을빛이 담담히 하늘 끝에 스며들 때" },
+            { chinese: "兩心如月照長明", korean: "두 마음은 달처럼 길이 빛나리" }
+          ]
+        },
+        koreanPoetry: {
+          ko: "동이 트는 새벽의 고요함 속에서,\n별들이 태어나는 성운의 꿈을 꾸네.\n말없이 곁에 서서 만 년을 기다렸고,\n달빛처럼 영원히 서로를 비추리라.",
+          en: "In the stillness of breaking dawn,\nI dream of nebulae where stars are born.\nStanding silently beside you for ten thousand years,\nwe shall illuminate each other eternally like moonlight."
+        }
+      },
       {
         id: "KA-SMALLJAR-003",
         artistId: "jung-sun-young",
         title: { ko: "FATE\nⅢ 여명소호(黎明小壺)", en: "FATE\nⅢ Dawn's First Breath" },
         medium: "화도 회적녹유항",
         dimensions: "Ø 20cm × H 17cm",
-        image: "/images/artists/jung-sun-young/works/small-jars/03_dawn_breath.jpg",
+        image: "/images/artists/jung-sun-young/works/small-jars/04_dawn_breath.jpg",
         available: true,
         category: "small-jars",
         subtitle: {
@@ -813,7 +873,7 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
         title: { ko: "FATE\nⅣ 성운소호(星雲小壺)", en: "FATE\nⅣ Nebula Dreams" },
         medium: "화도 청자유항",
         dimensions: "Ø 24cm × H 20cm",
-        image: "/images/artists/jung-sun-young/works/small-jars/04_nebula_dreams.jpg",
+        image: "/images/artists/jung-sun-young/works/small-jars/05_nebula_dreams.jpg",
         available: true,
         category: "small-jars",
         subtitle: {
