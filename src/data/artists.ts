@@ -1222,31 +1222,31 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
     ],
     cv: {
       education: [
-        { year: '1982', content: { ko: '홍익대학교 산업미술대학원 졸업', en: 'Graduated from Hongik University Graduate School of Industrial Art' } },
-        { year: '1967', content: { ko: '홍익대학교 미술대학 응용미술과 졸업', en: 'Graduated from Hongik University College of Fine Arts, Department of Applied Art' } }
+        { year: '1982', title: { ko: '홍익대학교 산업미술대학원 졸업', en: 'Graduated from Hongik University Graduate School of Industrial Art' } },
+        { year: '1967', title: { ko: '홍익대학교 미술대학 응용미술과 졸업', en: 'Graduated from Hongik University College of Fine Arts, Department of Applied Art' } }
       ],
       soloExhibitions: [
-        { year: '2022', content: { ko: '변건호 생명조형전 II, 울산 갤러리한빛', en: 'Byun Kunho Life Sculpture Exhibition II, Gallery Hanbit, Ulsan' } },
-        { year: '2016', content: { ko: '변건호 생명조형전 (Neo Cosmos), 예술의전당 한가람미술관', en: 'Byun Kunho Life Sculpture Exhibition (Neo Cosmos), Seoul Arts Center Hangaram Art Museum' } },
-        { year: '2004', content: { ko: '방법과 모색전, 홍익대학교 현대미술관', en: 'Method and Exploration, Hongik University Museum of Contemporary Art' } },
-        { year: '1998', content: { ko: '인간과 자연전, 갤러리 우덕, 서울', en: 'Human & Nature, Gallery Wooduk, Seoul' } },
-        { year: '1995', content: { ko: '혼돈과 질서전, 가산화랑, 서울', en: 'Chaos & Order, Gallery Gasan, Seoul' } },
-        { year: '1990', content: { ko: '생성과 소멸전, 무역센터 현대미술관 서울 / 현대화랑 대전', en: 'Generation & Annihilation, World Trade Center Hyundai Museum Seoul / Hyundai Gallery Daejeon' } }
+        { year: '2022', title: { ko: '변건호 생명조형전 II', en: 'Byun Kunho Life Sculpture Exhibition II' }, subtitle: { ko: '울산 갤러리한빛', en: 'Gallery Hanbit, Ulsan' } },
+        { year: '2016', title: { ko: '변건호 생명조형전 (Neo Cosmos)', en: 'Byun Kunho Life Sculpture Exhibition (Neo Cosmos)' }, subtitle: { ko: '예술의전당 한가람미술관', en: 'Seoul Arts Center Hangaram Art Museum' } },
+        { year: '2004', title: { ko: '방법과 모색전', en: 'Method and Exploration' }, subtitle: { ko: '홍익대학교 현대미술관', en: 'Hongik University Museum of Contemporary Art' } },
+        { year: '1998', title: { ko: '인간과 자연전', en: 'Human & Nature' }, subtitle: { ko: '갤러리 우덕, 서울', en: 'Gallery Wooduk, Seoul' } },
+        { year: '1995', title: { ko: '혼돈과 질서전', en: 'Chaos & Order' }, subtitle: { ko: '가산화랑, 서울', en: 'Gallery Gasan, Seoul' } },
+        { year: '1990', title: { ko: '생성과 소멸전', en: 'Generation & Annihilation' }, subtitle: { ko: '무역센터 현대미술관 서울 / 현대화랑 대전', en: 'World Trade Center Hyundai Museum Seoul / Hyundai Gallery Daejeon' } }
       ],
       groupExhibitions: [
-        { year: '2017', content: { ko: '스타필드신세계 환경조형물 설치, 하남시', en: 'Environmental Sculpture Installation at Starfield Shinsegae, Hanam City' } },
-        { year: '2008', content: { ko: '밀양시립미술관 개관기념 조형물 "비상" 설치', en: 'Installation of "Flight" Sculpture for Miryang City Museum Opening' } },
-        { year: '2008', content: { ko: '함평나비·곤충EXPO 기념조형물 "꿈·사랑" 설치', en: 'Installation of "Dream & Love" Sculpture for Hampyeong Butterfly & Insect EXPO' } },
-        { year: '2007', content: { ko: '청주예술의전당 환경조형물 "인간과자연" 설치', en: 'Installation of "Human & Nature" Environmental Sculpture at Cheongju Arts Center' } },
-        { year: '2000', content: { ko: '한국은행 대구지점 환경조형물 "Good Morning" 설치', en: 'Installation of "Good Morning" Environmental Sculpture at Bank of Korea Daegu Branch' } },
-        { year: '', content: { ko: 'Land of Morning Calm, Elliott Smith Contemporary Art, U.S.A', en: 'Land of Morning Calm, Elliott Smith Contemporary Art, U.S.A' } },
-        { year: '', content: { ko: 'LA Scope 미술관 초대전, U.S.A', en: 'LA Scope Museum Invitation Exhibition, U.S.A' } },
-        { year: '', content: { ko: '국립현대미술관 현대미술 초대전 외 국내외 초대전 300여회', en: 'National Museum of Modern and Contemporary Art Invitation Exhibition and 300+ domestic/overseas exhibitions' } }
+        { year: '2017', title: { ko: '스타필드신세계 환경조형물 설치', en: 'Environmental Sculpture Installation at Starfield Shinsegae' }, subtitle: { ko: '하남시', en: 'Hanam City' } },
+        { year: '2008', title: { ko: '밀양시립미술관 개관기념 조형물 "비상" 설치', en: 'Installation of "Flight" Sculpture for Miryang City Museum Opening' } },
+        { year: '2008', title: { ko: '함평나비·곤충EXPO 기념조형물 "꿈·사랑" 설치', en: 'Installation of "Dream & Love" Sculpture for Hampyeong Butterfly & Insect EXPO' } },
+        { year: '2007', title: { ko: '청주예술의전당 환경조형물 "인간과자연" 설치', en: 'Installation of "Human & Nature" Environmental Sculpture at Cheongju Arts Center' } },
+        { year: '2000', title: { ko: '한국은행 대구지점 환경조형물 "Good Morning" 설치', en: 'Installation of "Good Morning" Environmental Sculpture at Bank of Korea Daegu Branch' } },
+        { year: '', title: { ko: 'Land of Morning Calm', en: 'Land of Morning Calm' }, subtitle: { ko: 'Elliott Smith Contemporary Art, U.S.A', en: 'Elliott Smith Contemporary Art, U.S.A' } },
+        { year: '', title: { ko: 'LA Scope 미술관 초대전', en: 'LA Scope Museum Invitation Exhibition' }, subtitle: { ko: 'U.S.A', en: 'U.S.A' } },
+        { year: '', title: { ko: '국립현대미술관 현대미술 초대전 외 국내외 초대전 300여회', en: 'National Museum of Modern and Contemporary Art Invitation Exhibition and 300+ domestic/overseas exhibitions' } }
       ],
       awards: [
-        { year: '2014', content: { ko: '대한민국 옥조근정훈장', en: 'Order of Civil Merit, Okjo Medal, Republic of Korea' } },
-        { year: '', content: { ko: '한국조형디자인협회 공로상', en: 'Meritorious Service Award, Korea Association of Art & Design' } },
-        { year: '1997', content: { ko: '한국공예가협회 작품상', en: 'Korea Craft Artists Association Work Award' } }
+        { year: '2014', title: { ko: '대한민국 옥조근정훈장', en: 'Order of Civil Merit, Okjo Medal, Republic of Korea' } },
+        { year: '', title: { ko: '한국조형디자인협회 공로상', en: 'Meritorious Service Award, Korea Association of Art & Design' } },
+        { year: '1997', title: { ko: '한국공예가협회 작품상', en: 'Korea Craft Artists Association Work Award' } }
       ]
     }
   },
