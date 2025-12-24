@@ -1404,7 +1404,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
         year: 1984,
         medium: "2-block Woodcut",
         dimensions: "40 x 30 cm",
-        image: "/images/artists/yoon-miran/works/07_tranquility_1984.jpg",
+        image: "/images/artists/yoon-miran/works/07_tranquility_woodcut_1984.jpg",
         available: true
       },
       {
@@ -1424,7 +1424,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
         year: 1983,
         medium: "Deep Etching",
         dimensions: "39 x 59 cm",
-        image: "/images/artists/yoon-miran/works/09_tranquility_1983_b.jpg",
+        image: "/images/artists/yoon-miran/works/09_tranquility_etching_1983.jpg",
         available: true
       },
       {
