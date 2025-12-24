@@ -10,8 +10,20 @@ export const artistsData: Artist[] = [
     name: { ko: '김형대', en: 'Kim Hyung Dae' },
     category: 'featured',
     bio: {
-      ko: "김형대는 한국 추상미술의 선구자로, 1960년대 앵포르멜 운동을 주도했다. 1961년 국전에서 추상회화로는 최초로 수상하며 한국 추상미술의 권위를 인정받았다. 2024년 대한민국예술원 회원으로 선출되었다.",
-      en: "Kim Hyung Dae is a pioneer of Korean abstract art who led the Informel movement in the 1960s. Elected as a member of the National Academy of Arts in 2024."
+      ko: `1936년 대한민국 오산 출생
+1961년 서울대학교 미술대학 회화과 졸업
+1977~2002 이화여자대학교 조형예술대학 서양화과 교수
+
+김형대는 한국 추상미술의 선구자로, 1960년대 앵포르멜 운동을 주도했다. 1961년 국전에서 추상회화로는 최초로 수상하며 한국 추상미술의 권위를 인정받았으며, 이후 60여 년간 한결같이 추상의 세계를 탐구해왔다.
+
+그의 대표작 'HALO' 시리즈는 빛과 색채의 조화를 통해 우주적 에너지와 생명력을 표현한다. 아크릴 물감의 투명한 층을 겹겹이 쌓아 올려 만들어낸 발광하는 듯한 색면은 관람자에게 명상적 경험을 선사한다.`,
+      en: `Born 1936 in Osan, South Korea
+1961 Graduated Department of Painting, College of Fine Arts, Seoul National University
+1977~2002 Professor of Department of Western Painting, College of Formative Arts, Ewha Women's University
+
+Kim Hyung Dae is a pioneer of Korean abstract art who led the Informel movement in the 1960s. In 1961, he became the first abstract painter to win an award at the National Art Exhibition, establishing the authority of Korean abstract art.
+
+His signature 'HALO' series expresses cosmic energy and vitality through the harmony of light and color. The luminous color fields, created by layering transparent acrylic paint, offer viewers a meditative experience.`
     },
     image: "/images/artists/kim-hyung-dae.jpg",
     featuredImage: "/images/artists/kim-hyung-dae/collage.png",
@@ -21,34 +33,64 @@ export const artistsData: Artist[] = [
       {
         id: "khd-work-01",
         artistId: "kim-hyung-dae",
-        title: { ko: "무제 61-A", en: "Untitled 61-A" },
-        year: 1961,
-        medium: "캔버스에 유채",
-        dimensions: "130 x 162 cm",
+        title: { ko: "HALO 17-0122", en: "HALO 17-0122" },
+        year: 2017,
+        medium: "캔버스에 아크릴",
+        dimensions: "145 x 145 cm",
         image: "/images/artists/kim-hyung-dae/artwork-01.jpg",
         available: true
       },
       {
         id: "khd-work-02",
         artistId: "kim-hyung-dae",
-        title: { ko: "추상 68-B", en: "Abstract 68-B" },
-        year: 1968,
-        medium: "캔버스에 유채",
-        dimensions: "145 x 112 cm",
+        title: { ko: "HALO 07-429", en: "HALO 07-429" },
+        year: 2007,
+        medium: "캔버스에 아크릴",
+        dimensions: "140 x 140 cm",
         image: "/images/artists/kim-hyung-dae/artwork-02.jpg",
-        available: false
+        available: true
       },
       {
         id: "khd-work-03",
         artistId: "kim-hyung-dae",
-        title: { ko: "형상의 리듬", en: "Rhythm of Forms" },
-        year: 1975,
-        medium: "캔버스에 유채",
-        dimensions: "162 x 130 cm",
+        title: { ko: "HALO 22-0112", en: "HALO 22-0112" },
+        year: 2022,
+        medium: "캔버스에 아크릴",
+        dimensions: "150 x 150 cm",
         image: "/images/artists/kim-hyung-dae/artwork-03.jpg",
         available: true
       }
-    ]
+    ],
+    cv: {
+      education: [
+        { year: '1961', title: { ko: '서울대학교 미술대학 회화과 졸업', en: 'Graduated Department of Painting, College of Fine Arts, Seoul National University' } }
+      ],
+      awards: [
+        { year: '1982', title: { ko: '제2회 우주국제판화대상 공모전 최우수상', en: 'Grand Prize, 2nd Space International Print Grand Prize Competition' } },
+        { year: '1961', title: { ko: '국가재건최고회의의장 특별상', en: 'Special Prize of the Chairman of the Supreme Council for National Rehabilitation' } },
+        { year: '1961-68', title: { ko: '국전 6회 특선 (10, 11, 13, 14, 16, 17회)', en: 'Specially selected 6 times at National Art Exhibition' } }
+      ],
+      soloExhibitions: [
+        { year: '2022', title: { ko: '관훈갤러리', en: 'Kwanhoon Gallery' }, subtitle: { ko: '서울', en: 'Seoul' } },
+        { year: '2018', title: { ko: '바앙 갤러리', en: 'Baahng Gallery' }, subtitle: { ko: '뉴욕', en: 'New York' } },
+        { year: '2016', title: { ko: '김형대 회고전', en: 'Kim Hyung-Dae Retrospective' } },
+        { year: '2003', title: { ko: '가나아트센터', en: 'Gana Art Center' }, subtitle: { ko: '서울', en: 'Seoul' } },
+        { year: '1995', title: { ko: '아지 아라치 갤러리', en: 'Aggie Arachi Gallery' }, subtitle: { ko: '파리', en: 'Paris' } },
+        { year: '1993', title: { ko: '안드레 잘레트 갤러리', en: 'Andre Zalet Gallery' }, subtitle: { ko: '뉴욕', en: 'New York' } },
+        { year: '1991', title: { ko: '갤러리 현대', en: 'Gallery Hyundai' }, subtitle: { ko: '서울', en: 'Seoul' } }
+      ],
+      groupExhibitions: [
+        { year: '2023', title: { ko: 'KIAF', en: 'KIAF' }, subtitle: { ko: '서울', en: 'Seoul' } },
+        { year: '2000', title: { ko: '광주비엔날레 특별전', en: 'Gwangju Biennale Special Exhibition' } },
+        { year: '1995', title: { ko: '유네스코 50인 한국작가 초청전', en: '50 Korean Artists Invitational Exhibition, UNESCO' }, subtitle: { ko: '파리', en: 'Paris' } },
+        { year: '1991', title: { ko: '제19회 류블랴나 국제 판화 비엔날레', en: '19th Ljubljana International Print Biennale' } },
+        { year: '1984', title: { ko: '제16회 카그네스 국제 회화전', en: '16th Cagnes International Painting Exhibition' }, subtitle: { ko: '프랑스', en: 'France' } },
+        { year: '1983', title: { ko: '한국현대미술전', en: 'Korea Contemporary Art Fair' }, subtitle: { ko: '밀라노', en: 'Milano' } }
+      ],
+      current: [
+        { year: '1977-2002', title: { ko: '이화여자대학교 서양화과 교수', en: 'Professor, Ewha Women\'s University' } }
+      ]
+    }
   },
 
   {
@@ -56,8 +98,20 @@ export const artistsData: Artist[] = [
     name: { ko: '유근영', en: 'Yoo Geun Young' },
     category: 'featured',
     bio: {
-      ko: "유근영 작가는 추상과 구상의 경계를 넘나들며 독자적인 조형 언어를 구축해왔다. 강렬한 색채와 역동적인 붓질로 내면의 감정을 캔버스에 표현하며, 한국 현대회화의 새로운 가능성을 제시하고 있다.",
-      en: "Yoo Geun Young has developed a unique visual language crossing between abstract and figurative art."
+      ko: `1948년 대전 출생
+1974 홍익대학교 미술대학 졸업
+1985 홍익대학교 대학원 미학전공 졸업
+
+유근영 작가는 1978년 첫 개인전을 시작으로 50여 회의 개인전을 개최하며 한국 현대미술의 중요한 궤적을 그려왔다. 'The Odd Nature' 시리즈로 대표되는 그의 작품은 자연과 인간의 관계를 독특한 시각으로 탐구한다.
+
+추상과 구상의 경계를 넘나들며 강렬한 색채와 역동적인 붓질로 내면의 감정을 캔버스에 표현해왔으며, KIAF, 화랑미술제 등 주요 아트페어에 꾸준히 참여하고 있다.`,
+      en: `Born 1948 in Daejeon
+1974 Graduated from Hongik University College of Fine Arts
+1985 Graduated from Hongik University Graduate School of Aesthetics
+
+Since his first solo exhibition in 1978, Yoo Geun Young has held over 50 solo exhibitions, tracing an important trajectory in Korean contemporary art. His works, represented by 'The Odd Nature' series, explore the relationship between nature and humanity from a unique perspective.
+
+Crossing between abstract and figurative art, he has expressed inner emotions on canvas through intense colors and dynamic brushwork, consistently participating in major art fairs including KIAF and Gallery Art Fair.`
     },
     image: "/images/artists/yoo-geun-young.jpg",
     featuredImage: "/images/artists/yoo-geun-young/collage.png",
@@ -67,24 +121,70 @@ export const artistsData: Artist[] = [
       {
         id: "ygy-work-01",
         artistId: "yoo-geun-young",
-        title: { ko: "내면의 풍경", en: "Inner Landscape" },
-        year: 2015,
-        medium: "캔버스에 아크릴",
-        dimensions: "100 x 80 cm",
+        title: { ko: "The Odd Nature", en: "The Odd Nature" },
+        year: 2017,
+        medium: "캔버스에 유채",
+        dimensions: "130 x 162 cm",
         image: "/images/artists/yoo-geun-young/artwork-01.jpg",
         available: true
       },
       {
         id: "ygy-work-02",
         artistId: "yoo-geun-young",
-        title: { ko: "색채의 대화", en: "Dialogue of Colors" },
-        year: 2018,
-        medium: "캔버스에 혼합재료",
-        dimensions: "120 x 120 cm",
+        title: { ko: "The Odd Nature 160710_024", en: "The Odd Nature 160710_024" },
+        year: 2016,
+        medium: "캔버스에 유채",
+        dimensions: "130.3 x 162 cm",
         image: "/images/artists/yoo-geun-young/artwork-02.jpg",
         available: true
+      },
+      {
+        id: "ygy-work-03",
+        artistId: "yoo-geun-young",
+        title: { ko: "The Odd Nature 61-006", en: "The Odd Nature 61-006" },
+        year: 1999,
+        medium: "캔버스에 유채",
+        dimensions: "93.9 x 259.1 cm",
+        image: "/images/artists/yoo-geun-young/artwork-03.jpg",
+        available: true
+      },
+      {
+        id: "ygy-work-04",
+        artistId: "yoo-geun-young",
+        title: { ko: "The Odd Nature", en: "The Odd Nature" },
+        year: 1999,
+        medium: "캔버스에 유채",
+        dimensions: "162.0 x 227.3 cm",
+        image: "/images/artists/yoo-geun-young/artwork-04.jpg",
+        available: true
       }
-    ]
+    ],
+    cv: {
+      education: [
+        { year: '1985', title: { ko: '홍익대학교 대학원 미학전공 졸업', en: 'Graduated from Hongik University Graduate School of Aesthetics' } },
+        { year: '1974', title: { ko: '홍익대학교 미술대학 졸업', en: 'Graduated from Hongik University College of Fine Arts' } }
+      ],
+      soloExhibitions: [
+        { year: '2024', title: { ko: '제50회 개인전', en: '50th Solo Exhibition' }, subtitle: { ko: 'GANA ART LA, 미국', en: 'GANA ART LA, USA' } },
+        { year: '2023', title: { ko: '제49회 개인전', en: '49th Solo Exhibition' }, subtitle: { ko: '관훈갤러리, 서울', en: 'Kwanhoon Gallery, Seoul' } },
+        { year: '2022', title: { ko: '제48회 개인전', en: '48th Solo Exhibition' }, subtitle: { ko: '설비원서점 갤러리, 대전', en: 'Seolbiwon Bookstore Gallery, Daejeon' } },
+        { year: '2021', title: { ko: '제47회 개인전', en: '47th Solo Exhibition' }, subtitle: { ko: 'K-water 본사, 대전', en: 'K-water Headquarters, Daejeon' } },
+        { year: '2017', title: { ko: '제44회 개인전', en: '44th Solo Exhibition' }, subtitle: { ko: '순화동천 갤러리, 서울', en: 'Sunhwa Dongcheon Gallery, Seoul' } },
+        { year: '2005', title: { ko: '제29회 개인전', en: '29th Solo Exhibition' }, subtitle: { ko: '대전시립미술관', en: 'Daejeon Museum of Art' } },
+        { year: '2000-2001', title: { ko: '제21회 개인전 "색-회화의 복귀"', en: '21st Solo Exhibition "Color-Return of Painting"' }, subtitle: { ko: '한림미술관', en: 'Hallim Museum of Art' } },
+        { year: '1978', title: { ko: '제1회 개인전', en: '1st Solo Exhibition' }, subtitle: { ko: '대전문화원 갤러리', en: 'Daejeon Cultural Center Gallery' } }
+      ],
+      groupExhibitions: [
+        { year: '2024', title: { ko: '화랑미술제', en: 'Gallery Art Fair' }, subtitle: { ko: '코엑스, 서울', en: 'COEX, Seoul' } },
+        { year: '2023', title: { ko: 'KIAF', en: 'KIAF' }, subtitle: { ko: '코엑스', en: 'COEX' } },
+        { year: '2023', title: { ko: 'Sound or Spring', en: 'Sound or Spring' }, subtitle: { ko: '관훈갤러리, 서울', en: 'Kwanhoon Gallery, Seoul' } },
+        { year: '2023', title: { ko: 'K-ART SHOW SEOUL', en: 'K-ART SHOW SEOUL' }, subtitle: { ko: '롯데호텔, 서울', en: 'Lotte Hotel, Seoul' } },
+        { year: '2012', title: { ko: 'Hongik International Art Festival', en: 'Hongik International Art Festival' }, subtitle: { ko: '홍익대학교 대학로 아트센터', en: 'Hongik University Daehakro Art Center' } },
+        { year: '1995', title: { ko: '동세대전', en: 'Same Generation Exhibition' }, subtitle: { ko: '관훈미술관, 서울', en: 'Kwanhoon Museum, Seoul' } },
+        { year: '1992', title: { ko: '현대미술초대전', en: 'Contemporary Art Invitational' }, subtitle: { ko: '국립현대미술관', en: 'National Museum of Modern and Contemporary Art' } },
+        { year: '1992', title: { ko: '제1회 NICAF', en: '1st NICAF' }, subtitle: { ko: '일본', en: 'Japan' } }
+      ]
+    }
   },
 
   {
@@ -1063,8 +1163,16 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     name: { ko: '변건호', en: 'Byun Geon Ho' },
     category: 'featured',
     bio: {
-      ko: "변건호 작가는 도시 풍경과 일상의 순간을 독특한 시각으로 포착하는 작업을 이어오고 있다. 사진과 회화의 경계를 탐구하며, 현실과 환상 사이의 모호한 지점을 시각화한다.",
-      en: "Byun Geon Ho captures urban landscapes and everyday moments through a unique perspective, exploring the boundary between photography and painting."
+      ko: `1948년 출생. 홍익대학교 미술대학 및 동대학원을 졸업하였다. '90 생성과 소멸(무역센터 현대미술관), '95 혼돈과 질서(가산화랑 서울), '98 인간과 자연(갤러리우덕 서울), '16 생명조형전(Neo Cosmos, 예술의전당 한가람미술관), '22 Neo Cosmos I,II 등 개인전 8회를 가졌으며, 국립현대미술관 초대전, Land of Morning Calm(Elliott Smith Contemporary Art, U.S.A), LA Scope 미술관 초대전 외 300여회의 국내외 초대전시에 참여하였다.
+
+한국은행 대구지점 환경조형물(Good Morning), 청주예술의전당 환경조형물(인간과자연), 밀양시립미술관 개관기념 조형물(비상), 함평나비·곤충EXPO기념조형물(꿈·사랑), 스타필드신세계(무제, 하남시) 외 10여건의 환경조형물을 제작 설치하였다.
+
+한남대학교 문과대학 응용미술과 교수, 홍익대학교 미술대학 교수, 홍익대학교 산업미술대학원장을 역임하였으며, 현재 (사)한국조형디자인협회 명예이사장, 한국미술협회 자문위원으로 활동하며 파주 두포리에서 작품창작에 전념하고 있다.`,
+      en: `Born in 1948. After graduating from Hongik University's College of Fine Arts and its Graduate School, he has held eight solo exhibitions including '90 Generation & Annihilation (World Trade Center Hyundai Museum), '95 Chaos & Order (Gallery Gasan, Seoul), '98 Human & Nature (Gallery Wooduk, Seoul), '16 Life Sculpture Exhibition (Neo Cosmos, Seoul Arts Center Hangaram Art Museum), and '22 Neo Cosmos I, II. He participated in more than 300 domestic and overseas invitation exhibitions including the National Museum of Modern and Contemporary Art Invitation Exhibition, Land of Morning Calm (Elliott Smith Contemporary Art, U.S.A), and LA Scope Museum Invitation Exhibition.
+
+He produced and installed more than 10 environmental sculptures including Bank of Korea Daegu Branch (Good Morning), Cheongju Arts Center (Human & Nature), Miryang City Museum Opening Commemorative Sculpture (Flight), Hampyeong Butterfly & Insect EXPO Memorial Sculpture (Dream & Love), and Starfield Shinsegae (Untitled, Hanam City).
+
+He served as Professor at Hannam University College of Liberal Arts, Professor at Hongik University College of Fine Arts, and Dean of Hongik University Graduate School of Industrial Art. Currently, he is working as Honorary Chairman of Korea Association of Art & Design, Advisory Member of the Korean Fine Arts Association, and is devoted to creating works in Dupori, Paju.`
     },
     image: "/images/artists/byun-geon-ho/thumbnail.jpg",
     featuredImage: "/images/artists/byun-geon-ho/collage.png",
@@ -1072,95 +1180,75 @@ Each of the 25 bowls captures 13.7 billion years of cosmic history—from the mo
     nationality: "한국",
     works: [
       {
-        id: "bgh-work-01",
+        id: "bgh-neo-cosmos-12",
         artistId: "byun-geon-ho",
-        title: { ko: "작품 01", en: "Artwork 01" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
+        title: { ko: "Neo Cosmos 2023-No.12", en: "Neo Cosmos 2023-No.12" },
+        year: 2023,
+        medium: "Acrylic, Carbon, Crayon, Oil Pastel",
+        dimensions: "147 x 99 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-01.jpg",
         available: true
       },
       {
-        id: "bgh-work-02",
+        id: "bgh-neo-cosmos-13",
         artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.12", en: "Flowers & Birds No.12" },
+        title: { ko: "Neo Cosmos 2023-No.13", en: "Neo Cosmos 2023-No.13" },
         year: 2023,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
+        medium: "Acrylic, Carbon, Crayon, Oil Pastel",
         dimensions: "147 x 99 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-02.jpg",
         available: true
       },
       {
-        id: "bgh-work-03",
+        id: "bgh-neo-cosmos-14",
         artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.02", en: "Flowers & Birds No.02" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "117 x 91 cm",
+        title: { ko: "Neo Cosmos 2023-No.14", en: "Neo Cosmos 2023-No.14" },
+        year: 2023,
+        medium: "Acrylic, Carbon, Crayon, Oil Pastel",
+        dimensions: "147 x 99 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-03.jpg",
         available: true
       },
       {
-        id: "bgh-work-04",
+        id: "bgh-neo-cosmos-21",
         artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.03", en: "Flowers & Birds No.03" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "100 x 72 cm",
+        title: { ko: "Neo Cosmos 2023-No.21", en: "Neo Cosmos 2023-No.21" },
+        year: 2023,
+        medium: "Acrylic, Carbon, Crayon, Oil Pastel",
+        dimensions: "130.5 x 82.5 cm",
         image: "/images/artists/byun-geon-ho/works/neo-cosmos-04.jpg",
         available: true
-      },
-      {
-        id: "bgh-work-05",
-        artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.04", en: "Flowers & Birds No.04" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "91 x 117 cm",
-        image: "/images/artists/byun-geon-ho/works/neo-cosmos-05.jpg",
-        available: true
-      },
-      {
-        id: "bgh-work-06",
-        artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.05", en: "Flowers & Birds No.05" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "91 x 117 cm",
-        image: "/images/artists/byun-geon-ho/works/neo-cosmos-06.jpg",
-        available: true
-      },
-      {
-        id: "bgh-work-07",
-        artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.06", en: "Flowers & Birds No.06" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "91 x 117 cm",
-        image: "/images/artists/byun-geon-ho/works/neo-cosmos-07.jpg",
-        available: true
-      },
-      {
-        id: "bgh-work-08",
-        artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.07", en: "Flowers & Birds No.07" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "91 x 117 cm",
-        image: "/images/artists/byun-geon-ho/works/neo-cosmos-08.jpg",
-        available: true
-      },
-      {
-        id: "bgh-work-09",
-        artistId: "byun-geon-ho",
-        title: { ko: "Flowers & Birds No.08", en: "Flowers & Birds No.08" },
-        year: 2025,
-        medium: "아크릴, 카본, 크레용, 오일 파스텔",
-        dimensions: "105 x 148 cm",
-        image: "/images/artists/byun-geon-ho/works/neo-cosmos-09.jpg",
-        available: true
       }
-    ]
+    ],
+    cv: {
+      education: [
+        { year: '1982', content: { ko: '홍익대학교 산업미술대학원 졸업', en: 'Graduated from Hongik University Graduate School of Industrial Art' } },
+        { year: '1967', content: { ko: '홍익대학교 미술대학 응용미술과 졸업', en: 'Graduated from Hongik University College of Fine Arts, Department of Applied Art' } }
+      ],
+      soloExhibitions: [
+        { year: '2022', content: { ko: '변건호 생명조형전 II, 울산 갤러리한빛', en: 'Byun Kunho Life Sculpture Exhibition II, Gallery Hanbit, Ulsan' } },
+        { year: '2016', content: { ko: '변건호 생명조형전 (Neo Cosmos), 예술의전당 한가람미술관', en: 'Byun Kunho Life Sculpture Exhibition (Neo Cosmos), Seoul Arts Center Hangaram Art Museum' } },
+        { year: '2004', content: { ko: '방법과 모색전, 홍익대학교 현대미술관', en: 'Method and Exploration, Hongik University Museum of Contemporary Art' } },
+        { year: '1998', content: { ko: '인간과 자연전, 갤러리 우덕, 서울', en: 'Human & Nature, Gallery Wooduk, Seoul' } },
+        { year: '1995', content: { ko: '혼돈과 질서전, 가산화랑, 서울', en: 'Chaos & Order, Gallery Gasan, Seoul' } },
+        { year: '1990', content: { ko: '생성과 소멸전, 무역센터 현대미술관 서울 / 현대화랑 대전', en: 'Generation & Annihilation, World Trade Center Hyundai Museum Seoul / Hyundai Gallery Daejeon' } }
+      ],
+      groupExhibitions: [
+        { year: '2017', content: { ko: '스타필드신세계 환경조형물 설치, 하남시', en: 'Environmental Sculpture Installation at Starfield Shinsegae, Hanam City' } },
+        { year: '2008', content: { ko: '밀양시립미술관 개관기념 조형물 "비상" 설치', en: 'Installation of "Flight" Sculpture for Miryang City Museum Opening' } },
+        { year: '2008', content: { ko: '함평나비·곤충EXPO 기념조형물 "꿈·사랑" 설치', en: 'Installation of "Dream & Love" Sculpture for Hampyeong Butterfly & Insect EXPO' } },
+        { year: '2007', content: { ko: '청주예술의전당 환경조형물 "인간과자연" 설치', en: 'Installation of "Human & Nature" Environmental Sculpture at Cheongju Arts Center' } },
+        { year: '2000', content: { ko: '한국은행 대구지점 환경조형물 "Good Morning" 설치', en: 'Installation of "Good Morning" Environmental Sculpture at Bank of Korea Daegu Branch' } },
+        { year: '', content: { ko: 'Land of Morning Calm, Elliott Smith Contemporary Art, U.S.A', en: 'Land of Morning Calm, Elliott Smith Contemporary Art, U.S.A' } },
+        { year: '', content: { ko: 'LA Scope 미술관 초대전, U.S.A', en: 'LA Scope Museum Invitation Exhibition, U.S.A' } },
+        { year: '', content: { ko: '국립현대미술관 현대미술 초대전 외 국내외 초대전 300여회', en: 'National Museum of Modern and Contemporary Art Invitation Exhibition and 300+ domestic/overseas exhibitions' } }
+      ],
+      awards: [
+        { year: '2014', content: { ko: '대한민국 옥조근정훈장', en: 'Order of Civil Merit, Okjo Medal, Republic of Korea' } },
+        { year: '', content: { ko: '한국조형디자인협회 공로상', en: 'Meritorious Service Award, Korea Association of Art & Design' } },
+        { year: '1997', content: { ko: '한국공예가협회 작품상', en: 'Korea Craft Artists Association Work Award' } }
+      ]
+    }
   },
 
   {
