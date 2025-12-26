@@ -64,45 +64,43 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Gallery Spaces - Option C: 좌우 분할 레이아웃 */}
+      {/* Gallery Spaces - 상하 분할 레이아웃 (16:9 가로형 이미지) */}
       <section className="py-20 px-6 bg-stone-50">
         <div className="max-w-[1200px] mx-auto">
 
-          {/* 상단: 대형 이미지 + 텍스트 좌우 분할 */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            {/* 좌측: 대형 이미지 */}
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src={t.spaces.images.main}
-                  alt="갤러리 전경"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <p className="text-center tracking-wide text-sm mt-4">갤러리 전경</p>
-            </div>
+          {/* 로고 + 제목 (중앙 정렬) */}
+          <div className="flex items-center justify-center gap-6 mb-12">
+            <Image
+              src="/images/logo/logo.png"
+              alt="KWANHOON ARTE"
+              width={80}
+              height={80}
+              className="object-contain"
+            />
+            <h2 className="text-2xl md:text-3xl tracking-widest font-light">
+              {t.spaces.title[language]}
+            </h2>
+          </div>
 
-            {/* 우측: 로고 + 제목 + 텍스트 */}
-            <div className="flex flex-col justify-center">
-              {/* 로고 + 제목 수평 정렬 */}
-              <div className="flex items-center gap-6 mb-8">
-                <Image
-                  src="/images/logo/logo.png"
-                  alt="KWANHOON ARTE"
-                  width={80}
-                  height={80}
-                  className="object-contain"
-                />
-                <h2 className="text-2xl md:text-3xl tracking-widest font-light">
-                  {t.spaces.title[language]}
-                </h2>
-              </div>
-              <div className="space-y-2 text-gray-700 leading-normal">
-                {t.spaces.description[language].split('\n').map((line: string, i: number) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
+          {/* 16:9 대형 이미지 */}
+          <div className="group mb-4">
+            <div className="relative aspect-video overflow-hidden">
+              <Image
+                src={t.spaces.images.main}
+                alt="갤러리 전경"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+          <p className="text-center tracking-wide text-sm mb-12">갤러리 전경</p>
+
+          {/* 텍스트 설명 (중앙 정렬) */}
+          <div className="max-w-[800px] mx-auto text-center mb-16">
+            <div className="space-y-2 text-gray-700 leading-normal">
+              {t.spaces.description[language].split('\n').map((line: string, i: number) => (
+                <p key={i}>{line}</p>
+              ))}
             </div>
           </div>
 
