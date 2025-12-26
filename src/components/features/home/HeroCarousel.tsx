@@ -101,19 +101,10 @@ export function HeroCarousel({ images, className }: CarouselProps) {
 
               {/* Image Title (Optional) */}
               {image.title && (
-                <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <Image
-                      src="/images/logo/logo.png"
-                      alt="KWANHOON ARTE"
-                      width={48}
-                      height={48}
-                      className="w-8 h-8 md:w-12 md:h-12 object-contain"
-                    />
-                    <h2 className="text-white text-2xl md:text-4xl font-light tracking-wider">
-                      {image.title.ko}
-                    </h2>
-                  </div>
+                <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10 text-center">
+                  <h2 className="text-white text-2xl md:text-4xl font-light tracking-wider">
+                    {image.title.ko}
+                  </h2>
                 </div>
               )}
             </div>

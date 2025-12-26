@@ -4,6 +4,7 @@
  */
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 import type { BaseProps } from '@/types/components'
@@ -18,11 +19,20 @@ export function Logo({ className, onClick }: LogoProps) {
       href="/"
       onClick={onClick}
       className={cn(
-        'tracking-tight hover:text-gray-600 transition-colors text-2xl font-bold text-black',
+        'flex items-center gap-3 hover:opacity-80 transition-opacity',
         className
       )}
     >
-      KWANHOON ARTE
+      <Image
+        src="/images/logo/logo.png"
+        alt="KWANHOON ARTE"
+        width={40}
+        height={40}
+        className="object-contain"
+      />
+      <span className="tracking-tight text-2xl font-bold text-black">
+        KWANHOON ARTE
+      </span>
     </Link>
   )
 }
