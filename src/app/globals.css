@@ -119,4 +119,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* 한글 텍스트 줄바꿈 최적화 */
+  html {
+    word-break: keep-all;      /* 한글 단어가 중간에 잘리지 않게 */
+    overflow-wrap: break-word; /* 긴 단어는 줄바꿈 허용 */
+    word-wrap: break-word;     /* 구형 브라우저 지원 */
+  }
 }
