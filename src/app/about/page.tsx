@@ -83,11 +83,21 @@ export default function AboutPage() {
               <p className="text-center tracking-wide text-sm mt-4">갤러리 전경</p>
             </div>
 
-            {/* 우측: 제목 + 텍스트 */}
+            {/* 우측: 로고 + 제목 + 텍스트 */}
             <div className="flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl tracking-widest font-light mb-8">
-                {t.spaces.title[language]}
-              </h2>
+              {/* 로고 + 제목 수평 정렬 */}
+              <div className="flex items-center gap-6 mb-8">
+                <Image
+                  src="/images/logo/logo.png"
+                  alt="KWANHOON ARTE"
+                  width={80}
+                  height={80}
+                  className="object-contain"
+                />
+                <h2 className="text-2xl md:text-3xl tracking-widest font-light">
+                  {t.spaces.title[language]}
+                </h2>
+              </div>
               <div className="space-y-2 text-gray-700 leading-normal">
                 {t.spaces.description[language].split('\n').map((line: string, i: number) => (
                   <p key={i}>{line}</p>
