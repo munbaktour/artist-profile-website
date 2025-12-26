@@ -71,13 +71,16 @@ export default function AboutPage() {
           {/* 상단: 대형 이미지 + 텍스트 좌우 분할 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* 좌측: 대형 이미지 */}
-            <div className="relative aspect-[4/5] overflow-hidden group">
-              <Image
-                src={t.spaces.images.main}
-                alt={t.spaces.captions.mainHall[language]}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+            <div className="group">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={t.spaces.images.main}
+                  alt="갤러리 전경"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <p className="text-center tracking-wide text-sm mt-4">갤러리 전경</p>
             </div>
 
             {/* 우측: 제목 + 텍스트 */}
@@ -104,7 +107,7 @@ export default function AboutPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <p className="text-center tracking-wide text-sm">{t.spaces.captions.projectSpace[language]}</p>
+              <p className="text-center tracking-wide text-sm">Project Space</p>
             </div>
             <div className="group">
               <div className="relative aspect-[3/2] overflow-hidden mb-4">
@@ -115,7 +118,7 @@ export default function AboutPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <p className="text-center tracking-wide text-sm">{t.spaces.captions.viewingRoom[language]}</p>
+              <p className="text-center tracking-wide text-sm">Viewing Room</p>
             </div>
           </div>
 
