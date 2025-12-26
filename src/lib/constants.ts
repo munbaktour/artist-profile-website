@@ -215,7 +215,7 @@ We experience the unique music and energy that each artist's work conveys alongs
 In this way, our lives become a work of art, and a single piece of artwork becomes a life story.`,
       },
       images: {
-        main: '/images/about/main.jpg',
+        main: '/images/about/main.png',
         projectRoom: '/images/about/project-room.jpg',
         viewingRoom: '/images/about/viewing-room.jpg',
       },
