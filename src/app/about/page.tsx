@@ -88,7 +88,7 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl tracking-widest font-light mb-8">
                 {t.spaces.title[language]}
               </h2>
-              <div className="space-y-2 text-gray-700 leading-relaxed">
+              <div className="space-y-2 text-gray-700 leading-normal">
                 {t.spaces.description[language].split('\n').map((line: string, i: number) => (
                   <p key={i}>{line}</p>
                 ))}
