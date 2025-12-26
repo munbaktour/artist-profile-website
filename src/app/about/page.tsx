@@ -8,25 +8,6 @@ export default function AboutPage() {
   const { language } = useLanguage()
   const t = TRANSLATIONS.about
 
-  // Gallery spaces data
-  const gallerySpaces = [
-    {
-      id: 1,
-      image: 'https://images.unsplash.com/photo-1663736244030-1e3fdc47c84c?w=1080&q=80',
-      caption: t.spaces.captions.mainHall[language],
-    },
-    {
-      id: 2,
-      image: 'https://images.unsplash.com/photo-1535056889777-5821f7c5b4ff?w=1080&q=80',
-      caption: t.spaces.captions.projectSpace[language],
-    },
-    {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1743119638006-a01d4625745d?w=1080&q=80',
-      caption: t.spaces.captions.viewingRoom[language],
-    },
-  ]
-
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -83,27 +64,61 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Gallery Spaces */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-[1440px] mx-auto">
-          <h2 className="text-3xl mb-12 text-center tracking-wider font-light">
-            {t.spaces.title[language]}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {gallerySpaces.map((space) => (
-              <div key={space.id} className="group">
-                <div className="relative overflow-hidden mb-4 h-[300px]">
-                  <Image
-                    src={space.image}
-                    alt={space.caption}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <p className="text-center tracking-wide text-sm">{space.caption}</p>
+      {/* Gallery Spaces - Option C: 좌우 분할 레이아웃 */}
+      <section className="py-20 px-6 bg-stone-50">
+        <div className="max-w-[1200px] mx-auto">
+
+          {/* 상단: 대형 이미지 + 텍스트 좌우 분할 */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            {/* 좌측: 대형 이미지 */}
+            <div className="relative aspect-[4/5] overflow-hidden group">
+              <Image
+                src={t.spaces.images.main}
+                alt={t.spaces.captions.mainHall[language]}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+
+            {/* 우측: 제목 + 텍스트 */}
+            <div className="flex flex-col justify-center">
+              <h2 className="text-2xl md:text-3xl tracking-widest font-light mb-8">
+                {t.spaces.title[language]}
+              </h2>
+              <div className="space-y-6 text-gray-700 leading-loose text-lg">
+                {t.spaces.description[language].split('\n').map((line: string, i: number) => (
+                  <p key={i}>{line}</p>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
+
+          {/* 하단: 서브 이미지 2개 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="group">
+              <div className="relative aspect-[3/2] overflow-hidden mb-4">
+                <Image
+                  src={t.spaces.images.projectRoom}
+                  alt={t.spaces.captions.projectSpace[language]}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <p className="text-center tracking-wide text-sm">{t.spaces.captions.projectSpace[language]}</p>
+            </div>
+            <div className="group">
+              <div className="relative aspect-[3/2] overflow-hidden mb-4">
+                <Image
+                  src={t.spaces.images.viewingRoom}
+                  alt={t.spaces.captions.viewingRoom[language]}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <p className="text-center tracking-wide text-sm">{t.spaces.captions.viewingRoom[language]}</p>
+            </div>
+          </div>
+
         </div>
       </section>
 

@@ -202,7 +202,22 @@ export const TRANSLATIONS = {
     spaces: {
       title: {
         ko: '우리의 공간',
-        en: 'Our Spaces',
+        en: 'Our Space',
+      },
+      description: {
+        ko: `관훈아르떼의 공간은 단순히 작품을 전시하고, 설명하고, 판매하는 곳이 아닙니다.
+이곳은 컬렉터와 함께 작품을 진정한 예술로 완성해 가는 여정이 시작되는 곳입니다.
+우리는 작가의 작품이 들려주는 고유한 음악과 에너지를 컬렉터와 함께 경험하며, 깊은 사유와 사색의 시간을 나눕니다.
+그렇게 우리의 인생은 한 편의 예술이 되고, 한 점의 예술작품은 한 편의 인생이 됩니다.`,
+        en: `The space of KWANHOON ARTE is not merely a place to exhibit, explain, and sell artworks.
+This is where the journey begins to complete artworks as true art together with collectors.
+We experience the unique music and energy that each artist's work conveys alongside collectors, sharing moments of deep contemplation and reflection.
+In this way, our lives become a work of art, and a single piece of artwork becomes a life story.`,
+      },
+      images: {
+        main: '/images/about/main.jpg',
+        projectRoom: '/images/about/project-room.jpg',
+        viewingRoom: '/images/about/viewing-room.jpg',
       },
       captions: {
         mainHall: {
@@ -210,7 +225,7 @@ export const TRANSLATIONS = {
           en: 'Main Exhibition Hall',
         },
         projectSpace: {
-          ko: '프로젝트 공간',
+          ko: '프로젝트 스페이스',
           en: 'Project Space',
         },
         viewingRoom: {
