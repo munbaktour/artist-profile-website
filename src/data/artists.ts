@@ -1260,7 +1260,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       en: "Son Moon Il graduated from Seoul National University and studied at the Central Academy of Fine Arts in Beijing. He explores unique artistic language crossing boundaries between tradition and contemporary."
     },
     image: "/images/artists/son-moon-il/thumbnail.jpg",
-    featuredImage: "/images/artists/son-moon-il/collage.png",
+    featuredImage: "/images/artists/son-moon-il/featured.jpg",
     birthYear: 1980,
     nationality: "한국",
     works: [
