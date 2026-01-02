@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
 import { NaverMap } from '@/components/molecules/NaverMap'
 import { useLanguage } from '@/lib/i18n/LanguageProvider'
-import { TRANSLATIONS, GALLERY_INFO } from '@/lib/constants'
+import { TRANSLATIONS, GALLERY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 
 export default function ContactPage() {
   const { language } = useLanguage()
@@ -277,7 +277,7 @@ export default function ContactPage() {
           </p>
           <div className="flex justify-center gap-6">
             <a
-              href="https://instagram.com/kwanhoonarte"
+              href={SOCIAL_LINKS.INSTAGRAM}
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all"
