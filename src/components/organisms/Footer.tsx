@@ -6,10 +6,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Instagram } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-import { GALLERY_INFO, SOCIAL_LINKS } from '@/lib/constants'
+import { GALLERY_INFO } from '@/lib/constants'
 import type { Language } from '@/types'
 import type { FooterProps } from '@/types/components'
 
@@ -54,27 +53,7 @@ export function Footer({ language, className }: FooterComponentProps) {
             </p>
           </div>
 
-          {/* Middle Column - Empty spacer */}
-          <div className="hidden md:block md:col-span-1" />
-
-          {/* Right Column - Social Media */}
-          <div className="md:col-span-1 space-y-4 md:text-right">
-            <h3 className="text-lg font-semibold tracking-wider">
-              {language === 'ko' ? '소셜 미디어' : 'Follow Us'}
-            </h3>
-            <div className="flex gap-4 md:justify-end">
-              <a
-                href={SOCIAL_LINKS.INSTAGRAM}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-6 h-6 flex items-center justify-center hover:opacity-70 transition-opacity"
-                aria-label="Instagram"
-              >
-                <Instagram size={24} />
-              </a>
-            </div>
           </div>
-        </div>
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-gray-200">

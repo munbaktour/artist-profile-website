@@ -2,10 +2,10 @@
 
 import { useState, FormEvent } from 'react'
 import Image from 'next/image'
-import { MapPin, Phone, Mail, Clock, Instagram } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { NaverMap } from '@/components/molecules/NaverMap'
 import { useLanguage } from '@/lib/i18n/LanguageProvider'
-import { TRANSLATIONS, GALLERY_INFO, SOCIAL_LINKS } from '@/lib/constants'
+import { TRANSLATIONS, GALLERY_INFO } from '@/lib/constants'
 
 export default function ContactPage() {
   const { language } = useLanguage()
@@ -267,28 +267,6 @@ export default function ContactPage() {
       </section>
 
       {/* Social Media */}
-      <section className="py-16 px-6">
-        <div className="max-w-[600px] mx-auto text-center">
-          <h3 className="text-2xl mb-6 tracking-wider font-light">
-            {t.social.title[language]}
-          </h3>
-          <p className="text-gray-700 mb-8">
-            {t.social.description[language]}
-          </p>
-          <div className="flex justify-center gap-6">
-            <a
-              href={SOCIAL_LINKS.INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all"
-              aria-label="Instagram"
-            >
-              <Instagram size={20} />
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Newsletter Signup */}
       <section className="py-16 px-6 bg-black text-white">
         <div className="max-w-[600px] mx-auto text-center">
