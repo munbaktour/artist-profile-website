@@ -84,7 +84,7 @@ export const CONTACT_FORM_VALIDATION = {
 // 소셜 미디어
 // ============================================
 export const SOCIAL_LINKS = {
-  INSTAGRAM: 'https://www.instagram.com/kwanhoonarte?igsh=MWVhcjZ1aTVyd2N1Zg%3D%3D&utm_source=qr',
+  INSTAGRAM: 'https://www.instagram.com/kwanhoonarte',
   FACEBOOK: 'https://facebook.com/kwanhoonarte',
 } as const
 
