@@ -2,45 +2,31 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 
-const POPUP_STORAGE_KEY = 'exhibition-popup-hidden-until'
+const POPUP_STORAGE_KEY = 'exhibition-popup-hidden'
 
 export default function ExhibitionPopup() {
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  const [dontShowAgain, setDontShowAgain] = useState(false)
 
   useEffect(() => {
-    // localStorage에서 숨김 설정 확인
-    const hiddenUntil = localStorage.getItem(POPUP_STORAGE_KEY)
-    if (hiddenUntil) {
-      const hiddenDate = new Date(hiddenUntil)
-      if (hiddenDate > new Date()) {
-        // 아직 숨김 기간 중
-        return
-      }
+    // localStorage에서 "다시 보지 않기" 설정 확인
+    const isHidden = localStorage.getItem(POPUP_STORAGE_KEY)
+    if (isHidden === 'true') {
+      return
     }
     // 팝업 표시
     setIsOpen(true)
   }, [])
 
   const handleClose = useCallback(() => {
+    // "다시 보지 않기" 체크되었으면 저장
+    if (dontShowAgain) {
+      localStorage.setItem(POPUP_STORAGE_KEY, 'true')
+    }
     setIsOpen(false)
-  }, [])
-
-  const handleCloseToday = useCallback(() => {
-    // 오늘 자정까지 숨김
-    const tomorrow = new Date()
-    tomorrow.setHours(24, 0, 0, 0)
-    localStorage.setItem(POPUP_STORAGE_KEY, tomorrow.toISOString())
-    setIsOpen(false)
-  }, [])
-
-  const handleViewDetail = useCallback(() => {
-    setIsOpen(false)
-    router.push('/exhibition')
-  }, [router])
+  }, [dontShowAgain])
 
   // ESC 키로 닫기
   useEffect(() => {
@@ -71,14 +57,14 @@ export default function ExhibitionPopup() {
       />
 
       {/* 팝업 컨텐츠 */}
-      <div className="relative bg-white rounded-lg shadow-2xl max-w-[500px] w-[90%] animate-in zoom-in-95 fade-in duration-300">
-        {/* 닫기 버튼 */}
+      <div className="relative bg-white rounded-lg shadow-2xl w-[95%] max-w-[500px] animate-in zoom-in-95 fade-in duration-300">
+        {/* 닫기 버튼 (X) */}
         <button
           onClick={handleClose}
-          className="absolute -top-3 -right-3 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors z-10"
+          className="absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-colors z-10"
           aria-label="닫기"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5 text-white" />
         </button>
 
         {/* 이미지 */}
@@ -93,19 +79,28 @@ export default function ExhibitionPopup() {
           />
         </div>
 
-        {/* 하단 버튼 영역 */}
-        <div className="flex border-t">
+        {/* 전시 정보 */}
+        <div className="px-5 py-4 text-center border-b">
+          <h3 className="text-lg font-medium text-gray-900">관훈갤러리 3층</h3>
+          <p className="text-sm text-gray-600 mt-1">A Gap for You</p>
+        </div>
+
+        {/* 하단 영역: 체크박스 + 닫기 버튼 */}
+        <div className="flex items-center justify-between px-5 py-4">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={dontShowAgain}
+              onChange={(e) => setDontShowAgain(e.target.checked)}
+              className="w-4 h-4 rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+            />
+            <span className="text-sm text-gray-600">다시 보지 않기</span>
+          </label>
           <button
-            onClick={handleViewDetail}
-            className="flex-1 py-4 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors border-r"
+            onClick={handleClose}
+            className="px-6 py-2 text-sm font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
           >
-            전시 상세보기
-          </button>
-          <button
-            onClick={handleCloseToday}
-            className="flex-1 py-4 text-sm text-gray-500 hover:bg-gray-50 transition-colors"
-          >
-            오늘 하루 보지 않기
+            닫기
           </button>
         </div>
       </div>
