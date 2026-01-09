@@ -1256,8 +1256,40 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
     name: { ko: '손문일', en: 'Son Moon Il' },
     category: 'emerging',
     bio: {
-      ko: "손문일은 서울대학교 동양화과를 졸업하고 북경 중앙미술학원에서 수학했다. 대상의 본질에 대한 물음에서 출발하여 오브제를 활용한 독특한 작업 세계를 구축했다. 전통과 현대, 동양과 서양의 경계를 넘나들며 독자적인 예술 언어를 탐구하고 있다.",
-      en: "Son Moon Il graduated from Seoul National University and studied at the Central Academy of Fine Arts in Beijing. He explores unique artistic language crossing boundaries between tradition and contemporary."
+      ko: `서울대학교 미술대학 동양화과 졸업 · 중앙미술학원(CAFA) 벽화과 석사 · 중앙대학교 예술학 박사과정
+
+1980년 서울에서 태어나 서울대학교 동양화과를 졸업하고, 중국 베이징 중앙미술학원(CAFA)에서 벽화 석사학위를 취득했다. 현재 중앙대학교 예술학 박사과정에 재학 중이며, 건국대학교와 서울대학교에서 후학을 양성하고 있다.
+
+"나는 대상의 본질에 대한 물음에서 출발한다. 무엇이 진짜이고, 무엇이 가짜인가. 그 경계는 어디에 존재하는가." — 손문일
+
+■ 물질의 언어 — 본질을 묻다
+
+손문일은 전통적인 회화의 경계를 넘어 오브제와 물질을 통해 '본질'에 대한 질문을 던진다. 스테인리스 패널 위의 천, 백토 위의 물감, 유리와 식물—그의 작업에서 재료는 단순한 도구가 아닌 의미를 담는 그릇이 된다.
+
+2017년 이탈리아 베니스 Ray Gallery에서 열린 개인전 〈물질의 언어〉를 시작으로, 그의 작업은 한국을 넘어 세계 무대에서 주목받고 있다. 제네바 Artvera's(2018), 성곡미술관 〈코리아 투모로우〉(2016), 포스코미술관 〈The Great Artist〉(2017) 등 국내외 주요 전시에 참여했다.
+
+■ No man is an island — 연결과 관계
+
+"No man is an island entire of itself; every man is a piece of the continent, a part of the main." — John Donne
+
+2025년 개인전 〈No man is an island〉는 17세기 영국 시인 존 던의 시에서 영감을 받았다. 손문일은 이 시리즈를 통해 고립된 개체가 아닌, 서로 연결된 존재로서의 인간을 탐구한다. 스테인리스 패널 위에 천을 덧대고 백토 위에 물감을 올리는 그의 독특한 기법은 물질과 물질, 존재와 존재 사이의 관계를 시각적으로 구현한다.`,
+      en: `B.F.A., Oriental Painting, Seoul National University · M.F.A., Mural Painting, CAFA · Ph.D. Course, Art Studies, Chung-Ang University
+
+Born in Seoul in 1980, Son Moon Il graduated from Seoul National University's Department of Oriental Painting and received his M.F.A. in Mural Painting from the Central Academy of Fine Arts (CAFA) in Beijing, China. Currently pursuing his Ph.D. in Art Studies at Chung-Ang University, he teaches at both Konkuk University and Seoul National University.
+
+"I begin with questions about the essence of things. What is real, and what is fake? Where do these boundaries exist?" — Son Moon Il
+
+■ Language of Material — Questioning Essence
+
+Son Moon Il transcends traditional painting boundaries, questioning 'essence' through objects and materials. Fabric over stainless panels, paint on white clay, glass and plants—in his work, materials become vessels of meaning rather than mere tools.
+
+Beginning with his solo exhibition "Language of Material" at Ray Gallery in Venice, Italy in 2017, his work has garnered international attention. He has participated in major exhibitions including Artvera's in Geneva (2018), "Korea Tomorrow" at Sungkok Art Museum (2016), and "The Great Artist" at POSCO Art Museum (2017).
+
+■ No man is an island — Connection and Relationship
+
+"No man is an island entire of itself; every man is a piece of the continent, a part of the main." — John Donne
+
+His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-century English poet John Donne. Through this series, Son Moon Il explores humanity not as isolated beings, but as interconnected existence. His distinctive technique of layering fabric over stainless panels and applying paint on white clay visually embodies the relationships between materials and between beings.`
     },
     image: "/images/artists/son-moon-il/thumbnail.jpg",
     featuredImage: "/images/artists/son-moon-il/featured.jpg",
