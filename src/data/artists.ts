@@ -1298,7 +1298,8 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
     workCategories: [
       { id: "perfect-puzzle", label: { ko: "완전한 퍼즐", en: "Perfect Puzzle" } },
       { id: "no-man-island", label: { ko: "No man is an Island", en: "No man is an Island" } },
-      { id: "perfect-scabs", label: { ko: "완전한 딱지", en: "Perfect Scabs" } },
+      { id: "scab-series", label: { ko: "딱지 시리즈", en: "Scab Series" } },
+      { id: "flight", label: { ko: "Flight", en: "Flight" } },
       { id: "lightrain", label: { ko: "Lightrain", en: "Lightrain" } },
       { id: "relationship", label: { ko: "Relationship", en: "Relationship" } }
     ],
@@ -1393,7 +1394,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-01",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1404,7 +1405,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-02",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1415,7 +1416,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-03",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1426,7 +1427,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-04",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1437,7 +1438,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-05",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1448,13 +1449,79 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
       },
       {
         id: "smi-perfect-scabs-06",
-        category: "perfect-scabs",
+        category: "scab-series",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
         image: "/images/artists/son-moon-il/works/13. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-scab-07",
+        category: "scab-series",
+        artistId: "son-moon-il",
+        title: { ko: "껌딱지", en: "Gum Scab" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/껌딱지-01.jpg",
+        available: true
+      },
+      {
+        id: "smi-scab-08",
+        category: "scab-series",
+        artistId: "son-moon-il",
+        title: { ko: "껌딱지", en: "Gum Scab" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/껌딱지-02.jpg",
+        available: true
+      },
+      {
+        id: "smi-scab-09",
+        category: "scab-series",
+        artistId: "son-moon-il",
+        title: { ko: "껌딱지", en: "Gum Scab" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/껌딱지-03.jpg",
+        available: true
+      },
+      {
+        id: "smi-flight-01",
+        category: "flight",
+        artistId: "son-moon-il",
+        title: { ko: "Courage", en: "Courage" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/courage-01.jpg",
+        available: true
+      },
+      {
+        id: "smi-flight-02",
+        category: "flight",
+        artistId: "son-moon-il",
+        title: { ko: "Courage", en: "Courage" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/courage-02.jpg",
+        available: true
+      },
+      {
+        id: "smi-flight-03",
+        category: "flight",
+        artistId: "son-moon-il",
+        title: { ko: "Love", en: "Love" },
+        year: 2024,
+        medium: "Mixed media",
+        dimensions: "",
+        image: "/images/artists/son-moon-il/works/love-01.jpg",
         available: true
       },
       {
