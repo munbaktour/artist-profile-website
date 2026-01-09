@@ -5,10 +5,13 @@
 
 import { HeroCarousel } from '@/components/features/home/HeroCarousel'
 import { HERO_IMAGES } from '@/data/heroImages'
+import ExhibitionPopup from '@/components/organisms/ExhibitionPopup'
 
 export default function Home() {
   return (
     <div>
+      {/* 전시 팝업 */}
+      <ExhibitionPopup />
       {/* Hero Section - Full Screen Carousel */}
       <HeroCarousel images={HERO_IMAGES} />
 
