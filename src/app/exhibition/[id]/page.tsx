@@ -73,46 +73,6 @@ export default function ExhibitionDetailPage() {
         />
       </section>
 
-      {/* Exhibition Info */}
-      <section className="px-6 py-12">
-        <div className="max-w-[800px] mx-auto">
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-4">
-            {exhibition.title[language]}
-          </h1>
-
-          {/* Meta Info */}
-          <div className="space-y-3 text-gray-600 mb-8">
-            {artistNames && (
-              <p>
-                <span className="text-gray-400 mr-2">{labels.artist[language]}</span>
-                {artistNames}
-              </p>
-            )}
-            <p>
-              <span className="text-gray-400 mr-2">{labels.period[language]}</span>
-              {formatDate(exhibition.startDate)} — {formatDate(exhibition.endDate)}
-            </p>
-            {exhibition.location && (
-              <p>
-                <span className="text-gray-400 mr-2">{labels.location[language]}</span>
-                {exhibition.location[language]}
-              </p>
-            )}
-          </div>
-
-          {/* Description */}
-          <div className="border-t border-gray-200 pt-8">
-            <h2 className="text-sm text-gray-400 uppercase tracking-wider mb-4">
-              {labels.about[language]}
-            </h2>
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-              {exhibition.description[language]}
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Installation Views Gallery */}
       {exhibition.images && exhibition.images.length > 0 && (
         <section className="px-6 py-12 bg-gray-50">
