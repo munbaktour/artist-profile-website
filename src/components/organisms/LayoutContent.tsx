@@ -8,6 +8,7 @@
 import { useLanguage } from '@/hooks/useLanguage'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import ExhibitionPopup from './ExhibitionPopup'
 
 interface LayoutContentProps {
   children: React.ReactNode
@@ -29,6 +30,9 @@ export function LayoutContent({ children }: LayoutContentProps) {
       </main>
 
       <Footer language={language} />
+
+      {/* 전시 팝업 */}
+      <ExhibitionPopup />
     </>
   )
 }
