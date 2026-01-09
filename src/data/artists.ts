@@ -1464,6 +1464,37 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
         image: "/images/artists/son-moon-il/works/19. Lightrain 2025_Stainless,water paint on white clay_22*15cm.jpg",
         available: true
       }
+    ],
+    cv: [
+      // 학력
+      { year: "1980", title: { ko: "서울 출생", en: "Born in Seoul" } },
+      { year: "2005", title: { ko: "서울대학교 미술대학 동양화과 졸업", en: "B.F.A., Oriental Painting, Seoul National University" } },
+      { year: "2012", title: { ko: "중앙미술학원 조형학원 벽화과 석사졸업, 베이징, 중국", en: "M.F.A., Mural Painting, Central Academy of Fine Arts, Beijing, China" } },
+      { year: "2021", title: { ko: "중앙대학교 예술학 박사과정, 서울", en: "Ph.D. Course, Art Studies, Chung-Ang University, Seoul" } },
+      // 개인전
+      { year: "2025", title: { ko: "개인전 'No man is an island', Gallery 1, 서울", en: "Solo Exhibition 'No man is an island', Gallery 1, Seoul" } },
+      { year: "2024", title: { ko: "개인전 '오늘은 잘 모르겠어', Gallery eun, 서울", en: "Solo Exhibition 'I'm Not Sure Today', Gallery eun, Seoul" } },
+      { year: "2023", title: { ko: "개인전 'Reality', Lina Gallery, 서울", en: "Solo Exhibition 'Reality', Lina Gallery, Seoul" } },
+      { year: "2022", title: { ko: "개인전 '본질의 태도', 스페이스 사직, 서울", en: "Solo Exhibition 'Attitude of Essence', Space Sajik, Seoul" } },
+      { year: "2022", title: { ko: "개인전 '놓다, 쌓다, 묶다', Helen&jae Gallery, 서울", en: "Solo Exhibition 'Put, Stack, Bind', Helen&jae Gallery, Seoul" } },
+      { year: "2020", title: { ko: "개인전 '감흥탐구', Space Ba, 서울", en: "Solo Exhibition 'Exploring Inspiration', Space Ba, Seoul" } },
+      { year: "2017", title: { ko: "개인전 '물질의 언어', Ray Gallery, 베니스, 이태리", en: "Solo Exhibition 'Language of Material', Ray Gallery, Venice, Italy" } },
+      { year: "2016", title: { ko: "개인전 '물질의 언어', Form Gallery, 부산", en: "Solo Exhibition 'Language of Material', Form Gallery, Busan" } },
+      { year: "2013", title: { ko: "개인전 'Illusion', space sun+, 서울", en: "Solo Exhibition 'Illusion', space sun+, Seoul" } },
+      { year: "2011", title: { ko: "개인전 '본질과 유희하다', Gong art space, 서울", en: "Solo Exhibition 'Playing with Essence', Gong art space, Seoul" } },
+      { year: "2010", title: { ko: "개인전 '손문일', 공화랑, 베이징, 중국", en: "Solo Exhibition 'Son Moon Il', Gong Gallery, Beijing, China" } },
+      // 주요 단체전
+      { year: "2025", title: { ko: "단체전 '찢고 삐져나온 것들', 이스트 아뜰리에, 서울", en: "Group Exhibition, East Atelier, Seoul" } },
+      { year: "2024", title: { ko: "단체전 '낯선 초대', 밀크릭 갤러리, 서울", en: "Group Exhibition 'Strange Invitation', Millcreek Gallery, Seoul" } },
+      { year: "2023", title: { ko: "전남국제수묵비엔날레 '물드는 산, 멈춰선 물', 전남", en: "Jeonnam International Ink Biennale, Jeonnam" } },
+      { year: "2021", title: { ko: "전남국제수묵비엔날레 '오채찬란 모노크롬', 전남", en: "Jeonnam International Ink Biennale 'Brilliant Monochrome', Jeonnam" } },
+      { year: "2018", title: { ko: "'Korean's Spirit', Artvera's, 제네바, 스위스", en: "'Korean's Spirit', Artvera's, Geneva, Switzerland" } },
+      { year: "2017", title: { ko: "'The Great Artist', 포스코 미술관, 서울", en: "'The Great Artist', POSCO Art Museum, Seoul" } },
+      { year: "2016", title: { ko: "'코리아 투모로우', 성곡 미술관, 서울", en: "'Korea Tomorrow', Sungkok Art Museum, Seoul" } },
+      // 소장
+      { year: "2012", title: { ko: "작품 소장: 중앙미술학원 미술관, 베이징, 중국", en: "Collection: CAFA Art Museum, Beijing, China" } },
+      // 출강
+      { year: "2023", title: { ko: "현재 건국대학교, 서울대학교 출강", en: "Currently teaching at Konkuk University and Seoul National University" } }
     ]
   },
 
