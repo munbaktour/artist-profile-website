@@ -58,36 +58,7 @@ export default function ExhibitionPage() {
                     priority
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end">
-                  <div className="p-8 md:p-12 text-white">
-                    <p className="text-xs tracking-widest mb-2 text-gray-300">
-                      {t.featured[language]}
-                    </p>
-                    <h2 className="text-4xl md:text-5xl mb-2 text-white tracking-wider font-light">
-                      {featuredExhibition.title[language]}
-                    </h2>
-                    <p className="mb-2 text-lg">
-                      {featuredExhibition.title[language === 'ko' ? 'en' : 'ko']}
-                    </p>
-                    <p className="text-sm mb-1">
-                      {new Date(featuredExhibition.startDate).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })} - {new Date(featuredExhibition.endDate).toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </p>
-                    {featuredExhibition.location && (
-                      <p className="text-sm text-gray-300">{featuredExhibition.location[language]}</p>
-                    )}
-                    <button className="mt-6 px-8 py-3 bg-white text-black text-xs tracking-widest hover:bg-gray-200 transition-all">
-                      {t.viewDetails[language]}
-                    </button>
-                  </div>
-                </div>
+{/* 텍스트 오버레이 숨김 처리 */}
               </div>
             </Link>
           </div>
