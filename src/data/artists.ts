@@ -1263,9 +1263,17 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
     featuredImage: "/images/artists/son-moon-il/featured.jpg",
     birthYear: 1980,
     nationality: "한국",
+    workCategories: [
+      { id: "perfect-puzzle", label: { ko: "완전한 퍼즐", en: "Perfect Puzzle" } },
+      { id: "no-man-island", label: { ko: "No man is an Island", en: "No man is an Island" } },
+      { id: "perfect-scabs", label: { ko: "완전한 딱지", en: "Perfect Scabs" } },
+      { id: "lightrain", label: { ko: "Lightrain", en: "Lightrain" } },
+      { id: "relationship", label: { ko: "Relationship", en: "Relationship" } }
+    ],
     works: [
       {
         id: "smi-perfect-puzzle-01",
+        category: "perfect-puzzle",
         artistId: "son-moon-il",
         title: { ko: "완전한 퍼즐", en: "Perfect Puzzle" },
         year: 2024,
@@ -1276,6 +1284,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-puzzle-02",
+        category: "perfect-puzzle",
         artistId: "son-moon-il",
         title: { ko: "완전한 퍼즐", en: "Perfect Puzzle" },
         year: 2024,
@@ -1286,6 +1295,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-01",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2025,
@@ -1296,6 +1306,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-02",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2025,
@@ -1306,6 +1317,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-03",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2025,
@@ -1316,6 +1328,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-04",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2024,
@@ -1326,6 +1339,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-05",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2025,
@@ -1336,6 +1350,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-no-man-island-06",
+        category: "no-man-island",
         artistId: "son-moon-il",
         title: { ko: "No man is an Island", en: "No man is an Island" },
         year: 2025,
@@ -1346,6 +1361,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-01",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1356,6 +1372,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-02",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1366,6 +1383,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-03",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1376,6 +1394,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-04",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1386,6 +1405,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-05",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1396,6 +1416,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-perfect-scabs-06",
+        category: "perfect-scabs",
         artistId: "son-moon-il",
         title: { ko: "완전한 딱지", en: "Perfect Scabs" },
         year: 2025,
@@ -1406,6 +1427,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-lightrain-01",
+        category: "lightrain",
         artistId: "son-moon-il",
         title: { ko: "Lightrain", en: "Lightrain" },
         year: 2024,
@@ -1416,6 +1438,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-lightrain-02",
+        category: "lightrain",
         artistId: "son-moon-il",
         title: { ko: "Lightrain", en: "Lightrain" },
         year: 2024,
@@ -1426,6 +1449,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-relationship-01",
+        category: "relationship",
         artistId: "son-moon-il",
         title: { ko: "Relationship", en: "Relationship" },
         year: 2019,
@@ -1436,6 +1460,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-relationship-02",
+        category: "relationship",
         artistId: "son-moon-il",
         title: { ko: "Relationship", en: "Relationship" },
         year: 2019,
@@ -1446,6 +1471,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-lightrain-03",
+        category: "lightrain",
         artistId: "son-moon-il",
         title: { ko: "Lightrain", en: "Lightrain" },
         year: 2025,
@@ -1456,6 +1482,7 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
       },
       {
         id: "smi-lightrain-04",
+        category: "lightrain",
         artistId: "son-moon-il",
         title: { ko: "Lightrain", en: "Lightrain" },
         year: 2025,
