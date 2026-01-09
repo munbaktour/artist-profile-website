@@ -1265,59 +1265,203 @@ He served as Professor at Hannam University College of Liberal Arts, Professor a
     nationality: "한국",
     works: [
       {
-        id: "smi-work-01",
+        id: "smi-perfect-puzzle-01",
         artistId: "son-moon-il",
-        title: { ko: "경계의 탐구", en: "Exploring Boundaries" },
+        title: { ko: "완전한 퍼즐", en: "Perfect Puzzle" },
+        year: 2024,
+        medium: "Acrylic on fabric over stainless panel, water paint on white clay",
+        dimensions: "91 x 110 cm",
+        image: "/images/artists/son-moon-il/works/1. 완전한 퍼즐 2024_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-puzzle-02",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 퍼즐", en: "Perfect Puzzle" },
+        year: 2024,
+        medium: "Acrylic on canvas",
+        dimensions: "22 x 15 cm",
+        image: "/images/artists/son-moon-il/works/1-1. 완전한 퍼즐 2024_Acylic on canvas_22*15cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-01",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2025,
+        medium: "Acrylic on fabric over stainless panel, water paint on white clay",
+        dimensions: "91 x 110 cm",
+        image: "/images/artists/son-moon-il/works/2. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-02",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2025,
+        medium: "Acrylic on fabric over stainless panel, water paint on white clay",
+        dimensions: "91 x 110 cm",
+        image: "/images/artists/son-moon-il/works/3. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-03",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2025,
+        medium: "Acrylic on fabric over stainless panel, water paint on white clay",
+        dimensions: "91 x 110 cm",
+        image: "/images/artists/son-moon-il/works/4. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-04",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2024,
+        medium: "Acrylic on fabric over stainless panel, water paint on white clay",
+        dimensions: "91 x 110 cm",
+        image: "/images/artists/son-moon-il/works/5. No man is an Island 2024_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-05",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2025,
+        medium: "White pigment paint on white clay, plant, glass",
+        dimensions: "80 x 89 cm",
+        image: "/images/artists/son-moon-il/works/6. No man is an Island 2025_White pigment paint on white clay, plant, glass_80*89cm, meok.jpg",
+        available: true
+      },
+      {
+        id: "smi-no-man-island-06",
+        artistId: "son-moon-il",
+        title: { ko: "No man is an Island", en: "No man is an Island" },
+        year: 2025,
+        medium: "White pigment paint on white clay, plant",
+        dimensions: "80 x 89 cm",
+        image: "/images/artists/son-moon-il/works/7. No man is an Island 2025_White pigment paint on white clay, plant_80*89cm, meok.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-01",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/8. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-02",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/9. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-03",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/10. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-04",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/11. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-05",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/12. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-perfect-scabs-06",
+        artistId: "son-moon-il",
+        title: { ko: "완전한 딱지", en: "Perfect Scabs" },
+        year: 2025,
+        medium: "Mixed media (oil paint, fabric, glass)",
+        dimensions: "40 x 47.5 cm",
+        image: "/images/artists/son-moon-il/works/13. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-lightrain-01",
+        artistId: "son-moon-il",
+        title: { ko: "Lightrain", en: "Lightrain" },
+        year: 2024,
+        medium: "Stainless, water paint on white clay",
+        dimensions: "80 x 89 cm",
+        image: "/images/artists/son-moon-il/works/14. Lightrain 2024_Stainless,water paint on white clay_80*89cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-lightrain-02",
+        artistId: "son-moon-il",
+        title: { ko: "Lightrain", en: "Lightrain" },
+        year: 2024,
+        medium: "Stainless, water paint on white clay",
+        dimensions: "80 x 89 cm",
+        image: "/images/artists/son-moon-il/works/15. Lightrain 2024_Stainless,water paint on white clay_80*89cm.jpg",
+        available: true
+      },
+      {
+        id: "smi-relationship-01",
+        artistId: "son-moon-il",
+        title: { ko: "Relationship", en: "Relationship" },
         year: 2019,
-        medium: "한지에 먹과 오브제",
-        dimensions: "70 x 100 cm",
-        image: "/images/artists/son-moon-il/works/artwork-01.jpg",
+        medium: "Acrylic on fabric over aluminum panel",
+        dimensions: "55 x 190 cm",
+        image: "/images/artists/son-moon-il/works/16. Relationship 1_2019, Acylic on fabric over aluminum pannel _55 x 190cm.jpg",
         available: true
       },
       {
-        id: "smi-work-02",
+        id: "smi-relationship-02",
         artistId: "son-moon-il",
-        title: { ko: "본질을 찾아서", en: "Searching for Essence" },
-        year: 2021,
-        medium: "혼합재료",
-        dimensions: "90 x 90 cm",
-        image: "/images/artists/son-moon-il/works/artwork-02.jpg",
+        title: { ko: "Relationship", en: "Relationship" },
+        year: 2019,
+        medium: "Acrylic on fabric over aluminum panel",
+        dimensions: "55 x 190 cm",
+        image: "/images/artists/son-moon-il/works/17. Relationship 1_2019, Acylic on fabric over aluminum pannel _55 x 190cm.jpg",
         available: true
       },
       {
-        id: "smi-work-03",
+        id: "smi-lightrain-03",
         artistId: "son-moon-il",
-        title: { ko: "작품 03", en: "Artwork 03" },
-        year: 2022,
-        medium: "혼합재료",
-        image: "/images/artists/son-moon-il/works/artwork-03.jpg",
+        title: { ko: "Lightrain", en: "Lightrain" },
+        year: 2025,
+        medium: "Stainless, water paint on white clay",
+        dimensions: "22 x 15 cm",
+        image: "/images/artists/son-moon-il/works/18. Lightrain 2025_Stainless,water paint on white clay_22*15cm.jpg",
         available: true
       },
       {
-        id: "smi-courage-01",
+        id: "smi-lightrain-04",
         artistId: "son-moon-il",
-        title: { ko: "용기 01", en: "Courage 01" },
-        year: 2023,
-        medium: "혼합재료",
-        image: "/images/artists/son-moon-il/works/courage-01.jpg",
-        available: true
-      },
-      {
-        id: "smi-courage-02",
-        artistId: "son-moon-il",
-        title: { ko: "용기 02", en: "Courage 02" },
-        year: 2023,
-        medium: "혼합재료",
-        image: "/images/artists/son-moon-il/works/courage-02.jpg",
-        available: true
-      },
-      {
-        id: "smi-love-01",
-        artistId: "son-moon-il",
-        title: { ko: "사랑 01", en: "Love 01" },
-        year: 2023,
-        medium: "혼합재료",
-        image: "/images/artists/son-moon-il/works/love-01.jpg",
+        title: { ko: "Lightrain", en: "Lightrain" },
+        year: 2025,
+        medium: "Stainless, water paint on white clay",
+        dimensions: "22 x 15 cm",
+        image: "/images/artists/son-moon-il/works/19. Lightrain 2025_Stainless,water paint on white clay_22*15cm.jpg",
         available: true
       }
     ]
