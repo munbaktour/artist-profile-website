@@ -2,21 +2,23 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { X } from 'lucide-react'
 
-const POPUP_SESSION_KEY = 'exhibition-popup-shown'
+const POPUP_STORAGE_KEY = 'exhibition-popup-hidden-until'
 
 export default function ExhibitionPopup() {
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
-    // 세션당 한 번만 표시
-    const hasShown = sessionStorage.getItem(POPUP_SESSION_KEY)
-    if (hasShown) {
-      return
+    const hiddenUntil = localStorage.getItem(POPUP_STORAGE_KEY)
+    if (hiddenUntil) {
+      const hiddenDate = new Date(hiddenUntil)
+      if (hiddenDate > new Date()) {
+        return
+      }
     }
-    // 팝업 표시 및 세션에 기록
-    sessionStorage.setItem(POPUP_SESSION_KEY, 'true')
     setIsOpen(true)
   }, [])
 
@@ -24,9 +26,20 @@ export default function ExhibitionPopup() {
     setIsOpen(false)
   }, [])
 
-  // ESC 키로 닫기
+  const handleCloseToday = useCallback(() => {
+    const tomorrow = new Date()
+    tomorrow.setHours(24, 0, 0, 0)
+    localStorage.setItem(POPUP_STORAGE_KEY, tomorrow.toISOString())
+    setIsOpen(false)
+  }, [])
+
+  const handleViewDetail = useCallback(() => {
+    setIsOpen(false)
+    router.push('/exhibition')
+  }, [router])
+
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
+    const handleEsc = (e) => {
       if (e.key === 'Escape') {
         handleClose()
       }
@@ -45,32 +58,18 @@ export default function ExhibitionPopup() {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-      {/* Semi-transparent black overlay */}
-      <div
-        className="absolute inset-0 bg-black/60"
-        onClick={handleClose}
-      />
-
-      {/* White container - centered, moderate size */}
-      <div className="relative bg-white rounded-lg shadow-2xl p-6 max-w-[420px] w-full mx-auto">
-        {/* Close button - top right */}
-        <button
-          onClick={handleClose}
-          className="absolute -top-3 -right-3 w-9 h-9 bg-white hover:bg-gray-100 rounded-full shadow-lg flex items-center justify-center transition-colors z-10"
-          aria-label="닫기"
-        >
+      <div className="absolute inset-0 bg-black/70" onClick={handleClose} />
+      <div className="relative bg-white rounded-lg shadow-2xl max-w-[500px] w-[90%]">
+        <button onClick={handleClose} className="absolute -top-3 -right-3 w-10 h-10 bg-white hover:bg-gray-100 rounded-full shadow-lg flex items-center justify-center transition-colors z-10" aria-label="닫기">
           <X className="w-5 h-5 text-gray-700" />
         </button>
-
-        {/* Image - fits nicely */}
-        <Image
-          src="/images/popup/현수막 1.png"
-          alt="전시 안내"
-          width={380}
-          height={500}
-          className="w-full h-auto rounded"
-          priority
-        />
+        <div className="relative w-full">
+          <Image src="/images/popup/현수막 1.png" alt="손문일 개인전" width={500} height={700} className="w-full h-auto rounded-t-lg" priority />
+        </div>
+        <div className="flex border-t">
+          <button onClick={handleViewDetail} className="flex-1 py-4 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors border-r">전시 상세보기</button>
+          <button onClick={handleCloseToday} className="flex-1 py-4 text-sm text-gray-500 hover:bg-gray-50 transition-colors">오늘 하루 보지 않기</button>
+        </div>
       </div>
     </div>
   )
