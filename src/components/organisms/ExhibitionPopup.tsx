@@ -64,7 +64,7 @@ export default function ExhibitionPopup() {
           <X className="w-5 h-5 text-gray-700" />
         </button>
         <div className="relative w-full flex-1 min-h-0 overflow-hidden">
-          <Image src="/images/popup/현수막 1.png" alt="손문일 개인전" width={500} height={700} className="w-full h-full object-contain object-top rounded-t-lg" priority />
+          <Image src="/images/popup/popup.png" alt="손문일 개인전" width={500} height={750} className="w-full h-full object-contain object-top rounded-t-lg" priority />
         </div>
         <div className="flex border-t">
           <button onClick={handleViewDetail} className="flex-1 py-4 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors border-r">전시 상세보기</button>
