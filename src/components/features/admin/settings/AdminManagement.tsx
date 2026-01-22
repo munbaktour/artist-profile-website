@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Table,
@@ -24,11 +24,12 @@ interface Admin {
   email: string
   fullName: string | null
   role: 'super_admin' | 'admin' | 'manager' | 'director' | 'viewer'
-  status: 'active' | 'inactive'
+  createdAt: string
 }
 
 interface AdminManagementProps {
   canEdit?: boolean
+  currentUserId?: string
 }
 
 // 역할 표시 매핑
@@ -49,10 +50,45 @@ const roleColors: Record<Admin['role'], string> = {
   viewer: 'bg-gray-500/10 text-gray-400',
 }
 
-export function AdminManagement({ canEdit = false }: AdminManagementProps) {
-  // TODO: 실제 API 연동 시 useEffect로 관리자 목록 조회
-  const [admins] = useState<Admin[]>([])
-  const [isLoading] = useState(false)
+// 날짜 포맷팅
+function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/\. /g, '.').replace(/\.$/, '')
+}
+
+export function AdminManagement({ canEdit = false, currentUserId }: AdminManagementProps) {
+  const [admins, setAdmins] = useState<Admin[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchAdmins = async () => {
+      try {
+        setIsLoading(true)
+        setError(null)
+
+        const response = await fetch('/api/admin/admins')
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || '관리자 목록을 불러오는데 실패했습니다.')
+        }
+
+        setAdmins(result.data || [])
+      } catch (err) {
+        console.error('Error fetching admins:', err)
+        setError(err instanceof Error ? err.message : '오류가 발생했습니다.')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchAdmins()
+  }, [])
 
   const handleInvite = () => {
     // TODO: 관리자 초대 모달 열기
@@ -68,6 +104,22 @@ export function AdminManagement({ canEdit = false }: AdminManagementProps) {
             className="h-12 bg-[#262626] rounded animate-pulse"
           />
         ))}
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <p className="text-red-400 mb-2">{error}</p>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => window.location.reload()}
+          className="text-[#a1a1aa] border-[#262626]"
+        >
+          다시 시도
+        </Button>
       </div>
     )
   }
@@ -92,78 +144,85 @@ export function AdminManagement({ canEdit = false }: AdminManagementProps) {
                 <TableHead className="text-[#a1a1aa]">이메일</TableHead>
                 <TableHead className="text-[#a1a1aa]">이름</TableHead>
                 <TableHead className="text-[#a1a1aa]">역할</TableHead>
-                <TableHead className="text-[#a1a1aa]">상태</TableHead>
+                <TableHead className="text-[#a1a1aa]">가입일</TableHead>
                 {canEdit && (
                   <TableHead className="text-[#a1a1aa] w-[50px]"></TableHead>
                 )}
               </TableRow>
             </TableHeader>
             <TableBody>
-              {admins.map((admin) => (
-                <TableRow
-                  key={admin.id}
-                  className="border-[#262626] hover:bg-[#262626]/50"
-                >
-                  <TableCell className="text-white font-medium">
-                    {admin.email}
-                  </TableCell>
-                  <TableCell className="text-[#a1a1aa]">
-                    {admin.fullName || '-'}
-                  </TableCell>
-                  <TableCell>
-                    <span
-                      className={cn(
-                        'px-2 py-1 rounded text-xs',
-                        roleColors[admin.role]
-                      )}
-                    >
-                      {roleLabels[admin.role]}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <span
-                      className={cn(
-                        'px-2 py-1 rounded text-xs',
-                        admin.status === 'active'
-                          ? 'bg-green-500/10 text-green-400'
-                          : 'bg-red-500/10 text-red-400'
-                      )}
-                    >
-                      {admin.status === 'active' ? '활성' : '비활성'}
-                    </span>
-                  </TableCell>
-                  {canEdit && (
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
-                          >
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                          align="end"
-                          className="bg-[#1a1a1a] border-[#262626]"
-                        >
-                          <DropdownMenuItem
-                            className="text-red-400 focus:text-red-400 focus:bg-red-500/10"
-                            onClick={() => {
-                              // TODO: 관리자 삭제 기능
-                              console.log('삭제:', admin.id)
-                            }}
-                          >
-                            <Trash2 className="w-4 h-4 mr-2" />
-                            삭제
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+              {admins.map((admin) => {
+                const isCurrentUser = currentUserId === admin.id
+
+                return (
+                  <TableRow
+                    key={admin.id}
+                    className={cn(
+                      'border-[#262626] hover:bg-[#262626]/50',
+                      isCurrentUser && 'bg-blue-500/5'
+                    )}
+                  >
+                    <TableCell className="text-white font-medium">
+                      <div className="flex items-center gap-2">
+                        {admin.email}
+                        {isCurrentUser && (
+                          <span className="px-1.5 py-0.5 rounded text-[10px] bg-blue-500/20 text-blue-400">
+                            나
+                          </span>
+                        )}
+                      </div>
                     </TableCell>
-                  )}
-                </TableRow>
-              ))}
+                    <TableCell className="text-[#a1a1aa]">
+                      {admin.fullName || '-'}
+                    </TableCell>
+                    <TableCell>
+                      <span
+                        className={cn(
+                          'px-2 py-1 rounded text-xs',
+                          roleColors[admin.role]
+                        )}
+                      >
+                        {roleLabels[admin.role]}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-[#a1a1aa] text-sm">
+                      {formatDate(admin.createdAt)}
+                    </TableCell>
+                    {canEdit && (
+                      <TableCell>
+                        {!isCurrentUser && (
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
+                              >
+                                <MoreHorizontal className="w-4 h-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                              align="end"
+                              className="bg-[#1a1a1a] border-[#262626]"
+                            >
+                              <DropdownMenuItem
+                                className="text-red-400 focus:text-red-400 focus:bg-red-500/10"
+                                onClick={() => {
+                                  // TODO: 관리자 삭제 기능
+                                  console.log('삭제:', admin.id)
+                                }}
+                              >
+                                <Trash2 className="w-4 h-4 mr-2" />
+                                삭제
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        )}
+                      </TableCell>
+                    )}
+                  </TableRow>
+                )
+              })}
             </TableBody>
           </Table>
         </div>

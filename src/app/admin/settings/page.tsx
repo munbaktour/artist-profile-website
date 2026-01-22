@@ -43,7 +43,7 @@ export default function SettingsPage() {
 
         <Separator className="bg-[#262626]" />
 
-        <AdminManagement canEdit={canManageAdmins} />
+        <AdminManagement canEdit={canManageAdmins} currentUserId={profile?.id} />
       </div>
 
       {/* Category Management Section */}
