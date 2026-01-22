@@ -1,42 +1,13 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-import { cookies } from 'next/headers'
-import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@/lib/supabase/server'
 
 // GET: 모든 관리자 목록 조회
 export async function GET() {
   try {
-    // 환경변수 확인
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-    if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceKey) {
-      return NextResponse.json(
-        { error: '서버 설정 오류입니다.' },
-        { status: 500 }
-      )
-    }
-
-    // Service role client for admin operations
-    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+    const supabase = await createClient()
 
     // 인증 확인
-    const cookieStore = await cookies()
-    const supabase = createServerClient(
-      supabaseUrl,
-      supabaseAnonKey,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll()
-          },
-        },
-      }
-    )
-
     const { data: { user }, error: authError } = await supabase.auth.getUser()
-
     if (authError || !user) {
       return NextResponse.json(
         { error: '인증이 필요합니다.' },
@@ -45,7 +16,7 @@ export async function GET() {
     }
 
     // 관리자 목록 조회
-    const { data: admins, error } = await supabaseAdmin
+    const { data: admins, error } = await supabase
       .from('profiles')
       .select('id, email, full_name, role, avatar_url, created_at')
       .order('created_at', { ascending: true })
