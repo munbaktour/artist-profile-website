@@ -1,12 +1,10 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/hooks/useAuth'
 import { CategoryManagement } from '@/components/features/admin/settings/CategoryManagement'
-import { User, Mail, Shield, Bell, Tags } from 'lucide-react'
+import { AdminManagement } from '@/components/features/admin/settings/AdminManagement'
+import { Users, Mail, Shield, Bell, Tags } from 'lucide-react'
 import { hasPermission } from '@/types/admin'
 import type { AdminRole } from '@/types/admin'
 
@@ -17,11 +15,9 @@ export default function SettingsPage() {
     ? hasPermission(profile.role as AdminRole, 'categories', 'update')
     : false
 
-  const inputClassName = cn(
-    'bg-[#0a0a0a] border-[#262626] text-white',
-    'placeholder:text-[#52525b]',
-    'focus:ring-white/20 focus:border-white/20'
-  )
+  const canManageAdmins = profile?.role
+    ? hasPermission(profile.role as AdminRole, 'admins', 'update')
+    : false
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -33,58 +29,21 @@ export default function SettingsPage() {
         </p>
       </div>
 
-      {/* Profile Section */}
+      {/* Admin Management Section */}
       <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-6">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-blue-500/10">
-            <User className="w-5 h-5 text-blue-400" />
+            <Users className="w-5 h-5 text-blue-400" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-white">프로필</h2>
-            <p className="text-sm text-[#a1a1aa]">계정 정보를 확인합니다.</p>
+            <h2 className="text-lg font-semibold text-white">관리자 목록</h2>
+            <p className="text-sm text-[#a1a1aa]">시스템에 등록된 관리자를 관리합니다.</p>
           </div>
         </div>
 
         <Separator className="bg-[#262626]" />
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label className="text-[#fafafa]">이메일</Label>
-            <Input
-              value={profile?.email || ''}
-              disabled
-              className={cn(inputClassName, 'disabled:opacity-70')}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-[#fafafa]">이름</Label>
-            <Input
-              value={profile?.fullName || '-'}
-              disabled
-              className={cn(inputClassName, 'disabled:opacity-70')}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-[#fafafa]">역할</Label>
-            <Input
-              value={
-                profile?.role === 'super_admin'
-                  ? '최고 관리자'
-                  : profile?.role === 'admin'
-                  ? '관리자'
-                  : profile?.role === 'manager'
-                  ? '매니저'
-                  : profile?.role === 'director'
-                  ? '디렉터'
-                  : '뷰어'
-              }
-              disabled
-              className={cn(inputClassName, 'disabled:opacity-70')}
-            />
-          </div>
-        </div>
+        <AdminManagement canEdit={canManageAdmins} />
       </div>
 
       {/* Category Management Section */}

@@ -49,6 +49,7 @@ export default function NewContactPage() {
   const [scanError, setScanError] = useState<string | null>(null)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [extractedData, setExtractedData] = useState<ExtractedContact | null>(null)
+  const [scanEngine, setScanEngine] = useState<'ai' | 'ocr'>('ocr') // 'ai' = Claude, 'ocr' = Naver CLOVA OCR
 
   const [formData, setFormData] = useState({
     name: '',
@@ -169,7 +170,12 @@ export default function NewContactPage() {
       const formDataPayload = new FormData()
       formDataPayload.append('image', file)
 
-      const res = await fetch('/api/admin/scan-business-card', {
+      // Select API endpoint based on scan engine
+      const endpoint = scanEngine === 'ocr'
+        ? '/api/admin/scan-business-card-ocr'
+        : '/api/admin/scan-business-card'
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         body: formDataPayload,
         signal: controller.signal,
@@ -693,6 +699,42 @@ export default function NewContactPage() {
 
             {/* Modal Content */}
             <div className="p-6 space-y-6">
+              {/* Scan Engine Selection */}
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => setScanEngine('ocr')}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-all"
+                  style={{
+                    background: scanEngine === 'ocr' ? 'rgba(212,175,55,0.15)' : 'rgba(0,0,0,0.3)',
+                    border: `1px solid ${scanEngine === 'ocr' ? '#D4AF37' : 'rgba(212,175,55,0.2)'}`,
+                    color: scanEngine === 'ocr' ? '#D4AF37' : 'rgba(255,255,255,0.5)',
+                  }}
+                >
+                  <span className="text-lg">🇰🇷</span>
+                  <div className="text-left">
+                    <div className="font-medium">CLOVA OCR</div>
+                    <div className="text-xs opacity-70">네이버 명함 인식</div>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setScanEngine('ai')}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-all"
+                  style={{
+                    background: scanEngine === 'ai' ? 'rgba(212,175,55,0.15)' : 'rgba(0,0,0,0.3)',
+                    border: `1px solid ${scanEngine === 'ai' ? '#D4AF37' : 'rgba(212,175,55,0.2)'}`,
+                    color: scanEngine === 'ai' ? '#D4AF37' : 'rgba(255,255,255,0.5)',
+                  }}
+                >
+                  <Sparkles size={18} />
+                  <div className="text-left">
+                    <div className="font-medium">AI 분석</div>
+                    <div className="text-xs opacity-70">Claude Vision</div>
+                  </div>
+                </button>
+              </div>
+
               {/* Upload Area */}
               {!previewImage && (
                 <div
@@ -744,7 +786,9 @@ export default function NewContactPage() {
                         style={{ background: 'rgba(0,0,0,0.7)' }}
                       >
                         <Loader2 className="animate-spin h-10 w-10 mb-3" style={{ color: '#D4AF37' }} />
-                        <p className="text-sm" style={{ color: '#D4AF37' }}>AI가 명함을 분석 중...</p>
+                        <p className="text-sm" style={{ color: '#D4AF37' }}>
+                          {scanEngine === 'ocr' ? 'CLOVA OCR로 명함 인식 중...' : 'AI가 명함을 분석 중...'}
+                        </p>
                       </div>
                     )}
                   </div>
