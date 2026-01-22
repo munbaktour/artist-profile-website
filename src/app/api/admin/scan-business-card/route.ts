@@ -16,6 +16,36 @@ interface ExtractedContact {
   postalCode?: string
 }
 
+/**
+ * Anthropic API 에러를 사용자 친화적 한국어 메시지로 변환
+ */
+function getErrorMessage(error: Anthropic.APIError): string {
+  const message = error.message.toLowerCase()
+
+  // Credit/Billing 관련 에러
+  if (message.includes('credit') || message.includes('balance') || message.includes('billing')) {
+    return '서비스 점검 중입니다. 잠시 후 다시 시도해주세요.'
+  }
+
+  // Rate Limit 에러 (429)
+  if (error.status === 429 || message.includes('rate') || message.includes('limit')) {
+    return '요청이 많습니다. 잠시 후 다시 시도해주세요.'
+  }
+
+  // Overloaded 에러 (529)
+  if (error.status === 529 || message.includes('overload')) {
+    return '서비스가 일시적으로 혼잡합니다. 잠시 후 다시 시도해주세요.'
+  }
+
+  // 인증 에러 (401)
+  if (error.status === 401 || message.includes('auth') || message.includes('key') || message.includes('unauthorized')) {
+    return '서비스 설정 오류입니다. 관리자에게 문의해주세요.'
+  }
+
+  // 기타 에러
+  return '명함 분석 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'
+}
+
 // POST /api/admin/scan-business-card - Scan business card image with Claude Vision
 export async function POST(request: NextRequest) {
   try {
@@ -139,14 +169,17 @@ export async function POST(request: NextRequest) {
     console.error('Error scanning business card:', error)
 
     if (error instanceof Anthropic.APIError) {
+      const userMessage = getErrorMessage(error)
+      console.error(`Anthropic API Error [${error.status}]: ${error.message}`)
+
       return NextResponse.json(
-        { error: `Claude API error: ${error.message}` },
+        { error: userMessage },
         { status: error.status || 500 }
       )
     }
 
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: '명함 분석 서비스를 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해주세요.' },
       { status: 500 }
     )
   }

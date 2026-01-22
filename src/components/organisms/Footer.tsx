@@ -74,6 +74,12 @@ export function Footer({ language, className }: FooterComponentProps) {
               >
                 {language === 'ko' ? '이용약관' : 'Terms of Service'}
               </Link>
+              <Link
+                href="/admin"
+                className="hover:text-gray-900 transition-colors"
+              >
+                {language === 'ko' ? '관리자' : 'Admin'}
+              </Link>
             </div>
           </div>
         </div>
