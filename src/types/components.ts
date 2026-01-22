@@ -188,3 +188,116 @@ export interface TabItem {
   label: LocalizedText
   content: React.ReactNode
 }
+
+// ============================================
+// Admin UI Components
+// ============================================
+import type { LucideIcon } from 'lucide-react'
+
+/**
+ * AdminPageHeader - 관리자 페이지 상단 헤더
+ * 사용처: contacts/page, contacts/new, notifications/page
+ */
+export interface AdminPageHeaderProps extends BaseProps {
+  /** 페이지 제목 (한글) */
+  title: string
+  /** 페이지 부제목 (영어, 선택) */
+  subtitle?: string
+  /** 메인 액션 버튼 설정 */
+  actionButton?: {
+    label: string
+    icon?: LucideIcon
+    onClick?: () => void
+    href?: string
+  }
+  /** 추가 액션 영역 (ReactNode) */
+  actions?: React.ReactNode
+  /** 뒤로가기 링크 */
+  backHref?: string
+}
+
+/**
+ * StatCardsGrid - 통계 카드 그리드
+ * 사용처: contacts/page (4개), notifications/page (3개)
+ */
+export interface StatItem {
+  label: string
+  value: number | string
+  color?: string
+  icon?: LucideIcon
+}
+
+export interface StatCardsGridProps extends BaseProps {
+  stats: StatItem[]
+  columns?: 2 | 3 | 4
+}
+
+/**
+ * AdminFilterTabs - 어드민 필터 탭
+ * 사용처: contacts/page (카테고리), notifications/page (채널/상태)
+ */
+export interface AdminFilterTab {
+  id: string
+  label: string
+  icon?: LucideIcon
+  color?: string
+}
+
+export interface AdminFilterTabsProps extends BaseProps {
+  tabs: AdminFilterTab[]
+  activeTab: string
+  onTabChange: (tabId: string) => void
+  /** 스타일 변형 */
+  variant?: 'default' | 'pill'
+}
+
+/**
+ * FormSection - 폼 섹션 컨테이너
+ * 사용처: contacts/new (5개 섹션), contacts/[id]
+ */
+export interface FormSectionProps extends ChildrenProps {
+  title: string
+  icon?: LucideIcon
+  description?: string
+  /** 접기/펴기 지원 */
+  collapsible?: boolean
+  defaultCollapsed?: boolean
+}
+
+/**
+ * AdminSkeleton - 로딩 스켈레톤
+ * 사용처: contacts/page, notifications/page, compose/page
+ */
+export interface AdminSkeletonProps extends BaseProps {
+  count?: number
+  variant: 'card' | 'list-item' | 'stat' | 'table-row'
+  columns?: 1 | 2 | 3 | 4
+}
+
+/**
+ * AdminEmptyState - 빈 상태 표시
+ * 사용처: contacts/page, notifications/page, compose/page, tags/page
+ */
+export interface AdminEmptyStateProps extends BaseProps {
+  icon: LucideIcon
+  title: string
+  description?: string
+  action?: {
+    label: string
+    href?: string
+    onClick?: () => void
+    icon?: LucideIcon
+  }
+}
+
+/**
+ * AdminPagination - 페이지네이션
+ * 사용처: contacts/page, notifications/page
+ */
+export interface AdminPaginationProps extends BaseProps {
+  page: number
+  totalPages: number
+  total: number
+  pageSize: number
+  onPageChange: (page: number) => void
+}

@@ -230,3 +230,8 @@ export interface CollageTileConfig {
 // ============================================
 export type Nullable<T> = T | null
 export type Optional<T> = T | undefined
+
+// ============================================
+// Admin 타입 (별도 파일에서 re-export)
+// ============================================
+export * from './admin'
