@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import {
   Users,
   Bell,
+  MessageSquare,
   Settings,
   LogOut,
   X,
@@ -27,6 +28,11 @@ const navItems = [
     href: '/admin/notifications',
     label: '알림',
     icon: Bell,
+  },
+  {
+    href: '/admin/messages',
+    label: '메시지',
+    icon: MessageSquare,
   },
   {
     href: '/admin/settings',
