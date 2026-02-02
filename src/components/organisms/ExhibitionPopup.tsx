@@ -7,11 +7,23 @@ import { X } from 'lucide-react'
 
 const POPUP_STORAGE_KEY = 'exhibition-popup-hidden-until'
 
+// ====================================
+// 팝업 활성화 설정
+// false로 설정하면 팝업이 표시되지 않습니다.
+// ====================================
+const POPUP_ENABLED = false
+
 export default function ExhibitionPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
+    // 팝업 비활성화 시 표시 안 함
+    if (!POPUP_ENABLED) {
+      return
+    }
+
+    // "오늘 하루 보지 않기" 체크
     const hiddenUntil = localStorage.getItem(POPUP_STORAGE_KEY)
     if (hiddenUntil) {
       const hiddenDate = new Date(hiddenUntil)
