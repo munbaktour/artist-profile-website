@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,23 +18,18 @@ import {
   CheckCircle2,
   XCircle,
   Plus,
+  Loader2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// Mock 발송 내역 데이터
-interface MessageHistory {
+interface MessageLog {
   id: string
-  sentAt: string
-  template: string
-  recipientType: string
-  recipientCount: number
+  template_id: string
   content: string
+  recipient_count: number
   status: 'sent' | 'failed' | 'pending'
+  created_at: string
 }
-
-const mockHistory: MessageHistory[] = [
-  // 빈 배열 - 실제 발송 내역이 없으므로
-]
 
 // 상태별 스타일
 const statusConfig = {
@@ -43,14 +38,39 @@ const statusConfig = {
   pending: { label: '대기 중', icon: Clock, color: 'text-yellow-400 bg-yellow-500/10' },
 }
 
-export default function MessagesPage() {
-  const [history] = useState<MessageHistory[]>(mockHistory)
+// 템플릿 ID → 라벨 매핑
+const templateLabels: Record<string, string> = {
+  exhibition_invite: '전시 초대',
+  general_notice: '일반 공지',
+  event_invite: '행사 안내',
+  thanks: '감사 인사',
+  custom: '직접 작성',
+}
 
-  // 통계 (mock)
-  const stats = [
-    { label: '총 발송', value: 0, icon: Send, color: 'text-blue-400 bg-blue-500/10' },
-    { label: '발송 성공', value: 0, icon: CheckCircle2, color: 'text-green-400 bg-green-500/10' },
-    { label: '발송 실패', value: 0, icon: XCircle, color: 'text-red-400 bg-red-500/10' },
+export default function MessagesPage() {
+  const [history, setHistory] = useState<MessageLog[]>([])
+  const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState({ total: 0, sent: 0, failed: 0 })
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/admin/messages', { signal: controller.signal })
+      .then(res => res.json())
+      .then(data => {
+        if (data.data) setHistory(data.data)
+        if (data.stats) setStats(data.stats)
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') console.error('Failed to fetch messages:', err)
+      })
+      .finally(() => setLoading(false))
+    return () => controller.abort()
+  }, [])
+
+  const statItems = [
+    { label: '총 발송', value: stats.total, icon: Send },
+    { label: '발송 성공', value: stats.sent, icon: CheckCircle2 },
+    { label: '발송 실패', value: stats.failed, icon: XCircle },
   ]
 
   return (
@@ -58,13 +78,13 @@ export default function MessagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">메시지 발송</h1>
-          <p className="text-[#a1a1aa] text-sm mt-1">
+          <h1 className="text-lg font-semibold text-zinc-100">메시지 발송</h1>
+          <p className="text-zinc-500 text-sm mt-0.5">
             카카오톡 알림톡/친구톡 발송 내역을 관리합니다.
           </p>
         </div>
         <Link href="/admin/messages/compose">
-          <Button className="bg-[#FEE500] hover:bg-[#FDD835] text-[#3C1E1E] font-medium">
+          <Button className="bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium">
             <Plus className="w-4 h-4 mr-2" />
             새 메시지
           </Button>
@@ -73,51 +93,51 @@ export default function MessagesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {stats.map((stat) => {
+        {statItems.map((stat) => {
           const Icon = stat.icon
           return (
             <div
               key={stat.label}
-              className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-4 flex items-center gap-4"
+              className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4"
             >
-              <div className={cn('p-2.5 rounded-lg', stat.color.split(' ')[1])}>
-                <Icon className={cn('w-5 h-5', stat.color.split(' ')[0])} />
-              </div>
+              <Icon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
               <div>
-                <p className="text-2xl font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-[#52525b]">{stat.label}</p>
+                <p className="text-2xl font-semibold text-zinc-100">{stat.value}</p>
+                <p className="text-xs text-zinc-500">{stat.label}</p>
               </div>
             </div>
           )
         })}
       </div>
 
-      {/* NHN Cloud 안내 */}
-      <div className="p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/20 flex items-start gap-3">
-        <MessageSquare className="w-5 h-5 text-yellow-400/80 flex-shrink-0 mt-0.5" />
+      {/* NHN Cloud 연동 완료 안내 */}
+      <div className="p-4 rounded-lg bg-green-900/20 border border-green-800/30 flex items-start gap-3">
+        <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm text-yellow-400/80 font-medium">NHN Cloud 인증 대기 중</p>
-          <p className="text-xs text-yellow-400/60 mt-1">
-            카카오톡 발송 서비스(알림톡/친구톡) 인증이 완료되면 실제 메시지 발송이 가능합니다.
+          <p className="text-sm text-green-300 font-medium">NHN Cloud 연동 완료</p>
+          <p className="text-xs text-green-400/70 mt-1">
+            카카오톡 알림톡 발송 서비스가 연동되었습니다.
           </p>
         </div>
       </div>
 
       {/* 발송 내역 테이블 */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] overflow-hidden">
-        {history.length === 0 ? (
+      <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-6 h-6 text-zinc-400 animate-spin" />
+          </div>
+        ) : history.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="p-4 rounded-full bg-[#262626] mb-4">
-              <MessageSquare className="w-8 h-8 text-[#52525b]" />
-            </div>
-            <p className="text-[#a1a1aa] mb-1">발송 내역이 없습니다</p>
-            <p className="text-sm text-[#52525b] mb-6">
+            <MessageSquare className="w-10 h-10 text-zinc-700 mb-4" />
+            <p className="text-zinc-400 mb-1">발송 내역이 없습니다</p>
+            <p className="text-sm text-zinc-500 mb-6">
               카카오톡 메시지를 발송하면 여기에 표시됩니다.
             </p>
             <Link href="/admin/messages/compose">
               <Button
                 variant="outline"
-                className="border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                className="border-zinc-700 text-zinc-300 hover:bg-zinc-800"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 첫 메시지 보내기
@@ -127,36 +147,36 @@ export default function MessagesPage() {
         ) : (
           <Table>
             <TableHeader>
-              <TableRow className="border-[#262626] hover:bg-transparent">
-                <TableHead className="text-[#a1a1aa]">발송일시</TableHead>
-                <TableHead className="text-[#a1a1aa]">대상</TableHead>
-                <TableHead className="text-[#a1a1aa]">템플릿</TableHead>
-                <TableHead className="text-[#a1a1aa]">메시지</TableHead>
-                <TableHead className="text-[#a1a1aa]">상태</TableHead>
+              <TableRow className="border-zinc-800 hover:bg-transparent">
+                <TableHead className="text-zinc-400">발송일시</TableHead>
+                <TableHead className="text-zinc-400">수신자</TableHead>
+                <TableHead className="text-zinc-400">템플릿</TableHead>
+                <TableHead className="text-zinc-400">메시지</TableHead>
+                <TableHead className="text-zinc-400">상태</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {history.map((item) => {
-                const status = statusConfig[item.status]
+                const status = statusConfig[item.status] || statusConfig.pending
                 const StatusIcon = status.icon
 
                 return (
                   <TableRow
                     key={item.id}
-                    className="border-[#262626] hover:bg-[#262626]/50"
+                    className="border-zinc-800 hover:bg-zinc-800/50"
                   >
-                    <TableCell className="text-[#a1a1aa] text-sm">
-                      {new Date(item.sentAt).toLocaleString('ko-KR')}
+                    <TableCell className="text-zinc-400 text-sm">
+                      {new Date(item.created_at).toLocaleString('ko-KR')}
                     </TableCell>
-                    <TableCell className="text-white">
+                    <TableCell className="text-zinc-100">
                       <span className="text-sm">
-                        {item.recipientType} ({item.recipientCount}명)
+                        {item.recipient_count}명
                       </span>
                     </TableCell>
-                    <TableCell className="text-[#a1a1aa] text-sm">
-                      {item.template}
+                    <TableCell className="text-zinc-400 text-sm">
+                      {templateLabels[item.template_id] || item.template_id}
                     </TableCell>
-                    <TableCell className="text-[#a1a1aa] text-sm max-w-[200px] truncate">
+                    <TableCell className="text-zinc-400 text-sm max-w-[200px] truncate">
                       {item.content}
                     </TableCell>
                     <TableCell>
