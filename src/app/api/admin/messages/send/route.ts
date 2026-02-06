@@ -13,12 +13,19 @@ type ChatBubbleType = 'TEXT' | 'IMAGE' | 'WIDE_IMAGE' | 'WIDE_ITEMLIST'
 // 타겟팅 타입 (브랜드 메시지용)
 type TargetingType = 'M' | 'N' | 'I'
 
+// 변수 모드: 1명 선택 시 직접 입력, 2명 이상 선택 시 자동 치환
+type VariableMode = 'manual' | 'auto'
+
 interface SendRequest {
   recipientIds: string[]
   messageType: MessageType
   // 알림톡용
   templateCode?: string
   commonVariables?: Record<string, string>
+  // 변수 모드: manual (1명 직접 입력) / auto (2명 이상 자동 치환)
+  variableMode?: VariableMode
+  // 개별 변수 (1명 선택 시 직접 입력)
+  individualVariables?: Record<string, string>
   // 브랜드 메시지용
   content?: string
   imageUrl?: string
@@ -92,6 +99,8 @@ export async function POST(request: NextRequest) {
       messageType = 'alimtalk',
       templateCode,
       commonVariables = {},
+      variableMode = 'auto', // 기본값: 자동 치환
+      individualVariables = {},
       content,
       imageUrl,
       buttonText,
@@ -154,15 +163,25 @@ export async function POST(request: NextRequest) {
 
     // ============ 알림톡 발송 ============
     if (messageType === 'alimtalk' || messageType === 'kakao_sms') {
-      // 개별 변수를 DB에서 자동 치환하여 수신자별 templateParameter 생성
+      // 변수 모드에 따라 templateParameter 생성
       const alimtalkRecipients: AlimtalkRecipient[] = validContacts.map(contact => {
         const phoneNo = (contact.phone || contact.mobile || '').replace(/[^0-9]/g, '')
 
-        // 개별 변수 + 공통 변수 합치기
-        const templateParameter: Record<string, string> = {
-          ...commonVariables,
-          '고객명': contact.name || '고객',
-          '전화번호': phoneNo,
+        let templateParameter: Record<string, string>
+
+        if (variableMode === 'manual') {
+          // 1명 선택: 사용자가 직접 입력한 개별 변수 사용
+          templateParameter = {
+            ...commonVariables,
+            ...individualVariables,
+          }
+        } else {
+          // 2명 이상: DB에서 자동 치환
+          templateParameter = {
+            ...commonVariables,
+            '고객명': contact.name || '고객',
+            '전화번호': phoneNo,
+          }
         }
 
         return {

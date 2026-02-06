@@ -48,11 +48,14 @@ interface AlimtalkTemplate {
   templateName: string
   templateContent: string
   buttons?: { type: string; name: string; linkMo?: string; linkPc?: string }[]
-  // 개별 변수 (DB에서 자동 치환)
+  // 개별 변수 (1명: 직접 입력, 2명 이상: DB에서 자동 치환)
   individualVars?: string[]
   // 공통 변수 (사용자가 입력)
   commonVars?: string[]
 }
+
+// 변수 모드: 1명 선택 시 직접 입력, 2명 이상 선택 시 자동 치환
+type VariableMode = 'manual' | 'auto'
 
 // 실제 NHN Cloud 승인된 알림톡 템플릿 목록
 const alimtalkTemplates: AlimtalkTemplate[] = [
@@ -185,6 +188,8 @@ export default function MessageComposePage() {
   const [selectedTemplate, setSelectedTemplate] = useState<AlimtalkTemplate | null>(null)
   // 공통 변수 (사용자 입력)
   const [commonVariables, setCommonVariables] = useState<Record<string, string>>({})
+  // 개별 변수 (1명 선택 시 직접 입력용)
+  const [individualVariables, setIndividualVariables] = useState<Record<string, string>>({})
 
   // 수신자 관련
   const [recipientType, setRecipientType] = useState<RecipientType>('all')
@@ -210,23 +215,46 @@ export default function MessageComposePage() {
   const [categoryContactCounts, setCategoryContactCounts] = useState<Record<string, number>>({})
   const [previewContacts, setPreviewContacts] = useState<Contact[]>([])
 
-  // 템플릿 선택 시 공통 변수 초기화
+  // 변수 모드 계산: 1명이면 manual, 2명 이상이면 auto
+  const getVariableMode = (): VariableMode => {
+    if (recipientType === 'select') {
+      return selectedContacts.length === 1 ? 'manual' : 'auto'
+    }
+    // 전체 또는 카테고리 선택 시 항상 auto (2명 이상일 가능성 높음)
+    return 'auto'
+  }
+
+  const variableMode = getVariableMode()
+
+  // 템플릿 선택 시 변수 초기화
   const handleTemplateSelect = (template: AlimtalkTemplate) => {
     setSelectedTemplate(template)
-    const initialVars: Record<string, string> = {}
-    template.commonVars?.forEach(v => { initialVars[v] = '' })
-    setCommonVariables(initialVars)
+    // 공통 변수 초기화
+    const initialCommonVars: Record<string, string> = {}
+    template.commonVars?.forEach(v => { initialCommonVars[v] = '' })
+    setCommonVariables(initialCommonVars)
+    // 개별 변수 초기화
+    const initialIndividualVars: Record<string, string> = {}
+    template.individualVars?.forEach(v => { initialIndividualVars[v] = '' })
+    setIndividualVariables(initialIndividualVars)
   }
 
   // 개별 메시지 미리보기 생성 (특정 고객용)
-  const getPreviewMessage = (contact: Contact): string => {
+  const getPreviewMessage = (contact: Contact, mode: VariableMode = variableMode): string => {
     if (!selectedTemplate) return ''
 
     let message = selectedTemplate.templateContent
 
-    // 개별 변수 치환
-    message = message.replace(/#{고객명}/g, contact.name || '고객')
-    message = message.replace(/#{전화번호}/g, contact.phone || contact.mobile || '')
+    if (mode === 'manual') {
+      // 1명 선택: 사용자가 직접 입력한 개별 변수 사용
+      Object.entries(individualVariables).forEach(([key, value]) => {
+        message = message.replace(new RegExp(`#\\{${key}\\}`, 'g'), value || `#{${key}}`)
+      })
+    } else {
+      // 2명 이상: DB에서 자동 치환
+      message = message.replace(/#{고객명}/g, contact.name || '고객')
+      message = message.replace(/#{전화번호}/g, contact.phone || contact.mobile || '')
+    }
 
     // 공통 변수 치환
     Object.entries(commonVariables).forEach(([key, value]) => {
@@ -437,7 +465,11 @@ export default function MessageComposePage() {
       if (messageType === 'alimtalk') {
         requestBody.templateCode = selectedTemplate?.templateCode
         requestBody.commonVariables = commonVariables
-        // 개별 변수는 서버에서 DB 조회하여 자동 치환
+        // 변수 모드: 1명이면 직접 입력한 변수, 2명 이상이면 auto
+        requestBody.variableMode = variableMode
+        if (variableMode === 'manual') {
+          requestBody.individualVariables = individualVariables
+        }
       } else if (messageType === 'brandmessage') {
         requestBody.content = content
         requestBody.imageUrl = imageUrl
@@ -453,6 +485,10 @@ export default function MessageComposePage() {
         if (selectedTemplate) {
           requestBody.templateCode = selectedTemplate.templateCode
           requestBody.commonVariables = commonVariables
+          requestBody.variableMode = variableMode
+          if (variableMode === 'manual') {
+            requestBody.individualVariables = individualVariables
+          }
         }
       }
 
@@ -684,14 +720,43 @@ export default function MessageComposePage() {
 
           {messageType === 'alimtalk' && selectedTemplate && previewContacts.length > 0 && (
             <div className="space-y-3">
-              <p className="text-xs text-zinc-500">첫 번째 수신자 기준 미리보기</p>
-              <div className="bg-[#B2C7D9] rounded-xl p-4">
-                <div className="bg-white rounded-lg p-3 shadow-sm">
-                  <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
-                    {getPreviewMessage(previewContacts[0])}
-                  </p>
-                </div>
-              </div>
+              {variableMode === 'manual' ? (
+                /* 1명 선택: 직접 입력한 변수로 미리보기 */
+                <>
+                  <p className="text-xs text-zinc-500">📝 직접 입력한 변수 적용</p>
+                  <div className="bg-[#B2C7D9] rounded-xl p-4">
+                    <div className="bg-white rounded-lg p-3 shadow-sm">
+                      <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
+                        {getPreviewMessage(previewContacts[0], 'manual')}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* 2명 이상: 각 수신자별 미리보기 */
+                <>
+                  <p className="text-xs text-zinc-500">✨ 수신자별 자동 치환 미리보기 (최대 3명 표시)</p>
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                    {previewContacts.slice(0, 3).map((contact, index) => (
+                      <div key={contact.id} className="space-y-1">
+                        <p className="text-xs text-zinc-400">{index + 1}. {contact.name} ({contact.phone})</p>
+                        <div className="bg-[#B2C7D9] rounded-xl p-3">
+                          <div className="bg-white rounded-lg p-3 shadow-sm">
+                            <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
+                              {getPreviewMessage(contact, 'auto')}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {previewContacts.length > 3 && (
+                      <p className="text-xs text-zinc-500 text-center py-2">
+                        외 {previewContacts.length - 3}명에게도 동일하게 자동 치환됩니다
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           )}
 
@@ -946,13 +1011,55 @@ export default function MessageComposePage() {
                   </div>
                 </div>
 
+                {/* 변수 모드 안내 */}
+                {selectedTemplate && (
+                  <div className={cn(
+                    "p-3 rounded-lg border",
+                    variableMode === 'manual'
+                      ? "bg-blue-900/20 border-blue-800/30"
+                      : "bg-green-900/20 border-green-800/30"
+                  )}>
+                    <p className={cn(
+                      "text-xs font-medium",
+                      variableMode === 'manual' ? "text-blue-400" : "text-green-400"
+                    )}>
+                      {variableMode === 'manual'
+                        ? '📝 1명 선택 - 변수 직접 입력 모드'
+                        : '✨ 복수 선택 - 변수 자동 치환 모드'}
+                    </p>
+                    <p className="text-xs text-zinc-500 mt-1">
+                      {variableMode === 'manual'
+                        ? '고객명 등 모든 변수를 직접 입력합니다.'
+                        : '#{고객명}, #{전화번호}는 DB에서 자동으로 치환됩니다.'}
+                    </p>
+                  </div>
+                )}
+
+                {/* 개별 변수 입력 (1명 선택 시) */}
+                {selectedTemplate && variableMode === 'manual' && selectedTemplate.individualVars && selectedTemplate.individualVars.length > 0 && (
+                  <div className="space-y-3">
+                    <Label className="text-zinc-300 text-sm">개별 변수 입력</Label>
+                    {selectedTemplate.individualVars.map(varName => (
+                      <div key={varName} className="space-y-1">
+                        <Label className="text-xs text-zinc-500">{varName}</Label>
+                        <Input
+                          value={individualVariables[varName] || ''}
+                          onChange={(e) => setIndividualVariables(prev => ({
+                            ...prev,
+                            [varName]: e.target.value
+                          }))}
+                          placeholder={`#{${varName}} 값 입력`}
+                          className={inputClassName}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* 공통 변수 입력 */}
                 {selectedTemplate && selectedTemplate.commonVars && selectedTemplate.commonVars.length > 0 && (
                   <div className="space-y-3">
                     <Label className="text-zinc-300 text-sm">공통 변수 입력</Label>
-                    <p className="text-xs text-zinc-500">
-                      고객명은 DB에서 자동으로 치환됩니다
-                    </p>
                     {selectedTemplate.commonVars.map(varName => (
                       <div key={varName} className="space-y-1">
                         <Label className="text-xs text-zinc-500">{varName}</Label>
