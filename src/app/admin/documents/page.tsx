@@ -37,6 +37,7 @@ export default function DocumentsPage() {
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [fetchError, setFetchError] = useState<string | null>(null)
 
   // Upload modal
   const [showUploadModal, setShowUploadModal] = useState(false)
@@ -57,6 +58,7 @@ export default function DocumentsPage() {
 
   const fetchDocuments = useCallback(async (searchQuery?: string, pageNum?: number) => {
     setLoading(true)
+    setFetchError(null)
     try {
       const params = new URLSearchParams()
       if (searchQuery) params.set('search', searchQuery)
@@ -64,12 +66,17 @@ export default function DocumentsPage() {
       params.set('pageSize', '20')
 
       const res = await fetch(`/api/admin/documents?${params}`)
-      if (!res.ok) throw new Error('fetch failed')
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP ${res.status}`)
+      }
       const data = await res.json()
       setDocuments(data.data || [])
       setTotal(data.total || 0)
       setTotalPages(data.totalPages || 1)
-    } catch {
+    } catch (error) {
+      console.error('문서 목록 조회 실패:', error)
+      setFetchError(error instanceof Error ? error.message : '문서 목록을 불러오는데 실패했습니다.')
       setDocuments([])
     } finally {
       setLoading(false)
@@ -219,6 +226,20 @@ export default function DocumentsPage() {
         {loading ? (
           <div className="p-12 flex items-center justify-center">
             <Loader2 size={24} className="animate-spin text-zinc-500" />
+          </div>
+        ) : fetchError ? (
+          <div className="p-12 text-center">
+            <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-red-500/10 flex items-center justify-center">
+              <FolderOpen size={24} className="text-red-400" />
+            </div>
+            <p className="text-red-400 text-sm font-medium mb-1">오류 발생</p>
+            <p className="text-zinc-500 text-xs">{fetchError}</p>
+            <button
+              onClick={() => fetchDocuments(search, page)}
+              className="mt-3 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
+            >
+              다시 시도
+            </button>
           </div>
         ) : documents.length === 0 ? (
           <div className="p-12 text-center">
