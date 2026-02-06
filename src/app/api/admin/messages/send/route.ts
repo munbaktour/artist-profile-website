@@ -163,6 +163,12 @@ export async function POST(request: NextRequest) {
 
     // ============ 알림톡 발송 ============
     if (messageType === 'alimtalk' || messageType === 'kakao_sms') {
+      // 디버깅: variableMode 및 연락처 정보 확인
+      console.log('=== Alimtalk Debug Info ===')
+      console.log('variableMode:', variableMode)
+      console.log('validContacts count:', validContacts.length)
+      console.log('validContacts sample:', validContacts.slice(0, 3).map(c => ({ id: c.id, name: c.name, phone: c.phone })))
+
       // 변수 모드에 따라 templateParameter 생성
       const alimtalkRecipients: AlimtalkRecipient[] = validContacts.map(contact => {
         const phoneNo = (contact.phone || contact.mobile || '').replace(/[^0-9]/g, '')
@@ -177,9 +183,11 @@ export async function POST(request: NextRequest) {
           }
         } else {
           // 2명 이상: DB에서 자동 치환
+          // contact.name이 빈 문자열이거나 공백만 있는 경우 '고객'으로 대체
+          const customerName = (contact.name || '').trim() || '고객'
           templateParameter = {
             ...commonVariables,
-            '고객명': contact.name || '고객',
+            '고객명': customerName,
             '전화번호': phoneNo,
           }
         }
