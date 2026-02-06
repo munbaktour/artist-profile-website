@@ -4,23 +4,21 @@ import { createClient } from '@/lib/supabase/server'
 // NHN Cloud API 엔드포인트
 const NHN_ALIMTALK_API = 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.3/appkeys'
 const NHN_BRAND_MESSAGE_API = 'https://api-alimtalk.cloud.toast.com/brand-message/v1.0/appkeys'
+const NHN_SMS_API = 'https://api-sms.cloud.toast.com/sms/v3.0/appKeys'
 
 // 메시지 타입
-type MessageType = 'alimtalk' | 'brandmessage'
+type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms'
 type ChatBubbleType = 'TEXT' | 'IMAGE' | 'WIDE_IMAGE' | 'WIDE_ITEMLIST'
 
 // 타겟팅 타입 (브랜드 메시지용)
-// M: 마케팅 수신동의 유저 (채널 친구 여부 무관)
-// N: 채널 친구가 아닌 마케팅 수신동의 유저만
-// I: 채널 친구인 유저만
 type TargetingType = 'M' | 'N' | 'I'
 
 interface SendRequest {
-  recipientIds: string[] // contact IDs
+  recipientIds: string[]
   messageType: MessageType
   // 알림톡용
   templateCode?: string
-  templateVariables?: Record<string, string>
+  commonVariables?: Record<string, string>
   // 브랜드 메시지용
   content?: string
   imageUrl?: string
@@ -28,6 +26,8 @@ interface SendRequest {
   buttonLink?: string
   targeting?: TargetingType
   chatBubbleType?: ChatBubbleType
+  // SMS 대체 발송
+  fallbackToSms?: boolean
 }
 
 interface BrandMessageRecipient {
@@ -37,7 +37,24 @@ interface BrandMessageRecipient {
 
 interface AlimtalkRecipient {
   recipientNo: string
-  templateParameter?: Record<string, string>
+  templateParameter: Record<string, string>
+}
+
+interface SmsRecipient {
+  recipientNo: string
+}
+
+interface Contact {
+  id: string
+  name: string
+  phone: string | null
+  mobile: string | null
+}
+
+interface FailedRecipient {
+  name: string
+  phone: string
+  reason: string
 }
 
 export async function POST(request: NextRequest) {
@@ -57,6 +74,9 @@ export async function POST(request: NextRequest) {
     const appKey = process.env.NHN_CLOUD_APPKEY
     const secretKey = process.env.NHN_CLOUD_SECRET_KEY
     const senderKey = process.env.NHN_CLOUD_SENDER_KEY
+    const smsAppKey = process.env.NHN_CLOUD_SMS_APPKEY || appKey
+    const smsSecretKey = process.env.NHN_CLOUD_SMS_SECRET_KEY || secretKey
+    const smsSendNo = process.env.NHN_CLOUD_SMS_SENDER_NO // 발신번호
 
     if (!appKey || !secretKey || !senderKey) {
       console.error('NHN Cloud credentials not configured')
@@ -70,16 +90,15 @@ export async function POST(request: NextRequest) {
     const {
       recipientIds,
       messageType = 'alimtalk',
-      // 알림톡용
       templateCode,
-      templateVariables,
-      // 브랜드 메시지용
+      commonVariables = {},
       content,
       imageUrl,
       buttonText,
       buttonLink,
       targeting = 'M',
       chatBubbleType = 'TEXT',
+      fallbackToSms = false,
     } = body
 
     if (!recipientIds || recipientIds.length === 0) {
@@ -90,14 +109,14 @@ export async function POST(request: NextRequest) {
     }
 
     // 메시지 타입별 유효성 검사
-    if (messageType === 'alimtalk' && !templateCode) {
+    if ((messageType === 'alimtalk' || messageType === 'kakao_sms') && !templateCode) {
       return NextResponse.json(
         { error: '템플릿을 선택해주세요.' },
         { status: 400 }
       )
     }
 
-    if (messageType === 'brandmessage' && !content) {
+    if ((messageType === 'brandmessage' || messageType === 'sms') && !content) {
       return NextResponse.json(
         { error: '메시지 내용을 입력해주세요.' },
         { status: 400 }
@@ -119,7 +138,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 전화번호가 있는 연락처만 필터링
-    const validContacts = contacts.filter(c => c.phone || c.mobile)
+    const validContacts = (contacts as Contact[]).filter(c => c.phone || c.mobile)
 
     if (validContacts.length === 0) {
       return NextResponse.json(
@@ -128,16 +147,29 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    let apiResponse: Response
-    let apiResult: { header?: { isSuccessful?: boolean; resultMessage?: string }; message?: { requestId?: string } }
-    let logContent: string
+    let successCount = 0
+    let failCount = 0
+    const failedRecipients: FailedRecipient[] = []
+    let requestId: string | undefined
 
-    if (messageType === 'alimtalk') {
-      // ============ 알림톡 발송 ============
-      const alimtalkRecipients: AlimtalkRecipient[] = validContacts.map(contact => ({
-        recipientNo: (contact.phone || contact.mobile).replace(/[^0-9]/g, ''),
-        templateParameter: templateVariables || {},
-      }))
+    // ============ 알림톡 발송 ============
+    if (messageType === 'alimtalk' || messageType === 'kakao_sms') {
+      // 개별 변수를 DB에서 자동 치환하여 수신자별 templateParameter 생성
+      const alimtalkRecipients: AlimtalkRecipient[] = validContacts.map(contact => {
+        const phoneNo = (contact.phone || contact.mobile || '').replace(/[^0-9]/g, '')
+
+        // 개별 변수 + 공통 변수 합치기
+        const templateParameter: Record<string, string> = {
+          ...commonVariables,
+          '고객명': contact.name || '고객',
+          '전화번호': phoneNo,
+        }
+
+        return {
+          recipientNo: phoneNo,
+          templateParameter,
+        }
+      })
 
       const alimtalkBody = {
         senderKey,
@@ -147,7 +179,7 @@ export async function POST(request: NextRequest) {
 
       console.log('Alimtalk request:', JSON.stringify(alimtalkBody, null, 2))
 
-      apiResponse = await fetch(
+      const apiResponse = await fetch(
         `${NHN_ALIMTALK_API}/${appKey}/messages`,
         {
           method: 'POST',
@@ -159,17 +191,81 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      apiResult = await apiResponse.json()
-      logContent = `[알림톡] 템플릿: ${templateCode}`
+      const apiResult = await apiResponse.json()
+      console.log('Alimtalk response:', JSON.stringify(apiResult, null, 2))
 
-    } else {
-      // ============ 브랜드 메시지 발송 ============
+      if (apiResult.header?.isSuccessful) {
+        successCount = validContacts.length
+        requestId = apiResult.message?.requestId
+
+        // 개별 발송 결과 확인
+        if (apiResult.message?.sendResults) {
+          successCount = 0
+          for (const result of apiResult.message.sendResults) {
+            if (result.isSuccessful) {
+              successCount++
+            } else {
+              failCount++
+              const contact = validContacts.find(c =>
+                (c.phone || c.mobile || '').replace(/[^0-9]/g, '') === result.recipientNo
+              )
+              failedRecipients.push({
+                name: contact?.name || '',
+                phone: result.recipientNo,
+                reason: result.resultMessage || '발송 실패',
+              })
+            }
+          }
+        }
+      } else {
+        // 전체 실패
+        failCount = validContacts.length
+        failedRecipients.push({
+          name: '전체',
+          phone: '',
+          reason: apiResult.header?.resultMessage || '알림톡 발송 실패',
+        })
+
+        // SMS 대체 발송
+        if (fallbackToSms && content && smsSendNo) {
+          console.log('Fallback to SMS...')
+          const smsResult = await sendSms(
+            smsAppKey,
+            smsSecretKey,
+            smsSendNo,
+            validContacts,
+            content
+          )
+          if (smsResult.success) {
+            successCount = smsResult.successCount
+            failCount = smsResult.failCount
+            failedRecipients.length = 0
+            if (smsResult.failedRecipients) {
+              failedRecipients.push(...smsResult.failedRecipients)
+            }
+          }
+        }
+      }
+
+      // 로그 저장
+      await saveMessageLog(supabase, {
+        templateId: templateCode || '',
+        content: `[알림톡] 템플릿: ${templateCode}`,
+        recipientCount: validContacts.length,
+        recipientIds,
+        status: successCount > 0 ? 'sent' : 'failed',
+        response: apiResult,
+        sentBy: user.id,
+      })
+    }
+
+    // ============ 브랜드 메시지 발송 ============
+    else if (messageType === 'brandmessage') {
       const brandRecipients: BrandMessageRecipient[] = validContacts.map(contact => ({
-        recipientNo: (contact.phone || contact.mobile).replace(/[^0-9]/g, ''),
+        recipientNo: (contact.phone || contact.mobile || '').replace(/[^0-9]/g, ''),
         targeting,
       }))
 
-      // 버튼 구성 (있을 경우, 최대 5개)
       const buttons = buttonText && buttonLink ? [{
         ordering: 1,
         type: 'WL',
@@ -186,7 +282,6 @@ export async function POST(request: NextRequest) {
         pushAlarm: true,
       }
 
-      // 이미지가 있으면 IMAGE 타입으로 변경
       if (imageUrl && chatBubbleType === 'TEXT') {
         brandMessageBody.chatBubbleType = 'IMAGE'
         brandMessageBody.imageUrl = imageUrl
@@ -194,14 +289,13 @@ export async function POST(request: NextRequest) {
         brandMessageBody.imageUrl = imageUrl
       }
 
-      // 버튼 추가
       if (buttons) {
         brandMessageBody.buttons = buttons
       }
 
       console.log('Brand message request:', JSON.stringify(brandMessageBody, null, 2))
 
-      apiResponse = await fetch(
+      const apiResponse = await fetch(
         `${NHN_BRAND_MESSAGE_API}/${appKey}/freestyle-messages`,
         {
           method: 'POST',
@@ -213,44 +307,74 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      apiResult = await apiResponse.json()
-      logContent = content || ''
-    }
+      const apiResult = await apiResponse.json()
+      console.log('Brand message response:', JSON.stringify(apiResult, null, 2))
 
-    console.log('API response:', JSON.stringify(apiResult, null, 2))
+      if (apiResult.header?.isSuccessful) {
+        successCount = validContacts.length
+        requestId = apiResult.message?.requestId
+      } else {
+        failCount = validContacts.length
+        failedRecipients.push({
+          name: '전체',
+          phone: '',
+          reason: apiResult.header?.resultMessage || '브랜드 메시지 발송 실패',
+        })
+      }
 
-    // 발송 결과 로그 저장
-    const { error: logError } = await supabase
-      .from('message_logs')
-      .insert({
-        template_id: messageType === 'alimtalk' ? templateCode : 'brand-message',
-        content: logContent,
-        recipient_count: validContacts.length,
-        recipient_ids: recipientIds,
-        status: apiResult.header?.isSuccessful ? 'sent' : 'failed',
+      await saveMessageLog(supabase, {
+        templateId: 'brand-message',
+        content: content || '',
+        recipientCount: validContacts.length,
+        recipientIds,
+        status: successCount > 0 ? 'sent' : 'failed',
         response: apiResult,
-        sent_by: user.id,
+        sentBy: user.id,
       })
-
-    if (logError) {
-      console.error('Error saving message log:', logError)
     }
 
-    if (!apiResult.header?.isSuccessful) {
-      console.error('API error:', apiResult)
-      return NextResponse.json(
-        {
-          error: '메시지 발송에 실패했습니다.',
-          detail: apiResult.header?.resultMessage || 'Unknown error',
-        },
-        { status: 500 }
+    // ============ SMS 발송 ============
+    else if (messageType === 'sms') {
+      if (!smsSendNo) {
+        return NextResponse.json(
+          { error: 'SMS 발신번호가 설정되지 않았습니다.' },
+          { status: 500 }
+        )
+      }
+
+      const smsResult = await sendSms(
+        smsAppKey,
+        smsSecretKey,
+        smsSendNo,
+        validContacts,
+        content || ''
       )
+
+      successCount = smsResult.successCount
+      failCount = smsResult.failCount
+      requestId = smsResult.requestId
+      if (smsResult.failedRecipients) {
+        failedRecipients.push(...smsResult.failedRecipients)
+      }
+
+      await saveMessageLog(supabase, {
+        templateId: 'sms',
+        content: content || '',
+        recipientCount: validContacts.length,
+        recipientIds,
+        status: successCount > 0 ? 'sent' : 'failed',
+        response: smsResult,
+        sentBy: user.id,
+      })
     }
 
     return NextResponse.json({
-      success: true,
-      sentCount: validContacts.length,
-      requestId: apiResult.message?.requestId,
+      success: successCount > 0,
+      sentCount: successCount,
+      successCount,
+      failCount,
+      failedRecipients: failedRecipients.length > 0 ? failedRecipients : undefined,
+      requestId,
     })
 
   } catch (error) {
@@ -259,5 +383,113 @@ export async function POST(request: NextRequest) {
       { error: '서버 오류가 발생했습니다.' },
       { status: 500 }
     )
+  }
+}
+
+// SMS 발송 함수
+async function sendSms(
+  appKey: string,
+  secretKey: string,
+  sendNo: string,
+  contacts: Contact[],
+  content: string
+): Promise<{
+  success: boolean
+  successCount: number
+  failCount: number
+  requestId?: string
+  failedRecipients?: FailedRecipient[]
+}> {
+  try {
+    const recipientList: SmsRecipient[] = contacts.map(contact => ({
+      recipientNo: (contact.phone || contact.mobile || '').replace(/[^0-9]/g, ''),
+    }))
+
+    // SMS는 90자 이하, LMS는 2000자 이하
+    const messageType = content.length <= 90 ? 'SMS' : 'LMS'
+    const endpoint = messageType === 'SMS' ? 'sender/sms' : 'sender/mms'
+
+    const smsBody = {
+      body: content,
+      sendNo,
+      recipientList,
+    }
+
+    console.log('SMS request:', JSON.stringify(smsBody, null, 2))
+
+    const response = await fetch(
+      `${NHN_SMS_API}/${appKey}/${endpoint}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'X-Secret-Key': secretKey,
+        },
+        body: JSON.stringify(smsBody),
+      }
+    )
+
+    const result = await response.json()
+    console.log('SMS response:', JSON.stringify(result, null, 2))
+
+    if (result.header?.isSuccessful) {
+      return {
+        success: true,
+        successCount: contacts.length,
+        failCount: 0,
+        requestId: result.body?.data?.requestId,
+      }
+    } else {
+      return {
+        success: false,
+        successCount: 0,
+        failCount: contacts.length,
+        failedRecipients: [{
+          name: '전체',
+          phone: '',
+          reason: result.header?.resultMessage || 'SMS 발송 실패',
+        }],
+      }
+    }
+  } catch (error) {
+    console.error('SMS send error:', error)
+    return {
+      success: false,
+      successCount: 0,
+      failCount: contacts.length,
+      failedRecipients: [{
+        name: '전체',
+        phone: '',
+        reason: '네트워크 오류',
+      }],
+    }
+  }
+}
+
+// 메시지 로그 저장 함수
+async function saveMessageLog(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  data: {
+    templateId: string
+    content: string
+    recipientCount: number
+    recipientIds: string[]
+    status: string
+    response: unknown
+    sentBy: string
+  }
+) {
+  try {
+    await supabase.from('message_logs').insert({
+      template_id: data.templateId,
+      content: data.content,
+      recipient_count: data.recipientCount,
+      recipient_ids: data.recipientIds,
+      status: data.status,
+      response: data.response,
+      sent_by: data.sentBy,
+    })
+  } catch (error) {
+    console.error('Error saving message log:', error)
   }
 }
