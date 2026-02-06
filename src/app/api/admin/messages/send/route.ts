@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
-// NHN Cloud 카카오 브랜드 메시지 API 엔드포인트
-// API 문서: https://docs.nhncloud.com/ko/Notification/KakaoTalk%20Bizmessage/ko/friendtalkupgrade-api-guide/
+// NHN Cloud API 엔드포인트
+const NHN_ALIMTALK_API = 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.3/appkeys'
 const NHN_BRAND_MESSAGE_API = 'https://api-alimtalk.cloud.toast.com/brand-message/v1.0/appkeys'
 
 // 메시지 타입
+type MessageType = 'alimtalk' | 'brandmessage'
 type ChatBubbleType = 'TEXT' | 'IMAGE' | 'WIDE_IMAGE' | 'WIDE_ITEMLIST'
 
-// 타겟팅 타입
+// 타겟팅 타입 (브랜드 메시지용)
 // M: 마케팅 수신동의 유저 (채널 친구 여부 무관)
 // N: 채널 친구가 아닌 마케팅 수신동의 유저만
 // I: 채널 친구인 유저만
@@ -16,7 +17,12 @@ type TargetingType = 'M' | 'N' | 'I'
 
 interface SendRequest {
   recipientIds: string[] // contact IDs
-  content: string
+  messageType: MessageType
+  // 알림톡용
+  templateCode?: string
+  templateVariables?: Record<string, string>
+  // 브랜드 메시지용
+  content?: string
   imageUrl?: string
   buttonText?: string
   buttonLink?: string
@@ -27,6 +33,11 @@ interface SendRequest {
 interface BrandMessageRecipient {
   recipientNo: string
   targeting?: TargetingType
+}
+
+interface AlimtalkRecipient {
+  recipientNo: string
+  templateParameter?: Record<string, string>
 }
 
 export async function POST(request: NextRequest) {
@@ -58,12 +69,17 @@ export async function POST(request: NextRequest) {
     const body: SendRequest = await request.json()
     const {
       recipientIds,
+      messageType = 'alimtalk',
+      // 알림톡용
+      templateCode,
+      templateVariables,
+      // 브랜드 메시지용
       content,
       imageUrl,
       buttonText,
       buttonLink,
-      targeting = 'M', // 기본값: 마케팅 수신동의 유저 전체
-      chatBubbleType = 'TEXT', // 기본값: 텍스트형
+      targeting = 'M',
+      chatBubbleType = 'TEXT',
     } = body
 
     if (!recipientIds || recipientIds.length === 0) {
@@ -73,7 +89,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!content) {
+    // 메시지 타입별 유효성 검사
+    if (messageType === 'alimtalk' && !templateCode) {
+      return NextResponse.json(
+        { error: '템플릿을 선택해주세요.' },
+        { status: 400 }
+      )
+    }
+
+    if (messageType === 'brandmessage' && !content) {
       return NextResponse.json(
         { error: '메시지 내용을 입력해주세요.' },
         { status: 400 }
@@ -104,82 +128,120 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 수신자 목록 생성
-    const recipients: BrandMessageRecipient[] = validContacts.map(contact => ({
-      recipientNo: (contact.phone || contact.mobile).replace(/[^0-9]/g, ''),
-      targeting,
-    }))
+    let apiResponse: Response
+    let apiResult: { header?: { isSuccessful?: boolean; resultMessage?: string }; message?: { requestId?: string } }
+    let logContent: string
 
-    // 버튼 구성 (있을 경우, 최대 5개)
-    const buttons = buttonText && buttonLink ? [{
-      ordering: 1,
-      type: 'WL', // 웹 링크
-      name: buttonText,
-      linkMo: buttonLink,
-      linkPc: buttonLink,
-    }] : undefined
+    if (messageType === 'alimtalk') {
+      // ============ 알림톡 발송 ============
+      const alimtalkRecipients: AlimtalkRecipient[] = validContacts.map(contact => ({
+        recipientNo: (contact.phone || contact.mobile).replace(/[^0-9]/g, ''),
+        templateParameter: templateVariables || {},
+      }))
 
-    // 요청 본문 구성
-    const requestBody: Record<string, unknown> = {
-      senderKey,
-      chatBubbleType,
-      content,
-      recipientList: recipients,
-      pushAlarm: true, // 푸시 알람 발송
-    }
-
-    // 이미지가 있으면 IMAGE 타입으로 변경
-    if (imageUrl && chatBubbleType === 'TEXT') {
-      requestBody.chatBubbleType = 'IMAGE'
-      requestBody.imageUrl = imageUrl
-    } else if (imageUrl) {
-      requestBody.imageUrl = imageUrl
-    }
-
-    // 버튼 추가
-    if (buttons) {
-      requestBody.buttons = buttons
-    }
-
-    // NHN Cloud 브랜드 메시지 API 호출
-    const brandMessageResponse = await fetch(
-      `${NHN_BRAND_MESSAGE_API}/${appKey}/freestyle-messages`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'X-Secret-Key': secretKey,
-        },
-        body: JSON.stringify(requestBody),
+      const alimtalkBody = {
+        senderKey,
+        templateCode,
+        recipientList: alimtalkRecipients,
       }
-    )
 
-    const brandMessageResult = await brandMessageResponse.json()
+      console.log('Alimtalk request:', JSON.stringify(alimtalkBody, null, 2))
+
+      apiResponse = await fetch(
+        `${NHN_ALIMTALK_API}/${appKey}/messages`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'X-Secret-Key': secretKey,
+          },
+          body: JSON.stringify(alimtalkBody),
+        }
+      )
+
+      apiResult = await apiResponse.json()
+      logContent = `[알림톡] 템플릿: ${templateCode}`
+
+    } else {
+      // ============ 브랜드 메시지 발송 ============
+      const brandRecipients: BrandMessageRecipient[] = validContacts.map(contact => ({
+        recipientNo: (contact.phone || contact.mobile).replace(/[^0-9]/g, ''),
+        targeting,
+      }))
+
+      // 버튼 구성 (있을 경우, 최대 5개)
+      const buttons = buttonText && buttonLink ? [{
+        ordering: 1,
+        type: 'WL',
+        name: buttonText,
+        linkMo: buttonLink,
+        linkPc: buttonLink,
+      }] : undefined
+
+      const brandMessageBody: Record<string, unknown> = {
+        senderKey,
+        chatBubbleType,
+        content,
+        recipientList: brandRecipients,
+        pushAlarm: true,
+      }
+
+      // 이미지가 있으면 IMAGE 타입으로 변경
+      if (imageUrl && chatBubbleType === 'TEXT') {
+        brandMessageBody.chatBubbleType = 'IMAGE'
+        brandMessageBody.imageUrl = imageUrl
+      } else if (imageUrl) {
+        brandMessageBody.imageUrl = imageUrl
+      }
+
+      // 버튼 추가
+      if (buttons) {
+        brandMessageBody.buttons = buttons
+      }
+
+      console.log('Brand message request:', JSON.stringify(brandMessageBody, null, 2))
+
+      apiResponse = await fetch(
+        `${NHN_BRAND_MESSAGE_API}/${appKey}/freestyle-messages`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'X-Secret-Key': secretKey,
+          },
+          body: JSON.stringify(brandMessageBody),
+        }
+      )
+
+      apiResult = await apiResponse.json()
+      logContent = content || ''
+    }
+
+    console.log('API response:', JSON.stringify(apiResult, null, 2))
 
     // 발송 결과 로그 저장
     const { error: logError } = await supabase
       .from('message_logs')
       .insert({
-        template_id: 'brand-message', // 브랜드 메시지
-        content,
+        template_id: messageType === 'alimtalk' ? templateCode : 'brand-message',
+        content: logContent,
         recipient_count: validContacts.length,
         recipient_ids: recipientIds,
-        status: brandMessageResult.header?.isSuccessful ? 'sent' : 'failed',
-        response: brandMessageResult,
+        status: apiResult.header?.isSuccessful ? 'sent' : 'failed',
+        response: apiResult,
         sent_by: user.id,
       })
 
     if (logError) {
       console.error('Error saving message log:', logError)
-      // 로그 저장 실패해도 발송 결과는 반환
     }
 
-    if (!brandMessageResult.header?.isSuccessful) {
-      console.error('Brand Message API error:', brandMessageResult)
+    if (!apiResult.header?.isSuccessful) {
+      console.error('API error:', apiResult)
       return NextResponse.json(
         {
           error: '메시지 발송에 실패했습니다.',
-          detail: brandMessageResult.header?.resultMessage || 'Unknown error',
+          detail: apiResult.header?.resultMessage || 'Unknown error',
         },
         { status: 500 }
       )
@@ -188,7 +250,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       sentCount: validContacts.length,
-      requestId: brandMessageResult.message?.requestId,
+      requestId: apiResult.message?.requestId,
     })
 
   } catch (error) {

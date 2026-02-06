@@ -200,19 +200,10 @@ export default function NotificationsPage() {
         </div>
 
         {/* History */}
-        <div
-          className="rounded-xl overflow-hidden"
-          style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(212,175,55,0.2)',
-          }}
-        >
-          <div
-            className="p-5"
-            style={{ borderBottom: '1px solid rgba(212,175,55,0.15)' }}
-          >
-            <h2 className="text-lg font-light text-[#f0f0f0]">발송 내역</h2>
-            <p className="text-sm mt-1" style={{ color: 'rgba(212,175,55,0.6)' }}>
+        <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+          <div className="p-5 border-b border-zinc-800">
+            <h2 className="text-sm font-medium text-zinc-100">발송 내역</h2>
+            <p className="text-xs text-zinc-500 mt-1">
               총 {total}건
             </p>
           </div>
@@ -223,16 +214,11 @@ export default function NotificationsPage() {
             </div>
           ) : error ? (
             <div className="p-16 text-center">
-              <XCircle size={48} className="mx-auto mb-4" style={{ color: '#ef4444' }} />
-              <p style={{ color: '#ef4444' }}>{error}</p>
+              <XCircle size={48} className="mx-auto mb-4 text-red-400" />
+              <p className="text-red-400">{error}</p>
               <button
                 onClick={() => fetchNotifications()}
-                className="mt-4 px-6 py-2.5 rounded-lg text-sm transition-all"
-                style={{
-                  background: 'rgba(212,175,55,0.1)',
-                  border: '1px solid rgba(212,175,55,0.3)',
-                  color: '#D4AF37',
-                }}
+                className="mt-4 px-6 py-2.5 rounded-lg text-sm transition-colors bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700"
               >
                 다시 시도
               </button>
@@ -249,86 +235,56 @@ export default function NotificationsPage() {
               }}
             />
           ) : (
-            <div>
-              {notifications.map((notification, idx) => (
+            <div className="divide-y divide-zinc-800">
+              {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="p-5 transition-all hover:bg-white/[0.02]"
-                  style={{
-                    borderBottom: idx < notifications.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-                  }}
+                  className="p-4 transition-colors hover:bg-zinc-800/50"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div
-                        className="p-3 rounded-lg"
-                        style={{
-                          background: notification.channel === 'email'
-                            ? 'rgba(59,130,246,0.15)'
-                            : 'rgba(34,197,94,0.15)',
-                        }}
-                      >
-                        {notification.channel === 'email' ? (
-                          <Mail size={20} style={{ color: '#3b82f6' }} />
-                        ) : (
-                          <MessageSquare size={20} style={{ color: '#22c55e' }} />
-                        )}
-                      </div>
+                    <div className="flex items-center gap-3">
+                      {notification.channel === 'email' ? (
+                        <Mail size={18} className="text-blue-400 flex-shrink-0" />
+                      ) : (
+                        <MessageSquare size={18} className="text-green-400 flex-shrink-0" />
+                      )}
                       <div>
-                        <p className="text-[#f0f0f0] font-medium">
+                        <p className="text-zinc-100 text-sm font-medium">
                           {notification.subject || '(제목 없음)'}
                         </p>
-                        <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                        <p className="text-xs text-zinc-500 mt-0.5">
                           {notification.recipientEmail || notification.recipientPhone || '알 수 없음'}
                           {' • '}
                           {notification.notificationType === 'exhibition_invite' ? '전시 초대' : '일반 공지'}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 flex-shrink-0">
                       {notification.status === 'sent' && (
-                        <span
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs"
-                          style={{
-                            background: 'rgba(34,197,94,0.15)',
-                            color: '#22c55e',
-                          }}
-                        >
+                        <span className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs bg-green-500/10 text-green-400">
                           <CheckCircle size={12} />
                           발송 완료
                         </span>
                       )}
                       {notification.status === 'failed' && (
-                        <span
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs"
-                          style={{
-                            background: 'rgba(239,68,68,0.15)',
-                            color: '#ef4444',
-                          }}
-                        >
+                        <span className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs bg-red-500/10 text-red-400">
                           <XCircle size={12} />
                           발송 실패
                         </span>
                       )}
                       {notification.status === 'pending' && (
-                        <span
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs"
-                          style={{
-                            background: 'rgba(234,179,8,0.15)',
-                            color: '#eab308',
-                          }}
-                        >
+                        <span className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs bg-yellow-500/10 text-yellow-400">
                           <Clock size={12} />
                           대기 중
                         </span>
                       )}
-                      <span className="text-sm" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                      <span className="text-xs text-zinc-500">
                         {formatDate(notification.createdAt)}
                       </span>
                     </div>
                   </div>
                   {notification.errorMessage && (
-                    <p className="text-xs mt-2 ml-16" style={{ color: '#ef4444' }}>
+                    <p className="text-xs mt-2 ml-7 text-red-400">
                       오류: {notification.errorMessage}
                     </p>
                   )}

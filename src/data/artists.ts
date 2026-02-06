@@ -1312,7 +1312,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Acrylic on fabric over stainless panel, water paint on white clay",
         dimensions: "91 x 110 cm",
-        image: "/images/artists/son-moon-il/works/1. 완전한 퍼즐 2024_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        image: "/images/artists/son-moon-il/works/perfect-puzzle-01.jpg",
         available: true
       },
       {
@@ -1323,7 +1323,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Acrylic on canvas",
         dimensions: "22 x 15 cm",
-        image: "/images/artists/son-moon-il/works/1-1. 완전한 퍼즐 2024_Acylic on canvas_22*15cm.jpg",
+        image: "/images/artists/son-moon-il/works/perfect-puzzle-02.jpg",
         available: true
       },
       {
@@ -1334,7 +1334,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Acrylic on fabric over stainless panel, water paint on white clay",
         dimensions: "91 x 110 cm",
-        image: "/images/artists/son-moon-il/works/2. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-01.jpg",
         available: true
       },
       {
@@ -1345,7 +1345,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Acrylic on fabric over stainless panel, water paint on white clay",
         dimensions: "91 x 110 cm",
-        image: "/images/artists/son-moon-il/works/3. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-02.jpg",
         available: true
       },
       {
@@ -1356,7 +1356,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Acrylic on fabric over stainless panel, water paint on white clay",
         dimensions: "91 x 110 cm",
-        image: "/images/artists/son-moon-il/works/4. No man is an Island 2025_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-03.jpg",
         available: true
       },
       {
@@ -1367,7 +1367,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Acrylic on fabric over stainless panel, water paint on white clay",
         dimensions: "91 x 110 cm",
-        image: "/images/artists/son-moon-il/works/5. No man is an Island 2024_Acylic on fabric over stainless pannael, water paint on white clay _91*110cm.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-04.jpg",
         available: true
       },
       {
@@ -1378,7 +1378,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "White pigment paint on white clay, plant, glass",
         dimensions: "80 x 89 cm",
-        image: "/images/artists/son-moon-il/works/6. No man is an Island 2025_White pigment paint on white clay, plant, glass_80*89cm, meok.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-05.jpg",
         available: true
       },
       {
@@ -1389,7 +1389,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "White pigment paint on white clay, plant",
         dimensions: "80 x 89 cm",
-        image: "/images/artists/son-moon-il/works/7. No man is an Island 2025_White pigment paint on white clay, plant_80*89cm, meok.jpg",
+        image: "/images/artists/son-moon-il/works/no-man-island-06.jpg",
         available: true
       },
       {
@@ -1400,7 +1400,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/8. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-01.jpg",
         available: true
       },
       {
@@ -1411,7 +1411,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/9. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-02.jpg",
         available: true
       },
       {
@@ -1422,7 +1422,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/10. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-03.jpg",
         available: true
       },
       {
@@ -1433,7 +1433,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/11. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-04.jpg",
         available: true
       },
       {
@@ -1444,7 +1444,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/12. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-05.jpg",
         available: true
       },
       {
@@ -1455,7 +1455,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Mixed media (oil paint, fabric, glass)",
         dimensions: "40 x 47.5 cm",
-        image: "/images/artists/son-moon-il/works/13. 완전한 딱지2025_oil paint, fabric, glass, hma _40*47.5cm.jpg",
+        image: "/images/artists/son-moon-il/works/scab-06.jpg",
         available: true
       },
       {
@@ -1466,7 +1466,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Mixed media",
         dimensions: "",
-        image: "/images/artists/son-moon-il/works/껌딱지-01.jpg",
+        image: "/images/artists/son-moon-il/works/gum-scab-01.jpg",
         available: true
       },
       {
@@ -1477,7 +1477,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Mixed media",
         dimensions: "",
-        image: "/images/artists/son-moon-il/works/껌딱지-02.jpg",
+        image: "/images/artists/son-moon-il/works/gum-scab-02.jpg",
         available: true
       },
       {
@@ -1488,7 +1488,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Mixed media",
         dimensions: "",
-        image: "/images/artists/son-moon-il/works/껌딱지-03.jpg",
+        image: "/images/artists/son-moon-il/works/gum-scab-03.jpg",
         available: true
       },
       {
@@ -1532,7 +1532,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Stainless, water paint on white clay",
         dimensions: "80 x 89 cm",
-        image: "/images/artists/son-moon-il/works/14. Lightrain 2024_Stainless,water paint on white clay_80*89cm.jpg",
+        image: "/images/artists/son-moon-il/works/lightrain-01.jpg",
         available: true
       },
       {
@@ -1543,7 +1543,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2024,
         medium: "Stainless, water paint on white clay",
         dimensions: "80 x 89 cm",
-        image: "/images/artists/son-moon-il/works/15. Lightrain 2024_Stainless,water paint on white clay_80*89cm.jpg",
+        image: "/images/artists/son-moon-il/works/lightrain-02.jpg",
         available: true
       },
       {
@@ -1554,7 +1554,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2019,
         medium: "Acrylic on fabric over aluminum panel",
         dimensions: "55 x 190 cm",
-        image: "/images/artists/son-moon-il/works/16. Relationship 1_2019, Acylic on fabric over aluminum pannel _55 x 190cm.jpg",
+        image: "/images/artists/son-moon-il/works/relationship-01.jpg",
         available: true
       },
       {
@@ -1565,7 +1565,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2019,
         medium: "Acrylic on fabric over aluminum panel",
         dimensions: "55 x 190 cm",
-        image: "/images/artists/son-moon-il/works/17. Relationship 1_2019, Acylic on fabric over aluminum pannel _55 x 190cm.jpg",
+        image: "/images/artists/son-moon-il/works/relationship-02.jpg",
         available: true
       },
       {
@@ -1576,7 +1576,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Stainless, water paint on white clay",
         dimensions: "22 x 15 cm",
-        image: "/images/artists/son-moon-il/works/18. Lightrain 2025_Stainless,water paint on white clay_22*15cm.jpg",
+        image: "/images/artists/son-moon-il/works/lightrain-03.jpg",
         available: true
       },
       {
@@ -1587,7 +1587,7 @@ His 2025 solo exhibition "No man is an island" draws inspiration from the 17th-c
         year: 2025,
         medium: "Stainless, water paint on white clay",
         dimensions: "22 x 15 cm",
-        image: "/images/artists/son-moon-il/works/19. Lightrain 2025_Stainless,water paint on white clay_22*15cm.jpg",
+        image: "/images/artists/son-moon-il/works/lightrain-04.jpg",
         available: true
       }
     ],

@@ -21,7 +21,7 @@ export function CategoryBadge({
       <span
         className={cn(
           'inline-flex items-center font-medium rounded-full',
-          'bg-[#262626] text-[#a1a1aa]',
+          'bg-zinc-800 text-zinc-400',
           size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm',
           className
         )}
@@ -40,10 +40,8 @@ export function CategoryBadge({
     const b = parseInt(hex.substr(4, 2), 16)
     // Calculate luminance
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-    return luminance > 0.5 ? '#1a1a1a' : '#ffffff'
+    return luminance > 0.5 ? '#000000' : '#ffffff'
   }
-
-  const textColor = getContrastColor(category.color)
 
   return (
     <span
@@ -77,7 +75,7 @@ export function CategoryBadgeSolid({
       <span
         className={cn(
           'inline-flex items-center font-medium rounded-full',
-          'bg-[#262626] text-[#a1a1aa]',
+          'bg-zinc-800 text-zinc-400',
           size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm',
           className
         )}
@@ -93,7 +91,7 @@ export function CategoryBadgeSolid({
     const g = parseInt(hex.substr(2, 2), 16)
     const b = parseInt(hex.substr(4, 2), 16)
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-    return luminance > 0.5 ? '#1a1a1a' : '#ffffff'
+    return luminance > 0.5 ? '#000000' : '#ffffff'
   }
 
   return (

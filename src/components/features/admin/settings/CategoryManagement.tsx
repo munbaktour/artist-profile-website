@@ -186,15 +186,15 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
     return (
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <Skeleton className="h-6 w-32 bg-[#262626]" />
-          <Skeleton className="h-9 w-28 bg-[#262626]" />
+          <Skeleton className="h-6 w-32 bg-zinc-800" />
+          <Skeleton className="h-9 w-28 bg-zinc-800" />
         </div>
-        <div className="rounded-lg border border-[#262626] overflow-hidden">
+        <div className="rounded-lg border border-zinc-800 overflow-hidden">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 border-b border-[#262626] last:border-b-0">
-              <Skeleton className="h-5 w-5 rounded-full bg-[#262626]" />
-              <Skeleton className="h-5 w-32 bg-[#262626]" />
-              <Skeleton className="h-5 w-24 bg-[#262626] ml-auto" />
+            <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-800 last:border-b-0">
+              <Skeleton className="h-5 w-5 rounded-full bg-zinc-800" />
+              <Skeleton className="h-5 w-32 bg-zinc-800" />
+              <Skeleton className="h-5 w-24 bg-zinc-800 ml-auto" />
             </div>
           ))}
         </div>
@@ -215,7 +215,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
     <div className="space-y-4">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <p className="text-sm text-[#a1a1aa]">
+        <p className="text-sm text-zinc-400">
           총 {categories.length}개의 카테고리
         </p>
         {canEdit && (
@@ -231,24 +231,24 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
       </div>
 
       {/* Table */}
-      <div className="rounded-lg border border-[#262626] overflow-hidden">
+      <div className="rounded-lg border border-zinc-800 overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="border-[#262626] hover:bg-transparent">
-              <TableHead className="text-[#a1a1aa] w-[50px]"></TableHead>
-              <TableHead className="text-[#a1a1aa]">이름</TableHead>
-              <TableHead className="text-[#a1a1aa]">영문명</TableHead>
-              <TableHead className="text-[#a1a1aa]">색상</TableHead>
-              <TableHead className="text-[#a1a1aa]">유형</TableHead>
+            <TableRow className="border-zinc-800 hover:bg-transparent">
+              <TableHead className="text-zinc-400 w-[50px]"></TableHead>
+              <TableHead className="text-zinc-400">이름</TableHead>
+              <TableHead className="text-zinc-400">영문명</TableHead>
+              <TableHead className="text-zinc-400">색상</TableHead>
+              <TableHead className="text-zinc-400">유형</TableHead>
               {canEdit && (
-                <TableHead className="text-[#a1a1aa] w-[50px]"></TableHead>
+                <TableHead className="text-zinc-400 w-[50px]"></TableHead>
               )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {categories.length === 0 ? (
-              <TableRow className="border-[#262626]">
-                <TableCell colSpan={canEdit ? 6 : 5} className="text-center text-[#52525b] py-8">
+              <TableRow className="border-zinc-800">
+                <TableCell colSpan={canEdit ? 6 : 5} className="text-center text-zinc-500 py-8">
                   카테고리가 없습니다.
                 </TableCell>
               </TableRow>
@@ -256,12 +256,12 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
               categories.map((category) => (
                 <TableRow
                   key={category.id}
-                  className="border-[#262626] hover:bg-[#1a1a1a]"
+                  className="border-zinc-800 hover:bg-zinc-900"
                 >
                   <TableCell>
-                    <GripVertical className="w-4 h-4 text-[#52525b]" />
+                    <GripVertical className="w-4 h-4 text-zinc-500" />
                   </TableCell>
-                  <TableCell className="font-medium text-white">
+                  <TableCell className="font-medium text-zinc-100">
                     <div className="flex items-center gap-2">
                       <span
                         className="w-3 h-3 rounded-full shrink-0"
@@ -270,16 +270,16 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                       {category.name}
                     </div>
                   </TableCell>
-                  <TableCell className="text-[#a1a1aa]">
+                  <TableCell className="text-zinc-400">
                     {category.nameEn || '-'}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <span
-                        className="w-6 h-6 rounded border border-[#262626]"
+                        className="w-6 h-6 rounded border border-zinc-800"
                         style={{ backgroundColor: category.color }}
                       />
-                      <span className="text-[#a1a1aa] text-sm font-mono">
+                      <span className="text-zinc-400 text-sm font-mono">
                         {category.color}
                       </span>
                     </div>
@@ -290,7 +290,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                         시스템
                       </span>
                     ) : (
-                      <span className="px-2 py-1 rounded text-xs bg-[#262626] text-[#a1a1aa]">
+                      <span className="px-2 py-1 rounded text-xs bg-zinc-800 text-zinc-400">
                         사용자
                       </span>
                     )}
@@ -302,17 +302,17 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
+                            className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
                           >
                             <MoreHorizontal className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-[#1a1a1a] border-[#262626]"
+                          className="bg-zinc-900 border-zinc-800"
                         >
                           <DropdownMenuItem
-                            className="text-white hover:bg-[#262626] cursor-pointer"
+                            className="text-zinc-100 hover:bg-zinc-800 cursor-pointer"
                             onClick={() => openEditDialog(category)}
                           >
                             <Pencil className="w-4 h-4 mr-2" />
@@ -320,7 +320,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                           </DropdownMenuItem>
                           {!category.isSystem && (
                             <DropdownMenuItem
-                              className="text-red-400 hover:bg-[#262626] cursor-pointer"
+                              className="text-red-400 hover:bg-zinc-800 cursor-pointer"
                               onClick={() => handleDelete(category)}
                             >
                               <Trash2 className="w-4 h-4 mr-2" />
@@ -340,7 +340,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
 
       {/* Create/Edit Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-[#262626] text-white">
+        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
           <DialogHeader>
             <DialogTitle>
               {editingCategory ? '카테고리 수정' : '새 카테고리'}
@@ -350,31 +350,31 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           <div className="space-y-4 py-4">
             {/* Name */}
             <div className="space-y-2">
-              <Label className="text-[#fafafa]">
+              <Label className="text-zinc-50">
                 이름 <span className="text-red-400">*</span>
               </Label>
               <Input
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="예: 컬렉터"
-                className="bg-[#0a0a0a] border-[#262626] text-white placeholder:text-[#52525b]"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
               />
             </div>
 
             {/* English Name */}
             <div className="space-y-2">
-              <Label className="text-[#fafafa]">영문명</Label>
+              <Label className="text-zinc-50">영문명</Label>
               <Input
                 value={formData.nameEn}
                 onChange={(e) => setFormData({ ...formData, nameEn: e.target.value })}
                 placeholder="예: Collector"
-                className="bg-[#0a0a0a] border-[#262626] text-white placeholder:text-[#52525b]"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
               />
             </div>
 
             {/* Color */}
             <div className="space-y-2">
-              <Label className="text-[#fafafa]">색상</Label>
+              <Label className="text-zinc-50">색상</Label>
               <div className="flex items-center gap-3">
                 <div className="flex gap-2 flex-wrap">
                   {COLOR_PALETTE.map((color) => (
@@ -386,7 +386,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                         'w-8 h-8 rounded-lg border-2 transition-all',
                         formData.color === color
                           ? 'border-white scale-110'
-                          : 'border-transparent hover:border-[#52525b]'
+                          : 'border-transparent hover:border-zinc-600'
                       )}
                       style={{ backgroundColor: color }}
                     />
@@ -396,27 +396,27 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                   type="color"
                   value={formData.color}
                   onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                  className="w-12 h-8 p-0 border-[#262626] cursor-pointer"
+                  className="w-12 h-8 p-0 border-zinc-800 cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Icon (Emoji) */}
             <div className="space-y-2">
-              <Label className="text-[#fafafa]">아이콘 (이모지)</Label>
+              <Label className="text-zinc-50">아이콘 (이모지)</Label>
               <Input
                 value={formData.icon}
                 onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                 placeholder="예: 🎨"
-                className="bg-[#0a0a0a] border-[#262626] text-white placeholder:text-[#52525b]"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
                 maxLength={4}
               />
             </div>
 
             {/* Preview */}
             <div className="space-y-2">
-              <Label className="text-[#fafafa]">미리보기</Label>
-              <div className="p-4 rounded-lg bg-[#0a0a0a] border border-[#262626]">
+              <Label className="text-zinc-50">미리보기</Label>
+              <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
                 <span
                   className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium"
                   style={{
@@ -436,7 +436,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
             <Button
               variant="outline"
               onClick={() => setDialogOpen(false)}
-              className="bg-transparent border-[#262626] text-white hover:bg-[#262626]"
+              className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
             >
               취소
             </Button>

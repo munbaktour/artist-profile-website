@@ -12,12 +12,7 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)',
-      }}
-    >
+    <div className="min-h-screen bg-zinc-950">
       {/* Sidebar */}
       <AdminSidebar
         isOpen={sidebarOpen}
@@ -29,12 +24,7 @@ export default function AdminLayout({
         {/* Mobile Menu Button */}
         <button
           onClick={() => setSidebarOpen(true)}
-          className="fixed top-4 left-4 z-30 lg:hidden p-3 rounded-lg transition-all"
-          style={{
-            background: 'rgba(212,175,55,0.1)',
-            border: '1px solid rgba(212,175,55,0.3)',
-            color: '#D4AF37',
-          }}
+          className="fixed top-4 left-4 z-30 lg:hidden p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:bg-zinc-800 transition-colors"
         >
           <Menu className="w-5 h-5" />
         </button>

@@ -168,8 +168,8 @@ export default function TagsPage() {
   }
 
   const inputClassName = cn(
-    'bg-[#0a0a0a] border-[#262626] text-white',
-    'placeholder:text-[#52525b]',
+    'bg-zinc-950 border-zinc-800 text-zinc-100',
+    'placeholder:text-zinc-500',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -178,8 +178,8 @@ export default function TagsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">태그</h1>
-          <p className="text-[#a1a1aa] text-sm mt-1">
+          <h1 className="text-2xl font-bold text-zinc-100">태그</h1>
+          <p className="text-zinc-400 text-sm mt-1">
             연락처를 분류하는 태그를 관리합니다.
           </p>
         </div>
@@ -193,9 +193,9 @@ export default function TagsPage() {
               새 태그
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-[#1a1a1a] border-[#262626]">
+          <DialogContent className="bg-zinc-900 border-zinc-800">
             <DialogHeader>
-              <DialogTitle className="text-white">
+              <DialogTitle className="text-zinc-100">
                 {editingTag ? '태그 수정' : '새 태그'}
               </DialogTitle>
             </DialogHeader>
@@ -229,15 +229,15 @@ export default function TagsPage() {
                   <SelectTrigger className={inputClassName}>
                     <SelectValue placeholder="선택 안함" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#1a1a1a] border-[#262626]">
-                    <SelectItem value="none" className="text-white">
+                  <SelectContent className="bg-zinc-900 border-zinc-800">
+                    <SelectItem value="none" className="text-zinc-100">
                       선택 안함
                     </SelectItem>
                     {tagCategories.map((cat) => (
                       <SelectItem
                         key={cat.value}
                         value={cat.value}
-                        className="text-white"
+                        className="text-zinc-100"
                       >
                         {cat.label}
                       </SelectItem>
@@ -257,7 +257,7 @@ export default function TagsPage() {
                       className={cn(
                         'w-8 h-8 rounded-full transition-transform',
                         formData.color === color
-                          ? 'ring-2 ring-white ring-offset-2 ring-offset-[#1a1a1a] scale-110'
+                          ? 'ring-2 ring-white ring-offset-2 ring-offset-zinc-900 scale-110'
                           : 'hover:scale-110'
                       )}
                       style={{ backgroundColor: color }}
@@ -284,7 +284,7 @@ export default function TagsPage() {
                   type="button"
                   variant="outline"
                   onClick={() => setIsDialogOpen(false)}
-                  className="bg-transparent border-[#262626] text-white hover:bg-[#262626]"
+                  className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
                 >
                   취소
                 </Button>
@@ -307,7 +307,7 @@ export default function TagsPage() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-20 bg-[#1a1a1a] rounded-lg border border-[#262626] animate-pulse"
+              className="h-20 bg-zinc-900 rounded-lg border border-zinc-800 animate-pulse"
             />
           ))}
         </div>
@@ -317,8 +317,8 @@ export default function TagsPage() {
         </div>
       ) : tags.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-[#52525b]">태그가 없습니다.</p>
-          <p className="text-[#52525b] text-sm mt-1">
+          <p className="text-zinc-500">태그가 없습니다.</p>
+          <p className="text-zinc-500 text-sm mt-1">
             새 태그를 추가하여 연락처를 분류해보세요.
           </p>
         </div>
@@ -327,7 +327,7 @@ export default function TagsPage() {
           {tags.map((tag) => (
             <div
               key={tag.id}
-              className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-4 flex items-center justify-between group hover:border-[#3f3f46] transition-colors"
+              className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center justify-between group hover:border-zinc-600 transition-colors"
             >
               <div className="flex items-center gap-3">
                 <div
@@ -335,9 +335,9 @@ export default function TagsPage() {
                   style={{ backgroundColor: tag.color }}
                 />
                 <div>
-                  <p className="text-white font-medium">{tag.name}</p>
+                  <p className="text-zinc-100 font-medium">{tag.name}</p>
                   {tag.category && (
-                    <p className="text-[#52525b] text-xs">
+                    <p className="text-zinc-500 text-xs">
                       {tagCategories.find((c) => c.value === tag.category)?.label}
                     </p>
                   )}
@@ -348,7 +348,7 @@ export default function TagsPage() {
                   variant="ghost"
                   size="icon"
                   onClick={() => handleOpenDialog(tag)}
-                  className="h-8 w-8 text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
+                  className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
                 >
                   <Pencil className="w-4 h-4" />
                 </Button>
@@ -356,7 +356,7 @@ export default function TagsPage() {
                   variant="ghost"
                   size="icon"
                   onClick={() => handleDelete(tag.id)}
-                  className="h-8 w-8 text-[#a1a1aa] hover:text-red-400 hover:bg-red-500/10"
+                  className="h-8 w-8 text-zinc-400 hover:text-red-400 hover:bg-red-500/10"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>

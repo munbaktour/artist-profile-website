@@ -289,8 +289,8 @@ export default function NotificationComposePage() {
   }
 
   const inputClassName = cn(
-    'bg-[#0a0a0a] border-[#262626] text-white',
-    'placeholder:text-[#52525b]',
+    'bg-zinc-950 border-zinc-800 text-zinc-100',
+    'placeholder:text-zinc-500',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -302,14 +302,14 @@ export default function NotificationComposePage() {
           <Button
             variant="ghost"
             size="icon"
-            className="text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
+            className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-white">새 알림 작성</h1>
-          <p className="text-[#a1a1aa] text-sm mt-1">
+          <h1 className="text-2xl font-bold text-zinc-100">새 알림 작성</h1>
+          <p className="text-zinc-400 text-sm mt-1">
             이메일 또는 SMS를 작성하여 연락처에게 발송합니다.
           </p>
         </div>
@@ -333,7 +333,7 @@ export default function NotificationComposePage() {
               {sendResult.message}
             </p>
             {sendResult.summary && (
-              <p className="text-sm text-[#a1a1aa] mt-1">
+              <p className="text-sm text-zinc-400 mt-1">
                 총 {sendResult.summary.total}건 중 {sendResult.summary.sent}건 성공, {sendResult.summary.failed}건 실패
               </p>
             )}
@@ -351,7 +351,7 @@ export default function NotificationComposePage() {
       )}
 
       {/* Channel Selection */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
         <Label className="text-[#fafafa]">발송 채널</Label>
         <div className="flex gap-4">
           <button
@@ -361,16 +361,16 @@ export default function NotificationComposePage() {
               'flex-1 p-4 rounded-lg border-2 transition-all',
               channel === 'email'
                 ? 'border-blue-500 bg-blue-500/10'
-                : 'border-[#262626] bg-[#0a0a0a] hover:border-[#3f3f46]'
+                : 'border-zinc-800 bg-zinc-950 hover:border-zinc-600'
             )}
           >
             <Mail className={cn(
               'w-6 h-6 mx-auto mb-2',
-              channel === 'email' ? 'text-blue-400' : 'text-[#a1a1aa]'
+              channel === 'email' ? 'text-blue-400' : 'text-zinc-400'
             )} />
             <p className={cn(
               'font-medium',
-              channel === 'email' ? 'text-white' : 'text-[#a1a1aa]'
+              channel === 'email' ? 'text-zinc-100' : 'text-zinc-400'
             )}>
               이메일
             </p>
@@ -382,26 +382,26 @@ export default function NotificationComposePage() {
               'flex-1 p-4 rounded-lg border-2 transition-all',
               channel === 'sms'
                 ? 'border-green-500 bg-green-500/10'
-                : 'border-[#262626] bg-[#0a0a0a] hover:border-[#3f3f46]'
+                : 'border-zinc-800 bg-zinc-950 hover:border-zinc-600'
             )}
           >
             <MessageSquare className={cn(
               'w-6 h-6 mx-auto mb-2',
-              channel === 'sms' ? 'text-green-400' : 'text-[#a1a1aa]'
+              channel === 'sms' ? 'text-green-400' : 'text-zinc-400'
             )} />
             <p className={cn(
               'font-medium',
-              channel === 'sms' ? 'text-white' : 'text-[#a1a1aa]'
+              channel === 'sms' ? 'text-zinc-100' : 'text-zinc-400'
             )}>
               SMS
             </p>
-            <p className="text-xs text-[#52525b] mt-1">(설정 필요)</p>
+            <p className="text-xs text-zinc-500 mt-1">(설정 필요)</p>
           </button>
         </div>
       </div>
 
       {/* Notification Type */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
         <Label className="text-[#fafafa]">알림 유형</Label>
         <Select
           value={notificationType}
@@ -410,11 +410,11 @@ export default function NotificationComposePage() {
           <SelectTrigger className={inputClassName}>
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-[#1a1a1a] border-[#262626]">
-            <SelectItem value="general_notice" className="text-white">
+          <SelectContent className="bg-zinc-900 border-zinc-800">
+            <SelectItem value="general_notice" className="text-zinc-100">
               일반 공지
             </SelectItem>
-            <SelectItem value="exhibition_invite" className="text-white">
+            <SelectItem value="exhibition_invite" className="text-zinc-100">
               전시 초대
             </SelectItem>
           </SelectContent>
@@ -422,14 +422,14 @@ export default function NotificationComposePage() {
       </div>
 
       {/* Recipients */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
         <div className="flex items-center justify-between">
           <Label className="text-[#fafafa]">수신자</Label>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setRecipientDialogOpen(true)}
-            className="bg-transparent border-[#262626] text-white hover:bg-[#262626]"
+            className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
           >
             <Users className="w-4 h-4 mr-2" />
             수신자 선택
@@ -437,13 +437,13 @@ export default function NotificationComposePage() {
         </div>
 
         {selectedRecipients.length === 0 ? (
-          <div className="p-4 rounded-lg bg-[#0a0a0a] border border-[#262626] text-center">
-            <Users className="w-8 h-8 text-[#52525b] mx-auto mb-2" />
-            <p className="text-[#a1a1aa] text-sm">수신자를 선택해주세요.</p>
+          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-center">
+            <Users className="w-8 h-8 text-zinc-500 mx-auto mb-2" />
+            <p className="text-zinc-400 text-sm">수신자를 선택해주세요.</p>
           </div>
         ) : (
           <div className="space-y-2">
-            <p className="text-sm text-[#a1a1aa]">
+            <p className="text-sm text-zinc-400">
               {selectedRecipients.length}명 선택됨
               {channel === 'email' && (
                 <> ({selectedRecipients.filter(r => r.email).length}명 이메일 발송 가능)</>
@@ -458,7 +458,7 @@ export default function NotificationComposePage() {
                   key={recipient.id}
                   className={cn(
                     'inline-flex items-center gap-1 px-2 py-1 rounded-full text-sm',
-                    'bg-[#262626] text-white'
+                    'bg-zinc-800 text-zinc-100'
                   )}
                 >
                   {recipient.isVip && <Crown className="w-3 h-3 text-[#D4AF37]" />}
@@ -466,14 +466,14 @@ export default function NotificationComposePage() {
                   <button
                     type="button"
                     onClick={() => removeRecipient(recipient.id)}
-                    className="ml-1 text-[#a1a1aa] hover:text-white"
+                    className="ml-1 text-zinc-400 hover:text-zinc-100"
                   >
                     <X className="w-3 h-3" />
                   </button>
                 </span>
               ))}
               {selectedRecipients.length > 10 && (
-                <span className="px-2 py-1 text-sm text-[#a1a1aa]">
+                <span className="px-2 py-1 text-sm text-zinc-400">
                   외 {selectedRecipients.length - 10}명
                 </span>
               )}
@@ -484,11 +484,11 @@ export default function NotificationComposePage() {
 
       {/* Exhibition Details (if exhibition invite) */}
       {notificationType === 'exhibition_invite' && (
-        <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
           <Label className="text-[#fafafa]">전시 정보</Label>
 
           <div className="space-y-2">
-            <Label className="text-[#a1a1aa] text-sm">전시 제목</Label>
+            <Label className="text-zinc-400 text-sm">전시 제목</Label>
             <Input
               value={exhibitionTitle}
               onChange={(e) => setExhibitionTitle(e.target.value)}
@@ -499,7 +499,7 @@ export default function NotificationComposePage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-[#a1a1aa] text-sm">일시</Label>
+              <Label className="text-zinc-400 text-sm">일시</Label>
               <Input
                 value={exhibitionDate}
                 onChange={(e) => setExhibitionDate(e.target.value)}
@@ -508,7 +508,7 @@ export default function NotificationComposePage() {
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-[#a1a1aa] text-sm">장소</Label>
+              <Label className="text-zinc-400 text-sm">장소</Label>
               <Input
                 value={exhibitionVenue}
                 onChange={(e) => setExhibitionVenue(e.target.value)}
@@ -519,7 +519,7 @@ export default function NotificationComposePage() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-[#a1a1aa] text-sm">참석 확인 링크 (선택)</Label>
+            <Label className="text-zinc-400 text-sm">참석 확인 링크 (선택)</Label>
             <Input
               value={rsvpLink}
               onChange={(e) => setRsvpLink(e.target.value)}
@@ -531,7 +531,7 @@ export default function NotificationComposePage() {
       )}
 
       {/* Content */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
         {channel === 'email' && (
           <div className="space-y-2">
             <Label className="text-[#fafafa]">제목 <span className="text-red-400">*</span></Label>
@@ -561,7 +561,7 @@ export default function NotificationComposePage() {
         <Link href="/admin/notifications">
           <Button
             variant="outline"
-            className="bg-transparent border-[#262626] text-white hover:bg-[#262626]"
+            className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
           >
             취소
           </Button>
@@ -587,7 +587,7 @@ export default function NotificationComposePage() {
 
       {/* Recipient Selection Dialog */}
       <Dialog open={recipientDialogOpen} onOpenChange={setRecipientDialogOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-[#262626] text-white max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100 max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
           <DialogHeader>
             <DialogTitle>수신자 선택</DialogTitle>
           </DialogHeader>
@@ -596,7 +596,7 @@ export default function NotificationComposePage() {
             {/* Search and Filters */}
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#52525b]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
                 <Input
                   placeholder="이름, 이메일, 회사로 검색..."
                   value={searchQuery}
@@ -606,13 +606,13 @@ export default function NotificationComposePage() {
               </div>
 
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger className="w-[140px] bg-[#0a0a0a] border-[#262626] text-white">
+                <SelectTrigger className="w-[140px] bg-zinc-950 border-zinc-800 text-zinc-100">
                   <SelectValue placeholder="카테고리" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#1a1a1a] border-[#262626]">
-                  <SelectItem value="all" className="text-white">전체</SelectItem>
+                <SelectContent className="bg-zinc-900 border-zinc-800">
+                  <SelectItem value="all" className="text-zinc-100">전체</SelectItem>
                   {categories.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.id} className="text-white">
+                    <SelectItem key={cat.id} value={cat.id} className="text-zinc-100">
                       {cat.name}
                     </SelectItem>
                   ))}
@@ -625,8 +625,8 @@ export default function NotificationComposePage() {
                 onClick={() => setVipOnly(!vipOnly)}
                 className={cn(
                   vipOnly
-                    ? 'bg-gradient-to-r from-[#D4AF37] via-[#F5D67B] to-[#B8960C] text-[#1a1a1a] border-0'
-                    : 'bg-transparent border-[#262626] text-white hover:bg-[#262626]'
+                    ? 'bg-[#D4AF37] text-black border-0'
+                    : 'bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800'
                 )}
               >
                 <Crown className="w-4 h-4" />
@@ -635,37 +635,37 @@ export default function NotificationComposePage() {
 
             {/* Actions */}
             <div className="flex justify-between items-center">
-              <p className="text-sm text-[#a1a1aa]">
+              <p className="text-sm text-zinc-400">
                 {selectedRecipients.length}명 선택됨
               </p>
               <Button
                 variant="link"
                 size="sm"
                 onClick={selectAllVisible}
-                className="text-[#a1a1aa] hover:text-white"
+                className="text-zinc-400 hover:text-zinc-100"
               >
                 표시된 연락처 모두 선택
               </Button>
             </div>
 
             {/* Contact List */}
-            <div className="border border-[#262626] rounded-lg overflow-hidden max-h-[400px] overflow-y-auto">
+            <div className="border border-zinc-800 rounded-lg overflow-hidden max-h-[400px] overflow-y-auto">
               {loadingContacts ? (
                 <div className="p-4 space-y-3">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <Skeleton className="w-5 h-5 rounded bg-[#262626]" />
-                      <Skeleton className="h-5 w-32 bg-[#262626]" />
-                      <Skeleton className="h-4 w-40 bg-[#262626] ml-auto" />
+                      <Skeleton className="w-5 h-5 rounded bg-zinc-800" />
+                      <Skeleton className="h-5 w-32 bg-zinc-800" />
+                      <Skeleton className="h-4 w-40 bg-zinc-800 ml-auto" />
                     </div>
                   ))}
                 </div>
               ) : contacts.length === 0 ? (
-                <div className="p-8 text-center text-[#a1a1aa]">
+                <div className="p-8 text-center text-zinc-400">
                   검색 결과가 없습니다.
                 </div>
               ) : (
-                <div className="divide-y divide-[#262626]">
+                <div className="divide-y divide-zinc-800">
                   {contacts.map((contact) => {
                     const isSelected = selectedRecipients.some(r => r.id === contact.id)
                     const hasValidContact = channel === 'email' ? !!contact.email : !!contact.phone
@@ -674,7 +674,7 @@ export default function NotificationComposePage() {
                       <label
                         key={contact.id}
                         className={cn(
-                          'flex items-center gap-3 p-3 cursor-pointer hover:bg-[#262626]/50 transition-colors',
+                          'flex items-center gap-3 p-3 cursor-pointer hover:bg-zinc-800/50 transition-colors',
                           !hasValidContact && 'opacity-50 cursor-not-allowed'
                         )}
                       >
@@ -682,17 +682,17 @@ export default function NotificationComposePage() {
                           checked={isSelected}
                           onCheckedChange={() => hasValidContact && toggleRecipient(contact)}
                           disabled={!hasValidContact}
-                          className="border-[#3f3f46] data-[state=checked]:bg-white data-[state=checked]:text-black"
+                          className="border-zinc-700 data-[state=checked]:bg-white data-[state=checked]:text-black"
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-white font-medium truncate">
+                            <span className="text-zinc-100 font-medium truncate">
                               {contact.name}
                             </span>
                             {contact.isVip && <VipBadge isVip={true} size="sm" />}
                             <CategoryBadge category={contact.category} size="sm" />
                           </div>
-                          <p className="text-sm text-[#a1a1aa] truncate">
+                          <p className="text-sm text-zinc-400 truncate">
                             {channel === 'email'
                               ? contact.email || '이메일 없음'
                               : contact.phone || '전화번호 없음'}

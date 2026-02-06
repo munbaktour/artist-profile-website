@@ -1,34 +1,89 @@
 'use client'
 
-import { useParams, notFound } from 'next/navigation'
+import { useParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n/LanguageProvider'
-import { mockExhibitions } from '@/data/exhibitions'
-import { artistsData } from '@/data/artists'
+
+interface ExhibitionDetail {
+  id: string
+  slug: string
+  title_ko: string
+  title_en: string | null
+  artist_name_ko: string | null
+  artist_name_en: string | null
+  status: string
+  start_date: string
+  end_date: string
+  location_ko: string | null
+  location_en: string | null
+  description_ko: string | null
+  description_en: string | null
+  poster_image: string | null
+  images: string[] | null
+}
 
 export default function ExhibitionDetailPage() {
   const params = useParams()
   const { language } = useLanguage()
   const exhibitionId = params.id as string
 
-  const exhibition = mockExhibitions.find((ex) => ex.id === exhibitionId)
+  const [exhibition, setExhibition] = useState<ExhibitionDetail | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
 
-  if (!exhibition) {
-    notFound()
+  useEffect(() => {
+    const controller = new AbortController()
+
+    fetch(`/api/admin/exhibitions/${exhibitionId}`, { signal: controller.signal })
+      .then(res => {
+        if (res.status === 404) {
+          setNotFound(true)
+          return null
+        }
+        return res.json()
+      })
+      .then(data => {
+        if (data?.data) setExhibition(data.data)
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') setNotFound(true)
+      })
+      .finally(() => setLoading(false))
+
+    return () => controller.abort()
+  }, [exhibitionId])
+
+  if (loading) {
+    return (
+      <div className="pt-20 min-h-screen bg-white flex items-center justify-center">
+        <p className="text-gray-400">...</p>
+      </div>
+    )
   }
 
-  // Get artist names if artistIds exist
-  const artistNames = exhibition.artistIds
-    ?.map((id) => {
-      const artist = artistsData.find((a) => a.id === id)
-      return artist?.name[language]
-    })
-    .filter(Boolean)
-    .join(', ')
+  if (notFound || !exhibition) {
+    return (
+      <div className="pt-20 min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-500 text-lg mb-4">
+            {language === 'ko' ? '전시를 찾을 수 없습니다.' : 'Exhibition not found.'}
+          </p>
+          <Link href="/exhibition" className="text-sm text-gray-400 hover:text-gray-600">
+            {language === 'ko' ? '전시 목록으로' : 'Back to exhibitions'}
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
-  // Format date range
+  const title = language === 'ko' ? exhibition.title_ko : (exhibition.title_en || exhibition.title_ko)
+  const location = language === 'ko' ? (exhibition.location_ko || '') : (exhibition.location_en || exhibition.location_ko || '')
+  const description = language === 'ko' ? (exhibition.description_ko || '') : (exhibition.description_en || exhibition.description_ko || '')
+  const artistName = language === 'ko' ? (exhibition.artist_name_ko || '') : (exhibition.artist_name_en || exhibition.artist_name_ko || '')
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr)
     return date.toLocaleDateString(language === 'ko' ? 'ko-KR' : 'en-US', {
@@ -63,21 +118,53 @@ export default function ExhibitionDetailPage() {
       </div>
 
       {/* Main Image */}
-      <section className="relative w-full aspect-[16/9] max-h-[70vh] bg-gray-100">
-        <Image
-          src={exhibition.posterImage}
-          alt={exhibition.title[language]}
-          fill
-          className="object-contain"
-          priority
-        />
-      </section>
+      {exhibition.poster_image && (
+        <section className="relative w-full aspect-[16/9] max-h-[70vh] bg-gray-100">
+          <Image
+            src={exhibition.poster_image}
+            alt={title}
+            fill
+            className="object-contain"
+            priority
+          />
+        </section>
+      )}
+
+      {/* Exhibition Info */}
+      {(artistName || description || location) && (
+        <section className="px-6 py-12">
+          <div className="max-w-[800px] mx-auto space-y-6">
+            <h1 className="text-3xl font-light tracking-wider">{title}</h1>
+            {artistName && (
+              <div>
+                <p className="text-sm text-gray-500 mb-1">{labels.artist[language]}</p>
+                <p className="text-lg">{artistName}</p>
+              </div>
+            )}
+            <div>
+              <p className="text-sm text-gray-500 mb-1">{labels.period[language]}</p>
+              <p>{formatDate(exhibition.start_date)} - {formatDate(exhibition.end_date)}</p>
+            </div>
+            {location && (
+              <div>
+                <p className="text-sm text-gray-500 mb-1">{labels.location[language]}</p>
+                <p>{location}</p>
+              </div>
+            )}
+            {description && (
+              <div>
+                <p className="text-sm text-gray-500 mb-1">{labels.about[language]}</p>
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line">{description}</p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Installation Views Gallery */}
       {exhibition.images && exhibition.images.length > 0 && (
         <section className="px-6 py-12 bg-gray-50">
           <div className="max-w-[1440px] mx-auto">
-            {/* Section Title */}
             <div className="flex items-center gap-4 mb-8">
               <div className="h-px bg-gray-300 flex-1" />
               <h2 className="text-lg font-medium tracking-wide text-gray-800">
@@ -86,7 +173,6 @@ export default function ExhibitionDetailPage() {
               <div className="h-px bg-gray-300 flex-1" />
             </div>
 
-            {/* Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {exhibition.images.map((image, index) => (
                 <div
@@ -95,7 +181,7 @@ export default function ExhibitionDetailPage() {
                 >
                   <Image
                     src={image}
-                    alt={`${exhibition.title[language]} - ${index + 1}`}
+                    alt={`${title} - ${index + 1}`}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />

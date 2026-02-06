@@ -101,7 +101,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-12 bg-[#262626] rounded animate-pulse"
+            className="h-12 bg-zinc-800 rounded animate-pulse"
           />
         ))}
       </div>
@@ -116,7 +116,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
           variant="outline"
           size="sm"
           onClick={() => window.location.reload()}
-          className="text-[#a1a1aa] border-[#262626]"
+          className="text-zinc-400 border-zinc-800"
         >
           다시 시도
         </Button>
@@ -128,25 +128,25 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
     <div className="space-y-4">
       {admins.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="p-3 rounded-full bg-[#262626] mb-4">
-            <UserPlus className="w-6 h-6 text-[#52525b]" />
+          <div className="p-3 rounded-full bg-zinc-800 mb-4">
+            <UserPlus className="w-6 h-6 text-zinc-500" />
           </div>
-          <p className="text-[#a1a1aa] mb-1">등록된 관리자가 없습니다</p>
-          <p className="text-sm text-[#52525b]">
+          <p className="text-zinc-400 mb-1">등록된 관리자가 없습니다</p>
+          <p className="text-sm text-zinc-500">
             관리자를 초대하여 시스템을 함께 관리하세요.
           </p>
         </div>
       ) : (
-        <div className="rounded-md border border-[#262626] overflow-hidden">
+        <div className="rounded-md border border-zinc-800 overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="border-[#262626] hover:bg-transparent">
-                <TableHead className="text-[#a1a1aa]">이메일</TableHead>
-                <TableHead className="text-[#a1a1aa]">이름</TableHead>
-                <TableHead className="text-[#a1a1aa]">역할</TableHead>
-                <TableHead className="text-[#a1a1aa]">가입일</TableHead>
+              <TableRow className="border-zinc-800 hover:bg-transparent">
+                <TableHead className="text-zinc-400">이메일</TableHead>
+                <TableHead className="text-zinc-400">이름</TableHead>
+                <TableHead className="text-zinc-400">역할</TableHead>
+                <TableHead className="text-zinc-400">가입일</TableHead>
                 {canEdit && (
-                  <TableHead className="text-[#a1a1aa] w-[50px]"></TableHead>
+                  <TableHead className="text-zinc-400 w-[50px]"></TableHead>
                 )}
               </TableRow>
             </TableHeader>
@@ -158,11 +158,11 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                   <TableRow
                     key={admin.id}
                     className={cn(
-                      'border-[#262626] hover:bg-[#262626]/50',
+                      'border-zinc-800 hover:bg-zinc-800/50',
                       isCurrentUser && 'bg-blue-500/5'
                     )}
                   >
-                    <TableCell className="text-white font-medium">
+                    <TableCell className="text-zinc-100 font-medium">
                       <div className="flex items-center gap-2">
                         {admin.email}
                         {isCurrentUser && (
@@ -172,7 +172,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                         )}
                       </div>
                     </TableCell>
-                    <TableCell className="text-[#a1a1aa]">
+                    <TableCell className="text-zinc-400">
                       {admin.fullName || '-'}
                     </TableCell>
                     <TableCell>
@@ -185,7 +185,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                         {roleLabels[admin.role]}
                       </span>
                     </TableCell>
-                    <TableCell className="text-[#a1a1aa] text-sm">
+                    <TableCell className="text-zinc-400 text-sm">
                       {formatDate(admin.createdAt)}
                     </TableCell>
                     {canEdit && (
@@ -196,14 +196,14 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-[#a1a1aa] hover:text-white hover:bg-[#262626]"
+                                className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
                               >
                                 <MoreHorizontal className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               align="end"
-                              className="bg-[#1a1a1a] border-[#262626]"
+                              className="bg-zinc-900 border-zinc-800"
                             >
                               <DropdownMenuItem
                                 className="text-red-400 focus:text-red-400 focus:bg-red-500/10"
@@ -231,7 +231,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
       {canEdit && (
         <Button
           onClick={handleInvite}
-          className="w-full bg-[#262626] hover:bg-[#363636] text-white border border-[#363636]"
+          className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-100 border border-zinc-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           관리자 초대

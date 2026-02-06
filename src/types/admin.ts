@@ -532,3 +532,51 @@ export function dbNotificationLogToNotificationLog(
     author: db.author ? dbProfileToProfile(db.author) : undefined,
   }
 }
+
+// ============================================
+// Document Types
+// ============================================
+export interface GalleryDocument {
+  id: string
+  title: string
+  description: string | null
+  fileName: string
+  filePath: string
+  fileSize: number
+  fileType: string
+  uploadedBy: string | null
+  createdAt: string
+  updatedAt: string
+  uploader?: AdminProfile
+}
+
+export interface DbDocument {
+  id: string
+  title: string
+  description: string | null
+  file_name: string
+  file_path: string
+  file_size: number
+  file_type: string
+  uploaded_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export function dbDocumentToDocument(
+  db: DbDocument & { uploader?: DbProfile }
+): GalleryDocument {
+  return {
+    id: db.id,
+    title: db.title,
+    description: db.description,
+    fileName: db.file_name,
+    filePath: db.file_path,
+    fileSize: db.file_size,
+    fileType: db.file_type,
+    uploadedBy: db.uploaded_by,
+    createdAt: db.created_at,
+    updatedAt: db.updated_at,
+    uploader: db.uploader ? dbProfileToProfile(db.uploader) : undefined,
+  }
+}

@@ -17,16 +17,46 @@ import {
   Search,
   Loader2,
   Megaphone,
+  MessageSquare,
+  Bell,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// 타겟팅 타입
+// 메시지 타입
+type MessageType = 'alimtalk' | 'brandmessage'
+
+// 타겟팅 타입 (브랜드 메시지용)
 type TargetingType = 'M' | 'N' | 'I'
 
 const targetingOptions = [
   { value: 'M' as TargetingType, label: '전체', description: '마케팅 수신동의 유저 전체' },
   { value: 'I' as TargetingType, label: '채널 친구만', description: '채널 친구인 유저만' },
   { value: 'N' as TargetingType, label: '비친구만', description: '채널 친구가 아닌 유저만' },
+]
+
+// 알림톡 템플릿
+interface AlimtalkTemplate {
+  templateCode: string
+  templateName: string
+  templateContent: string
+  buttons?: { type: string; name: string; linkMo?: string; linkPc?: string }[]
+}
+
+// 알림톡 템플릿 목록 (NHN Cloud에서 승인된 템플릿)
+const alimtalkTemplates: AlimtalkTemplate[] = [
+  {
+    templateCode: 'exhibition_notice',
+    templateName: '전시 안내',
+    templateContent: '안녕하세요, 관훈아르떼입니다.\n\n#{전시명} 전시가 #{시작일}부터 #{종료일}까지 진행됩니다.\n\n많은 관심 부탁드립니다.',
+    buttons: [
+      { type: 'WL', name: '전시 보기', linkMo: 'https://kwanhoonarte.com/exhibition', linkPc: 'https://kwanhoonarte.com/exhibition' }
+    ]
+  },
+  {
+    templateCode: 'visit_thanks',
+    templateName: '방문 감사',
+    templateContent: '안녕하세요, 관훈아르떼입니다.\n\n#{고객명}님, 방문해 주셔서 감사합니다.\n앞으로도 좋은 전시로 찾아뵙겠습니다.',
+  },
 ]
 
 // 빠른 입력 템플릿 (브랜드 메시지용 - 자유롭게 수정 가능)
@@ -64,6 +94,11 @@ interface Category {
 }
 
 export default function MessageComposePage() {
+  // 메시지 타입 (알림톡 / 브랜드 메시지)
+  const [messageType, setMessageType] = useState<MessageType>('alimtalk')
+  const [selectedTemplate, setSelectedTemplate] = useState<AlimtalkTemplate | null>(null)
+  const [templateVariables, setTemplateVariables] = useState<Record<string, string>>({})
+
   const [recipientType, setRecipientType] = useState<RecipientType>('all')
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedContacts, setSelectedContacts] = useState<string[]>([])
@@ -81,6 +116,40 @@ export default function MessageComposePage() {
   const [isSending, setIsSending] = useState(false)
   const [totalContactCount, setTotalContactCount] = useState(0)
   const [categoryContactCounts, setCategoryContactCounts] = useState<Record<string, number>>({})
+
+  // 알림톡 템플릿에서 변수 추출
+  const extractVariables = (templateContent: string): string[] => {
+    const regex = /#\{([^}]+)\}/g
+    const variables: string[] = []
+    let match
+    while ((match = regex.exec(templateContent)) !== null) {
+      if (!variables.includes(match[1])) {
+        variables.push(match[1])
+      }
+    }
+    return variables
+  }
+
+  // 템플릿 선택 시 변수 초기화
+  const handleTemplateSelect = (template: AlimtalkTemplate) => {
+    setSelectedTemplate(template)
+    const vars = extractVariables(template.templateContent)
+    const initialVars: Record<string, string> = {}
+    vars.forEach(v => { initialVars[v] = '' })
+    setTemplateVariables(initialVars)
+  }
+
+  // 변수가 치환된 최종 메시지
+  const getFinalContent = (): string => {
+    if (messageType === 'alimtalk' && selectedTemplate) {
+      let finalContent = selectedTemplate.templateContent
+      Object.entries(templateVariables).forEach(([key, value]) => {
+        finalContent = finalContent.replace(new RegExp(`#\\{${key}\\}`, 'g'), value || `#{${key}}`)
+      })
+      return finalContent
+    }
+    return content
+  }
 
   // 카테고리 목록 로드
   const loadCategories = useCallback(async () => {
@@ -248,17 +317,33 @@ export default function MessageComposePage() {
     setIsSending(true)
 
     try {
+      const requestBody: Record<string, unknown> = {
+        recipientIds,
+        messageType,
+      }
+
+      if (messageType === 'alimtalk') {
+        // 알림톡: 템플릿 코드와 변수 전송
+        if (!selectedTemplate) {
+          alert('템플릿을 선택해주세요.')
+          setIsSending(false)
+          return
+        }
+        requestBody.templateCode = selectedTemplate.templateCode
+        requestBody.templateVariables = templateVariables
+      } else {
+        // 브랜드 메시지: 본문, 이미지, 버튼, 타겟팅 전송
+        requestBody.content = content
+        requestBody.imageUrl = imageUrl
+        requestBody.buttonText = buttonText
+        requestBody.buttonLink = buttonLink
+        requestBody.targeting = targeting
+      }
+
       const res = await fetch('/api/admin/messages/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          recipientIds,
-          content,
-          imageUrl,
-          buttonText,
-          buttonLink,
-          targeting,
-        }),
+        body: JSON.stringify(requestBody),
       })
 
       const result = await res.json()
@@ -312,11 +397,79 @@ export default function MessageComposePage() {
           <ArrowLeft className="w-5 h-5 text-zinc-400" />
         </Link>
         <div>
-          <h1 className="text-lg font-semibold text-zinc-100">카카오톡 브랜드 메시지 발송</h1>
+          <h1 className="text-lg font-semibold text-zinc-100">카카오톡 메시지 발송</h1>
           <p className="text-zinc-500 text-sm mt-0.5">
-            마케팅 수신동의 유저에게 브랜드 메시지를 발송합니다.
+            알림톡 또는 브랜드 메시지를 발송합니다.
           </p>
         </div>
+      </div>
+
+      {/* 메시지 타입 선택 */}
+      <div className="grid grid-cols-2 gap-4">
+        <button
+          onClick={() => {
+            setMessageType('alimtalk')
+            setSelectedTemplate(null)
+            setTemplateVariables({})
+          }}
+          className={cn(
+            'p-4 rounded-lg border transition-all',
+            messageType === 'alimtalk'
+              ? 'bg-zinc-800 border-[#D4AF37] ring-1 ring-[#D4AF37]'
+              : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+          )}
+        >
+          <div className="flex items-center gap-3">
+            <div className={cn(
+              'w-10 h-10 rounded-lg flex items-center justify-center',
+              messageType === 'alimtalk' ? 'bg-[#D4AF37]/20' : 'bg-zinc-800'
+            )}>
+              <Bell className={cn(
+                'w-5 h-5',
+                messageType === 'alimtalk' ? 'text-[#D4AF37]' : 'text-zinc-500'
+              )} />
+            </div>
+            <div className="text-left">
+              <p className={cn(
+                'font-medium',
+                messageType === 'alimtalk' ? 'text-zinc-100' : 'text-zinc-400'
+              )}>알림톡</p>
+              <p className="text-xs text-zinc-500">승인된 템플릿 발송</p>
+            </div>
+          </div>
+        </button>
+
+        <button
+          onClick={() => {
+            setMessageType('brandmessage')
+            setContent('')
+          }}
+          className={cn(
+            'p-4 rounded-lg border transition-all',
+            messageType === 'brandmessage'
+              ? 'bg-zinc-800 border-[#D4AF37] ring-1 ring-[#D4AF37]'
+              : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+          )}
+        >
+          <div className="flex items-center gap-3">
+            <div className={cn(
+              'w-10 h-10 rounded-lg flex items-center justify-center',
+              messageType === 'brandmessage' ? 'bg-[#D4AF37]/20' : 'bg-zinc-800'
+            )}>
+              <MessageSquare className={cn(
+                'w-5 h-5',
+                messageType === 'brandmessage' ? 'text-[#D4AF37]' : 'text-zinc-500'
+              )} />
+            </div>
+            <div className="text-left">
+              <p className={cn(
+                'font-medium',
+                messageType === 'brandmessage' ? 'text-zinc-100' : 'text-zinc-400'
+              )}>브랜드 메시지</p>
+              <p className="text-xs text-zinc-500">자유 형식 발송</p>
+            </div>
+          </div>
+        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -436,103 +589,175 @@ export default function MessageComposePage() {
 
           {/* 메시지 내용 */}
           <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
-            <h2 className="text-sm font-medium text-zinc-100">메시지 내용</h2>
+            <h2 className="text-sm font-medium text-zinc-100">
+              {messageType === 'alimtalk' ? '알림톡 템플릿' : '메시지 내용'}
+            </h2>
 
-            <div className="space-y-4">
-              {/* 빠른 입력 */}
-              <div className="space-y-2">
-                <Label className="text-zinc-300 text-sm">빠른 입력</Label>
-                <div className="flex flex-wrap gap-2">
-                  {quickTemplates.map(t => (
-                    <button
-                      key={t.id}
-                      onClick={() => applyQuickTemplate(t.content)}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
-                    >
-                      {t.label}
-                    </button>
-                  ))}
+            {messageType === 'alimtalk' ? (
+              /* 알림톡: 템플릿 선택 및 변수 입력 */
+              <div className="space-y-4">
+                {/* 템플릿 선택 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">템플릿 선택</Label>
+                  <div className="grid gap-2">
+                    {alimtalkTemplates.map(template => (
+                      <button
+                        key={template.templateCode}
+                        onClick={() => handleTemplateSelect(template)}
+                        className={cn(
+                          'p-3 rounded-lg border text-left transition-all',
+                          selectedTemplate?.templateCode === template.templateCode
+                            ? 'bg-zinc-800 border-[#D4AF37] ring-1 ring-[#D4AF37]'
+                            : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
+                        )}
+                      >
+                        <p className={cn(
+                          'font-medium text-sm',
+                          selectedTemplate?.templateCode === template.templateCode
+                            ? 'text-zinc-100'
+                            : 'text-zinc-400'
+                        )}>
+                          {template.templateName}
+                        </p>
+                        <p className="text-xs text-zinc-500 mt-1 line-clamp-2">
+                          {template.templateContent}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* 메시지 본문 */}
-              <div className="space-y-2">
-                <Label className="text-zinc-300 text-sm">본문</Label>
-                <Textarea
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="메시지 내용을 입력하세요..."
-                  rows={8}
-                  className={cn(inputClassName, 'resize-none')}
-                />
-                <p className="text-xs text-zinc-500 text-right">
-                  {content.length} / 1,000자
-                </p>
-              </div>
+                {/* 변수 입력 */}
+                {selectedTemplate && Object.keys(templateVariables).length > 0 && (
+                  <div className="space-y-3">
+                    <Label className="text-zinc-300 text-sm">변수 입력</Label>
+                    {Object.keys(templateVariables).map(varName => (
+                      <div key={varName} className="space-y-1">
+                        <Label className="text-xs text-zinc-500">{varName}</Label>
+                        <Input
+                          value={templateVariables[varName]}
+                          onChange={(e) => setTemplateVariables(prev => ({
+                            ...prev,
+                            [varName]: e.target.value
+                          }))}
+                          placeholder={`#{${varName}} 값 입력`}
+                          className={inputClassName}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-              {/* 이미지 URL */}
-              <div className="space-y-2">
-                <Label className="text-zinc-300 text-sm flex items-center gap-2">
-                  <Image className="w-3.5 h-3.5" />
-                  이미지 (선택)
-                </Label>
-                <Input
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="이미지 URL을 입력하세요"
-                  className={inputClassName}
-                />
+                {/* 최종 메시지 미리보기 */}
+                {selectedTemplate && (
+                  <div className="space-y-2">
+                    <Label className="text-zinc-300 text-sm">최종 메시지</Label>
+                    <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800">
+                      <p className="text-sm text-zinc-300 whitespace-pre-wrap">
+                        {getFinalContent()}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
+            ) : (
+              /* 브랜드 메시지: 자유 형식 입력 */
+              <div className="space-y-4">
+                {/* 빠른 입력 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">빠른 입력</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {quickTemplates.map(t => (
+                      <button
+                        key={t.id}
+                        onClick={() => applyQuickTemplate(t.content)}
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
+                      >
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-              {/* 버튼 */}
-              <div className="space-y-2">
-                <Label className="text-zinc-300 text-sm flex items-center gap-2">
-                  <LinkIcon className="w-3.5 h-3.5" />
-                  버튼 (선택)
-                </Label>
-                <div className="grid grid-cols-2 gap-3">
+                {/* 메시지 본문 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">본문</Label>
+                  <Textarea
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="메시지 내용을 입력하세요..."
+                    rows={8}
+                    className={cn(inputClassName, 'resize-none')}
+                  />
+                  <p className="text-xs text-zinc-500 text-right">
+                    {content.length} / 1,000자
+                  </p>
+                </div>
+
+                {/* 이미지 URL */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm flex items-center gap-2">
+                    <Image className="w-3.5 h-3.5" />
+                    이미지 (선택)
+                  </Label>
                   <Input
-                    value={buttonText}
-                    onChange={(e) => setButtonText(e.target.value)}
-                    placeholder="버튼 텍스트"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="이미지 URL을 입력하세요"
                     className={inputClassName}
                   />
-                  <Input
-                    value={buttonLink}
-                    onChange={(e) => setButtonLink(e.target.value)}
-                    placeholder="버튼 URL"
-                    className={inputClassName}
-                  />
                 </div>
-              </div>
 
-              {/* 발송 대상 타겟팅 */}
-              <div className="space-y-2">
-                <Label className="text-zinc-300 text-sm flex items-center gap-2">
-                  <Megaphone className="w-3.5 h-3.5" />
-                  발송 타겟팅
-                </Label>
-                <div className="flex flex-wrap gap-2">
-                  {targetingOptions.map(option => (
-                    <button
-                      key={option.value}
-                      onClick={() => setTargeting(option.value)}
-                      className={cn(
-                        'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
-                        targeting === option.value
-                          ? 'bg-[#D4AF37] text-black'
-                          : 'bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700'
-                      )}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
+                {/* 버튼 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm flex items-center gap-2">
+                    <LinkIcon className="w-3.5 h-3.5" />
+                    버튼 (선택)
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
+                      value={buttonText}
+                      onChange={(e) => setButtonText(e.target.value)}
+                      placeholder="버튼 텍스트"
+                      className={inputClassName}
+                    />
+                    <Input
+                      value={buttonLink}
+                      onChange={(e) => setButtonLink(e.target.value)}
+                      placeholder="버튼 URL"
+                      className={inputClassName}
+                    />
+                  </div>
                 </div>
-                <p className="text-xs text-zinc-500">
-                  {targetingOptions.find(o => o.value === targeting)?.description}
-                </p>
+
+                {/* 발송 대상 타겟팅 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm flex items-center gap-2">
+                    <Megaphone className="w-3.5 h-3.5" />
+                    발송 타겟팅
+                  </Label>
+                  <div className="flex flex-wrap gap-2">
+                    {targetingOptions.map(option => (
+                      <button
+                        key={option.value}
+                        onClick={() => setTargeting(option.value)}
+                        className={cn(
+                          'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
+                          targeting === option.value
+                            ? 'bg-[#D4AF37] text-black'
+                            : 'bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700'
+                        )}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-zinc-500">
+                    {targetingOptions.find(o => o.value === targeting)?.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* 발송 버튼 */}
@@ -547,7 +772,11 @@ export default function MessageComposePage() {
             </Link>
             <Button
               onClick={handleSend}
-              disabled={!content || isSending}
+              disabled={
+                isSending ||
+                (messageType === 'alimtalk' && !selectedTemplate) ||
+                (messageType === 'brandmessage' && !content)
+              }
               className="flex-1 bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium"
             >
               {isSending ? (
@@ -558,23 +787,39 @@ export default function MessageComposePage() {
               ) : (
                 <span className="flex items-center gap-2">
                   <Send className="w-4 h-4" />
-                  카카오톡 발송
+                  {messageType === 'alimtalk' ? '알림톡 발송' : '브랜드 메시지 발송'}
                 </span>
               )}
             </Button>
           </div>
 
-          {/* NHN Cloud 안내 */}
+          {/* 발송 안내 */}
           <div className="p-4 rounded-lg bg-amber-900/20 border border-amber-800/30 space-y-1">
             <p className="text-sm text-amber-400 font-medium">
-              브랜드 메시지 발송 안내
+              {messageType === 'alimtalk' ? '알림톡 발송 안내' : '브랜드 메시지 발송 안내'}
             </p>
-            <p className="text-xs text-amber-400/80">
-              • 마케팅 수신동의 유저에게 채널 친구 여부와 관계없이 발송 가능
-            </p>
-            <p className="text-xs text-amber-400/80">
-              • 발송 시간: 08:00 ~ 20:50 (야간 발송 제한)
-            </p>
+            {messageType === 'alimtalk' ? (
+              <>
+                <p className="text-xs text-amber-400/80">
+                  • 승인된 템플릿만 발송 가능 (NHN Cloud 승인 필요)
+                </p>
+                <p className="text-xs text-amber-400/80">
+                  • 전화번호가 등록된 모든 연락처에 발송 가능
+                </p>
+                <p className="text-xs text-amber-400/80">
+                  • 24시간 발송 가능
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-xs text-amber-400/80">
+                  • 마케팅 수신동의 유저에게 채널 친구 여부와 관계없이 발송 가능
+                </p>
+                <p className="text-xs text-amber-400/80">
+                  • 발송 시간: 08:00 ~ 20:50 (야간 발송 제한)
+                </p>
+              </>
+            )}
           </div>
         </div>
 
@@ -613,7 +858,10 @@ export default function MessageComposePage() {
                       {/* 텍스트 영역 */}
                       <div className="p-3">
                         <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
-                          {content || '메시지 내용이 여기에 표시됩니다.'}
+                          {messageType === 'alimtalk'
+                            ? (selectedTemplate ? getFinalContent() : '템플릿을 선택하세요.')
+                            : (content || '메시지 내용이 여기에 표시됩니다.')
+                          }
                         </p>
                       </div>
 
@@ -637,27 +885,41 @@ export default function MessageComposePage() {
               <div className="space-y-2 pt-2">
                 <div className="flex justify-between text-xs">
                   <span className="text-zinc-500">채널</span>
-                  <span className="text-zinc-400">브랜드 메시지</span>
+                  <span className="text-zinc-400">
+                    {messageType === 'alimtalk' ? '알림톡' : '브랜드 메시지'}
+                  </span>
                 </div>
+                {messageType === 'alimtalk' && (
+                  <div className="flex justify-between text-xs">
+                    <span className="text-zinc-500">템플릿</span>
+                    <span className="text-zinc-400">
+                      {selectedTemplate?.templateName || '미선택'}
+                    </span>
+                  </div>
+                )}
                 <div className="flex justify-between text-xs">
                   <span className="text-zinc-500">대상</span>
                   <span className="text-zinc-400">{getRecipientCount()}명</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-zinc-500">타겟팅</span>
-                  <span className="text-amber-400">
-                    {targetingOptions.find(o => o.value === targeting)?.label}
-                  </span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-zinc-500">글자 수</span>
-                  <span className={cn(
-                    'text-zinc-400',
-                    content.length > 1000 && 'text-red-400'
-                  )}>
-                    {content.length}자
-                  </span>
-                </div>
+                {messageType === 'brandmessage' && (
+                  <>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-zinc-500">타겟팅</span>
+                      <span className="text-amber-400">
+                        {targetingOptions.find(o => o.value === targeting)?.label}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-zinc-500">글자 수</span>
+                      <span className={cn(
+                        'text-zinc-400',
+                        content.length > 1000 && 'text-red-400'
+                      )}>
+                        {content.length}자
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

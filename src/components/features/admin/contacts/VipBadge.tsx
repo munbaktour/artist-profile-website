@@ -37,9 +37,8 @@ export function VipBadge({
     <span
       className={cn(
         'inline-flex items-center font-semibold rounded-full',
-        'bg-gradient-to-r from-[#D4AF37] via-[#F5D67B] to-[#B8960C]',
-        'text-[#1a1a1a]',
-        'shadow-sm',
+        'bg-[#D4AF37]',
+        'text-black',
         sizeStyles[size],
         className
       )}
@@ -65,8 +64,7 @@ export function VipIndicator({ isVip, className }: VipIndicatorProps) {
     <span
       className={cn(
         'inline-block w-2 h-2 rounded-full',
-        'bg-gradient-to-r from-[#D4AF37] to-[#B8960C]',
-        'shadow-sm',
+        'bg-[#D4AF37]',
         className
       )}
       title="VIP"
@@ -106,8 +104,8 @@ const tierStyles: Record<VipTier, { bg: string; text: string; label: string }> =
     label: 'Bronze',
   },
   standard: {
-    bg: 'bg-[#262626]',
-    text: 'text-[#a1a1aa]',
+    bg: 'bg-zinc-800',
+    text: 'text-zinc-400',
     label: 'Standard',
   },
 }

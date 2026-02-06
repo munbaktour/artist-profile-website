@@ -256,7 +256,97 @@ CREATE INDEX IF NOT EXISTS notifications_created_at_idx ON notifications (create
 CREATE INDEX IF NOT EXISTS notifications_status_idx ON notifications (status);
 
 -- ============================================
--- 7. UPDATED_AT TRIGGER FUNCTION
+-- 7. EXHIBITIONS (전시)
+-- ============================================
+CREATE TABLE IF NOT EXISTS exhibitions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  slug TEXT NOT NULL UNIQUE,
+  title_ko TEXT NOT NULL,
+  title_en TEXT,
+  artist_name_ko TEXT,
+  artist_name_en TEXT,
+  status TEXT DEFAULT 'upcoming' CHECK (status IN ('current', 'upcoming', 'past')),
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  location_ko TEXT DEFAULT '관훈아르떼',
+  location_en TEXT DEFAULT 'KWANHOON ARTE',
+  description_ko TEXT,
+  description_en TEXT,
+  poster_image TEXT,
+  images TEXT[] DEFAULT '{}',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable Row Level Security
+ALTER TABLE exhibitions ENABLE ROW LEVEL SECURITY;
+
+-- 누구나 조회 가능 (공개 전시 페이지)
+CREATE POLICY "Anyone can view exhibitions"
+  ON exhibitions FOR SELECT
+  TO anon, authenticated
+  USING (true);
+
+-- 인증된 관리자만 CUD
+CREATE POLICY "Authenticated users can insert exhibitions"
+  ON exhibitions FOR INSERT
+  TO authenticated
+  WITH CHECK (true);
+
+CREATE POLICY "Authenticated users can update exhibitions"
+  ON exhibitions FOR UPDATE
+  TO authenticated
+  USING (true);
+
+CREATE POLICY "Authenticated users can delete exhibitions"
+  ON exhibitions FOR DELETE
+  TO authenticated
+  USING (true);
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS exhibitions_status_idx ON exhibitions (status);
+CREATE INDEX IF NOT EXISTS exhibitions_start_date_idx ON exhibitions (start_date DESC);
+CREATE INDEX IF NOT EXISTS exhibitions_slug_idx ON exhibitions (slug);
+
+-- Apply updated_at trigger
+DROP TRIGGER IF EXISTS update_exhibitions_updated_at ON exhibitions;
+CREATE TRIGGER update_exhibitions_updated_at
+  BEFORE UPDATE ON exhibitions
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- ============================================
+-- 8. EXHIBITION_CHECKINS (전시 체크인)
+-- exhibition_id는 exhibitions.slug를 참조합니다.
+-- ============================================
+CREATE TABLE IF NOT EXISTS exhibition_checkins (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  exhibition_id TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  name TEXT,
+  checked_in_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable Row Level Security
+ALTER TABLE exhibition_checkins ENABLE ROW LEVEL SECURITY;
+
+-- Anyone can check in (public access for visitors)
+CREATE POLICY "Anyone can check in"
+  ON exhibition_checkins FOR INSERT
+  TO anon, authenticated
+  WITH CHECK (true);
+
+-- Only authenticated users (admins) can view checkins
+CREATE POLICY "Authenticated users can view checkins"
+  ON exhibition_checkins FOR SELECT
+  TO authenticated
+  USING (true);
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS exhibition_checkins_exhibition_id_idx ON exhibition_checkins (exhibition_id);
+CREATE INDEX IF NOT EXISTS exhibition_checkins_checked_in_at_idx ON exhibition_checkins (checked_in_at DESC);
+
+-- ============================================
+-- 9. UPDATED_AT TRIGGER FUNCTION
 -- ============================================
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -283,7 +373,40 @@ CREATE TRIGGER update_notes_updated_at
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================
--- 8. SAMPLE DATA (Optional - 테스트용 샘플 데이터)
+-- 10. MESSAGE_LOGS (카카오톡 발송 내역)
+-- ============================================
+CREATE TABLE IF NOT EXISTS message_logs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  template_id TEXT NOT NULL,
+  content TEXT NOT NULL,
+  recipient_count INTEGER NOT NULL DEFAULT 0,
+  recipient_ids UUID[] DEFAULT '{}',
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'sent', 'failed')),
+  response JSONB,
+  sent_by UUID REFERENCES profiles(id),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable Row Level Security
+ALTER TABLE message_logs ENABLE ROW LEVEL SECURITY;
+
+-- 인증된 사용자만 조회/삽입 가능
+CREATE POLICY "Authenticated users can view message_logs"
+  ON message_logs FOR SELECT
+  TO authenticated
+  USING (true);
+
+CREATE POLICY "Authenticated users can insert message_logs"
+  ON message_logs FOR INSERT
+  TO authenticated
+  WITH CHECK (true);
+
+-- Indexes
+CREATE INDEX IF NOT EXISTS message_logs_created_at_idx ON message_logs (created_at DESC);
+CREATE INDEX IF NOT EXISTS message_logs_status_idx ON message_logs (status);
+
+-- ============================================
+-- 11. SAMPLE DATA (Optional - 테스트용 샘플 데이터)
 -- ============================================
 -- 아래 주석을 해제하여 샘플 태그를 추가할 수 있습니다.
 
@@ -298,6 +421,45 @@ CREATE TRIGGER update_notes_updated_at
 --   ('서울', '#64748b', 'region'),
 --   ('부산', '#64748b', 'region'),
 --   ('해외', '#64748b', 'region');
+
+-- ============================================
+-- 11. 기존 전시 데이터 마이그레이션
+-- ============================================
+-- 아래 SQL을 실행하여 기존 전시를 추가하세요.
+
+-- INSERT INTO exhibitions (slug, title_ko, title_en, artist_name_ko, artist_name_en, status, start_date, end_date, location_ko, location_en, description_ko, description_en, poster_image, images)
+-- VALUES (
+--   'no-man-is-an-island',
+--   'No man is an island',
+--   'No man is an island',
+--   '손문일',
+--   'Son Moon Il',
+--   'current',
+--   '2025-01-09',
+--   '2025-02-28',
+--   '관훈아르떼',
+--   'KWANHOON ARTE',
+--   '손문일 작가의 개인전',
+--   'Solo Exhibition by Son Moon Il',
+--   '/images/exhibitions/no-man-is-an-island/emain.png',
+--   ARRAY[
+--     '/images/exhibitions/no-man-is-an-island/installation-view-01.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-02.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-03.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-04.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-05.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-06.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-07.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-08.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-09.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-10.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-11.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-12.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-13.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-14.jpg',
+--     '/images/exhibitions/no-man-is-an-island/installation-view-15.jpg'
+--   ]
+-- );
 
 -- ============================================
 -- 완료!

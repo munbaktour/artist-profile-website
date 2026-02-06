@@ -192,51 +192,25 @@ export default function ContactsPage() {
     setIsModalOpen(true)
   }
 
-  const getCategoryColor = (category: Category | undefined) => {
-    return category?.color || '#D4AF37'
-  }
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)',
-      }}
-    >
+    <div className="min-h-screen bg-zinc-950">
       {/* Page Header */}
-      <div
-        className="sticky top-0 z-40 px-6 py-6 mb-8"
-        style={{
-          background: 'linear-gradient(90deg, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0.9) 50%, rgba(212,175,55,0.1) 100%)',
-          borderBottom: '1px solid rgba(212,175,55,0.3)',
-          backdropFilter: 'blur(10px)',
-        }}
-      >
+      <div className="sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-800">
         <div className="max-w-[1600px] mx-auto flex justify-between items-center">
           <div>
-            <h1
-              className="text-2xl font-light tracking-[6px] mb-1"
-              style={{ color: '#D4AF37', fontFamily: "'Playfair Display', serif" }}
-            >
+            <h1 className="text-lg font-semibold text-zinc-100">
               연락처 관리
             </h1>
-            <p
-              className="text-xs tracking-[2px] uppercase"
-              style={{ color: 'rgba(212,175,55,0.7)' }}
-            >
+            <p className="text-xs text-zinc-500 mt-0.5">
               Collector & Relations Management
             </p>
           </div>
           <button
             onClick={() => router.push('/admin/contacts/new')}
-            className="flex items-center gap-2 px-6 py-3 rounded font-semibold text-sm transition-all"
-            style={{
-              background: 'linear-gradient(135deg, #D4AF37 0%, #B8960C 100%)',
-              color: '#0a0a0a',
-              boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
-            }}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4AF37] text-black text-sm font-medium hover:bg-[#C49B30] transition-colors"
           >
-            <Plus size={18} />
+            <Plus size={16} />
             새 연락처 추가
           </button>
         </div>
@@ -244,44 +218,36 @@ export default function ContactsPage() {
 
       <main className="max-w-[1600px] mx-auto px-6 pb-12">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {[
-            { label: '전체 연락처', value: stats.total, color: '#D4AF37' },
-            { label: 'VIP', value: stats.vip, color: '#FFD700' },
-            { label: '컬렉터', value: stats.collectors, color: '#E91E63' },
-            { label: '작가', value: stats.artists, color: '#9C27B0' },
+            { label: '전체 연락처', value: stats.total, icon: Users },
+            { label: 'VIP', value: stats.vip, icon: Star },
+            { label: '컬렉터', value: stats.collectors, icon: Star },
+            { label: '작가', value: stats.artists, icon: Palette },
           ].map((stat, i) => (
             <div
               key={i}
-              className="text-center p-6 rounded-lg transition-all hover:scale-[1.02]"
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(212,175,55,0.2)',
-              }}
+              className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-800"
             >
-              <div
-                className="text-4xl font-light mb-2"
-                style={{ color: stat.color }}
-              >
-                {stat.value}
-              </div>
-              <div
-                className="text-xs tracking-[1px]"
-                style={{ color: 'rgba(255,255,255,0.6)' }}
-              >
-                {stat.label}
+              <stat.icon size={20} className="flex-shrink-0 text-zinc-400" />
+              <div>
+                <div className="text-2xl font-semibold text-zinc-100">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-zinc-500 mt-0.5">
+                  {stat.label}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Search & Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="flex-1 min-w-[300px] relative">
             <Search
-              size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2"
-              style={{ color: 'rgba(212,175,55,0.5)' }}
+              size={16}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500"
             />
             <input
               type="text"
@@ -291,12 +257,7 @@ export default function ContactsPage() {
                 setSearchTerm(e.target.value)
                 setPage(1)
               }}
-              className="w-full py-3.5 pl-12 pr-4 rounded-lg text-sm outline-none transition-all"
-              style={{
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(212,175,55,0.2)',
-                color: '#f0f0f0',
-              }}
+              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-zinc-600 transition-colors"
             />
           </div>
           <button
@@ -304,38 +265,29 @@ export default function ContactsPage() {
               setShowVIPOnly(!showVIPOnly)
               setPage(1)
             }}
-            className="flex items-center gap-2 px-6 py-3.5 rounded-lg font-medium text-sm transition-all"
-            style={{
-              background: showVIPOnly
-                ? 'linear-gradient(135deg, #D4AF37 0%, #B8960C 100%)'
-                : 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(212,175,55,0.3)',
-              color: showVIPOnly ? '#0a0a0a' : '#D4AF37',
-            }}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+              showVIPOnly
+                ? 'bg-[#D4AF37] text-black'
+                : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+            }`}
           >
-            <Star size={16} fill={showVIPOnly ? '#0a0a0a' : 'none'} />
+            <Star size={14} fill={showVIPOnly ? 'currentColor' : 'none'} />
             VIP Only
           </button>
         </div>
 
         {/* Category Tabs */}
-        <div
-          className="flex flex-wrap gap-2 mb-8 pb-4"
-          style={{ borderBottom: '1px solid rgba(212,175,55,0.1)' }}
-        >
+        <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-zinc-800">
           <button
             onClick={() => {
               setSelectedCategory('all')
               setPage(1)
             }}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm transition-all"
-            style={{
-              background: selectedCategory === 'all'
-                ? 'linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.1) 100%)'
-                : 'transparent',
-              border: `1px solid ${selectedCategory === 'all' ? '#D4AF37' : 'rgba(255,255,255,0.1)'}`,
-              color: selectedCategory === 'all' ? '#D4AF37' : 'rgba(255,255,255,0.6)',
-            }}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
+              selectedCategory === 'all'
+                ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                : 'text-zinc-500 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+            }`}
           >
             <Users size={14} />
             전체
@@ -350,14 +302,11 @@ export default function ContactsPage() {
                   setSelectedCategory(cat.id)
                   setPage(1)
                 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm transition-all"
-                style={{
-                  background: isActive
-                    ? `linear-gradient(135deg, ${cat.color}22 0%, ${cat.color}11 100%)`
-                    : 'transparent',
-                  border: `1px solid ${isActive ? cat.color : 'rgba(255,255,255,0.1)'}`,
-                  color: isActive ? cat.color : 'rgba(255,255,255,0.6)',
-                }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
+                  isActive
+                    ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                    : 'text-zinc-500 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                }`}
               >
                 <Icon size={14} />
                 {cat.name}
@@ -368,110 +317,78 @@ export default function ContactsPage() {
 
         {/* Contact List */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="p-6 rounded-xl animate-pulse"
-                style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                }}
+                className="p-5 rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse"
               >
                 <div className="flex gap-4">
-                  <div className="w-14 h-14 rounded-full bg-[#262626]" />
-                  <div className="flex-1 space-y-3">
-                    <div className="h-5 w-32 bg-[#262626] rounded" />
-                    <div className="h-4 w-24 bg-[#262626] rounded" />
-                    <div className="h-3 w-40 bg-[#262626] rounded" />
+                  <div className="w-12 h-12 rounded-full bg-zinc-800" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 w-32 bg-zinc-800 rounded" />
+                    <div className="h-3 w-24 bg-zinc-800 rounded" />
+                    <div className="h-3 w-40 bg-zinc-800 rounded" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : error ? (
-          <div
-            className="text-center py-20"
-            style={{ color: '#ef4444' }}
-          >
+          <div className="text-center py-20 text-red-400">
             <p>{error}</p>
           </div>
         ) : contacts.length === 0 ? (
-          <div
-            className="text-center py-20"
-            style={{ color: 'rgba(255,255,255,0.4)' }}
-          >
-            <Users size={48} className="mx-auto mb-4 opacity-30" />
-            <p>검색 결과가 없습니다</p>
+          <div className="text-center py-20">
+            <Users size={48} className="mx-auto mb-4 text-zinc-700" />
+            <p className="text-zinc-400">검색 결과가 없습니다</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {contacts.map((contact) => (
               <div
                 key={contact.id}
                 onClick={() => handleView(contact)}
-                className="relative p-6 rounded-xl cursor-pointer transition-all hover:scale-[1.02]"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
-                  border: `1px solid ${contact.isVip ? 'rgba(212,175,55,0.4)' : 'rgba(255,255,255,0.1)'}`,
-                }}
+                className="relative p-5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:bg-zinc-800/70 transition-colors"
               >
                 {/* VIP Badge */}
                 {contact.isVip && (
-                  <div
-                    className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-[1px]"
-                    style={{
-                      background: 'linear-gradient(135deg, #D4AF37 0%, #B8960C 100%)',
-                      color: '#0a0a0a',
-                    }}
-                  >
+                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#D4AF37] text-black">
                     VIP
                   </div>
                 )}
 
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                   {/* Avatar */}
-                  <div
-                    className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, ${getCategoryColor(contact.category)}33 0%, ${getCategoryColor(contact.category)}11 100%)`,
-                      border: `1px solid ${getCategoryColor(contact.category)}44`,
-                    }}
-                  >
-                    <User size={24} color={getCategoryColor(contact.category)} />
+                  <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center bg-zinc-800">
+                    <User size={18} className="text-zinc-400" />
                   </div>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-medium text-[#f0f0f0] mb-1">
+                    <h3 className="text-sm font-medium text-zinc-100 mb-0.5">
                       {contact.name}
                     </h3>
-                    <p
-                      className="text-sm mb-0.5"
-                      style={{ color: 'rgba(212,175,55,0.8)' }}
-                    >
+                    <p className="text-xs text-zinc-400 mb-0.5">
                       {contact.position || contact.category?.name || ''}
                     </p>
                     {contact.company && (
-                      <p
-                        className="text-xs mb-3"
-                        style={{ color: 'rgba(255,255,255,0.5)' }}
-                      >
+                      <p className="text-xs text-zinc-500 mb-2">
                         {contact.company}
                       </p>
                     )}
 
                     {/* Contact Info */}
-                    <div className="text-xs space-y-1 mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                    <div className="text-xs space-y-1 text-zinc-500 mb-2">
                       {contact.phone && (
                         <div className="flex items-center gap-1.5">
-                          <Phone size={12} />
+                          <Phone size={11} />
                           {contact.phone}
                         </div>
                       )}
                       {contact.email && (
                         <div className="flex items-center gap-1.5">
-                          <Mail size={12} />
+                          <Mail size={11} />
                           {contact.email}
                         </div>
                       )}
@@ -479,13 +396,7 @@ export default function ContactsPage() {
 
                     {/* Category Badge */}
                     {contact.category && (
-                      <span
-                        className="inline-block px-2.5 py-1 rounded-full text-[11px]"
-                        style={{
-                          background: 'rgba(212,175,55,0.15)',
-                          color: 'rgba(212,175,55,0.9)',
-                        }}
-                      >
+                      <span className="inline-block px-2 py-0.5 rounded text-[11px] bg-zinc-800 text-zinc-400">
                         {contact.category.name}
                       </span>
                     )}
@@ -493,23 +404,15 @@ export default function ContactsPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div
-                  className="flex gap-2 mt-4 pt-4"
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                >
+                <div className="flex gap-2 mt-4 pt-3 border-t border-zinc-800">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       handleView(contact)
                     }}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-md text-xs transition-all"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      color: 'rgba(255,255,255,0.7)',
-                    }}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
                   >
-                    <Eye size={14} />
+                    <Eye size={13} />
                     상세보기
                   </button>
                   <button
@@ -517,30 +420,20 @@ export default function ContactsPage() {
                       e.stopPropagation()
                       router.push(`/admin/contacts/${contact.id}?edit=true`)
                     }}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-md text-xs transition-all"
-                    style={{
-                      background: 'rgba(212,175,55,0.1)',
-                      border: '1px solid rgba(212,175,55,0.3)',
-                      color: '#D4AF37',
-                    }}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
                   >
-                    <Edit2 size={14} />
+                    <Edit2 size={13} />
                     수정
                   </button>
                   <button
                     onClick={(e) => handleDelete(contact.id, e)}
                     disabled={deletingId === contact.id}
-                    className="flex items-center justify-center px-3 py-2 rounded-md text-xs transition-all disabled:opacity-50"
-                    style={{
-                      background: 'rgba(239,68,68,0.1)',
-                      border: '1px solid rgba(239,68,68,0.3)',
-                      color: '#ef4444',
-                    }}
+                    className="flex items-center justify-center px-3 py-1.5 rounded text-xs text-zinc-500 hover:text-red-400 hover:bg-red-500/5 transition-colors disabled:opacity-50"
                   >
                     {deletingId === contact.id ? (
-                      <Loader2 size={14} className="animate-spin" />
+                      <Loader2 size={13} className="animate-spin" />
                     ) : (
-                      <Trash2 size={14} />
+                      <Trash2 size={13} />
                     )}
                   </button>
                 </div>
@@ -551,37 +444,27 @@ export default function ContactsPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-8 pt-6" style={{ borderTop: '1px solid rgba(212,175,55,0.1)' }}>
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-800">
+            <p className="text-sm text-zinc-500">
               {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, total)} / {total}
             </p>
             <div className="flex items-center gap-3">
               <button
                 disabled={page === 1}
                 onClick={() => setPage(page - 1)}
-                className="p-2 rounded-lg transition-all disabled:opacity-30"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(212,175,55,0.2)',
-                  color: '#D4AF37',
-                }}
+                className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={16} />
               </button>
-              <span className="text-sm px-3" style={{ color: 'rgba(212,175,55,0.8)' }}>
+              <span className="text-sm px-3 text-zinc-400">
                 {page} / {totalPages}
               </span>
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage(page + 1)}
-                className="p-2 rounded-lg transition-all disabled:opacity-30"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(212,175,55,0.2)',
-                  color: '#D4AF37',
-                }}
+                className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>
@@ -591,103 +474,69 @@ export default function ContactsPage() {
       {/* Contact Detail Modal */}
       {isModalOpen && selectedContact && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-5"
-          style={{
-            background: 'rgba(0,0,0,0.8)',
-            backdropFilter: 'blur(4px)',
-          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-5 bg-black/80 backdrop-blur-sm"
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-2xl p-8"
-            style={{
-              background: 'linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%)',
-              border: '1px solid rgba(212,175,55,0.3)',
-            }}
+            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto rounded-xl p-6 bg-zinc-900 border border-zinc-800"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 p-2"
-              style={{ color: 'rgba(255,255,255,0.5)' }}
+              className="absolute top-4 right-4 p-1.5 text-zinc-500 hover:text-zinc-300 transition-colors"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
 
             {/* Header */}
-            <div className="flex items-center gap-5 mb-6">
-              <div
-                className="w-20 h-20 rounded-full flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${getCategoryColor(selectedContact.category)}33 0%, ${getCategoryColor(selectedContact.category)}11 100%)`,
-                  border: `2px solid ${getCategoryColor(selectedContact.category)}44`,
-                }}
-              >
-                <User size={36} color={getCategoryColor(selectedContact.category)} />
+            <div className="flex items-center gap-4 mb-5">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center bg-zinc-800">
+                <User size={24} className="text-zinc-400" />
               </div>
               <div>
-                <h3 className="text-2xl font-normal text-[#f0f0f0] mb-1 flex items-center gap-3">
+                <h3 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
                   {selectedContact.name}
                   {selectedContact.isVip && (
-                    <span
-                      className="px-3 py-1 rounded-full text-[11px] font-semibold"
-                      style={{
-                        background: 'linear-gradient(135deg, #D4AF37 0%, #B8960C 100%)',
-                        color: '#0a0a0a',
-                      }}
-                    >
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#D4AF37] text-black">
                       VIP
                     </span>
                   )}
                 </h3>
-                <p style={{ color: 'rgba(212,175,55,0.8)' }}>{selectedContact.position}</p>
+                <p className="text-sm text-zinc-400">{selectedContact.position}</p>
                 {selectedContact.company && (
-                  <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                    {selectedContact.company}
-                  </p>
+                  <p className="text-xs text-zinc-500">{selectedContact.company}</p>
                 )}
               </div>
             </div>
 
             {/* Contact Info Box */}
-            <div
-              className="p-5 rounded-xl mb-5 space-y-4"
-              style={{ background: 'rgba(255,255,255,0.03)' }}
-            >
+            <div className="p-4 rounded-lg mb-4 space-y-3 bg-zinc-800/50">
               {selectedContact.phone && (
                 <div className="flex items-center gap-3">
-                  <Phone size={18} color="#D4AF37" />
-                  <span className="text-[#f0f0f0]">{selectedContact.phone}</span>
+                  <Phone size={16} className="text-zinc-500" />
+                  <span className="text-sm text-zinc-200">{selectedContact.phone}</span>
                 </div>
               )}
               {selectedContact.email && (
                 <div className="flex items-center gap-3">
-                  <Mail size={18} color="#D4AF37" />
-                  <span className="text-[#f0f0f0]">{selectedContact.email}</span>
+                  <Mail size={16} className="text-zinc-500" />
+                  <span className="text-sm text-zinc-200">{selectedContact.email}</span>
                 </div>
               )}
               {selectedContact.company && (
                 <div className="flex items-center gap-3">
-                  <Building size={18} color="#D4AF37" />
-                  <span className="text-[#f0f0f0]">{selectedContact.company}</span>
+                  <Building size={16} className="text-zinc-500" />
+                  <span className="text-sm text-zinc-200">{selectedContact.company}</span>
                 </div>
               )}
             </div>
 
             {/* Category */}
             {selectedContact.category && (
-              <div className="mb-5">
-                <h4 className="text-xs mb-2" style={{ color: 'rgba(212,175,55,0.7)' }}>
-                  카테고리
-                </h4>
-                <span
-                  className="inline-block px-4 py-2 rounded-full text-sm"
-                  style={{
-                    background: 'rgba(212,175,55,0.15)',
-                    color: 'rgba(212,175,55,0.9)',
-                  }}
-                >
+              <div className="mb-4">
+                <h4 className="text-xs text-zinc-500 mb-1.5">카테고리</h4>
+                <span className="inline-block px-3 py-1 rounded text-sm bg-zinc-800 text-zinc-300">
                   {selectedContact.category.name}
                 </span>
               </div>
@@ -695,17 +544,9 @@ export default function ContactsPage() {
 
             {/* Notes */}
             {selectedContact.notes && (
-              <div className="mb-5">
-                <h4 className="text-xs mb-2" style={{ color: 'rgba(212,175,55,0.7)' }}>
-                  메모
-                </h4>
-                <p
-                  className="p-4 rounded-lg text-sm leading-relaxed"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    color: 'rgba(255,255,255,0.8)',
-                  }}
-                >
+              <div className="mb-4">
+                <h4 className="text-xs text-zinc-500 mb-1.5">메모</h4>
+                <p className="p-3 rounded-lg text-sm leading-relaxed bg-zinc-800/50 text-zinc-300">
                   {selectedContact.notes}
                 </p>
               </div>
@@ -717,14 +558,9 @@ export default function ContactsPage() {
                 setIsModalOpen(false)
                 router.push(`/admin/contacts/${selectedContact.id}?edit=true`)
               }}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-lg font-medium text-sm mt-6 transition-all"
-              style={{
-                background: 'rgba(212,175,55,0.1)',
-                border: '1px solid rgba(212,175,55,0.4)',
-                color: '#D4AF37',
-              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium mt-5 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition-colors"
             >
-              <Edit2 size={16} />
+              <Edit2 size={15} />
               수정하기
             </button>
           </div>
