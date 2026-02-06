@@ -57,80 +57,70 @@ interface AlimtalkTemplate {
 // 변수 모드: 1명 선택 시 직접 입력, 2명 이상 선택 시 자동 치환
 type VariableMode = 'manual' | 'auto'
 
-// 실제 NHN Cloud 승인된 알림톡 템플릿 목록
+// 실제 NHN Cloud 승인된 알림톡 템플릿 목록 (엑셀 파일 기준)
 const alimtalkTemplates: AlimtalkTemplate[] = [
   {
-    templateCode: 'ARTWORK_INQUIRY',
-    templateName: '작품 문의 접수',
-    templateContent: '안녕하세요, #{고객명}님.\n\n#{작품명} 작품에 대한 문의가 접수되었습니다.\n담당자가 확인 후 연락드리겠습니다.\n\n감사합니다.\n관훈아르떼',
+    templateCode: 'RESERVE_CONFIRM',
+    templateName: '방문 예약 접수 확인',
+    templateContent: '#{고객명}님, 방문 예약이 접수되었습니다.\n\n■ 전시명: #{전시명}\n■ 예약일시: #{예약일시}\n■ 장소: 관훈아르떼 갤러리\n\n예약 변경/취소는 갤러리로 연락 부탁드립니다.',
     individualVars: ['고객명'],
-    commonVars: ['작품명'],
+    commonVars: ['전시명', '예약일시'],
+  },
+  {
+    templateCode: 'RESERVE_CANCEL',
+    templateName: '방문 예약 취소 확인',
+    templateContent: '#{고객명}님, 요청하신 예약 취소가 완료되었습니다.\n\n■ 전시명: #{전시명}\n■ 취소된 예약일: #{예약일}\n\n재예약을 원하시면 연락 부탁드립니다.\n관훈아르떼 갤러리',
+    individualVars: ['고객명'],
+    commonVars: ['전시명', '예약일'],
+  },
+  {
+    templateCode: 'RESERVE_CHANGE',
+    templateName: '방문 예약 변경 확인',
+    templateContent: '#{고객명}님, 요청하신 예약 변경이 완료되었습니다.\n\n■ 전시명: #{전시명}\n■ 변경 전: #{변경전일시}\n■ 변경 후: #{변경후일시}\n\n관훈아르떼 갤러리',
+    individualVars: ['고객명'],
+    commonVars: ['전시명', '변경전일시', '변경후일시'],
   },
   {
     templateCode: 'INQUIRY_CONFIRM',
-    templateName: '문의 확인 안내',
-    templateContent: '안녕하세요, #{고객명}님.\n\n문의하신 내용을 확인하였습니다.\n\n#{답변내용}\n\n추가 문의사항이 있으시면 연락주세요.\n관훈아르떼',
+    templateName: '문의 접수 확인',
+    templateContent: '#{고객명}님, 문의가 정상적으로 접수되었습니다.\n\n■ 접수번호: #{접수번호}\n■ 접수일시: #{접수일시}\n\n담당자 확인 후 순차적으로 답변드리겠습니다.\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
-    commonVars: ['답변내용'],
+    commonVars: ['접수번호', '접수일시'],
   },
   {
-    templateCode: 'RESERVE_CONFIRM',
-    templateName: '예약 확인',
-    templateContent: '안녕하세요, #{고객명}님.\n\n#{예약일시} 예약이 확정되었습니다.\n\n▶ 장소: 관훈아르떼\n▶ 주소: 서울시 종로구 관훈동\n\n방문 시 본 메시지를 보여주세요.\n감사합니다.',
+    templateCode: 'INQUIRY_REPLY',
+    templateName: '문의 답변 등록 안내',
+    templateContent: '#{고객명}님, 접수하신 문의에 대한 답변이 등록되었습니다.\n\n■ 접수번호: #{접수번호}\n\n상세 내용은 이메일을 확인해주세요.\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
-    commonVars: ['예약일시'],
+    commonVars: ['접수번호'],
   },
   {
-    templateCode: 'EXHIBITION_INVITE',
-    templateName: '전시 초대',
-    templateContent: '안녕하세요, #{고객명}님.\n\n관훈아르떼에서 새로운 전시를 안내드립니다.\n\n▶ 전시명: #{전시명}\n▶ 기간: #{전시기간}\n▶ 장소: 관훈아르떼\n\n많은 관심 부탁드립니다.',
-    individualVars: ['고객명'],
-    commonVars: ['전시명', '전시기간'],
-    buttons: [
-      { type: 'WL', name: '전시 보기', linkMo: 'https://kwanhoonarte.com/exhibition', linkPc: 'https://kwanhoonarte.com/exhibition' }
-    ]
-  },
-  {
-    templateCode: 'VISIT_THANKS',
-    templateName: '방문 감사',
-    templateContent: '안녕하세요, #{고객명}님.\n\n관훈아르떼를 방문해 주셔서 감사합니다.\n앞으로도 좋은 전시로 찾아뵙겠습니다.\n\n감사합니다.\n관훈아르떼',
+    templateCode: 'SUBSCRIBE_CONFIRM',
+    templateName: '뉴스레터 구독 확인',
+    templateContent: '#{고객명}님, 뉴스레터 구독 신청이 완료되었습니다.\n\n앞으로 관훈아르떼 갤러리의 소식을 받아보실 수 있습니다.\n\n구독 해지는 갤러리로 연락 부탁드립니다.\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
     commonVars: [],
   },
   {
-    templateCode: 'EVENT_NOTICE',
-    templateName: '행사 안내',
-    templateContent: '안녕하세요, #{고객명}님.\n\n관훈아르떼에서 특별한 행사를 안내드립니다.\n\n▶ 행사명: #{행사명}\n▶ 일시: #{행사일시}\n▶ 장소: #{장소}\n\n참여를 원하시면 회신 부탁드립니다.',
+    templateCode: 'UNSUBSCRIBE_CONFIRM',
+    templateName: '뉴스레터 구독 해지 확인',
+    templateContent: '#{고객명}님, 요청하신 뉴스레터 구독 해지가 완료되었습니다.\n\n재구독을 원하시면 연락 부탁드립니다.\n\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
-    commonVars: ['행사명', '행사일시', '장소'],
+    commonVars: [],
   },
   {
-    templateCode: 'OPENING_NOTICE',
-    templateName: '오프닝 안내',
-    templateContent: '안녕하세요, #{고객명}님.\n\n#{전시명} 전시 오프닝에 초대합니다.\n\n▶ 일시: #{오프닝일시}\n▶ 장소: 관훈아르떼\n\n작가와 함께하는 특별한 시간이 될 것입니다.\n많은 참석 부탁드립니다.',
+    templateCode: 'ARTWORK_INQUIRY',
+    templateName: '작품 문의 접수 확인',
+    templateContent: '#{고객명}님, 작품 문의가 접수되었습니다.\n\n■ 작품명: #{작품명}\n■ 작가: #{작가명}\n\n담당자 확인 후 연락드리겠습니다.\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
-    commonVars: ['전시명', '오프닝일시'],
+    commonVars: ['작품명', '작가명'],
   },
   {
-    templateCode: 'PURCHASE_CONFIRM',
-    templateName: '구매 확인',
-    templateContent: '안녕하세요, #{고객명}님.\n\n#{작품명} 작품 구매가 완료되었습니다.\n\n▶ 결제금액: #{결제금액}\n▶ 수령방법: #{수령방법}\n\n추가 문의사항은 연락주세요.\n감사합니다.',
+    templateCode: 'VIEWING_CONFIRM',
+    templateName: '프라이빗 뷰잉 예약 확인',
+    templateContent: '#{고객명}님, 프라이빗 뷰잉 예약이 확인되었습니다.\n\n■ 전시명: #{전시명}\n■ 예약일시: #{예약일시}\n\n예약 시간에 맞춰 방문 부탁드립니다.\n관훈아르떼 갤러리',
     individualVars: ['고객명'],
-    commonVars: ['작품명', '결제금액', '수령방법'],
-  },
-  {
-    templateCode: 'DELIVERY_NOTICE',
-    templateName: '배송 안내',
-    templateContent: '안녕하세요, #{고객명}님.\n\n주문하신 #{작품명} 작품이 발송되었습니다.\n\n▶ 택배사: #{택배사}\n▶ 운송장번호: #{운송장번호}\n\n배송 조회는 택배사 홈페이지에서 가능합니다.',
-    individualVars: ['고객명'],
-    commonVars: ['작품명', '택배사', '운송장번호'],
-  },
-  {
-    templateCode: 'SEASON_GREETING',
-    templateName: '시즌 인사',
-    templateContent: '안녕하세요, #{고객명}님.\n\n#{인사메시지}\n\n관훈아르떼 드림',
-    individualVars: ['고객명'],
-    commonVars: ['인사메시지'],
+    commonVars: ['전시명', '예약일시'],
   },
 ]
 
