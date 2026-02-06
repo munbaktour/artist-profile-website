@@ -222,14 +222,27 @@ export async function POST(request: NextRequest) {
       console.log('Alimtalk response:', JSON.stringify(apiResult, null, 2))
 
       if (apiResult.header?.isSuccessful) {
-        successCount = validContacts.length
         requestId = apiResult.message?.requestId
 
         // 개별 발송 결과 확인
-        if (apiResult.message?.sendResults) {
+        if (apiResult.message?.sendResults && apiResult.message.sendResults.length > 0) {
           successCount = 0
+          failCount = 0
+
           for (const result of apiResult.message.sendResults) {
-            if (result.isSuccessful) {
+            // NHN Cloud API 응답 구조 디버깅
+            console.log('sendResult item:', JSON.stringify(result))
+
+            // NHN Cloud API: resultCode가 0이면 성공, 그 외는 실패
+            // resultMessage가 'SUCCESS'면 성공
+            const isSuccess = result.resultCode === 0 ||
+                              result.resultCode === '0' ||
+                              result.resultMessage === 'SUCCESS' ||
+                              result.isSuccessful === true
+
+            console.log(`recipientNo: ${result.recipientNo}, isSuccess: ${isSuccess}, resultCode: ${result.resultCode}, resultMessage: ${result.resultMessage}`)
+
+            if (isSuccess) {
               successCount++
             } else {
               failCount++
@@ -243,6 +256,12 @@ export async function POST(request: NextRequest) {
               })
             }
           }
+
+          console.log(`Final counts - success: ${successCount}, fail: ${failCount}`)
+        } else {
+          // sendResults가 없으면 전체 성공으로 간주
+          successCount = validContacts.length
+          failCount = 0
         }
       } else {
         // 전체 실패
