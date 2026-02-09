@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, Save } from 'lucide-react'
 import Link from 'next/link'
 import { ImageUploader } from '@/components/features/admin/exhibitions/ImageUploader'
+import { artistsData } from '@/data/artists'
 
 export default function NewExhibitionPage() {
   const router = useRouter()
@@ -17,6 +18,7 @@ export default function NewExhibitionPage() {
     title_en: '',
     artist_name_ko: '',
     artist_name_en: '',
+    artist_id: '',
     status: 'upcoming',
     start_date: '',
     end_date: '',
@@ -60,6 +62,7 @@ export default function NewExhibitionPage() {
           title_en: form.title_en || null,
           artist_name_ko: form.artist_name_ko || null,
           artist_name_en: form.artist_name_en || null,
+          artist_id: form.artist_id || null,
           status: form.status,
           start_date: form.start_date,
           end_date: form.end_date,
@@ -154,6 +157,36 @@ export default function NewExhibitionPage() {
             </div>
             <p className="text-xs text-zinc-500 mt-1">
               URL에 사용됩니다: /exhibition/{form.slug || 'slug'}
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm text-zinc-400 mb-1.5">
+              작가 선택 <span className="text-zinc-500 text-xs">(체크인 시 작가 페이지로 이동)</span>
+            </label>
+            <select
+              name="artist_id"
+              value={form.artist_id}
+              onChange={(e) => {
+                const selectedArtist = artistsData.find(a => a.id === e.target.value)
+                setForm(prev => ({
+                  ...prev,
+                  artist_id: e.target.value,
+                  artist_name_ko: selectedArtist?.name.ko || prev.artist_name_ko,
+                  artist_name_en: selectedArtist?.name.en || prev.artist_name_en,
+                }))
+              }}
+              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+            >
+              <option value="">선택 안함 (그룹전 등)</option>
+              {artistsData.map(artist => (
+                <option key={artist.id} value={artist.id}>
+                  {artist.name.ko} ({artist.name.en})
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-zinc-500 mt-1">
+              선택 시 체크인 완료 후 해당 작가 페이지로 자동 이동합니다.
             </p>
           </div>
 

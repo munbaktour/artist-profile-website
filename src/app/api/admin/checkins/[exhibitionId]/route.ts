@@ -19,7 +19,7 @@ export async function GET(
       )
     }
 
-    // 체크인 목록 조회
+    // 체크인 목록 조회 (전화번호 입력한 방문자)
     const { data: checkins, error } = await supabase
       .from('exhibition_checkins')
       .select('id, phone, name, checked_in_at')
@@ -34,9 +34,30 @@ export async function GET(
       )
     }
 
+    // 익명 방문 카운트 조회
+    const { count: visitCount, error: visitError } = await supabase
+      .from('exhibition_visits')
+      .select('*', { count: 'exact', head: true })
+      .eq('exhibition_id', exhibitionId)
+
+    // 최근 방문 시간 조회
+    const { data: lastVisit } = await supabase
+      .from('exhibition_visits')
+      .select('visited_at')
+      .eq('exhibition_id', exhibitionId)
+      .order('visited_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    if (visitError) {
+      console.error('Error fetching visit count:', visitError)
+    }
+
     return NextResponse.json({
       data: checkins,
       total: checkins.length,
+      visitCount: visitCount || 0,
+      lastVisit: lastVisit?.visited_at || null,
     })
   } catch (error) {
     console.error('Error in checkins API:', error)

@@ -11,6 +11,7 @@ import {
   Phone,
   User,
   Download,
+  Eye,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -37,6 +38,8 @@ export default function AdminCheckinsPage() {
   const [loading, setLoading] = useState(false)
   const [loadingExhibitions, setLoadingExhibitions] = useState(true)
   const [error, setError] = useState('')
+  const [visitCount, setVisitCount] = useState(0)
+  const [lastVisit, setLastVisit] = useState<string | null>(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -66,6 +69,8 @@ export default function AdminCheckinsPage() {
           setError(data.error)
         } else {
           setCheckins(data.data || [])
+          setVisitCount(data.visitCount || 0)
+          setLastVisit(data.lastVisit || null)
         }
       })
       .catch(err => {
@@ -177,23 +182,32 @@ export default function AdminCheckinsPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
+          <Eye className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
+          <div>
+            <p className="text-2xl font-semibold text-zinc-100">{visitCount}</p>
+            <p className="text-xs text-zinc-500">QR 스캔 횟수</p>
+          </div>
+        </div>
         <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{checkins.length}</p>
-            <p className="text-xs text-zinc-500">총 참석자</p>
+            <p className="text-xs text-zinc-500">정보 입력 체크인</p>
           </div>
         </div>
         <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
           <Clock className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">
-              {checkins.length > 0
+              {lastVisit
+                ? new Date(lastVisit).toLocaleDateString('ko-KR')
+                : checkins.length > 0
                 ? new Date(checkins[0].checked_in_at).toLocaleDateString('ko-KR')
                 : '-'}
             </p>
-            <p className="text-xs text-zinc-500">최근 체크인</p>
+            <p className="text-xs text-zinc-500">최근 방문</p>
           </div>
         </div>
       </div>
