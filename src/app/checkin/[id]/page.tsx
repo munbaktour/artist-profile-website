@@ -11,6 +11,27 @@ interface ExhibitionInfo {
   artist_name_ko?: string
 }
 
+// 중복 스캔 방지: 1시간 쿨다운
+const VISIT_COOLDOWN = 60 * 60 * 1000 // 1시간 (밀리초)
+
+function canRecordVisit(exhibitionId: string): boolean {
+  if (typeof window === 'undefined') return true
+
+  const key = `visit_${exhibitionId}`
+  const lastVisit = localStorage.getItem(key)
+
+  if (lastVisit) {
+    const elapsed = Date.now() - parseInt(lastVisit, 10)
+    if (elapsed < VISIT_COOLDOWN) {
+      return false // 1시간 이내 재방문
+    }
+  }
+
+  // 방문 시간 기록
+  localStorage.setItem(key, Date.now().toString())
+  return true
+}
+
 export default function CheckinPage() {
   const params = useParams()
   const exhibitionId = params.id as string
@@ -50,14 +71,16 @@ export default function CheckinPage() {
     if (exhibition.artist_id) {
       visitRecorded.current = true
 
-      // 익명 방문 카운트 (비동기, 실패해도 리다이렉트는 진행)
-      fetch('/api/checkin/visit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ exhibitionId }),
-      }).catch(() => {
-        // 에러 무시 - 방문 기록 실패해도 작가 페이지로 이동
-      })
+      // 중복 방지 체크 후 익명 방문 카운트
+      if (canRecordVisit(exhibitionId)) {
+        fetch('/api/checkin/visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ exhibitionId }),
+        }).catch(() => {
+          // 에러 무시 - 방문 기록 실패해도 작가 페이지로 이동
+        })
+      }
 
       // 즉시 작가 페이지로 리다이렉트
       window.location.href = `/artists/${exhibition.artist_id}`

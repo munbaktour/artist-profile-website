@@ -40,24 +40,29 @@ export async function GET(
       .select('*', { count: 'exact', head: true })
       .eq('exhibition_id', exhibitionId)
 
-    // 최근 방문 시간 조회
-    const { data: lastVisit } = await supabase
+    // 익명 방문 목록 조회 (개별 기록)
+    const { data: visits, error: visitsError } = await supabase
       .from('exhibition_visits')
-      .select('visited_at')
+      .select('id, visited_at')
       .eq('exhibition_id', exhibitionId)
       .order('visited_at', { ascending: false })
-      .limit(1)
-      .maybeSingle()
 
     if (visitError) {
       console.error('Error fetching visit count:', visitError)
     }
+    if (visitsError) {
+      console.error('Error fetching visits:', visitsError)
+    }
+
+    // 최근 방문 시간 (익명 방문 목록에서 첫 번째 항목)
+    const lastVisit = visits && visits.length > 0 ? visits[0].visited_at : null
 
     return NextResponse.json({
       data: checkins,
+      visits: visits || [],
       total: checkins.length,
       visitCount: visitCount || 0,
-      lastVisit: lastVisit?.visited_at || null,
+      lastVisit,
     })
   } catch (error) {
     console.error('Error in checkins API:', error)

@@ -22,6 +22,11 @@ interface CheckinRecord {
   checked_in_at: string
 }
 
+interface VisitRecord {
+  id: string
+  visited_at: string
+}
+
 interface ExhibitionRow {
   id: string
   slug: string
@@ -34,6 +39,7 @@ interface ExhibitionRow {
 export default function AdminCheckinsPage() {
   const [selectedExhibition, setSelectedExhibition] = useState<string | null>(null)
   const [checkins, setCheckins] = useState<CheckinRecord[]>([])
+  const [visits, setVisits] = useState<VisitRecord[]>([])
   const [exhibitions, setExhibitions] = useState<ExhibitionRow[]>([])
   const [loading, setLoading] = useState(false)
   const [loadingExhibitions, setLoadingExhibitions] = useState(true)
@@ -69,6 +75,7 @@ export default function AdminCheckinsPage() {
           setError(data.error)
         } else {
           setCheckins(data.data || [])
+          setVisits(data.visits || [])
           setVisitCount(data.visitCount || 0)
           setLastVisit(data.lastVisit || null)
         }
@@ -243,7 +250,7 @@ export default function AdminCheckinsPage() {
         </div>
       </div>
 
-      {/* 참석자 목록 */}
+      {/* 방문자 목록 (체크인 + 익명 방문 통합) */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
         {loading ? (
           <div className="p-8 text-center">
@@ -253,40 +260,70 @@ export default function AdminCheckinsPage() {
           <div className="p-8 text-center">
             <p className="text-red-400">{error}</p>
           </div>
-        ) : checkins.length === 0 ? (
+        ) : checkins.length === 0 && visits.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <Users className="w-8 h-8 text-zinc-700 mb-4" />
-            <p className="text-zinc-400 mb-1">아직 체크인한 방문자가 없습니다</p>
+            <p className="text-zinc-400 mb-1">아직 방문자가 없습니다</p>
             <p className="text-sm text-zinc-500">
               QR코드를 통해 방문자가 체크인하면 여기에 표시됩니다.
             </p>
           </div>
         ) : (
           <div className="divide-y divide-zinc-800">
-            {checkins.map((checkin) => (
-              <div key={checkin.id} className="px-4 py-3 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0">
-                  <User className="w-4 h-4 text-zinc-500" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-zinc-100 text-sm font-medium truncate">
-                    {checkin.name || '이름 없음'}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-xs text-zinc-500">
-                    <Phone className="w-3 h-3" />
-                    <span>{formatPhone(checkin.phone)}</span>
+            {/* 통합 목록: 체크인 + 익명 방문을 시간순 정렬 */}
+            {[
+              ...checkins.map(c => ({ ...c, type: 'checkin' as const })),
+              ...visits.map(v => ({ ...v, type: 'visit' as const })),
+            ]
+              .sort((a, b) => {
+                const dateA = a.type === 'checkin' ? a.checked_in_at : a.visited_at
+                const dateB = b.type === 'checkin' ? b.checked_in_at : b.visited_at
+                return new Date(dateB).getTime() - new Date(dateA).getTime()
+              })
+              .map((item) => (
+                <div key={item.id} className="px-4 py-3 flex items-center gap-3">
+                  <div className={cn(
+                    "w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0",
+                    item.type === 'checkin' ? "bg-zinc-800" : "bg-zinc-800/50"
+                  )}>
+                    {item.type === 'checkin' ? (
+                      <User className="w-4 h-4 text-zinc-500" />
+                    ) : (
+                      <Eye className="w-4 h-4 text-zinc-600" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    {item.type === 'checkin' ? (
+                      <>
+                        <p className="text-zinc-100 text-sm font-medium truncate">
+                          {item.name || '이름 없음'}
+                        </p>
+                        <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+                          <Phone className="w-3 h-3" />
+                          <span>{formatPhone(item.phone)}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-zinc-400 text-sm font-medium">
+                          익명 방문자
+                        </p>
+                        <p className="text-xs text-zinc-600">
+                          QR 스캔
+                        </p>
+                      </>
+                    )}
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-xs text-zinc-400">
+                      {new Date(item.type === 'checkin' ? item.checked_in_at : item.visited_at).toLocaleDateString('ko-KR')}
+                    </p>
+                    <p className="text-xs text-zinc-500">
+                      {new Date(item.type === 'checkin' ? item.checked_in_at : item.visited_at).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
+                    </p>
                   </div>
                 </div>
-                <div className="text-right flex-shrink-0">
-                  <p className="text-xs text-zinc-400">
-                    {new Date(checkin.checked_in_at).toLocaleDateString('ko-KR')}
-                  </p>
-                  <p className="text-xs text-zinc-500">
-                    {new Date(checkin.checked_in_at).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         )}
       </div>
