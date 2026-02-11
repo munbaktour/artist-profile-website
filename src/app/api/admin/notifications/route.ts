@@ -11,8 +11,12 @@ export async function GET(request: NextRequest) {
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
+      console.log('=== Notifications API: Unauthorized ===')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
+
+    console.log('=== Notifications API Debug ===')
+    console.log('User ID:', user.id)
 
     // Parse query params
     const searchParams = request.nextUrl.searchParams
@@ -20,6 +24,8 @@ export async function GET(request: NextRequest) {
     const pageSize = parseInt(searchParams.get('pageSize') || '20')
     const channel = searchParams.get('channel')
     const status = searchParams.get('status')
+
+    console.log('Query params:', { page, pageSize, channel, status })
 
     // Build query for notification_logs
     let query = supabase
@@ -44,10 +50,18 @@ export async function GET(request: NextRequest) {
 
     const { data, count, error } = await query
 
+    console.log('Query result - count:', count, 'data length:', data?.length)
+    console.log('Query error:', error)
+
     if (error) {
       console.error('Error fetching notification_logs:', error)
+      console.error('Error code:', error.code)
+      console.error('Error message:', error.message)
+      console.error('Error details:', error.details)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
+
+    console.log('Raw data sample:', JSON.stringify(data?.slice(0, 2), null, 2))
 
     // Convert to camelCase
     const notifications: NotificationLog[] = (data || []).map(dbNotificationLogToNotificationLog)

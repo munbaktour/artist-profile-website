@@ -637,7 +637,7 @@ async function saveNotificationLog(
   }
 ) {
   try {
-    const { error } = await supabase.from('notification_logs').insert({
+    const insertData = {
       notification_type: 'general_notice',
       channel: data.channel,
       recipient_id: null,
@@ -651,14 +651,27 @@ async function saveNotificationLog(
       provider_response: data.providerResponse,
       created_by: data.createdBy,
       sent_at: data.status === 'sent' ? new Date().toISOString() : null,
-    })
+    }
+
+    console.log('=== Notification Log Insert Debug ===')
+    console.log('Insert data:', JSON.stringify(insertData, null, 2))
+
+    const { data: insertedData, error } = await supabase
+      .from('notification_logs')
+      .insert(insertData)
+      .select()
 
     if (error) {
       console.error('Error inserting notification log:', error)
+      console.error('Error code:', error.code)
+      console.error('Error message:', error.message)
+      console.error('Error details:', error.details)
+      console.error('Error hint:', error.hint)
     } else {
       console.log('Notification log saved successfully')
+      console.log('Inserted data:', JSON.stringify(insertedData, null, 2))
     }
   } catch (error) {
-    console.error('Error saving notification log:', error)
+    console.error('Error saving notification log (catch):', error)
   }
 }
