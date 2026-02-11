@@ -294,14 +294,19 @@ export async function POST(request: NextRequest) {
       }
 
       // 로그 저장
-      await saveMessageLog(supabase, {
-        templateId: templateCode || '',
-        content: `[알림톡] 템플릿: ${templateCode}`,
+      await saveNotificationLog(supabase, {
+        channel: 'alimtalk',
+        subject: `[알림톡] ${templateCode}`,
+        content: `템플릿: ${templateCode}, 수신자: ${validContacts.length}명`,
+        recipientPhone: validContacts.length === 1
+          ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
+          : `${validContacts.length}명`,
         recipientCount: validContacts.length,
-        recipientIds,
         status: successCount > 0 ? 'sent' : 'failed',
-        response: apiResult,
-        sentBy: user.id,
+        errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
+        provider: 'nhn_cloud',
+        providerResponse: apiResult,
+        createdBy: user.id,
       })
     }
 
@@ -368,14 +373,19 @@ export async function POST(request: NextRequest) {
         })
       }
 
-      await saveMessageLog(supabase, {
-        templateId: 'brand-message',
+      await saveNotificationLog(supabase, {
+        channel: 'alimtalk',
+        subject: '[브랜드 메시지]',
         content: content || '',
+        recipientPhone: validContacts.length === 1
+          ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
+          : `${validContacts.length}명`,
         recipientCount: validContacts.length,
-        recipientIds,
         status: successCount > 0 ? 'sent' : 'failed',
-        response: apiResult,
-        sentBy: user.id,
+        errorMessage: failCount > 0 ? apiResult.header?.resultMessage : null,
+        provider: 'nhn_cloud',
+        providerResponse: apiResult,
+        createdBy: user.id,
       })
     }
 
@@ -403,14 +413,19 @@ export async function POST(request: NextRequest) {
         failedRecipients.push(...smsResult.failedRecipients)
       }
 
-      await saveMessageLog(supabase, {
-        templateId: 'sms',
+      await saveNotificationLog(supabase, {
+        channel: 'sms',
+        subject: '[SMS] 문자 발송',
         content: content || '',
+        recipientPhone: validContacts.length === 1
+          ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
+          : `${validContacts.length}명`,
         recipientCount: validContacts.length,
-        recipientIds,
         status: successCount > 0 ? 'sent' : 'failed',
-        response: smsResult,
-        sentBy: user.id,
+        errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
+        provider: 'nhn_cloud',
+        providerResponse: smsResult,
+        createdBy: user.id,
       })
     }
 
@@ -512,36 +527,45 @@ async function sendSms(
   }
 }
 
-// 메시지 로그 저장 함수
-async function saveMessageLog(
+// 알림 로그 저장 함수 (notification_logs 테이블 사용)
+async function saveNotificationLog(
   supabase: Awaited<ReturnType<typeof createClient>>,
   data: {
-    templateId: string
+    channel: 'sms' | 'alimtalk'
+    subject: string
     content: string
+    recipientPhone: string | null
     recipientCount: number
-    recipientIds: string[]
-    status: string
-    response: unknown
-    sentBy: string
+    status: 'sent' | 'failed' | 'pending'
+    errorMessage: string | null
+    provider: string
+    providerResponse: unknown
+    createdBy: string
   }
 ) {
   try {
-    const { data: insertedData, error } = await supabase.from('message_logs').insert({
-      template_id: data.templateId,
+    const { error } = await supabase.from('notification_logs').insert({
+      notification_type: 'general_notice',
+      channel: data.channel,
+      recipient_id: null,
+      recipient_email: null,
+      recipient_phone: data.recipientPhone,
+      subject: data.subject,
       content: data.content,
-      recipient_count: data.recipientCount,
-      recipient_ids: data.recipientIds,
       status: data.status,
-      response: data.response,
-      sent_by: data.sentBy,
-    }).select()
+      error_message: data.errorMessage,
+      provider: data.provider,
+      provider_response: data.providerResponse,
+      created_by: data.createdBy,
+      sent_at: data.status === 'sent' ? new Date().toISOString() : null,
+    })
 
     if (error) {
-      console.error('Error inserting message log:', error)
+      console.error('Error inserting notification log:', error)
     } else {
-      console.log('Message log saved successfully:', insertedData)
+      console.log('Notification log saved successfully')
     }
   } catch (error) {
-    console.error('Error saving message log:', error)
+    console.error('Error saving notification log:', error)
   }
 }
