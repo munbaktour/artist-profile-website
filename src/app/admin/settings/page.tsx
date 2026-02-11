@@ -83,10 +83,10 @@ export default function SettingsPage() {
               <Shield className="w-4 h-4 text-zinc-500" />
               <div>
                 <p className="text-zinc-100 text-sm font-medium">SMS</p>
-                <p className="text-xs text-zinc-500">SMS 발송 서비스</p>
+                <p className="text-xs text-zinc-500">NHN Cloud SMS 발송 서비스</p>
               </div>
-              <span className="ml-auto px-2 py-0.5 rounded text-xs bg-yellow-500/10 text-yellow-400">
-                설정 필요
+              <span className="ml-auto px-2 py-0.5 rounded text-xs bg-green-500/10 text-green-400">
+                연결됨
               </span>
             </div>
           </div>

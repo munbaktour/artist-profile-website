@@ -238,7 +238,6 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
               <TableHead className="text-zinc-400 w-[50px]"></TableHead>
               <TableHead className="text-zinc-400">이름</TableHead>
               <TableHead className="text-zinc-400">영문명</TableHead>
-              <TableHead className="text-zinc-400">색상</TableHead>
               <TableHead className="text-zinc-400">유형</TableHead>
               {canEdit && (
                 <TableHead className="text-zinc-400 w-[50px]"></TableHead>
@@ -248,7 +247,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           <TableBody>
             {categories.length === 0 ? (
               <TableRow className="border-zinc-800">
-                <TableCell colSpan={canEdit ? 6 : 5} className="text-center text-zinc-500 py-8">
+                <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-500 py-8">
                   카테고리가 없습니다.
                 </TableCell>
               </TableRow>
@@ -272,17 +271,6 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                   </TableCell>
                   <TableCell className="text-zinc-400">
                     {category.nameEn || '-'}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="w-6 h-6 rounded border border-zinc-800"
-                        style={{ backgroundColor: category.color }}
-                      />
-                      <span className="text-zinc-400 text-sm font-mono">
-                        {category.color}
-                      </span>
-                    </div>
                   </TableCell>
                   <TableCell>
                     {category.isSystem ? (
