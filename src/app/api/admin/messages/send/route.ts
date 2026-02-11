@@ -89,8 +89,15 @@ export async function POST(request: NextRequest) {
     const smsSecretKey = process.env.NHN_CLOUD_SMS_SECRET_KEY || secretKey
     const smsSendNo = process.env.NHN_CLOUD_SMS_SENDER_NO // 발신번호
 
+    // 환경변수 디버깅 (값은 마스킹)
+    console.log('=== NHN Cloud ENV Check ===')
+    console.log('APPKEY:', appKey ? `${appKey.substring(0, 4)}...${appKey.substring(appKey.length - 4)}` : 'NOT SET')
+    console.log('SECRET_KEY:', secretKey ? `${secretKey.substring(0, 4)}...` : 'NOT SET')
+    console.log('SENDER_KEY:', senderKey ? `${senderKey.substring(0, 8)}...` : 'NOT SET')
+
     if (!appKey || !secretKey || !senderKey) {
       console.error('NHN Cloud credentials not configured')
+      console.error('Missing:', !appKey ? 'APPKEY' : '', !secretKey ? 'SECRET_KEY' : '', !senderKey ? 'SENDER_KEY' : '')
       return NextResponse.json(
         { error: 'NHN Cloud 설정이 완료되지 않았습니다.' },
         { status: 500 }
@@ -236,20 +243,25 @@ export async function POST(request: NextRequest) {
 
       console.log('Alimtalk request:', JSON.stringify(alimtalkBody, null, 2))
 
-      const apiResponse = await fetch(
-        `${NHN_ALIMTALK_API}/${appKey}/messages`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'X-Secret-Key': secretKey,
-          },
-          body: JSON.stringify(alimtalkBody),
-        }
-      )
+      const apiUrl = `${NHN_ALIMTALK_API}/${appKey}/messages`
+      console.log('Alimtalk API URL:', apiUrl)
+
+      const apiResponse = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'X-Secret-Key': secretKey,
+        },
+        body: JSON.stringify(alimtalkBody),
+      })
+
+      console.log('Alimtalk HTTP status:', apiResponse.status, apiResponse.statusText)
 
       const apiResult = await apiResponse.json()
-      console.log('Alimtalk response:', JSON.stringify(apiResult, null, 2))
+      console.log('=== Alimtalk Full Response ===')
+      console.log('Response:', JSON.stringify(apiResult, null, 2))
+      console.log('Header:', JSON.stringify(apiResult.header, null, 2))
+      console.log('Message:', JSON.stringify(apiResult.message, null, 2))
 
       if (apiResult.header?.isSuccessful) {
         requestId = apiResult.message?.requestId
@@ -376,20 +388,26 @@ export async function POST(request: NextRequest) {
 
       console.log('Brand message request:', JSON.stringify(brandMessageBody, null, 2))
 
-      const apiResponse = await fetch(
-        `${NHN_BRAND_MESSAGE_API}/${appKey}/freestyle-messages`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'X-Secret-Key': secretKey,
-          },
-          body: JSON.stringify(brandMessageBody),
-        }
-      )
+      const brandApiUrl = `${NHN_BRAND_MESSAGE_API}/${appKey}/freestyle-messages`
+      console.log('Brand message API URL:', brandApiUrl)
+
+      const apiResponse = await fetch(brandApiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'X-Secret-Key': secretKey,
+        },
+        body: JSON.stringify(brandMessageBody),
+      })
+
+      console.log('Brand message HTTP status:', apiResponse.status, apiResponse.statusText)
 
       const apiResult = await apiResponse.json()
-      console.log('Brand message response:', JSON.stringify(apiResult, null, 2))
+      console.log('=== Brand Message Full Response ===')
+      console.log('Response:', JSON.stringify(apiResult, null, 2))
+      console.log('Header:', JSON.stringify(apiResult.header, null, 2))
+      console.log('resultCode:', apiResult.header?.resultCode)
+      console.log('resultMessage:', apiResult.header?.resultMessage)
 
       if (apiResult.header?.isSuccessful) {
         successCount = validContacts.length
