@@ -55,6 +55,7 @@ export async function GET(request: NextRequest) {
     if (notificationError) {
       console.error('Error fetching notification_logs:', notificationError)
     }
+    console.log('notification_logs count:', notificationData?.length || 0)
 
     // Fetch from message_logs
     const { data: messageData, error: messageError } = await supabase
@@ -65,6 +66,8 @@ export async function GET(request: NextRequest) {
     if (messageError) {
       console.error('Error fetching message_logs:', messageError)
     }
+    console.log('message_logs count:', messageData?.length || 0)
+    console.log('message_logs data:', JSON.stringify(messageData, null, 2))
 
     // Convert notification_logs to unified format
     const notificationItems: UnifiedNotification[] = (notificationData || []).map(n => {

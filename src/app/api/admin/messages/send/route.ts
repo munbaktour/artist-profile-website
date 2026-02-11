@@ -526,7 +526,7 @@ async function saveMessageLog(
   }
 ) {
   try {
-    await supabase.from('message_logs').insert({
+    const { data: insertedData, error } = await supabase.from('message_logs').insert({
       template_id: data.templateId,
       content: data.content,
       recipient_count: data.recipientCount,
@@ -534,7 +534,13 @@ async function saveMessageLog(
       status: data.status,
       response: data.response,
       sent_by: data.sentBy,
-    })
+    }).select()
+
+    if (error) {
+      console.error('Error inserting message log:', error)
+    } else {
+      console.log('Message log saved successfully:', insertedData)
+    }
   } catch (error) {
     console.error('Error saving message log:', error)
   }
