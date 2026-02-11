@@ -27,12 +27,30 @@ function getResendClient() {
 }
 
 /**
+ * Format email 'from' field to ensure proper format: "Name <email>"
+ * If only email address is provided, wraps it with default sender name
+ */
+function formatFromEmail(fromValue: string): string {
+  // If already in "Name <email>" format, return as-is
+  if (fromValue.includes('<') && fromValue.includes('>')) {
+    return fromValue
+  }
+  // If only email address, wrap with default sender name
+  return `KWANHOONARTE <${fromValue}>`
+}
+
+/**
  * Send an email using Resend
  */
 export async function sendEmail(options: EmailOptions): Promise<EmailResult> {
   try {
     const resend = getResendClient()
-    const from = process.env.RESEND_FROM || 'KWANHOONARTE <noreply@kwanhoonarte.com>'
+    const rawFrom = process.env.RESEND_FROM || 'noreply@kwanhoonarte.com'
+    const from = formatFromEmail(rawFrom)
+
+    console.log('=== Email Send Debug ===')
+    console.log('RESEND_FROM env:', process.env.RESEND_FROM)
+    console.log('Formatted from:', from)
 
     const { data, error } = await resend.emails.send({
       from,
