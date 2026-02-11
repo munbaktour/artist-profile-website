@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { sendEmail, generateGeneralNoticeEmail } from '@/lib/email'
 
 // NHN Cloud API 엔드포인트
 const NHN_ALIMTALK_API = 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.3/appkeys'
@@ -7,7 +8,7 @@ const NHN_BRAND_MESSAGE_API = 'https://api-alimtalk.cloud.toast.com/brand-messag
 const NHN_SMS_API = 'https://api-sms.cloud.toast.com/sms/v3.0/appKeys'
 
 // 메시지 타입
-type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms'
+type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms' | 'email'
 type ChatBubbleType = 'TEXT' | 'IMAGE' | 'WIDE_IMAGE' | 'WIDE_ITEMLIST'
 
 // 타겟팅 타입 (브랜드 메시지용)
@@ -35,6 +36,8 @@ interface SendRequest {
   chatBubbleType?: ChatBubbleType
   // SMS 대체 발송
   fallbackToSms?: boolean
+  // 이메일용
+  subject?: string
 }
 
 interface BrandMessageRecipient {
@@ -56,6 +59,7 @@ interface Contact {
   name: string
   phone: string | null
   mobile: string | null
+  email: string | null
 }
 
 interface FailedRecipient {
@@ -108,6 +112,7 @@ export async function POST(request: NextRequest) {
       targeting = 'M',
       chatBubbleType = 'TEXT',
       fallbackToSms = false,
+      subject,
     } = body
 
     if (!recipientIds || recipientIds.length === 0) {
@@ -132,10 +137,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 연락처에서 전화번호 조회
+    if (messageType === 'email') {
+      if (!subject) {
+        return NextResponse.json(
+          { error: '이메일 제목을 입력해주세요.' },
+          { status: 400 }
+        )
+      }
+      if (!content) {
+        return NextResponse.json(
+          { error: '이메일 내용을 입력해주세요.' },
+          { status: 400 }
+        )
+      }
+    }
+
+    // 연락처에서 전화번호/이메일 조회
     const { data: contacts, error: contactsError } = await supabase
       .from('contacts')
-      .select('id, name, phone, mobile')
+      .select('id, name, phone, mobile, email')
       .in('id', recipientIds)
 
     if (contactsError) {
@@ -146,14 +166,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 전화번호가 있는 연락처만 필터링
-    const validContacts = (contacts as Contact[]).filter(c => c.phone || c.mobile)
-
-    if (validContacts.length === 0) {
-      return NextResponse.json(
-        { error: '전화번호가 등록된 연락처가 없습니다.' },
-        { status: 400 }
-      )
+    // 메시지 타입에 따라 유효한 연락처 필터링
+    let validContacts: Contact[]
+    if (messageType === 'email') {
+      validContacts = (contacts as Contact[]).filter(c => c.email)
+      if (validContacts.length === 0) {
+        return NextResponse.json(
+          { error: '이메일 주소가 등록된 연락처가 없습니다.' },
+          { status: 400 }
+        )
+      }
+    } else {
+      validContacts = (contacts as Contact[]).filter(c => c.phone || c.mobile)
+      if (validContacts.length === 0) {
+        return NextResponse.json(
+          { error: '전화번호가 등록된 연락처가 없습니다.' },
+          { status: 400 }
+        )
+      }
     }
 
     let successCount = 0
@@ -429,6 +459,69 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // ============ 이메일 발송 ============
+    else if (messageType === 'email') {
+      console.log('=== Email Send Debug Info ===')
+      console.log('validContacts count:', validContacts.length)
+      console.log('subject:', subject)
+
+      // 각 수신자에게 이메일 발송
+      for (const contact of validContacts) {
+        if (!contact.email) continue
+
+        try {
+          // 이메일 HTML 생성
+          const html = generateGeneralNoticeEmail({
+            recipientName: contact.name || '고객',
+            subject: subject || '',
+            content: content || '',
+          })
+
+          // 이메일 발송
+          const result = await sendEmail({
+            to: contact.email,
+            subject: subject || '',
+            html,
+          })
+
+          if (result.success) {
+            successCount++
+          } else {
+            failCount++
+            failedRecipients.push({
+              name: contact.name || '',
+              phone: contact.email,
+              reason: result.error || '발송 실패',
+            })
+          }
+        } catch (error) {
+          console.error('Email send error for:', contact.email, error)
+          failCount++
+          failedRecipients.push({
+            name: contact.name || '',
+            phone: contact.email,
+            reason: '이메일 발송 오류',
+          })
+        }
+      }
+
+      // 로그 저장
+      await saveNotificationLog(supabase, {
+        channel: 'email',
+        subject: subject || '',
+        content: content || '',
+        recipientPhone: validContacts.length === 1
+          ? validContacts[0].email || ''
+          : `${validContacts.length}명`,
+        recipientCount: validContacts.length,
+        status: successCount > 0 ? 'sent' : 'failed',
+        errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
+        provider: 'resend',
+        providerResponse: { successCount, failCount },
+        createdBy: user.id,
+      })
+    }
+
     return NextResponse.json({
       success: successCount > 0,
       sentCount: successCount,
@@ -531,7 +624,7 @@ async function sendSms(
 async function saveNotificationLog(
   supabase: Awaited<ReturnType<typeof createClient>>,
   data: {
-    channel: 'sms' | 'alimtalk'
+    channel: 'sms' | 'alimtalk' | 'email'
     subject: string
     content: string
     recipientPhone: string | null

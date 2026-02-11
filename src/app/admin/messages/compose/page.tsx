@@ -24,11 +24,12 @@ import {
   AlertCircle,
   CheckCircle2,
   XCircle,
+  Mail,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 // 메시지 타입
-type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms'
+type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms' | 'email'
 
 // 타겟팅 타입 (브랜드 메시지용)
 type TargetingType = 'M' | 'N' | 'I'
@@ -148,6 +149,7 @@ interface Contact {
   name: string
   phone: string
   mobile?: string
+  email?: string
   category_name?: string
 }
 
@@ -198,6 +200,9 @@ export default function MessageComposePage() {
   const [buttonText, setButtonText] = useState('')
   const [buttonLink, setButtonLink] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+
+  // 이메일 관련
+  const [emailSubject, setEmailSubject] = useState('')
 
   // 발송 관련
   const [isSending, setIsSending] = useState(false)
@@ -317,6 +322,7 @@ export default function MessageComposePage() {
           name: (c.name as string) || '',
           phone: (c.phone as string) || (c.mobile as string) || '',
           mobile: (c.mobile as string) || '',
+          email: (c.email as string) || '',
           category_name: (c.category as { name?: string } | null)?.name || undefined,
         })))
       }
@@ -437,6 +443,17 @@ export default function MessageComposePage() {
       return
     }
 
+    if (messageType === 'email') {
+      if (!emailSubject) {
+        alert('이메일 제목을 입력해주세요.')
+        return
+      }
+      if (!content) {
+        alert('이메일 내용을 입력해주세요.')
+        return
+      }
+    }
+
     setSendStep('preview')
   }
 
@@ -480,6 +497,9 @@ export default function MessageComposePage() {
             requestBody.individualVariables = individualVariables
           }
         }
+      } else if (messageType === 'email') {
+        requestBody.subject = emailSubject
+        requestBody.content = content
       }
 
       const res = await fetch('/api/admin/messages/send', {
@@ -671,6 +691,7 @@ export default function MessageComposePage() {
                 {messageType === 'brandmessage' && '카카오 브랜드 메시지'}
                 {messageType === 'sms' && 'SMS'}
                 {messageType === 'kakao_sms' && '카카오톡 + SMS'}
+                {messageType === 'email' && '이메일'}
               </span>
             </div>
             <div className="flex justify-between">
@@ -759,6 +780,22 @@ export default function MessageComposePage() {
               </div>
             </div>
           )}
+
+          {messageType === 'email' && (
+            <div className="bg-zinc-800 rounded-xl p-4">
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div className="border-b border-gray-100 p-3">
+                  <p className="text-xs text-gray-500 mb-1">제목</p>
+                  <p className="text-sm text-[#333] font-medium">{emailSubject}</p>
+                </div>
+                <div className="p-3">
+                  <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
+                    {content}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 발송 버튼 */}
@@ -812,12 +849,13 @@ export default function MessageComposePage() {
       </div>
 
       {/* 메시지 타입 선택 */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {[
           { type: 'alimtalk' as MessageType, icon: Bell, label: '알림톡', desc: '승인 템플릿' },
           { type: 'brandmessage' as MessageType, icon: MessageSquare, label: '브랜드 메시지', desc: '자유 형식' },
           { type: 'sms' as MessageType, icon: Phone, label: 'SMS', desc: '문자 발송' },
           { type: 'kakao_sms' as MessageType, icon: Bell, label: '카카오+SMS', desc: '실패 시 SMS' },
+          { type: 'email' as MessageType, icon: Mail, label: '이메일', desc: '이메일 발송' },
         ].map(({ type, icon: Icon, label, desc }) => (
           <button
             key={type}
@@ -826,6 +864,7 @@ export default function MessageComposePage() {
               setSelectedTemplate(null)
               setCommonVariables({})
               setContent('')
+              setEmailSubject('')
             }}
             className={cn(
               'p-3 rounded-lg border transition-all text-left',
@@ -1108,6 +1147,48 @@ export default function MessageComposePage() {
                   </p>
                 </div>
               </div>
+            ) : messageType === 'email' ? (
+              /* 이메일 */
+              <div className="space-y-4">
+                {/* 빠른 입력 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">빠른 입력</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {quickTemplates.map(t => (
+                      <button
+                        key={t.id}
+                        onClick={() => applyQuickTemplate(t.content)}
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
+                      >
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 이메일 제목 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">제목</Label>
+                  <Input
+                    value={emailSubject}
+                    onChange={(e) => setEmailSubject(e.target.value)}
+                    placeholder="이메일 제목을 입력하세요"
+                    className={inputClassName}
+                  />
+                </div>
+
+                {/* 이메일 본문 */}
+                <div className="space-y-2">
+                  <Label className="text-zinc-300 text-sm">본문</Label>
+                  <Textarea
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="이메일 내용을 입력하세요..."
+                    rows={10}
+                    className={cn(inputClassName, 'resize-none')}
+                  />
+                </div>
+              </div>
             ) : (
               /* 브랜드 메시지 */
               <div className="space-y-4">
@@ -1224,7 +1305,8 @@ export default function MessageComposePage() {
                 (messageType === 'alimtalk' && !selectedTemplate) ||
                 (messageType === 'brandmessage' && !content) ||
                 (messageType === 'sms' && !content) ||
-                (messageType === 'kakao_sms' && !selectedTemplate && !content)
+                (messageType === 'kakao_sms' && !selectedTemplate && !content) ||
+                (messageType === 'email' && (!emailSubject || !content))
               }
               className="flex-1 bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium"
             >
@@ -1242,6 +1324,7 @@ export default function MessageComposePage() {
               {messageType === 'brandmessage' && '브랜드 메시지 발송 안내'}
               {messageType === 'sms' && 'SMS 발송 안내'}
               {messageType === 'kakao_sms' && '카카오톡 + SMS 발송 안내'}
+              {messageType === 'email' && '이메일 발송 안내'}
             </p>
             {messageType === 'alimtalk' && (
               <>
@@ -1268,6 +1351,12 @@ export default function MessageComposePage() {
                 <p className="text-xs text-amber-400/80">• 추가 비용이 발생할 수 있습니다</p>
               </>
             )}
+            {messageType === 'email' && (
+              <>
+                <p className="text-xs text-amber-400/80">• 이메일 주소가 있는 연락처에게만 발송됩니다</p>
+                <p className="text-xs text-amber-400/80">• 24시간 발송 가능</p>
+              </>
+            )}
           </div>
         </div>
 
@@ -1277,68 +1366,98 @@ export default function MessageComposePage() {
             <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
               <h3 className="text-sm font-medium text-zinc-100">미리보기</h3>
 
-              {/* 카카오톡 스타일 미리보기 */}
-              <div className="bg-[#B2C7D9] rounded-xl p-4 min-h-[300px]">
-                {/* 채팅방 헤더 */}
-                <div className="text-center mb-4">
-                  <p className="text-xs text-[#5B6770]">관훈아르떼</p>
-                </div>
-
-                {/* 메시지 말풍선 */}
-                <div className="flex gap-2">
-                  <div className="w-9 h-9 rounded-full bg-[#FEE500] flex items-center justify-center flex-shrink-0">
-                    <span className="text-xs font-bold text-[#3C1E1E]">관훈</span>
-                  </div>
-
-                  <div className="flex-1 max-w-[85%]">
-                    <p className="text-xs text-[#5B6770] mb-1">관훈아르떼</p>
-
-                    <div className="bg-white rounded-lg rounded-tl-none shadow-sm overflow-hidden">
-                      {imageUrl && (
-                        <div className="w-full h-32 bg-gray-200 flex items-center justify-center">
-                          <Image className="w-6 h-6 text-gray-400" />
-                        </div>
-                      )}
-
-                      <div className="p-3">
-                        <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
-                          {messageType === 'alimtalk' || messageType === 'kakao_sms'
-                            ? (selectedTemplate
-                              ? selectedTemplate.templateContent.replace(/#{고객명}/g, '홍길동')
-                                .replace(/#\{([^}]+)\}/g, (_, key) => commonVariables[key] || `#{${key}}`)
-                              : '템플릿을 선택하세요.')
-                            : (content || '메시지 내용이 여기에 표시됩니다.')
-                          }
-                        </p>
+              {/* 미리보기 영역 */}
+              {messageType === 'email' ? (
+                /* 이메일 스타일 미리보기 */
+                <div className="bg-zinc-800 rounded-xl p-4 min-h-[300px]">
+                  <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                    {/* 이메일 헤더 */}
+                    <div className="border-b border-gray-100 p-3 space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-500 w-10">From:</span>
+                        <span className="text-xs text-gray-700">관훈아르떼</span>
                       </div>
-
-                      {buttonText && messageType === 'brandmessage' && (
-                        <>
-                          <div className="border-t border-gray-100" />
-                          <div className="p-2">
-                            <div className="text-center py-2 rounded bg-[#FEE500]/20 text-sm text-[#3C1E1E] font-medium">
-                              {buttonText}
-                            </div>
-                          </div>
-                        </>
-                      )}
-
-                      {selectedTemplate?.buttons && messageType === 'alimtalk' && (
-                        <>
-                          <div className="border-t border-gray-100" />
-                          <div className="p-2">
-                            {selectedTemplate.buttons.map((btn, i) => (
-                              <div key={i} className="text-center py-2 rounded bg-[#FEE500]/20 text-sm text-[#3C1E1E] font-medium">
-                                {btn.name}
-                              </div>
-                            ))}
-                          </div>
-                        </>
-                      )}
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-500 w-10">To:</span>
+                        <span className="text-xs text-gray-700">수신자</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-500 w-10">제목:</span>
+                        <span className="text-sm text-[#333] font-medium">{emailSubject || '제목을 입력하세요'}</span>
+                      </div>
+                    </div>
+                    {/* 이메일 본문 */}
+                    <div className="p-4">
+                      <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
+                        {content || '이메일 내용이 여기에 표시됩니다.'}
+                      </p>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                /* 카카오톡 스타일 미리보기 */
+                <div className="bg-[#B2C7D9] rounded-xl p-4 min-h-[300px]">
+                  {/* 채팅방 헤더 */}
+                  <div className="text-center mb-4">
+                    <p className="text-xs text-[#5B6770]">관훈아르떼</p>
+                  </div>
+
+                  {/* 메시지 말풍선 */}
+                  <div className="flex gap-2">
+                    <div className="w-9 h-9 rounded-full bg-[#FEE500] flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs font-bold text-[#3C1E1E]">관훈</span>
+                    </div>
+
+                    <div className="flex-1 max-w-[85%]">
+                      <p className="text-xs text-[#5B6770] mb-1">관훈아르떼</p>
+
+                      <div className="bg-white rounded-lg rounded-tl-none shadow-sm overflow-hidden">
+                        {imageUrl && (
+                          <div className="w-full h-32 bg-gray-200 flex items-center justify-center">
+                            <Image className="w-6 h-6 text-gray-400" />
+                          </div>
+                        )}
+
+                        <div className="p-3">
+                          <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
+                            {messageType === 'alimtalk' || messageType === 'kakao_sms'
+                              ? (selectedTemplate
+                                ? selectedTemplate.templateContent.replace(/#{고객명}/g, '홍길동')
+                                  .replace(/#\{([^}]+)\}/g, (_, key) => commonVariables[key] || `#{${key}}`)
+                                : '템플릿을 선택하세요.')
+                              : (content || '메시지 내용이 여기에 표시됩니다.')
+                            }
+                          </p>
+                        </div>
+
+                        {buttonText && messageType === 'brandmessage' && (
+                          <>
+                            <div className="border-t border-gray-100" />
+                            <div className="p-2">
+                              <div className="text-center py-2 rounded bg-[#FEE500]/20 text-sm text-[#3C1E1E] font-medium">
+                                {buttonText}
+                              </div>
+                            </div>
+                          </>
+                        )}
+
+                        {selectedTemplate?.buttons && messageType === 'alimtalk' && (
+                          <>
+                            <div className="border-t border-gray-100" />
+                            <div className="p-2">
+                              {selectedTemplate.buttons.map((btn, i) => (
+                                <div key={i} className="text-center py-2 rounded bg-[#FEE500]/20 text-sm text-[#3C1E1E] font-medium">
+                                  {btn.name}
+                                </div>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* 발송 정보 요약 */}
               <div className="space-y-2 pt-2">
@@ -1349,6 +1468,7 @@ export default function MessageComposePage() {
                     {messageType === 'brandmessage' && '브랜드 메시지'}
                     {messageType === 'sms' && 'SMS'}
                     {messageType === 'kakao_sms' && '카카오톡 + SMS'}
+                    {messageType === 'email' && '이메일'}
                   </span>
                 </div>
                 {(messageType === 'alimtalk' || messageType === 'kakao_sms') && (

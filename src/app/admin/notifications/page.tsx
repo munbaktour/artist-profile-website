@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import {
   Mail,
   MessageSquare,
-  Plus,
   Clock,
   CheckCircle,
   XCircle,
@@ -169,13 +168,8 @@ export default function NotificationsPage() {
     <div className="min-h-screen">
       {/* Page Header */}
       <AdminPageHeader
-        title="알림 관리"
-        subtitle="Notification Management"
-        actionButton={{
-          label: '새 알림',
-          icon: Plus,
-          href: '/admin/notifications/compose',
-        }}
+        title="발송 내역"
+        subtitle="Notification History"
         actions={
           <RefreshButton
             onClick={() => fetchNotifications()}
@@ -232,12 +226,7 @@ export default function NotificationsPage() {
             <AdminEmptyState
               icon={Bell}
               title="발송 내역이 없습니다."
-              description="새 알림을 작성하여 연락처에게 발송해보세요."
-              action={{
-                label: '새 알림 작성',
-                href: '/admin/notifications/compose',
-                icon: Plus,
-              }}
+              description="메시지 메뉴에서 알림을 발송해보세요."
             />
           ) : (
             <div className="divide-y divide-zinc-800">
