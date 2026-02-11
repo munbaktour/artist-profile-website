@@ -9,6 +9,7 @@ import {
   CheckCircle,
   XCircle,
   Bell,
+  MessageCircle,
 } from 'lucide-react'
 import type { NotificationLog } from '@/types/admin'
 import { isAbortError } from '@/hooks/useAbortableFetch'
@@ -42,7 +43,9 @@ export default function NotificationsPage() {
   const [stats, setStats] = useState({
     email: 0,
     sms: 0,
+    alimtalk: 0,
     pending: 0,
+    total: 0,
   })
 
   // AbortController ref
@@ -83,15 +86,16 @@ export default function NotificationsPage() {
       setTotal(data.total)
       setTotalPages(data.totalPages)
 
-      const emailCount = data.data.filter((n: NotificationLog) => n.channel === 'email').length
-      const smsCount = data.data.filter((n: NotificationLog) => n.channel === 'sms').length
-      const pendingCount = data.data.filter((n: NotificationLog) => n.status === 'pending').length
-
-      setStats({
-        email: emailCount,
-        sms: smsCount,
-        pending: pendingCount,
-      })
+      // Use stats from API response (calculated before pagination)
+      if (data.stats) {
+        setStats({
+          email: data.stats.email || 0,
+          sms: data.stats.sms || 0,
+          alimtalk: data.stats.alimtalk || 0,
+          pending: data.stats.pending || 0,
+          total: data.stats.total || data.total || 0,
+        })
+      }
     } catch (err) {
       // Ignore abort errors
       if (isAbortError(err)) return
@@ -134,6 +138,7 @@ export default function NotificationsPage() {
     { id: 'all', label: '전체 채널' },
     { id: 'email', label: '이메일' },
     { id: 'sms', label: 'SMS' },
+    { id: 'alimtalk', label: '알림톡' },
   ]
 
   const statusTabs = [
@@ -145,9 +150,9 @@ export default function NotificationsPage() {
 
   // Stats configuration
   const statsConfig = [
-    { label: '이메일 발송', value: stats.email, icon: Mail, color: '#3b82f6' },
-    { label: 'SMS 발송', value: stats.sms, icon: MessageSquare, color: '#22c55e' },
-    { label: '대기 중', value: stats.pending, icon: Clock, color: '#eab308' },
+    { label: '알림톡', value: stats.alimtalk, icon: MessageCircle, color: '#facc15' },
+    { label: 'SMS', value: stats.sms, icon: MessageSquare, color: '#22c55e' },
+    { label: '이메일', value: stats.email, icon: Mail, color: '#3b82f6' },
   ]
 
   const handleChannelChange = (channel: string) => {
@@ -245,6 +250,8 @@ export default function NotificationsPage() {
                     <div className="flex items-center gap-3">
                       {notification.channel === 'email' ? (
                         <Mail size={18} className="text-blue-400 flex-shrink-0" />
+                      ) : notification.channel === 'alimtalk' ? (
+                        <MessageCircle size={18} className="text-yellow-400 flex-shrink-0" />
                       ) : (
                         <MessageSquare size={18} className="text-green-400 flex-shrink-0" />
                       )}
@@ -253,9 +260,13 @@ export default function NotificationsPage() {
                           {notification.subject || '(제목 없음)'}
                         </p>
                         <p className="text-xs text-zinc-500 mt-0.5">
-                          {notification.recipientEmail || notification.recipientPhone || '알 수 없음'}
+                          {notification.recipientCount > 1
+                            ? `${notification.recipientCount}명에게 발송`
+                            : notification.recipientEmail || notification.recipientPhone || '1명에게 발송'}
                           {' • '}
-                          {notification.notificationType === 'exhibition_invite' ? '전시 초대' : '일반 공지'}
+                          {notification.channel === 'alimtalk' ? '카카오 알림톡'
+                            : notification.channel === 'sms' ? 'SMS 문자'
+                            : notification.notificationType === 'exhibition_invite' ? '전시 초대' : '이메일'}
                         </p>
                       </div>
                     </div>

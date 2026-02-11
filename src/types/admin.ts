@@ -228,18 +228,19 @@ export interface NoteFormData {
 // ============================================
 // Notification Types (UPDATED)
 // ============================================
-export type NotificationChannel = 'email' | 'sms'
+export type NotificationChannel = 'email' | 'sms' | 'alimtalk'
 export type NotificationType = 'exhibition_invite' | 'general_notice'
 export type NotificationStatus = 'pending' | 'sent' | 'failed'
 
 // Individual notification log (per recipient)
 export interface NotificationLog {
   id: string
-  notificationType: NotificationType
+  notificationType: NotificationType | string
   channel: NotificationChannel
   recipientId: string | null
   recipientEmail: string | null
   recipientPhone: string | null
+  recipientCount: number
   subject: string | null
   content: string
   status: NotificationStatus
@@ -515,10 +516,11 @@ export function dbNotificationLogToNotificationLog(
   return {
     id: db.id,
     notificationType: db.notification_type,
-    channel: db.channel,
+    channel: db.channel as NotificationChannel,
     recipientId: db.recipient_id,
     recipientEmail: db.recipient_email,
     recipientPhone: db.recipient_phone,
+    recipientCount: 1,
     subject: db.subject,
     content: db.content,
     status: db.status,
