@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import { GALLERY_INFO } from '@/lib/constants'
+
 interface NaverMapProps {
   center?: {
     lat: number
@@ -12,7 +14,7 @@ interface NaverMapProps {
 }
 
 function NaverMapContent({
-  center = { lat: 37.5729503, lng: 126.9856214 },
+  center = GALLERY_INFO.COORDS,
   zoom = 16,
   className = 'w-full h-[400px]',
 }: NaverMapProps) {

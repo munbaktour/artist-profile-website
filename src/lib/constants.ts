@@ -99,6 +99,11 @@ export const GALLERY_INFO = {
     ko: '서울특별시 종로구 인사동11길 5, 2층 (관훈동)',
     en: '2F, 5, Insadong 11-gil, Jongno-gu, Seoul (Gwanhun-dong)',
   },
+  // ADDRESS와 반드시 함께 갱신할 것 — 주소만 바꾸면 지도가 옛 위치를 가리킨다
+  COORDS: {
+    lat: 37.5737392,
+    lng: 126.9838776,
+  },
 } as const
 
 // ============================================

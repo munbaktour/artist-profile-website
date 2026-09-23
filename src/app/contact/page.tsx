@@ -85,7 +85,7 @@ export default function ContactPage() {
 
               {/* Naver Map */}
               <NaverMap
-                center={{ lat: 37.5729503, lng: 126.9856214 }}
+                center={GALLERY_INFO.COORDS}
                 zoom={16}
                 className="w-full h-[400px]"
               />
