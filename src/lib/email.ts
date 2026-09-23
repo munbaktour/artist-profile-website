@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { GALLERY_INFO } from '@/lib/constants'
 
 export interface EmailOptions {
   to: string | string[]
@@ -191,7 +192,7 @@ export function generateExhibitionInviteEmail(params: {
             <td style="padding: 20px 40px 40px; border-top: 1px solid #262626; margin-top: 20px;">
               <p style="color: #52525b; font-size: 12px; line-height: 1.6; margin: 0;">
                 관훈아르떼<br>
-                서울시 종로구 인사동길 19 관훈빌딩<br>
+                ${GALLERY_INFO.ADDRESS.ko}<br>
                 Tel: 02-733-6469
               </p>
             </td>
@@ -255,7 +256,7 @@ export function generateGeneralNoticeEmail(params: {
             <td style="padding: 20px 40px 40px; border-top: 1px solid #262626; margin-top: 20px;">
               <p style="color: #52525b; font-size: 12px; line-height: 1.6; margin: 0;">
                 관훈아르떼<br>
-                서울시 종로구 인사동길 19 관훈빌딩<br>
+                ${GALLERY_INFO.ADDRESS.ko}<br>
                 Tel: 02-733-6469
               </p>
             </td>
