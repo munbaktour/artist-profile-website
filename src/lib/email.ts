@@ -193,7 +193,7 @@ export function generateExhibitionInviteEmail(params: {
               <p style="color: #52525b; font-size: 12px; line-height: 1.6; margin: 0;">
                 관훈아르떼<br>
                 ${GALLERY_INFO.ADDRESS.ko}<br>
-                Tel: 02-733-6469
+                Tel: ${GALLERY_INFO.PHONE}
               </p>
             </td>
           </tr>
@@ -257,7 +257,7 @@ export function generateGeneralNoticeEmail(params: {
               <p style="color: #52525b; font-size: 12px; line-height: 1.6; margin: 0;">
                 관훈아르떼<br>
                 ${GALLERY_INFO.ADDRESS.ko}<br>
-                Tel: 02-733-6469
+                Tel: ${GALLERY_INFO.PHONE}
               </p>
             </td>
           </tr>
