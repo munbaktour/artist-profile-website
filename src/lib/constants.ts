@@ -96,8 +96,8 @@ export const GALLERY_INFO = {
   EMAIL: 'kwanhoonarte@gmail.com',
   PHONE: '02-720-4028',
   ADDRESS: {
-    ko: '서울 종로구 관훈동 인사동5길 12 2층',
-    en: '2F, 12, Insadong 5-gil, Gwanhun-dong, Jongno-gu, Seoul',
+    ko: '서울특별시 종로구 인사동11길 5, 2층 (관훈동)',
+    en: '2F, 5, Insadong 11-gil, Jongno-gu, Seoul (Gwanhun-dong)',
   },
 } as const
 
