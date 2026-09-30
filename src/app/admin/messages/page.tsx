@@ -76,15 +76,15 @@ export default function MessagesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-lg font-semibold text-zinc-100">메시지 발송</h1>
-          <p className="text-zinc-500 text-sm mt-0.5">
-            카카오톡 알림톡/친구톡 발송 내역을 관리합니다.
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-50">메시지 발송</h1>
+          <p className="text-zinc-400 text-sm mt-1">
+            카카오톡 알림톡·친구톡과 이메일 발송 내역을 관리합니다.
           </p>
         </div>
-        <Link href="/admin/messages/compose">
-          <Button className="bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium">
+        <Link href="/admin/messages/compose" className="shrink-0">
+          <Button className="w-full sm:w-auto bg-[#D4AF37] hover:bg-[#C49B30] text-zinc-950 font-medium shadow-sm">
             <Plus className="w-4 h-4 mr-2" />
             새 메시지
           </Button>
@@ -98,12 +98,17 @@ export default function MessagesPage() {
           return (
             <div
               key={stat.label}
-              className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4"
+              className="bg-zinc-900 rounded-xl border border-zinc-800 p-5 flex items-center gap-4"
             >
-              <Icon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
-              <div>
-                <p className="text-2xl font-semibold text-zinc-100">{stat.value}</p>
-                <p className="text-xs text-zinc-500">{stat.label}</p>
+              {/* 아이콘에 배경을 줘 숫자와 시각적 무게를 분리한다 */}
+              <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0">
+                <Icon className="w-5 h-5 text-zinc-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-2xl font-semibold tabular-nums text-zinc-50 leading-none">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-zinc-400 mt-1.5">{stat.label}</p>
               </div>
             </div>
           )
@@ -128,17 +133,19 @@ export default function MessagesPage() {
             <Loader2 className="w-6 h-6 text-zinc-400 animate-spin" />
           </div>
         ) : history.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <MessageSquare className="w-10 h-10 text-zinc-700 mb-4" />
-            <p className="text-zinc-400 mb-1">발송 내역이 없습니다</p>
-            <p className="text-sm text-zinc-500 mb-6">
-              카카오톡 메시지를 발송하면 여기에 표시됩니다.
+          <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
+            {/* 아이콘을 원형 배경에 담아 빈 화면에 시선이 머물 지점을 만든다 */}
+            <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+              <MessageSquare className="w-6 h-6 text-zinc-500" />
+            </div>
+            <p className="text-base font-medium text-zinc-100">아직 보낸 메시지가 없습니다</p>
+            <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
+              연락처를 선택해 알림톡이나 이메일을 보내면 발송 내역이 여기에 쌓입니다.
             </p>
-            <Link href="/admin/messages/compose">
-              <Button
-                variant="outline"
-                className="border-zinc-700 text-zinc-300 hover:bg-zinc-800"
-              >
+            <Link href="/admin/messages/compose" className="mt-6">
+              {/* 빈 상태에서는 이 버튼이 유일한 다음 행동이므로 주요 버튼으로 둔다.
+                  기존에는 variant="outline"이라 배경이 흰색으로 렌더돼 글자가 보이지 않았다. */}
+              <Button className="bg-[#D4AF37] hover:bg-[#C49B30] text-zinc-950 font-medium shadow-sm">
                 <Plus className="w-4 h-4 mr-2" />
                 첫 메시지 보내기
               </Button>
