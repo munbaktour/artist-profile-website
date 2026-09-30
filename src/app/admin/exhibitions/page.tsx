@@ -151,12 +151,21 @@ export default function AdminExhibitionsPage() {
             <p className="text-red-400">{error}</p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <ImageIcon className="w-10 h-10 text-zinc-700 mb-4" />
-            <p className="text-zinc-400 mb-1">등록된 전시가 없습니다</p>
-            <p className="text-sm text-zinc-500">
-              &quot;새 전시 등록&quot; 버튼을 눌러 전시를 추가하세요.
+          <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
+            <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+              <ImageIcon className="w-6 h-6 text-zinc-500" />
+            </div>
+            <p className="text-base font-medium text-zinc-100">등록된 전시가 없습니다</p>
+            <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
+              전시를 등록하면 기간과 진행 상태를 여기서 관리할 수 있습니다.
             </p>
+            <Link
+              href="/admin/exhibitions/new"
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-zinc-950 rounded-lg font-medium text-sm hover:bg-[#C49B30] transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              첫 전시 등록하기
+            </Link>
           </div>
         ) : (
           filtered.map(exhibition => (

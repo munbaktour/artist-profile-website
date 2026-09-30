@@ -34,8 +34,14 @@ export default function AdminLayout({
 
         {/* 여백을 레이아웃에서 한 번만 준다.
             기존에는 각 페이지가 알아서 처리해 대부분 여백이 없었고,
-            헤더 버튼과 카드가 화면 오른쪽 끝에 붙어 잘려 보였다. */}
-        <main className="p-4 sm:p-6 lg:p-8 pt-16 lg:pt-8">
+            헤더 버튼과 카드가 화면 오른쪽 끝에 붙어 잘려 보였다.
+
+            padding을 축별로 나눠 쓰는 이유: `p-4 sm:p-6 ... pt-16`처럼 쓰면
+            Tailwind 소스 순서상 sm:p-6이 pt-16을 덮어써 위 여백이 24px로 줄고,
+            lg 미만에서 좌상단 고정 메뉴 버튼(y 16~62)이 제목을 가린다.
+            padding-top을 pt-20 / lg:pt-8 두 개로만 정해 충돌을 없앤다.
+            메뉴 버튼 하단이 62px이므로 pt-20(80px)이면 18px 여유가 남는다. */}
+        <main className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-20 lg:pt-8">
           {children}
         </main>
       </div>
