@@ -1,11 +1,17 @@
 import { Resend } from 'resend'
 import { GALLERY_INFO } from '@/lib/constants'
 
+export interface EmailAttachment {
+  filename: string
+  content: Buffer
+}
+
 export interface EmailOptions {
   to: string | string[]
   subject: string
   html: string
   text?: string
+  attachments?: EmailAttachment[]
 }
 
 export interface EmailResult {
@@ -59,6 +65,7 @@ export async function sendEmail(options: EmailOptions): Promise<EmailResult> {
       subject: options.subject,
       html: options.html,
       text: options.text,
+      attachments: options.attachments,
     })
 
     if (error) {
