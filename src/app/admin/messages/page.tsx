@@ -18,9 +18,9 @@ import {
   CheckCircle2,
   XCircle,
   Plus,
-  Loader2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AdminSkeleton } from '@/components/features/admin/ui'
 
 interface MessageLog {
   id: string
@@ -129,8 +129,8 @@ export default function MessagesPage() {
       {/* 발송 내역 테이블 */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-6 h-6 text-zinc-400 animate-spin" />
+          <div className="p-5">
+            <AdminSkeleton variant="table-row" count={5} />
           </div>
         ) : history.length === 0 ? (
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">

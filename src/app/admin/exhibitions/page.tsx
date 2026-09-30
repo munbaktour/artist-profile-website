@@ -10,6 +10,7 @@ import {
   Trash2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AdminSkeleton } from '@/components/features/admin/ui'
 
 interface ExhibitionRow {
   id: string
@@ -143,9 +144,7 @@ export default function AdminExhibitionsPage() {
       {/* Exhibition List */}
       <div className="space-y-3">
         {loading ? (
-          <div className="p-8 text-center">
-            <p className="text-zinc-400">불러오는 중...</p>
-          </div>
+          <AdminSkeleton variant="list-item" count={4} />
         ) : error ? (
           <div className="p-8 text-center">
             <p className="text-red-400">{error}</p>

@@ -14,6 +14,7 @@ import {
   Eye,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AdminSkeleton } from '@/components/features/admin/ui'
 
 interface CheckinRecord {
   id: string
@@ -253,9 +254,7 @@ export default function AdminCheckinsPage() {
       {/* 방문자 목록 (체크인 + 익명 방문 통합) */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center">
-            <p className="text-zinc-400">불러오는 중...</p>
-          </div>
+          <AdminSkeleton variant="list-item" count={4} />
         ) : error ? (
           <div className="p-8 text-center">
             <p className="text-red-400">{error}</p>
