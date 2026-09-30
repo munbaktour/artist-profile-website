@@ -317,8 +317,8 @@ export default function ContactsPage() {
 
         {/* Contact List */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
                 className="p-5 rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse"
@@ -344,12 +344,15 @@ export default function ContactsPage() {
             <p className="text-zinc-400">검색 결과가 없습니다</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          // 2xl에서 4열 — 위 통계 카드(md:grid-cols-4)와 세로선을 맞춘다
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
             {contacts.map((contact) => (
+              // flex-col: 내용 길이가 달라도 액션 바를 카드 맨 아래에 고정한다.
+              // 그리드가 카드 높이는 맞춰주지만 내부 배치까지 맞춰주지는 않는다.
               <div
                 key={contact.id}
                 onClick={() => handleView(contact)}
-                className="relative p-5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:bg-zinc-800/70 transition-colors"
+                className="relative flex flex-col p-5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:bg-zinc-800/70 transition-colors"
               >
                 {/* VIP Badge */}
                 {contact.isVip && (
@@ -358,7 +361,7 @@ export default function ContactsPage() {
                   </div>
                 )}
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 mb-4">
                   {/* Avatar */}
                   <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center bg-zinc-800">
                     <User size={18} className="text-zinc-400" />
@@ -403,8 +406,8 @@ export default function ContactsPage() {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-2 mt-4 pt-3 border-t border-zinc-800">
+                {/* Action Buttons — mt-auto로 카드 하단에 붙인다 */}
+                <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-800">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
