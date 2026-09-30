@@ -236,18 +236,31 @@ export default function DocumentsPage() {
             </button>
           </div>
         ) : documents.length === 0 ? (
-          <div className="p-12 text-center">
-            <FolderOpen size={40} className="mx-auto text-zinc-600 mb-3" />
-            <p className="text-zinc-400 text-sm">
-              {search ? '검색 결과가 없습니다.' : '등록된 문서가 없습니다.'}
-            </p>
-            {!search && (
-              <button
-                onClick={() => setShowUploadModal(true)}
-                className="mt-3 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
-              >
-                첫 문서를 업로드하세요
-              </button>
+          <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
+            <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+              <FolderOpen size={24} className="text-zinc-500" />
+            </div>
+            {search ? (
+              <>
+                <p className="text-base font-medium text-zinc-100">검색 결과가 없습니다</p>
+                <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
+                  다른 제목이나 파일명으로 다시 찾아보세요.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-base font-medium text-zinc-100">등록된 문서가 없습니다</p>
+                <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
+                  전시 도록이나 작품 목록을 올려두면 메일 보낼 때 첨부로 바로 쓸 수 있습니다.
+                </p>
+                <button
+                  onClick={() => setShowUploadModal(true)}
+                  className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-zinc-950 rounded-lg font-medium text-sm hover:bg-[#C49B30] transition-colors"
+                >
+                  <Upload size={16} />
+                  첫 문서 업로드
+                </button>
+              </>
             )}
           </div>
         ) : (
