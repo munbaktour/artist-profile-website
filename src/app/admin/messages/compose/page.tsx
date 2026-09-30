@@ -26,7 +26,8 @@ import {
   XCircle,
   Mail,
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, formatFileSize } from '@/lib/utils'
+import { MAX_ATTACHMENT_BYTES } from '@/lib/constants'
 
 // 메시지 타입
 type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms' | 'email'
@@ -36,6 +37,14 @@ type TargetingType = 'M' | 'N' | 'I'
 
 // 발송 단계
 type SendStep = 'compose' | 'preview' | 'result'
+
+// 이메일 첨부 대상 문서 (문서 관리에 업로드된 파일)
+type AttachableDocument = {
+  id: string
+  title: string
+  fileName: string
+  fileSize: number
+}
 
 const targetingOptions = [
   { value: 'M' as TargetingType, label: '전체', description: '마케팅 수신동의 유저 전체' },
@@ -204,6 +213,16 @@ export default function MessageComposePage() {
   // 이메일 관련
   const [emailSubject, setEmailSubject] = useState('')
 
+  // 이메일 첨부 (문서 관리에 업로드된 파일에서 선택)
+  const [documents, setDocuments] = useState<AttachableDocument[]>([])
+  const [selectedDocIds, setSelectedDocIds] = useState<string[]>([])
+  const [isLoadingDocs, setIsLoadingDocs] = useState(false)
+
+  // 선택한 첨부의 용량 합계
+  const attachmentBytes = documents
+    .filter(d => selectedDocIds.includes(d.id))
+    .reduce((sum, d) => sum + d.fileSize, 0)
+
   // 발송 관련
   const [isSending, setIsSending] = useState(false)
   const [totalContactCount, setTotalContactCount] = useState(0)
@@ -307,6 +326,39 @@ export default function MessageComposePage() {
     loadCategories()
     loadContactCounts()
   }, [loadCategories, loadContactCounts])
+
+  // 첨부 가능한 문서 목록 로드 (이메일 모드에서만)
+  const loadDocuments = useCallback(async () => {
+    setIsLoadingDocs(true)
+    try {
+      const res = await fetch('/api/admin/documents?pageSize=100')
+      if (!res.ok) throw new Error('fetch failed')
+      const data = await res.json()
+      if (Array.isArray(data.data)) {
+        setDocuments(
+          data.data.map((d: Record<string, unknown>) => ({
+            id: d.id as string,
+            title: (d.title as string) || '',
+            fileName: (d.fileName as string) || '',
+            fileSize: (d.fileSize as number) || 0,
+          }))
+        )
+      }
+    } catch {
+      setDocuments([])
+    } finally {
+      setIsLoadingDocs(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (messageType === 'email') {
+      loadDocuments()
+    } else {
+      // 이메일 외 채널은 첨부 개념이 없다. 채널을 바꾸면 선택을 비운다.
+      setSelectedDocIds([])
+    }
+  }, [messageType, loadDocuments])
 
   // 연락처 목록 로드
   const loadContacts = useCallback(async () => {
@@ -452,6 +504,14 @@ export default function MessageComposePage() {
         alert('이메일 내용을 입력해주세요.')
         return
       }
+      if (attachmentBytes > MAX_ATTACHMENT_BYTES) {
+        alert(
+          `첨부 용량이 한도를 넘습니다.\n` +
+          `현재 ${formatFileSize(attachmentBytes)} / 최대 ${formatFileSize(MAX_ATTACHMENT_BYTES)}\n\n` +
+          `첨부를 줄이거나, 용량이 큰 자료는 본문에 링크로 안내해 주세요.`
+        )
+        return
+      }
     }
 
     setSendStep('preview')
@@ -500,6 +560,9 @@ export default function MessageComposePage() {
       } else if (messageType === 'email') {
         requestBody.subject = emailSubject
         requestBody.content = content
+        if (selectedDocIds.length > 0) {
+          requestBody.documentIds = selectedDocIds
+        }
       }
 
       const res = await fetch('/api/admin/messages/send', {
@@ -1187,6 +1250,71 @@ export default function MessageComposePage() {
                     rows={10}
                     className={cn(inputClassName, 'resize-none')}
                   />
+                </div>
+
+                {/* 첨부파일 */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-zinc-300 text-sm">첨부파일</Label>
+                    <Link
+                      href="/admin/documents"
+                      className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+                    >
+                      문서 관리에서 업로드 →
+                    </Link>
+                  </div>
+
+                  {isLoadingDocs ? (
+                    <p className="text-xs text-zinc-500 py-2">문서를 불러오는 중...</p>
+                  ) : documents.length === 0 ? (
+                    <p className="text-xs text-zinc-500 py-2">
+                      첨부할 수 있는 문서가 없습니다. 문서 관리에서 먼저 업로드해 주세요.
+                    </p>
+                  ) : (
+                    <>
+                      <div className="max-h-48 overflow-y-auto rounded-lg border border-zinc-700 divide-y divide-zinc-800">
+                        {documents.map(doc => {
+                          const checked = selectedDocIds.includes(doc.id)
+                          return (
+                            <label
+                              key={doc.id}
+                              className="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-zinc-800/50 transition-colors"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() =>
+                                  setSelectedDocIds(prev =>
+                                    checked ? prev.filter(id => id !== doc.id) : [...prev, doc.id]
+                                  )
+                                }
+                                className="w-4 h-4 accent-yellow-500"
+                              />
+                              <span className="flex-1 min-w-0 text-sm text-zinc-300 truncate">
+                                {doc.title || doc.fileName}
+                              </span>
+                              <span className="text-xs text-zinc-500 shrink-0">
+                                {formatFileSize(doc.fileSize)}
+                              </span>
+                            </label>
+                          )
+                        })}
+                      </div>
+
+                      {selectedDocIds.length > 0 && (
+                        <p
+                          className={cn(
+                            'text-xs',
+                            attachmentBytes > MAX_ATTACHMENT_BYTES ? 'text-red-400' : 'text-zinc-500'
+                          )}
+                        >
+                          {selectedDocIds.length}개 선택 · {formatFileSize(attachmentBytes)}
+                          {attachmentBytes > MAX_ATTACHMENT_BYTES &&
+                            ` — 한도 ${formatFileSize(MAX_ATTACHMENT_BYTES)}를 넘어 발송할 수 없습니다`}
+                        </p>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             ) : (

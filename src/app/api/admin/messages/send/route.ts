@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { sendEmail, generateGeneralNoticeEmail } from '@/lib/email'
+import type { EmailAttachment } from '@/lib/email'
+import { MAX_ATTACHMENT_BYTES } from '@/lib/constants'
 
 // NHN Cloud API 엔드포인트
 const NHN_ALIMTALK_API = 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.3/appkeys'
@@ -38,6 +40,8 @@ interface SendRequest {
   fallbackToSms?: boolean
   // 이메일용
   subject?: string
+  // 이메일 첨부 — documents 테이블의 id 목록 (이메일 외 채널에서는 무시)
+  documentIds?: string[]
 }
 
 interface BrandMessageRecipient {
@@ -120,6 +124,7 @@ export async function POST(request: NextRequest) {
       chatBubbleType = 'TEXT',
       fallbackToSms = false,
       subject,
+      documentIds,
     } = body
 
     if (!recipientIds || recipientIds.length === 0) {
@@ -483,6 +488,57 @@ export async function POST(request: NextRequest) {
       console.log('validContacts count:', validContacts.length)
       console.log('subject:', subject)
 
+      // ---- 첨부파일 준비 ----
+      // 수신자 루프 밖에서 한 번만 내려받는다. 루프 안에서 받으면
+      // 수신자 수만큼 같은 파일을 중복 다운로드하게 된다.
+      let attachments: EmailAttachment[] | undefined
+
+      if (documentIds && documentIds.length > 0) {
+        const { data: docs, error: docsError } = await supabase
+          .from('documents')
+          .select('file_path, file_name, file_size')
+          .in('id', documentIds)
+
+        if (docsError || !docs || docs.length === 0) {
+          return NextResponse.json(
+            { error: '첨부할 문서를 찾을 수 없습니다.' },
+            { status: 400 }
+          )
+        }
+
+        const totalBytes = docs.reduce((sum, d) => sum + (d.file_size ?? 0), 0)
+        if (totalBytes > MAX_ATTACHMENT_BYTES) {
+          const mb = (n: number) => (n / 1024 / 1024).toFixed(1)
+          return NextResponse.json(
+            { error: `첨부 용량이 한도를 넘습니다 (${mb(totalBytes)}MB / 최대 ${mb(MAX_ATTACHMENT_BYTES)}MB)` },
+            { status: 400 }
+          )
+        }
+
+        // 하나라도 못 받으면 한 통도 보내지 않는다.
+        // 일부만 첨부된 채로 나가면 수신자도 혼란스럽고 재발송도 어렵다.
+        attachments = []
+        for (const doc of docs) {
+          const { data: blob, error: dlError } = await supabase.storage
+            .from('documents')
+            .download(doc.file_path)
+
+          if (dlError || !blob) {
+            return NextResponse.json(
+              { error: `첨부 파일을 불러오지 못했습니다: ${doc.file_name}` },
+              { status: 500 }
+            )
+          }
+
+          attachments.push({
+            filename: doc.file_name,
+            content: Buffer.from(await blob.arrayBuffer()),
+          })
+        }
+
+        console.log('attachments:', attachments.map(a => a.filename).join(', '))
+      }
+
       // 각 수신자에게 이메일 발송
       for (const contact of validContacts) {
         if (!contact.email) continue
@@ -500,6 +556,7 @@ export async function POST(request: NextRequest) {
             to: contact.email,
             subject: subject || '',
             html,
+            attachments,
           })
 
           if (result.success) {
