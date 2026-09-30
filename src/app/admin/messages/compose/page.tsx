@@ -193,7 +193,9 @@ export default function MessageComposePage() {
   const [individualVariables, setIndividualVariables] = useState<Record<string, string>>({})
 
   // 수신자 관련
-  const [recipientType, setRecipientType] = useState<RecipientType>('all')
+  // 기본값을 '직접 선택'으로 둔다. '전체'가 기본이면 수신자를 고르지 않은 채
+  // 발송해 연락처 전원에게 나가는 사고가 생길 수 있다.
+  const [recipientType, setRecipientType] = useState<RecipientType>('select')
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedContacts, setSelectedContacts] = useState<string[]>([])
   const [contacts, setContacts] = useState<Contact[]>([])
