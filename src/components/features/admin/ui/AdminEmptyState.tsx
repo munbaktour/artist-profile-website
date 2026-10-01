@@ -32,7 +32,7 @@ export function AdminEmptyState({
         className
       )}
     >
-      <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+      <div className="w-14 h-14 rounded-full bg-zinc-700/60 flex items-center justify-center mb-5">
         <Icon className="w-6 h-6 text-zinc-400" />
       </div>
       <p className="text-base font-medium text-zinc-100">{title}</p>

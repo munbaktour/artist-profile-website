@@ -255,7 +255,7 @@ export default function NewContactPage() {
           <button
             type="button"
             onClick={() => setShowScanModal(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm border border-zinc-700 text-zinc-300 hover:bg-zinc-700 transition-colors"
           >
             <Camera size={16} />
             명함 스캔
@@ -272,7 +272,7 @@ export default function NewContactPage() {
         )}
 
         {/* Basic Info */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <User size={16} className="text-zinc-400" />
             <h2 className={ADMIN_TYPE.sectionTitle}>기본 정보</h2>
@@ -341,7 +341,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Contact Info */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Phone size={16} className="text-zinc-400" />
             <h2 className={ADMIN_TYPE.sectionTitle}>연락처 정보</h2>
@@ -387,7 +387,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Organization */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Building size={16} className="text-zinc-400" />
             <h2 className={ADMIN_TYPE.sectionTitle}>소속 정보</h2>
@@ -419,7 +419,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Address */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <MapPin size={16} className="text-zinc-400" />
             <h2 className={ADMIN_TYPE.sectionTitle}>주소</h2>
@@ -475,7 +475,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Notes */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5 space-y-4">
           <h2 className={ADMIN_TYPE.sectionTitle}>메모</h2>
           <textarea
             value={formData.notes}
@@ -490,7 +490,7 @@ export default function NewContactPage() {
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-700">
           <Link
             href="/admin/contacts"
-            className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-800 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-700 transition-colors"
           >
             취소
           </Link>
@@ -522,7 +522,7 @@ export default function NewContactPage() {
             if (e.target === e.currentTarget) resetScanModal()
           }}
         >
-          <div className="w-full max-w-xl bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden">
+          <div className="w-full max-w-xl bg-zinc-800 border border-zinc-700 rounded-xl overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-700">
               <div className="flex items-center gap-3">
@@ -536,7 +536,7 @@ export default function NewContactPage() {
               </div>
               <button
                 onClick={resetScanModal}
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-300 hover:bg-zinc-700 transition-colors"
               >
                 <X size={18} />
               </button>
@@ -551,7 +551,7 @@ export default function NewContactPage() {
                   onClick={() => setScanEngine('ocr')}
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ocr'
-                      ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
+                      ? 'bg-zinc-700 border border-zinc-700 text-zinc-100'
                       : 'bg-zinc-950 border border-zinc-700 text-zinc-400'
                   }`}
                 >
@@ -566,7 +566,7 @@ export default function NewContactPage() {
                   onClick={() => setScanEngine('ai')}
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ai'
-                      ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
+                      ? 'bg-zinc-700 border border-zinc-700 text-zinc-100'
                       : 'bg-zinc-950 border border-zinc-700 text-zinc-400'
                   }`}
                 >
@@ -694,7 +694,7 @@ export default function NewContactPage() {
                     setExtractedData(null)
                     setScanError(null)
                   }}
-                  className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-800 transition-colors"
+                  className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-700 transition-colors"
                 >
                   다시 업로드
                 </button>

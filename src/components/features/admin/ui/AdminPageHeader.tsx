@@ -25,7 +25,7 @@ export function AdminPageHeader({
 }: AdminPageHeaderProps) {
   const ActionIcon = actionButton?.icon
   const backClass =
-    'p-2 -ml-2 mt-0.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors shrink-0'
+    'p-2 -ml-2 mt-0.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700 transition-colors shrink-0'
   // 버튼이 좁은 화면에서는 가로폭을 채우고, 넓어지면 내용만큼만 차지한다
   const actionClass =
     'flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 rounded-lg ' +
@@ -87,7 +87,7 @@ export function RefreshButton({ onClick, loading, disabled }: RefreshButtonProps
       onClick={onClick}
       disabled={disabled || loading}
       aria-label="새로고침"
-      className="p-2 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors disabled:opacity-50"
+      className="p-2 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700 transition-colors disabled:opacity-50"
     >
       <RefreshCw className={cn('w-4 h-4', loading && 'animate-spin')} />
     </button>

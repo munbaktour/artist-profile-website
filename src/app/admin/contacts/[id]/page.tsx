@@ -294,14 +294,14 @@ export default function ContactDetailPage({ params }: PageProps) {
     return (
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex items-center gap-4">
-          <Skeleton className="h-10 w-10 bg-zinc-800" />
+          <Skeleton className="h-10 w-10 bg-zinc-700" />
           <div className="space-y-2">
-            <Skeleton className="h-8 w-48 bg-zinc-800" />
-            <Skeleton className="h-4 w-32 bg-zinc-800" />
+            <Skeleton className="h-8 w-48 bg-zinc-700" />
+            <Skeleton className="h-4 w-32 bg-zinc-700" />
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6">
-          <Skeleton className="h-64 bg-zinc-800" />
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6">
+          <Skeleton className="h-64 bg-zinc-700" />
         </div>
       </div>
     )
@@ -335,7 +335,7 @@ export default function ContactDetailPage({ params }: PageProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900"
+              className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700"
             >
               <ArrowLeft className="w-5 h-5" />
             </Button>
@@ -359,7 +359,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           <Link href={`/admin/notifications/compose?contactId=${contact.id}`}>
             <Button
               variant="outline"
-              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
+              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-700"
             >
               <Send className="w-4 h-4 mr-2" />
               알림 발송
@@ -371,7 +371,7 @@ export default function ContactDetailPage({ params }: PageProps) {
               <Button
                 variant="outline"
                 onClick={() => setIsEditing(false)}
-                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-900"
+                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-700"
               >
                 취소
               </Button>
@@ -388,7 +388,7 @@ export default function ContactDetailPage({ params }: PageProps) {
               <Button
                 variant="outline"
                 onClick={() => setIsEditing(true)}
-                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-900"
+                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-700"
               >
                 <Pencil className="w-4 h-4 mr-2" />
                 수정
@@ -410,7 +410,7 @@ export default function ContactDetailPage({ params }: PageProps) {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Contact Info */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+          <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
             <h2 className={ADMIN_TYPE.sectionTitle}>연락처 정보</h2>
 
             {isEditing ? (
@@ -450,7 +450,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                       <SelectTrigger className={inputClassName}>
                         <SelectValue placeholder="선택 안함" />
                       </SelectTrigger>
-                      <SelectContent className="bg-zinc-900 border-zinc-700">
+                      <SelectContent className="bg-zinc-800 border-zinc-700">
                         <SelectItem value="none" className="text-zinc-100">
                           선택 안함
                         </SelectItem>
@@ -586,7 +586,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           </div>
 
           {/* Notes Section */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+          <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className={`${ADMIN_TYPE.sectionTitle} flex items-center gap-2`}>
                 <MessageSquare className="w-5 h-5" />
@@ -607,7 +607,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                   <SelectTrigger className={cn(inputClassName, 'w-[140px]')}>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-zinc-900 border-zinc-700">
+                  <SelectContent className="bg-zinc-800 border-zinc-700">
                     {noteTypes.map((type) => (
                       <SelectItem
                         key={type.value}
@@ -684,10 +684,10 @@ export default function ContactDetailPage({ params }: PageProps) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-zinc-900 border-zinc-700"
+                          className="bg-zinc-800 border-zinc-700"
                         >
                           <DropdownMenuItem
-                            className="text-red-400 hover:bg-zinc-800 cursor-pointer"
+                            className="text-red-400 hover:bg-zinc-700 cursor-pointer"
                             onClick={() => handleDeleteNote(note.id)}
                           >
                             <Trash2 className="w-4 h-4 mr-2" />
@@ -731,8 +731,8 @@ export default function ContactDetailPage({ params }: PageProps) {
             className={cn(
               'rounded-lg border p-6 space-y-4',
               contact.isVip
-                ? 'bg-zinc-900 border-zinc-700'
-                : 'bg-zinc-900 border-zinc-700'
+                ? 'bg-zinc-800 border-zinc-700'
+                : 'bg-zinc-800 border-zinc-700'
             )}
           >
             <h3 className="text-sm font-medium text-zinc-400">정보</h3>
@@ -778,7 +778,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           </div>
 
           {/* Tags */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+          <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
             <h3 className="text-sm font-medium text-zinc-400">태그</h3>
 
             {contact.tags && contact.tags.length > 0 ? (
@@ -799,7 +799,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-3">
+          <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-3">
             <h3 className="text-sm font-medium text-zinc-400">빠른 작업</h3>
 
             {contact.email && (

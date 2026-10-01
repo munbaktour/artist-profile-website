@@ -25,8 +25,8 @@ export function AdminFilterTabs({
               variant === 'pill' && 'rounded-full',
               variant === 'default' && 'rounded-lg',
               isActive
-                ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
+                ? 'bg-zinc-700 text-zinc-100 border border-zinc-700'
+                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-700'
             )}
           >
             {Icon && <Icon size={14} />}
@@ -40,6 +40,6 @@ export function AdminFilterTabs({
 
 export function FilterDivider() {
   return (
-    <div className="w-px bg-zinc-800 self-stretch mx-2" />
+    <div className="w-px bg-zinc-700 self-stretch mx-2" />
   )
 }

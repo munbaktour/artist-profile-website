@@ -126,7 +126,7 @@ export default function AdminExhibitionsPage() {
             className={cn(
               'px-3 py-1.5 rounded-lg text-sm transition-colors',
               filter === tab.id
-                ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                ? 'bg-zinc-700 text-zinc-100 border border-zinc-700'
                 : 'text-zinc-400 hover:text-zinc-300 border border-transparent'
             )}
           >
@@ -145,7 +145,7 @@ export default function AdminExhibitionsPage() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
-            <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+            <div className="w-14 h-14 rounded-full bg-zinc-700/60 flex items-center justify-center mb-5">
               <ImageIcon className="w-6 h-6 text-zinc-400" />
             </div>
             <p className="text-base font-medium text-zinc-100">등록된 전시가 없습니다</p>
@@ -164,7 +164,7 @@ export default function AdminExhibitionsPage() {
           filtered.map(exhibition => (
             <div
               key={exhibition.id}
-              className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors"
+              className="bg-zinc-800 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-700/70 transition-colors"
             >
               <ImageIcon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
               <div

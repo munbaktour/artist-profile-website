@@ -135,7 +135,7 @@ export default function AdminCheckinsPage() {
               <button
                 key={exhibition.id}
                 onClick={() => setSelectedExhibition(exhibition.slug)}
-                className="w-full bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors text-left"
+                className="w-full bg-zinc-800 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-700/70 transition-colors text-left"
               >
                 <QrCode className="w-5 h-5 text-zinc-400 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -153,7 +153,7 @@ export default function AdminCheckinsPage() {
                       ? 'bg-green-500/10 text-green-400'
                       : exhibition.status === 'upcoming'
                       ? 'bg-blue-500/10 text-blue-400'
-                      : 'bg-zinc-800 text-zinc-400'
+                      : 'bg-zinc-700 text-zinc-400'
                   )}>
                     {exhibition.status === 'current' ? '진행 중' : exhibition.status === 'upcoming' ? '예정' : '종료'}
                   </span>
@@ -179,21 +179,21 @@ export default function AdminCheckinsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Eye className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{visitCount}</p>
             <p className="text-xs text-zinc-400">QR 스캔 횟수</p>
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{checkins.length}</p>
             <p className="text-xs text-zinc-400">정보 입력 체크인</p>
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Clock className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">
@@ -209,7 +209,7 @@ export default function AdminCheckinsPage() {
       </div>
 
       {/* QR 코드 */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5">
+      <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-5">
         <h2 className={`${ADMIN_TYPE.sectionTitle} mb-4`}>체크인 QR코드</h2>
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <div ref={qrRef} className="bg-white p-4 rounded-lg">
@@ -240,7 +240,7 @@ export default function AdminCheckinsPage() {
       </div>
 
       {/* 방문자 목록 (체크인 + 익명 방문 통합) */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
+      <div className="bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <AdminSkeleton variant="list-item" count={4} />
         ) : error ? (
@@ -271,7 +271,7 @@ export default function AdminCheckinsPage() {
                 <div key={item.id} className="px-4 py-3 flex items-center gap-3">
                   <div className={cn(
                     "w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0",
-                    item.type === 'checkin' ? "bg-zinc-800" : "bg-zinc-800/50"
+                    item.type === 'checkin' ? "bg-zinc-700" : "bg-zinc-700/50"
                   )}>
                     {item.type === 'checkin' ? (
                       <User className="w-4 h-4 text-zinc-400" />

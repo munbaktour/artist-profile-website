@@ -214,7 +214,7 @@ export default function DocumentsPage() {
       </div>
 
       {/* Document List */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
+      <div className="bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <div className="p-5">
             <AdminSkeleton variant="list-item" count={5} />
@@ -235,7 +235,7 @@ export default function DocumentsPage() {
           </div>
         ) : documents.length === 0 ? (
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
-            <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
+            <div className="w-14 h-14 rounded-full bg-zinc-700/60 flex items-center justify-center mb-5">
               <FolderOpen size={24} className="text-zinc-400" />
             </div>
             {search ? (
@@ -266,7 +266,7 @@ export default function DocumentsPage() {
             {documents.map((doc) => (
               <div
                 key={doc.id}
-                className="p-4 flex items-center gap-4 hover:bg-zinc-800 transition-colors"
+                className="p-4 flex items-center gap-4 hover:bg-zinc-700 transition-colors"
               >
                 <div className="flex-shrink-0">
                   {getFileIcon(doc.fileType)}
@@ -335,7 +335,7 @@ export default function DocumentsPage() {
           <button
             onClick={() => { setPage(page - 1); fetchDocuments(search, page - 1) }}
             disabled={page <= 1}
-            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-700 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-800 border border-zinc-700 rounded-md hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             이전
           </button>
@@ -345,7 +345,7 @@ export default function DocumentsPage() {
           <button
             onClick={() => { setPage(page + 1); fetchDocuments(search, page + 1) }}
             disabled={page >= totalPages}
-            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-700 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-800 border border-zinc-700 rounded-md hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             다음
           </button>
@@ -359,7 +359,7 @@ export default function DocumentsPage() {
             className="absolute inset-0 bg-black/60"
             onClick={() => !uploading && setShowUploadModal(false)}
           />
-          <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-5">
+          <div className="relative w-full max-w-lg mx-4 bg-zinc-800 border border-zinc-700 rounded-xl p-6 space-y-5">
             <div className="flex items-center justify-between">
               <h2 className={ADMIN_TYPE.sectionTitle}>문서 업로드</h2>
               <button
@@ -405,7 +405,7 @@ export default function DocumentsPage() {
                 className={cn(
                   'border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors',
                   isDragging
-                    ? 'border-zinc-500 bg-zinc-800/50'
+                    ? 'border-zinc-500 bg-zinc-700/50'
                     : 'border-zinc-700 hover:border-zinc-600'
                 )}
               >

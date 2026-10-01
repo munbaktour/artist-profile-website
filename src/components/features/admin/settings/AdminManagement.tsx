@@ -101,7 +101,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-12 bg-zinc-800 rounded animate-pulse"
+            className="h-12 bg-zinc-700 rounded animate-pulse"
           />
         ))}
       </div>
@@ -128,7 +128,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
     <div className="space-y-4">
       {admins.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="p-3 rounded-full bg-zinc-800 mb-4">
+          <div className="p-3 rounded-full bg-zinc-700 mb-4">
             <UserPlus className="w-6 h-6 text-zinc-400" />
           </div>
           <p className="text-zinc-400 mb-1">등록된 관리자가 없습니다</p>
@@ -158,7 +158,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                   <TableRow
                     key={admin.id}
                     className={cn(
-                      'border-zinc-700 hover:bg-zinc-800',
+                      'border-zinc-700 hover:bg-zinc-700',
                       isCurrentUser && 'bg-blue-500/5'
                     )}
                   >
@@ -196,14 +196,14 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                                className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700"
                               >
                                 <MoreHorizontal className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               align="end"
-                              className="bg-zinc-900 border-zinc-700"
+                              className="bg-zinc-800 border-zinc-700"
                             >
                               <DropdownMenuItem
                                 className="text-red-400 focus:text-red-400 focus:bg-red-500/10"
@@ -231,7 +231,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
       {canEdit && (
         <Button
           onClick={handleInvite}
-          className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-100 border border-zinc-700"
+          className="w-full bg-zinc-700 hover:bg-zinc-700 text-zinc-100 border border-zinc-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           관리자 초대

@@ -232,7 +232,7 @@ export default function ContactsPage() {
                 setSearchTerm(e.target.value)
                 setPage(1)
               }}
-              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-700 text-zinc-100 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors"
+              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors"
             />
           </div>
           <button
@@ -243,7 +243,7 @@ export default function ContactsPage() {
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors ${
               showVIPOnly
                 ? 'bg-[#D4AF37] text-black'
-                : 'bg-zinc-900 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+                : 'bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700'
             }`}
           >
             <Star size={14} fill={showVIPOnly ? 'currentColor' : 'none'} />
@@ -260,8 +260,8 @@ export default function ContactsPage() {
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
               selectedCategory === 'all'
-                ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
+                ? 'bg-zinc-700 text-zinc-100 border border-zinc-700'
+                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-700'
             }`}
           >
             <Users size={14} />
@@ -279,8 +279,8 @@ export default function ContactsPage() {
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
                   isActive
-                    ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                    : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
+                    ? 'bg-zinc-700 text-zinc-100 border border-zinc-700'
+                    : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-700'
                 }`}
               >
                 <Icon size={14} />
@@ -296,14 +296,14 @@ export default function ContactsPage() {
             {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
-                className="p-5 rounded-lg bg-zinc-900 border border-zinc-700 animate-pulse"
+                className="p-5 rounded-lg bg-zinc-800 border border-zinc-700 animate-pulse"
               >
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800" />
+                  <div className="w-12 h-12 rounded-full bg-zinc-700" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 w-32 bg-zinc-800 rounded" />
-                    <div className="h-3 w-24 bg-zinc-800 rounded" />
-                    <div className="h-3 w-40 bg-zinc-800 rounded" />
+                    <div className="h-4 w-32 bg-zinc-700 rounded" />
+                    <div className="h-3 w-24 bg-zinc-700 rounded" />
+                    <div className="h-3 w-40 bg-zinc-700 rounded" />
                   </div>
                 </div>
               </div>
@@ -327,7 +327,7 @@ export default function ContactsPage() {
               <div
                 key={contact.id}
                 onClick={() => handleView(contact)}
-                className="relative flex flex-col p-5 rounded-lg bg-zinc-900 border border-zinc-700 cursor-pointer hover:bg-zinc-800/70 transition-colors"
+                className="relative flex flex-col p-5 rounded-lg bg-zinc-800 border border-zinc-700 cursor-pointer hover:bg-zinc-700/70 transition-colors"
               >
                 {/* VIP Badge */}
                 {contact.isVip && (
@@ -338,7 +338,7 @@ export default function ContactsPage() {
 
                 <div className="flex gap-3 mb-4">
                   {/* Avatar */}
-                  <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center bg-zinc-800">
+                  <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center bg-zinc-700">
                     <User size={18} className="text-zinc-400" />
                   </div>
 
@@ -374,7 +374,7 @@ export default function ContactsPage() {
 
                     {/* Category Badge */}
                     {contact.category && (
-                      <span className="inline-block px-2 py-0.5 rounded text-[11px] bg-zinc-800 text-zinc-400">
+                      <span className="inline-block px-2 py-0.5 rounded text-[11px] bg-zinc-700 text-zinc-400">
                         {contact.category.name}
                       </span>
                     )}
@@ -388,7 +388,7 @@ export default function ContactsPage() {
                       e.stopPropagation()
                       handleView(contact)
                     }}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
                   >
                     <Eye size={13} />
                     상세보기
@@ -398,7 +398,7 @@ export default function ContactsPage() {
                       e.stopPropagation()
                       router.push(`/admin/contacts/${contact.id}?edit=true`)
                     }}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
                   >
                     <Edit2 size={13} />
                     수정
@@ -430,7 +430,7 @@ export default function ContactsPage() {
               <button
                 disabled={page === 1}
                 onClick={() => setPage(page - 1)}
-                className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
+                className="p-2 rounded-lg bg-zinc-700/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
               >
                 <ChevronLeft size={16} />
               </button>
@@ -440,7 +440,7 @@ export default function ContactsPage() {
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage(page + 1)}
-                className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
+                className="p-2 rounded-lg bg-zinc-700/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
               >
                 <ChevronRight size={16} />
               </button>
@@ -455,7 +455,7 @@ export default function ContactsPage() {
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto rounded-xl p-6 bg-zinc-900 border border-zinc-700"
+            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto rounded-xl p-6 bg-zinc-800 border border-zinc-700"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -468,7 +468,7 @@ export default function ContactsPage() {
 
             {/* Header */}
             <div className="flex items-center gap-4 mb-5">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center bg-zinc-800">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center bg-zinc-700">
                 <User size={24} className="text-zinc-400" />
               </div>
               <div>
@@ -488,7 +488,7 @@ export default function ContactsPage() {
             </div>
 
             {/* Contact Info Box */}
-            <div className="p-4 rounded-lg mb-4 space-y-3 bg-zinc-800/50">
+            <div className="p-4 rounded-lg mb-4 space-y-3 bg-zinc-700/50">
               {selectedContact.phone && (
                 <div className="flex items-center gap-3">
                   <Phone size={16} className="text-zinc-400" />
@@ -513,7 +513,7 @@ export default function ContactsPage() {
             {selectedContact.category && (
               <div className="mb-4">
                 <h4 className="text-xs text-zinc-400 mb-1.5">카테고리</h4>
-                <span className="inline-block px-3 py-1 rounded text-sm bg-zinc-800 text-zinc-300">
+                <span className="inline-block px-3 py-1 rounded text-sm bg-zinc-700 text-zinc-300">
                   {selectedContact.category.name}
                 </span>
               </div>
@@ -523,7 +523,7 @@ export default function ContactsPage() {
             {selectedContact.notes && (
               <div className="mb-4">
                 <h4 className="text-xs text-zinc-400 mb-1.5">메모</h4>
-                <p className="p-3 rounded-lg text-sm leading-relaxed bg-zinc-800/50 text-zinc-300">
+                <p className="p-3 rounded-lg text-sm leading-relaxed bg-zinc-700/50 text-zinc-300">
                   {selectedContact.notes}
                 </p>
               </div>
@@ -535,7 +535,7 @@ export default function ContactsPage() {
                 setIsModalOpen(false)
                 router.push(`/admin/contacts/${selectedContact.id}?edit=true`)
               }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium mt-5 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium mt-5 border border-zinc-700 text-zinc-300 hover:bg-zinc-700 transition-colors"
             >
               <Edit2 size={15} />
               수정하기

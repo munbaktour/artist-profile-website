@@ -186,15 +186,15 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
     return (
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <Skeleton className="h-6 w-32 bg-zinc-800" />
-          <Skeleton className="h-9 w-28 bg-zinc-800" />
+          <Skeleton className="h-6 w-32 bg-zinc-700" />
+          <Skeleton className="h-9 w-28 bg-zinc-700" />
         </div>
         <div className="rounded-lg border border-zinc-700 overflow-hidden">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-700 last:border-b-0">
-              <Skeleton className="h-5 w-5 rounded-full bg-zinc-800" />
-              <Skeleton className="h-5 w-32 bg-zinc-800" />
-              <Skeleton className="h-5 w-24 bg-zinc-800 ml-auto" />
+              <Skeleton className="h-5 w-5 rounded-full bg-zinc-700" />
+              <Skeleton className="h-5 w-32 bg-zinc-700" />
+              <Skeleton className="h-5 w-24 bg-zinc-700 ml-auto" />
             </div>
           ))}
         </div>
@@ -255,7 +255,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
               categories.map((category) => (
                 <TableRow
                   key={category.id}
-                  className="border-zinc-700 hover:bg-zinc-900"
+                  className="border-zinc-700 hover:bg-zinc-700"
                 >
                   <TableCell>
                     <GripVertical className="w-4 h-4 text-zinc-400" />
@@ -278,7 +278,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                         시스템
                       </span>
                     ) : (
-                      <span className="px-2 py-1 rounded text-xs bg-zinc-800 text-zinc-400">
+                      <span className="px-2 py-1 rounded text-xs bg-zinc-700 text-zinc-400">
                         사용자
                       </span>
                     )}
@@ -290,17 +290,17 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                            className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700"
                           >
                             <MoreHorizontal className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-zinc-900 border-zinc-700"
+                          className="bg-zinc-800 border-zinc-700"
                         >
                           <DropdownMenuItem
-                            className="text-zinc-100 hover:bg-zinc-800 cursor-pointer"
+                            className="text-zinc-100 hover:bg-zinc-700 cursor-pointer"
                             onClick={() => openEditDialog(category)}
                           >
                             <Pencil className="w-4 h-4 mr-2" />
@@ -308,7 +308,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                           </DropdownMenuItem>
                           {!category.isSystem && (
                             <DropdownMenuItem
-                              className="text-red-400 hover:bg-zinc-800 cursor-pointer"
+                              className="text-red-400 hover:bg-zinc-700 cursor-pointer"
                               onClick={() => handleDelete(category)}
                             >
                               <Trash2 className="w-4 h-4 mr-2" />
@@ -328,7 +328,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
 
       {/* Create/Edit Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-700 text-zinc-100">
+        <DialogContent className="bg-zinc-800 border-zinc-700 text-zinc-100">
           <DialogHeader>
             <DialogTitle>
               {editingCategory ? '카테고리 수정' : '새 카테고리'}
@@ -424,7 +424,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
             <Button
               variant="outline"
               onClick={() => setDialogOpen(false)}
-              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
+              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-700"
             >
               취소
             </Button>

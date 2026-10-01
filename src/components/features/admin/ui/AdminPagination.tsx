@@ -31,7 +31,7 @@ export function AdminPagination({
         <button
           disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
-          className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
+          className="p-2 rounded-lg bg-zinc-700/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
         >
           <ChevronLeft size={16} />
         </button>
@@ -41,7 +41,7 @@ export function AdminPagination({
         <button
           disabled={page === totalPages}
           onClick={() => onPageChange(page + 1)}
-          className="p-2 rounded-lg bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
+          className="p-2 rounded-lg bg-zinc-700/50 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors disabled:opacity-30"
         >
           <ChevronRight size={16} />
         </button>

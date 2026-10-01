@@ -79,7 +79,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
           'fixed top-0 left-0 h-full w-64 z-50',
           'transform transition-transform duration-300 ease-in-out',
           'lg:translate-x-0',
-          'bg-zinc-900 border-r border-zinc-700',
+          'bg-zinc-800 border-r border-zinc-700',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -124,8 +124,8 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                   'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
                   'before:h-5 before:w-0.5 before:rounded-r before:transition-colors',
                   isActive
-                    ? 'bg-zinc-800/60 text-zinc-50 before:bg-[#D4AF37]'
-                    : 'text-zinc-400 hover:bg-zinc-800/40 hover:text-zinc-300 before:bg-transparent'
+                    ? 'bg-zinc-700/60 text-zinc-50 before:bg-[#D4AF37]'
+                    : 'text-zinc-400 hover:bg-zinc-700/40 hover:text-zinc-300 before:bg-transparent'
                 )}
                 aria-current={isActive ? 'page' : undefined}
               >

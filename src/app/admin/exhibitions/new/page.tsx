@@ -95,7 +95,7 @@ export default function NewExhibitionPage() {
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* 기본 정보 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>기본 정보</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -207,7 +207,7 @@ export default function NewExhibitionPage() {
         </div>
 
         {/* 상태 및 기간 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>상태 및 기간</h2>
 
           <div>
@@ -255,7 +255,7 @@ export default function NewExhibitionPage() {
         </div>
 
         {/* 장소 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>장소</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -280,7 +280,7 @@ export default function NewExhibitionPage() {
         </div>
 
         {/* 설명 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>설명</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -307,7 +307,7 @@ export default function NewExhibitionPage() {
         </div>
 
         {/* 이미지 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-6">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6 space-y-6">
           <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>이미지</h2>
 
           <ImageUploader
