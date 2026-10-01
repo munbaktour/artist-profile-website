@@ -20,7 +20,7 @@ export function AdminPagination({
   return (
     <div
       className={cn(
-        'flex items-center justify-between mt-8 pt-6 border-t border-zinc-700',
+        'flex items-center justify-between mt-8 pt-6 border-t border-zinc-600',
         className
       )}
     >

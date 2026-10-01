@@ -121,7 +121,7 @@ export default function MessagesPage() {
         ) : (
           <Table>
             <TableHeader>
-              <TableRow className="border-zinc-700 hover:bg-transparent">
+              <TableRow className="border-zinc-600 hover:bg-transparent">
                 <TableHead className="text-zinc-400">발송일시</TableHead>
                 <TableHead className="text-zinc-400">수신자</TableHead>
                 <TableHead className="text-zinc-400">템플릿</TableHead>

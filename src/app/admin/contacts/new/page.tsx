@@ -487,7 +487,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-700">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-600">
           <Link
             href="/admin/contacts"
             className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-700 transition-colors"
@@ -524,7 +524,7 @@ export default function NewContactPage() {
         >
           <div className="w-full max-w-xl bg-zinc-800 border border-zinc-700 rounded-xl overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-700">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-600">
               <div className="flex items-center gap-3">
                 <Sparkles size={18} className="text-zinc-400" />
                 <div>
@@ -686,7 +686,7 @@ export default function NewContactPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-zinc-700">
+            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-zinc-600">
               {previewImage && !isScanning && (
                 <button
                   onClick={() => {

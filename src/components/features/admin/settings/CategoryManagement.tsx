@@ -191,7 +191,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
         </div>
         <div className="rounded-lg border border-zinc-700 overflow-hidden">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-700 last:border-b-0">
+            <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-600 last:border-b-0">
               <Skeleton className="h-5 w-5 rounded-full bg-zinc-700" />
               <Skeleton className="h-5 w-32 bg-zinc-700" />
               <Skeleton className="h-5 w-24 bg-zinc-700 ml-auto" />
@@ -234,7 +234,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
       <div className="rounded-lg border border-zinc-700 overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="border-zinc-700 hover:bg-transparent">
+            <TableRow className="border-zinc-600 hover:bg-transparent">
               <TableHead className="text-zinc-400 w-[50px]"></TableHead>
               <TableHead className="text-zinc-400">이름</TableHead>
               <TableHead className="text-zinc-400">영문명</TableHead>
@@ -246,7 +246,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           </TableHeader>
           <TableBody>
             {categories.length === 0 ? (
-              <TableRow className="border-zinc-700">
+              <TableRow className="border-zinc-600">
                 <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-400 py-8">
                   카테고리가 없습니다.
                 </TableCell>

@@ -666,7 +666,7 @@ export default function NotificationComposePage() {
                   검색 결과가 없습니다.
                 </div>
               ) : (
-                <div className="divide-y divide-zinc-700">
+                <div className="divide-y divide-zinc-600">
                   {contacts.map((contact) => {
                     const isSelected = selectedRecipients.some(r => r.id === contact.id)
                     const hasValidContact = channel === 'email' ? !!contact.email : !!contact.phone
