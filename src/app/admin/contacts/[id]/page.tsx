@@ -44,6 +44,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import type { Contact, Category, Note, NoteType, AdminContactFormData } from '@/types/admin'
+import { ADMIN_TYPE } from '@/components/features/admin/ui'
 
 const noteTypes: { value: NoteType; label: string; icon: string }[] = [
   { value: 'note', label: '메모', icon: '📝' },
@@ -341,7 +342,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           </Link>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-zinc-100">{contact.name}</h1>
+              <h1 className={ADMIN_TYPE.pageTitle}>{contact.name}</h1>
               <VipBadge isVip={contact.isVip} />
             </div>
             <div className="flex items-center gap-2 mt-1">
@@ -410,7 +411,7 @@ export default function ContactDetailPage({ params }: PageProps) {
         <div className="lg:col-span-2 space-y-6">
           {/* Contact Info */}
           <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
-            <h2 className="text-lg font-semibold text-zinc-100">연락처 정보</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>연락처 정보</h2>
 
             {isEditing ? (
               <div className="space-y-4">
@@ -587,7 +588,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           {/* Notes Section */}
           <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
+              <h2 className={`${ADMIN_TYPE.sectionTitle} flex items-center gap-2`}>
                 <MessageSquare className="w-5 h-5" />
                 메모
                 <span className="text-sm font-normal text-zinc-400">

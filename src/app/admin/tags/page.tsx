@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { AdminPageHeader } from '@/components/features/admin/ui'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
@@ -175,14 +176,10 @@ export default function TagsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-zinc-100">태그</h1>
-          <p className="text-zinc-400 text-sm mt-1">
-            연락처를 분류하는 태그를 관리합니다.
-          </p>
-        </div>
+      <AdminPageHeader
+        title="태그"
+        subtitle="연락처를 분류하는 태그를 관리합니다."
+        actions={
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button
@@ -299,7 +296,8 @@ export default function TagsPage() {
             </form>
           </DialogContent>
         </Dialog>
-      </div>
+        }
+      />
 
       {/* Tags Grid */}
       {loading ? (

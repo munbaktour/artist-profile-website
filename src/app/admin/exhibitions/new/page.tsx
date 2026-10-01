@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Save } from 'lucide-react'
-import Link from 'next/link'
+import { Save } from 'lucide-react'
 import { ImageUploader } from '@/components/features/admin/exhibitions/ImageUploader'
 import { artistsData } from '@/data/artists'
+import { ADMIN_TYPE, AdminPageHeader } from '@/components/features/admin/ui'
 
 export default function NewExhibitionPage() {
   const router = useRouter()
@@ -90,23 +90,13 @@ export default function NewExhibitionPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <Link
-          href="/admin/exhibitions"
-          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-100 text-sm mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          전시 목록
-        </Link>
-        <h1 className="text-lg font-semibold text-zinc-100">새 전시 등록</h1>
-      </div>
+      <AdminPageHeader title="새 전시 등록" backHref="/admin/exhibitions" />
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* 기본 정보 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
-          <h2 className="text-zinc-100 font-medium mb-2">기본 정보</h2>
+          <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>기본 정보</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -218,7 +208,7 @@ export default function NewExhibitionPage() {
 
         {/* 상태 및 기간 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
-          <h2 className="text-zinc-100 font-medium mb-2">상태 및 기간</h2>
+          <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>상태 및 기간</h2>
 
           <div>
             <label className="block text-sm text-zinc-400 mb-1.5">상태</label>
@@ -266,7 +256,7 @@ export default function NewExhibitionPage() {
 
         {/* 장소 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
-          <h2 className="text-zinc-100 font-medium mb-2">장소</h2>
+          <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>장소</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-zinc-400 mb-1.5">장소 (한국어)</label>
@@ -291,7 +281,7 @@ export default function NewExhibitionPage() {
 
         {/* 설명 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
-          <h2 className="text-zinc-100 font-medium mb-2">설명</h2>
+          <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>설명</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-zinc-400 mb-1.5">설명 (한국어)</label>
@@ -318,7 +308,7 @@ export default function NewExhibitionPage() {
 
         {/* 이미지 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-6">
-          <h2 className="text-zinc-100 font-medium mb-2">이미지</h2>
+          <h2 className={`${ADMIN_TYPE.sectionTitle} mb-2`}>이미지</h2>
 
           <ImageUploader
             mode="single"

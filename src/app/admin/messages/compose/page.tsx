@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import {
-  ArrowLeft,
   Send,
   Users,
   Image,
@@ -31,6 +30,7 @@ import {
 import { cn, formatFileSize } from '@/lib/utils'
 import { MAX_ATTACHMENT_BYTES, DOCUMENT_ALLOWED_TYPES, ATTACHMENT_UPLOAD_PREFIX } from '@/lib/constants'
 import { createClient } from '@/lib/supabase/client'
+import { ADMIN_TYPE, AdminPageHeader} from '@/components/features/admin/ui'
 
 // 메시지 타입
 type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms' | 'email'
@@ -728,7 +728,7 @@ export default function MessageComposePage() {
             <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           )}
 
-          <h1 className="text-xl font-semibold text-zinc-100 mb-2">
+          <h1 className={`${ADMIN_TYPE.pageTitle} mb-2`}>
             {sendResult.success && sendResult.failCount === 0
               ? '발송 완료'
               : sendResult.successCount > 0
@@ -810,25 +810,15 @@ export default function MessageComposePage() {
   if (sendStep === 'preview') {
     return (
       <div className="max-w-4xl space-y-6">
-        {/* Header */}
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setSendStep('compose')}
-            className="p-2 rounded-lg hover:bg-zinc-800 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
-          </button>
-          <div>
-            <h1 className="text-lg font-semibold text-zinc-100">발송 확인</h1>
-            <p className="text-zinc-400 text-sm mt-0.5">
-              발송 전 내용을 확인해주세요
-            </p>
-          </div>
-        </div>
+        <AdminPageHeader
+          title="발송 확인"
+          subtitle="발송 전 내용을 확인해주세요"
+          onBack={() => setSendStep('compose')}
+        />
 
         {/* 발송 정보 요약 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-          <h2 className="text-sm font-medium text-zinc-100">발송 정보</h2>
+          <h2 className={ADMIN_TYPE.sectionTitle}>발송 정보</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="flex justify-between">
               <span className="text-zinc-400">발송 채널</span>
@@ -855,7 +845,7 @@ export default function MessageComposePage() {
 
         {/* 수신자 목록 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-          <h2 className="text-sm font-medium text-zinc-100">수신자 목록 ({previewContacts.length}명)</h2>
+          <h2 className={ADMIN_TYPE.sectionTitle}>수신자 목록 ({previewContacts.length}명)</h2>
           <div className="max-h-48 overflow-y-auto space-y-1">
             {previewContacts.slice(0, 20).map(contact => (
               <div key={contact.id} className="flex items-center justify-between py-2 border-b border-zinc-700 last:border-0">
@@ -873,7 +863,7 @@ export default function MessageComposePage() {
 
         {/* 메시지 미리보기 */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-          <h2 className="text-sm font-medium text-zinc-100">메시지 미리보기</h2>
+          <h2 className={ADMIN_TYPE.sectionTitle}>메시지 미리보기</h2>
 
           {messageType === 'alimtalk' && selectedTemplate && previewContacts.length > 0 && (
             <div className="space-y-3">
@@ -978,21 +968,11 @@ export default function MessageComposePage() {
   // 작성 화면 (기본)
   return (
     <div className="max-w-4xl space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Link
-          href="/admin/messages"
-          className="p-2 rounded-lg hover:bg-zinc-800 transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5 text-zinc-400" />
-        </Link>
-        <div>
-          <h1 className="text-lg font-semibold text-zinc-100">메시지 발송</h1>
-          <p className="text-zinc-400 text-sm mt-0.5">
-            카카오톡 또는 SMS로 메시지를 발송합니다
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        title="메시지 발송"
+        subtitle="카카오톡 또는 SMS로 메시지를 발송합니다"
+        backHref="/admin/messages"
+      />
 
       {/* 메시지 타입 선택 */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
@@ -1041,7 +1021,7 @@ export default function MessageComposePage() {
         <div className="lg:col-span-3 space-y-6">
           {/* 발송 대상 */}
           <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-            <h2 className="text-sm font-medium text-zinc-100">발송 대상</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>발송 대상</h2>
 
             <div className="space-y-3">
               <div className="flex gap-2">
@@ -1148,7 +1128,7 @@ export default function MessageComposePage() {
 
           {/* 메시지 내용 */}
           <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-            <h2 className="text-sm font-medium text-zinc-100">
+            <h2 className={ADMIN_TYPE.sectionTitle}>
               {messageType === 'alimtalk' ? '알림톡 템플릿' : '메시지 내용'}
             </h2>
 

@@ -7,7 +7,6 @@ import {
   Users,
   Clock,
   ChevronRight,
-  ArrowLeft,
   Phone,
   User,
   Download,
@@ -15,6 +14,8 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AdminSkeleton } from '@/components/features/admin/ui'
+import { AdminPageHeader } from '@/components/features/admin/ui'
+import { ADMIN_TYPE } from '@/components/features/admin/ui'
 
 interface CheckinRecord {
   id: string
@@ -113,13 +114,10 @@ export default function AdminCheckinsPage() {
   if (!selectedExhibition) {
     return (
       <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-lg font-semibold text-zinc-100">체크인 관리</h1>
-          <p className="text-zinc-400 text-sm mt-0.5">
-            전시별 방문자 체크인 현황을 확인합니다.
-          </p>
-        </div>
+        <AdminPageHeader
+          title="체크인 관리"
+          subtitle="전시별 방문자 체크인 현황을 확인합니다."
+        />
 
         {/* 전시 목록 */}
         <div className="space-y-3">
@@ -173,21 +171,11 @@ export default function AdminCheckinsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <button
-          onClick={() => setSelectedExhibition(null)}
-          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 text-sm mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          전시 목록
-        </button>
-        <h1 className="text-lg font-semibold text-zinc-100">
-          {selectedExhibitionData?.title_ko}
-        </h1>
-        <p className="text-zinc-400 text-sm mt-0.5">
-          {selectedExhibitionData?.start_date} ~ {selectedExhibitionData?.end_date}
-        </p>
-      </div>
+      <AdminPageHeader
+        title={selectedExhibitionData?.title_ko ?? ''}
+        subtitle={`${selectedExhibitionData?.start_date} ~ ${selectedExhibitionData?.end_date}`}
+        onBack={() => setSelectedExhibition(null)}
+      />
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -222,7 +210,7 @@ export default function AdminCheckinsPage() {
 
       {/* QR 코드 */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5">
-        <h2 className="text-sm font-medium text-zinc-100 mb-4">체크인 QR코드</h2>
+        <h2 className={`${ADMIN_TYPE.sectionTitle} mb-4`}>체크인 QR코드</h2>
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <div ref={qrRef} className="bg-white p-4 rounded-lg">
             <QRCodeCanvas

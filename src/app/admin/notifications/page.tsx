@@ -21,6 +21,7 @@ import {
   AdminSkeleton,
   AdminEmptyState,
   AdminPagination,
+  ADMIN_TYPE,
 } from '@/components/features/admin/ui'
 
 export default function NotificationsPage() {
@@ -165,8 +166,7 @@ export default function NotificationsPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Page Header */}
+    <div className="space-y-6">
       <AdminPageHeader
         title="발송 내역"
         subtitle="Notification History"
@@ -179,12 +179,10 @@ export default function NotificationsPage() {
         }
       />
 
-      <main className="max-w-[1600px] mx-auto px-6 pb-12">
-        {/* Stats */}
-        <StatCardsGrid stats={statsConfig} columns={3} />
+      <StatCardsGrid stats={statsConfig} columns={3} />
 
         {/* Filters */}
-        <div className="flex gap-3 mb-6 flex-wrap items-center">
+        <div className="flex gap-3 flex-wrap items-center">
           <AdminFilterTabs
             tabs={channelTabs}
             activeTab={channelFilter}
@@ -201,7 +199,7 @@ export default function NotificationsPage() {
         {/* History */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
           <div className="p-5 border-b border-zinc-700">
-            <h2 className="text-sm font-medium text-zinc-100">발송 내역</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>발송 내역</h2>
             <p className="text-xs text-zinc-400 mt-1">
               총 {total}건
             </p>
@@ -302,7 +300,6 @@ export default function NotificationsPage() {
           pageSize={pageSize}
           onPageChange={setPage}
         />
-      </main>
     </div>
   )
 }

@@ -5,6 +5,9 @@
  * 골드 테마(#D4AF37) 기반 통일된 디자인 시스템
  */
 
+// 글자 크기 체계
+export { ADMIN_TYPE } from './typography'
+
 // Page Header
 export { AdminPageHeader, RefreshButton } from './AdminPageHeader'
 export type { RefreshButtonProps } from './AdminPageHeader'
@@ -15,8 +18,6 @@ export { StatCardsGrid } from './StatCardsGrid'
 // Filters
 export { AdminFilterTabs, FilterDivider } from './AdminFilterTabs'
 
-// Form
-export { FormSection } from './FormSection'
 
 // Loading States
 export { AdminSkeleton } from './AdminSkeleton'

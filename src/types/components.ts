@@ -212,6 +212,8 @@ export interface AdminPageHeaderProps extends BaseProps {
   }
   /** 추가 액션 영역 (ReactNode) */
   actions?: React.ReactNode
+  /** 뒤로가기 동작 — 링크로 못 가는 경우(같은 화면 안에서 단계 이동)에 쓴다 */
+  onBack?: () => void
   /** 뒤로가기 링크 */
   backHref?: string
 }
@@ -249,19 +251,6 @@ export interface AdminFilterTabsProps extends BaseProps {
   onTabChange: (tabId: string) => void
   /** 스타일 변형 */
   variant?: 'default' | 'pill'
-}
-
-/**
- * FormSection - 폼 섹션 컨테이너
- * 사용처: contacts/new (5개 섹션), contacts/[id]
- */
-export interface FormSectionProps extends ChildrenProps {
-  title: string
-  icon?: LucideIcon
-  description?: string
-  /** 접기/펴기 지원 */
-  collapsible?: boolean
-  defaultCollapsed?: boolean
 }
 
 /**
