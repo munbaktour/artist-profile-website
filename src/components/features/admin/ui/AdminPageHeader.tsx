@@ -16,7 +16,7 @@ export function AdminPageHeader({
   return (
     <div
       className={cn(
-        'sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-800',
+        'sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-700',
         className
       )}
     >
@@ -34,7 +34,7 @@ export function AdminPageHeader({
               {title}
             </h1>
             {subtitle && (
-              <p className="text-sm text-zinc-500 mt-0.5">
+              <p className="text-sm text-zinc-400 mt-0.5">
                 {subtitle}
               </p>
             )}

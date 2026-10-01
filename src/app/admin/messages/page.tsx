@@ -98,7 +98,7 @@ export default function MessagesPage() {
           return (
             <div
               key={stat.label}
-              className="bg-zinc-900 rounded-xl border border-zinc-800 p-5 flex items-center gap-4"
+              className="bg-zinc-900 rounded-xl border border-zinc-700 p-5 flex items-center gap-4"
             >
               {/* 아이콘에 배경을 줘 숫자와 시각적 무게를 분리한다 */}
               <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0">
@@ -127,7 +127,7 @@ export default function MessagesPage() {
       </div>
 
       {/* 발송 내역 테이블 */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <div className="p-5">
             <AdminSkeleton variant="table-row" count={5} />
@@ -136,7 +136,7 @@ export default function MessagesPage() {
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
             {/* 아이콘을 원형 배경에 담아 빈 화면에 시선이 머물 지점을 만든다 */}
             <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
-              <MessageSquare className="w-6 h-6 text-zinc-500" />
+              <MessageSquare className="w-6 h-6 text-zinc-400" />
             </div>
             <p className="text-base font-medium text-zinc-100">아직 보낸 메시지가 없습니다</p>
             <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
@@ -154,7 +154,7 @@ export default function MessagesPage() {
         ) : (
           <Table>
             <TableHeader>
-              <TableRow className="border-zinc-800 hover:bg-transparent">
+              <TableRow className="border-zinc-700 hover:bg-transparent">
                 <TableHead className="text-zinc-400">발송일시</TableHead>
                 <TableHead className="text-zinc-400">수신자</TableHead>
                 <TableHead className="text-zinc-400">템플릿</TableHead>
@@ -170,7 +170,7 @@ export default function MessagesPage() {
                 return (
                   <TableRow
                     key={item.id}
-                    className="border-zinc-800 hover:bg-zinc-800/50"
+                    className="border-zinc-700 hover:bg-zinc-800"
                   >
                     <TableCell className="text-zinc-400 text-sm">
                       {new Date(item.created_at).toLocaleString('ko-KR')}

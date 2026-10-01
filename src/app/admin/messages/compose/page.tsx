@@ -710,9 +710,9 @@ export default function MessageComposePage() {
   }
 
   const inputClassName = cn(
-    'bg-zinc-950 border-zinc-800 text-zinc-100',
-    'placeholder:text-zinc-600',
-    'focus:ring-zinc-700 focus:border-zinc-600'
+    'bg-zinc-950 border-zinc-700 text-zinc-100',
+    'placeholder:text-zinc-400',
+    'focus:ring-zinc-700 focus:border-zinc-500'
   )
 
   // 결과 화면
@@ -744,30 +744,30 @@ export default function MessageComposePage() {
 
         {/* 결과 통계 */}
         <div className="grid grid-cols-3 gap-4">
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 text-center">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 text-center">
             <p className="text-2xl font-bold text-zinc-100">{sendResult.total}</p>
-            <p className="text-sm text-zinc-500">전체</p>
+            <p className="text-sm text-zinc-400">전체</p>
           </div>
           <div className="bg-zinc-900 rounded-lg border border-green-800/30 p-4 text-center">
             <p className="text-2xl font-bold text-green-400">{sendResult.successCount}</p>
-            <p className="text-sm text-zinc-500">성공</p>
+            <p className="text-sm text-zinc-400">성공</p>
           </div>
           <div className="bg-zinc-900 rounded-lg border border-red-800/30 p-4 text-center">
             <p className="text-2xl font-bold text-red-400">{sendResult.failCount}</p>
-            <p className="text-sm text-zinc-500">실패</p>
+            <p className="text-sm text-zinc-400">실패</p>
           </div>
         </div>
 
         {/* 실패 상세 */}
         {sendResult.failedRecipients && sendResult.failedRecipients.length > 0 && (
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5">
             <h3 className="text-sm font-medium text-zinc-100 mb-3">실패 상세</h3>
             <div className="space-y-2 max-h-48 overflow-y-auto">
               {sendResult.failedRecipients.map((r, i) => (
-                <div key={i} className="flex items-center justify-between text-sm py-2 border-b border-zinc-800 last:border-0">
+                <div key={i} className="flex items-center justify-between text-sm py-2 border-b border-zinc-700 last:border-0">
                   <div>
                     <span className="text-zinc-300">{r.name}</span>
-                    {r.phone && <span className="text-zinc-500 ml-2">{r.phone}</span>}
+                    {r.phone && <span className="text-zinc-400 ml-2">{r.phone}</span>}
                   </div>
                   <span className="text-red-400 text-xs">{r.reason}</span>
                 </div>
@@ -777,7 +777,7 @@ export default function MessageComposePage() {
         )}
 
         {sendResult.requestId && (
-          <p className="text-xs text-zinc-500 text-center">
+          <p className="text-xs text-zinc-400 text-center">
             요청 ID: {sendResult.requestId}
           </p>
         )}
@@ -786,7 +786,7 @@ export default function MessageComposePage() {
           <Link href="/admin/messages" className="flex-1">
             <Button
               variant="outline"
-              className="w-full border-zinc-800 text-zinc-400 hover:bg-zinc-800"
+              className="w-full border-zinc-700 text-zinc-400 hover:bg-zinc-800"
             >
               발송 내역으로
             </Button>
@@ -820,18 +820,18 @@ export default function MessageComposePage() {
           </button>
           <div>
             <h1 className="text-lg font-semibold text-zinc-100">발송 확인</h1>
-            <p className="text-zinc-500 text-sm mt-0.5">
+            <p className="text-zinc-400 text-sm mt-0.5">
               발송 전 내용을 확인해주세요
             </p>
           </div>
         </div>
 
         {/* 발송 정보 요약 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <h2 className="text-sm font-medium text-zinc-100">발송 정보</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="flex justify-between">
-              <span className="text-zinc-500">발송 채널</span>
+              <span className="text-zinc-400">발송 채널</span>
               <span className="text-zinc-300">
                 {messageType === 'alimtalk' && '카카오 알림톡'}
                 {messageType === 'brandmessage' && '카카오 브랜드 메시지'}
@@ -841,12 +841,12 @@ export default function MessageComposePage() {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-500">발송 대상</span>
+              <span className="text-zinc-400">발송 대상</span>
               <span className="text-zinc-300">{previewContacts.length}명</span>
             </div>
             {messageType === 'alimtalk' && selectedTemplate && (
               <div className="flex justify-between col-span-2">
-                <span className="text-zinc-500">템플릿</span>
+                <span className="text-zinc-400">템플릿</span>
                 <span className="text-zinc-300">{selectedTemplate.templateName}</span>
               </div>
             )}
@@ -854,17 +854,17 @@ export default function MessageComposePage() {
         </div>
 
         {/* 수신자 목록 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <h2 className="text-sm font-medium text-zinc-100">수신자 목록 ({previewContacts.length}명)</h2>
           <div className="max-h-48 overflow-y-auto space-y-1">
             {previewContacts.slice(0, 20).map(contact => (
-              <div key={contact.id} className="flex items-center justify-between py-2 border-b border-zinc-800 last:border-0">
+              <div key={contact.id} className="flex items-center justify-between py-2 border-b border-zinc-700 last:border-0">
                 <span className="text-sm text-zinc-300">{contact.name}</span>
-                <span className="text-xs text-zinc-500">{contact.phone}</span>
+                <span className="text-xs text-zinc-400">{contact.phone}</span>
               </div>
             ))}
             {previewContacts.length > 20 && (
-              <p className="text-xs text-zinc-500 text-center py-2">
+              <p className="text-xs text-zinc-400 text-center py-2">
                 외 {previewContacts.length - 20}명
               </p>
             )}
@@ -872,7 +872,7 @@ export default function MessageComposePage() {
         </div>
 
         {/* 메시지 미리보기 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <h2 className="text-sm font-medium text-zinc-100">메시지 미리보기</h2>
 
           {messageType === 'alimtalk' && selectedTemplate && previewContacts.length > 0 && (
@@ -880,7 +880,7 @@ export default function MessageComposePage() {
               {variableMode === 'manual' ? (
                 /* 1명 선택: 직접 입력한 변수로 미리보기 */
                 <>
-                  <p className="text-xs text-zinc-500">📝 직접 입력한 변수 적용</p>
+                  <p className="text-xs text-zinc-400">📝 직접 입력한 변수 적용</p>
                   <div className="bg-[#B2C7D9] rounded-xl p-4">
                     <div className="bg-white rounded-lg p-3 shadow-sm">
                       <p className="text-sm text-[#333] whitespace-pre-wrap leading-relaxed">
@@ -892,7 +892,7 @@ export default function MessageComposePage() {
               ) : (
                 /* 2명 이상: 각 수신자별 미리보기 */
                 <>
-                  <p className="text-xs text-zinc-500">✨ 수신자별 자동 치환 미리보기 (최대 3명 표시)</p>
+                  <p className="text-xs text-zinc-400">✨ 수신자별 자동 치환 미리보기 (최대 3명 표시)</p>
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {previewContacts.slice(0, 3).map((contact, index) => (
                       <div key={contact.id} className="space-y-1">
@@ -907,7 +907,7 @@ export default function MessageComposePage() {
                       </div>
                     ))}
                     {previewContacts.length > 3 && (
-                      <p className="text-xs text-zinc-500 text-center py-2">
+                      <p className="text-xs text-zinc-400 text-center py-2">
                         외 {previewContacts.length - 3}명에게도 동일하게 자동 치환됩니다
                       </p>
                     )}
@@ -949,7 +949,7 @@ export default function MessageComposePage() {
           <Button
             variant="outline"
             onClick={() => setSendStep('compose')}
-            className="flex-1 border-zinc-800 text-zinc-400 hover:bg-zinc-800"
+            className="flex-1 border-zinc-700 text-zinc-400 hover:bg-zinc-800"
           >
             이전으로
           </Button>
@@ -988,7 +988,7 @@ export default function MessageComposePage() {
         </Link>
         <div>
           <h1 className="text-lg font-semibold text-zinc-100">메시지 발송</h1>
-          <p className="text-zinc-500 text-sm mt-0.5">
+          <p className="text-zinc-400 text-sm mt-0.5">
             카카오톡 또는 SMS로 메시지를 발송합니다
           </p>
         </div>
@@ -1016,20 +1016,20 @@ export default function MessageComposePage() {
               'p-3 rounded-lg border transition-all text-left',
               messageType === type
                 ? 'bg-zinc-800 border-[#D4AF37] ring-1 ring-[#D4AF37]'
-                : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+                : 'bg-zinc-900 border-zinc-700 hover:border-zinc-700'
             )}
           >
             <div className="flex items-center gap-2">
               <Icon className={cn(
                 'w-4 h-4',
-                messageType === type ? 'text-[#D4AF37]' : 'text-zinc-500'
+                messageType === type ? 'text-[#D4AF37]' : 'text-zinc-400'
               )} />
               <div>
                 <p className={cn(
                   'text-sm font-medium',
                   messageType === type ? 'text-zinc-100' : 'text-zinc-400'
                 )}>{label}</p>
-                <p className="text-[10px] text-zinc-500">{desc}</p>
+                <p className="text-[10px] text-zinc-400">{desc}</p>
               </div>
             </div>
           </button>
@@ -1040,7 +1040,7 @@ export default function MessageComposePage() {
         {/* 왼쪽: 작성 영역 */}
         <div className="lg:col-span-3 space-y-6">
           {/* 발송 대상 */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
             <h2 className="text-sm font-medium text-zinc-100">발송 대상</h2>
 
             <div className="space-y-3">
@@ -1057,7 +1057,7 @@ export default function MessageComposePage() {
                       'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                       recipientType === type
                         ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                        : 'bg-zinc-800/50 text-zinc-500 border border-transparent hover:text-zinc-300'
+                        : 'bg-zinc-800/50 text-zinc-400 border border-transparent hover:text-zinc-300'
                     )}
                   >
                     {type === 'all' && '전체'}
@@ -1070,12 +1070,12 @@ export default function MessageComposePage() {
               {recipientType === 'category' && (
                 <div className="flex flex-wrap gap-2">
                   {loadingCategories ? (
-                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                    <div className="flex items-center gap-2 text-zinc-400 text-sm">
                       <Loader2 className="w-4 h-4 animate-spin" />
                       카테고리 로딩 중...
                     </div>
                   ) : categories.length === 0 ? (
-                    <p className="text-sm text-zinc-500">등록된 카테고리가 없습니다.</p>
+                    <p className="text-sm text-zinc-400">등록된 카테고리가 없습니다.</p>
                   ) : (
                     categories.map(cat => {
                       const isSelected = selectedCategories.includes(cat.id)
@@ -1089,12 +1089,12 @@ export default function MessageComposePage() {
                             'flex items-center gap-1.5',
                             isSelected
                               ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                              : 'bg-zinc-950 text-zinc-400 border border-zinc-800 hover:border-zinc-700'
+                              : 'bg-zinc-950 text-zinc-400 border border-zinc-700 hover:border-zinc-700'
                           )}
                         >
                           {isSelected && <Check className="w-3 h-3" />}
                           {cat.name}
-                          <span className="text-xs text-zinc-500">({count})</span>
+                          <span className="text-xs text-zinc-400">({count})</span>
                         </button>
                       )
                     })
@@ -1105,7 +1105,7 @@ export default function MessageComposePage() {
               {recipientType === 'select' && (
                 <Button
                   variant="outline"
-                  className="w-full border-zinc-800 text-zinc-400 hover:bg-zinc-800"
+                  className="w-full border-zinc-700 text-zinc-400 hover:bg-zinc-800"
                   onClick={openContactModal}
                 >
                   <Users className="w-4 h-4 mr-2" />
@@ -1140,14 +1140,14 @@ export default function MessageComposePage() {
                 </div>
               )}
 
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-zinc-400">
                 발송 대상: <span className="text-zinc-400">{getRecipientCount()}명</span>
               </p>
             </div>
           </div>
 
           {/* 메시지 내용 */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
             <h2 className="text-sm font-medium text-zinc-100">
               {messageType === 'alimtalk' ? '알림톡 템플릿' : '메시지 내용'}
             </h2>
@@ -1167,7 +1167,7 @@ export default function MessageComposePage() {
                           'p-3 rounded-lg border text-left transition-all',
                           selectedTemplate?.templateCode === template.templateCode
                             ? 'bg-zinc-800 border-[#D4AF37] ring-1 ring-[#D4AF37]'
-                            : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
+                            : 'bg-zinc-950 border-zinc-700 hover:border-zinc-700'
                         )}
                       >
                         <p className={cn(
@@ -1178,7 +1178,7 @@ export default function MessageComposePage() {
                         )}>
                           {template.templateName}
                         </p>
-                        <p className="text-xs text-zinc-500 mt-1 line-clamp-2">
+                        <p className="text-xs text-zinc-400 mt-1 line-clamp-2">
                           {template.templateContent}
                         </p>
                       </button>
@@ -1202,7 +1202,7 @@ export default function MessageComposePage() {
                         ? '📝 1명 선택 - 변수 직접 입력 모드'
                         : '✨ 복수 선택 - 변수 자동 치환 모드'}
                     </p>
-                    <p className="text-xs text-zinc-500 mt-1">
+                    <p className="text-xs text-zinc-400 mt-1">
                       {variableMode === 'manual'
                         ? '고객명 등 모든 변수를 직접 입력합니다.'
                         : '#{고객명}, #{전화번호}는 DB에서 자동으로 치환됩니다.'}
@@ -1216,7 +1216,7 @@ export default function MessageComposePage() {
                     <Label className="text-zinc-300 text-sm">개별 변수 입력</Label>
                     {selectedTemplate.individualVars.map(varName => (
                       <div key={varName} className="space-y-1">
-                        <Label className="text-xs text-zinc-500">{varName}</Label>
+                        <Label className="text-xs text-zinc-400">{varName}</Label>
                         <Input
                           value={individualVariables[varName] || ''}
                           onChange={(e) => setIndividualVariables(prev => ({
@@ -1237,7 +1237,7 @@ export default function MessageComposePage() {
                     <Label className="text-zinc-300 text-sm">공통 변수 입력</Label>
                     {selectedTemplate.commonVars.map(varName => (
                       <div key={varName} className="space-y-1">
-                        <Label className="text-xs text-zinc-500">{varName}</Label>
+                        <Label className="text-xs text-zinc-400">{varName}</Label>
                         <Input
                           value={commonVariables[varName] || ''}
                           onChange={(e) => setCommonVariables(prev => ({
@@ -1254,12 +1254,12 @@ export default function MessageComposePage() {
 
                 {/* 카카오+SMS일 때 SMS 내용 */}
                 {messageType === 'kakao_sms' && (
-                  <div className="space-y-2 pt-4 border-t border-zinc-800">
+                  <div className="space-y-2 pt-4 border-t border-zinc-700">
                     <Label className="text-zinc-300 text-sm flex items-center gap-2">
                       <Phone className="w-3.5 h-3.5" />
                       SMS 대체 발송 내용
                     </Label>
-                    <p className="text-xs text-zinc-500">카카오톡 발송 실패 시 이 내용으로 SMS가 발송됩니다</p>
+                    <p className="text-xs text-zinc-400">카카오톡 발송 실패 시 이 내용으로 SMS가 발송됩니다</p>
                     <Textarea
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
@@ -1267,7 +1267,7 @@ export default function MessageComposePage() {
                       rows={4}
                       className={cn(inputClassName, 'resize-none')}
                     />
-                    <p className="text-xs text-zinc-500 text-right">
+                    <p className="text-xs text-zinc-400 text-right">
                       {content.length} / 90자 (90자 초과 시 LMS)
                     </p>
                   </div>
@@ -1285,7 +1285,7 @@ export default function MessageComposePage() {
                     rows={6}
                     className={cn(inputClassName, 'resize-none')}
                   />
-                  <p className="text-xs text-zinc-500 text-right">
+                  <p className="text-xs text-zinc-400 text-right">
                     {content.length} / 90자
                     <span className="ml-2">
                       {content.length <= 90 ? '(SMS)' : content.length <= 2000 ? '(LMS)' : '(MMS)'}
@@ -1339,7 +1339,7 @@ export default function MessageComposePage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-zinc-300 text-sm">첨부파일</Label>
-                    <span className="text-xs text-zinc-600">PDF · ZIP</span>
+                    <span className="text-xs text-zinc-400">PDF · ZIP</span>
                   </div>
 
                   {/* 내 컴퓨터에서 바로 올리기 */}
@@ -1348,7 +1348,7 @@ export default function MessageComposePage() {
                       'flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-dashed',
                       'text-sm transition-colors',
                       isUploading
-                        ? 'border-zinc-700 text-zinc-500 cursor-wait'
+                        ? 'border-zinc-700 text-zinc-400 cursor-wait'
                         : 'border-zinc-700 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200 cursor-pointer'
                     )}
                   >
@@ -1373,16 +1373,16 @@ export default function MessageComposePage() {
                   )}
 
                   {uploaded.length > 0 && (
-                    <div className="rounded-lg border border-zinc-700 divide-y divide-zinc-800">
+                    <div className="rounded-lg border border-zinc-700 divide-y divide-zinc-700">
                       {uploaded.map(u => (
                         <div key={u.path} className="flex items-center gap-3 px-3 py-2">
-                          <Paperclip className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                          <Paperclip className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                           <span className="flex-1 min-w-0 text-sm text-zinc-300 truncate">{u.name}</span>
-                          <span className="text-xs text-zinc-500 shrink-0">{formatFileSize(u.size)}</span>
+                          <span className="text-xs text-zinc-400 shrink-0">{formatFileSize(u.size)}</span>
                           <button
                             type="button"
                             onClick={() => removeUploaded(u)}
-                            className="text-zinc-600 hover:text-red-400 transition-colors shrink-0"
+                            className="text-zinc-500 hover:text-red-400 transition-colors shrink-0"
                             aria-label={`${u.name} 첨부 제거`}
                           >
                             <X className="w-4 h-4" />
@@ -1394,25 +1394,25 @@ export default function MessageComposePage() {
 
                   <div className="flex items-center gap-3 pt-1">
                     <span className="h-px flex-1 bg-zinc-800" />
-                    <span className="text-xs text-zinc-600">또는 문서 관리에서 선택</span>
+                    <span className="text-xs text-zinc-400">또는 문서 관리에서 선택</span>
                     <span className="h-px flex-1 bg-zinc-800" />
                   </div>
 
                   {isLoadingDocs ? (
-                    <p className="text-xs text-zinc-500 py-2">문서를 불러오는 중...</p>
+                    <p className="text-xs text-zinc-400 py-2">문서를 불러오는 중...</p>
                   ) : documents.length === 0 ? (
-                    <p className="text-xs text-zinc-500 py-2">
+                    <p className="text-xs text-zinc-400 py-2">
                       첨부할 수 있는 문서가 없습니다. 문서 관리에서 먼저 업로드해 주세요.
                     </p>
                   ) : (
                     <>
-                      <div className="max-h-48 overflow-y-auto rounded-lg border border-zinc-700 divide-y divide-zinc-800">
+                      <div className="max-h-48 overflow-y-auto rounded-lg border border-zinc-700 divide-y divide-zinc-700">
                         {documents.map(doc => {
                           const checked = selectedDocIds.includes(doc.id)
                           return (
                             <label
                               key={doc.id}
-                              className="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-zinc-800/50 transition-colors"
+                              className="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-zinc-800 transition-colors"
                             >
                               <input
                                 type="checkbox"
@@ -1427,7 +1427,7 @@ export default function MessageComposePage() {
                               <span className="flex-1 min-w-0 text-sm text-zinc-300 truncate">
                                 {doc.title || doc.fileName}
                               </span>
-                              <span className="text-xs text-zinc-500 shrink-0">
+                              <span className="text-xs text-zinc-400 shrink-0">
                                 {formatFileSize(doc.fileSize)}
                               </span>
                             </label>
@@ -1439,7 +1439,7 @@ export default function MessageComposePage() {
                         <p
                           className={cn(
                             'text-xs',
-                            attachmentBytes > MAX_ATTACHMENT_BYTES ? 'text-red-400' : 'text-zinc-500'
+                            attachmentBytes > MAX_ATTACHMENT_BYTES ? 'text-red-400' : 'text-zinc-400'
                           )}
                         >
                           {selectedDocIds.length}개 선택 · {formatFileSize(attachmentBytes)}
@@ -1480,7 +1480,7 @@ export default function MessageComposePage() {
                     rows={8}
                     className={cn(inputClassName, 'resize-none')}
                   />
-                  <p className="text-xs text-zinc-500 text-right">
+                  <p className="text-xs text-zinc-400 text-right">
                     {content.length} / 1,000자
                   </p>
                 </div>
@@ -1543,7 +1543,7 @@ export default function MessageComposePage() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-zinc-400">
                     {targetingOptions.find(o => o.value === targeting)?.description}
                   </p>
                 </div>
@@ -1556,7 +1556,7 @@ export default function MessageComposePage() {
             <Link href="/admin/messages" className="flex-1">
               <Button
                 variant="outline"
-                className="w-full border-zinc-800 text-zinc-400 hover:bg-zinc-800"
+                className="w-full border-zinc-700 text-zinc-400 hover:bg-zinc-800"
               >
                 취소
               </Button>
@@ -1625,7 +1625,7 @@ export default function MessageComposePage() {
         {/* 오른쪽: 미리보기 */}
         <div className="lg:col-span-2">
           <div className="sticky top-6">
-            <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+            <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
               <h3 className="text-sm font-medium text-zinc-100">미리보기</h3>
 
               {/* 미리보기 영역 */}
@@ -1724,7 +1724,7 @@ export default function MessageComposePage() {
               {/* 발송 정보 요약 */}
               <div className="space-y-2 pt-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-zinc-500">채널</span>
+                  <span className="text-zinc-400">채널</span>
                   <span className="text-zinc-400">
                     {messageType === 'alimtalk' && '알림톡'}
                     {messageType === 'brandmessage' && '브랜드 메시지'}
@@ -1735,19 +1735,19 @@ export default function MessageComposePage() {
                 </div>
                 {(messageType === 'alimtalk' || messageType === 'kakao_sms') && (
                   <div className="flex justify-between text-xs">
-                    <span className="text-zinc-500">템플릿</span>
+                    <span className="text-zinc-400">템플릿</span>
                     <span className="text-zinc-400">
                       {selectedTemplate?.templateName || '미선택'}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between text-xs">
-                  <span className="text-zinc-500">대상</span>
+                  <span className="text-zinc-400">대상</span>
                   <span className="text-zinc-400">{getRecipientCount()}명</span>
                 </div>
                 {messageType === 'brandmessage' && (
                   <div className="flex justify-between text-xs">
-                    <span className="text-zinc-500">타겟팅</span>
+                    <span className="text-zinc-400">타겟팅</span>
                     <span className="text-amber-400">
                       {targetingOptions.find(o => o.value === targeting)?.label}
                     </span>
@@ -1766,9 +1766,9 @@ export default function MessageComposePage() {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => setShowContactModal(false)}
           />
-          <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl flex flex-col max-h-[80vh]">
+          <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col max-h-[80vh]">
             {/* 모달 헤더 */}
-            <div className="flex items-center justify-between p-4 border-b border-zinc-800">
+            <div className="flex items-center justify-between p-4 border-b border-zinc-700">
               <h3 className="text-sm font-medium text-zinc-100">연락처 선택</h3>
               <button
                 onClick={() => setShowContactModal(false)}
@@ -1779,28 +1779,28 @@ export default function MessageComposePage() {
             </div>
 
             {/* 검색 */}
-            <div className="p-4 border-b border-zinc-800">
+            <div className="p-4 border-b border-zinc-700">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                 <input
                   type="text"
                   value={contactSearch}
                   onChange={(e) => setContactSearch(e.target.value)}
                   placeholder="이름 또는 전화번호 검색..."
-                  className="w-full pl-9 pr-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-600"
+                  className="w-full pl-9 pr-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 placeholder:text-zinc-400"
                 />
               </div>
             </div>
 
             {/* 전체 선택 */}
             {!loadingContacts && filteredContacts.length > 0 && (
-              <div className="px-4 py-2.5 border-b border-zinc-800">
+              <div className="px-4 py-2.5 border-b border-zinc-700">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={filteredContacts.length > 0 && filteredContacts.every(c => selectedContacts.includes(c.id))}
                     onChange={() => toggleAllContacts(filteredContacts)}
-                    className="w-4 h-4 rounded border-zinc-700 bg-zinc-950 text-zinc-400 focus:ring-zinc-600"
+                    className="w-4 h-4 rounded border-zinc-700 bg-zinc-950 text-zinc-400 focus:ring-zinc-500"
                   />
                   <span className="text-sm text-zinc-400">
                     전체 선택 ({filteredContacts.length}명)
@@ -1817,22 +1817,22 @@ export default function MessageComposePage() {
                 </div>
               ) : filteredContacts.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-sm text-zinc-500">
+                  <p className="text-sm text-zinc-400">
                     {contacts.length === 0 ? '연락처가 없습니다.' : '검색 결과가 없습니다.'}
                   </p>
                 </div>
               ) : (
-                <div className="divide-y divide-zinc-800">
+                <div className="divide-y divide-zinc-700">
                   {filteredContacts.map(contact => (
                     <label
                       key={contact.id}
-                      className="flex items-center gap-3 px-4 py-3 hover:bg-zinc-800/50 cursor-pointer transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-zinc-800 cursor-pointer transition-colors"
                     >
                       <input
                         type="checkbox"
                         checked={selectedContacts.includes(contact.id)}
                         onChange={() => toggleContact(contact.id)}
-                        className="w-4 h-4 rounded border-zinc-700 bg-zinc-950 text-zinc-400 focus:ring-zinc-600"
+                        className="w-4 h-4 rounded border-zinc-700 bg-zinc-950 text-zinc-400 focus:ring-zinc-500"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
@@ -1844,7 +1844,7 @@ export default function MessageComposePage() {
                           )}
                         </div>
                       </div>
-                      <span className="text-xs text-zinc-500 flex-shrink-0">{contact.phone || '-'}</span>
+                      <span className="text-xs text-zinc-400 flex-shrink-0">{contact.phone || '-'}</span>
                     </label>
                   ))}
                 </div>
@@ -1852,7 +1852,7 @@ export default function MessageComposePage() {
             </div>
 
             {/* 모달 푸터 */}
-            <div className="p-4 border-t border-zinc-800">
+            <div className="p-4 border-t border-zinc-700">
               <Button
                 onClick={() => setShowContactModal(false)}
                 className="w-full bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium"

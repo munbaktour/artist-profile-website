@@ -10,7 +10,7 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ onMenuClick, title }: AdminHeaderProps) {
   return (
-    <header className="sticky top-0 z-30 h-16 bg-zinc-950 border-b border-zinc-800">
+    <header className="sticky top-0 z-30 h-16 bg-zinc-950 border-b border-zinc-700">
       <div className="flex items-center justify-between h-full px-4 lg:px-6">
         {/* Left Side */}
         <div className="flex items-center gap-4">

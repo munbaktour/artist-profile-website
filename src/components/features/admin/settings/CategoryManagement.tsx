@@ -189,9 +189,9 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           <Skeleton className="h-6 w-32 bg-zinc-800" />
           <Skeleton className="h-9 w-28 bg-zinc-800" />
         </div>
-        <div className="rounded-lg border border-zinc-800 overflow-hidden">
+        <div className="rounded-lg border border-zinc-700 overflow-hidden">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-800 last:border-b-0">
+            <div key={i} className="flex items-center gap-4 p-4 border-b border-zinc-700 last:border-b-0">
               <Skeleton className="h-5 w-5 rounded-full bg-zinc-800" />
               <Skeleton className="h-5 w-32 bg-zinc-800" />
               <Skeleton className="h-5 w-24 bg-zinc-800 ml-auto" />
@@ -231,10 +231,10 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
       </div>
 
       {/* Table */}
-      <div className="rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="rounded-lg border border-zinc-700 overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="border-zinc-800 hover:bg-transparent">
+            <TableRow className="border-zinc-700 hover:bg-transparent">
               <TableHead className="text-zinc-400 w-[50px]"></TableHead>
               <TableHead className="text-zinc-400">이름</TableHead>
               <TableHead className="text-zinc-400">영문명</TableHead>
@@ -246,8 +246,8 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           </TableHeader>
           <TableBody>
             {categories.length === 0 ? (
-              <TableRow className="border-zinc-800">
-                <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-500 py-8">
+              <TableRow className="border-zinc-700">
+                <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-400 py-8">
                   카테고리가 없습니다.
                 </TableCell>
               </TableRow>
@@ -255,10 +255,10 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
               categories.map((category) => (
                 <TableRow
                   key={category.id}
-                  className="border-zinc-800 hover:bg-zinc-900"
+                  className="border-zinc-700 hover:bg-zinc-900"
                 >
                   <TableCell>
-                    <GripVertical className="w-4 h-4 text-zinc-500" />
+                    <GripVertical className="w-4 h-4 text-zinc-400" />
                   </TableCell>
                   <TableCell className="font-medium text-zinc-100">
                     <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-zinc-900 border-zinc-800"
+                          className="bg-zinc-900 border-zinc-700"
                         >
                           <DropdownMenuItem
                             className="text-zinc-100 hover:bg-zinc-800 cursor-pointer"
@@ -328,7 +328,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
 
       {/* Create/Edit Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100">
+        <DialogContent className="bg-zinc-900 border-zinc-700 text-zinc-100">
           <DialogHeader>
             <DialogTitle>
               {editingCategory ? '카테고리 수정' : '새 카테고리'}
@@ -345,7 +345,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="예: 컬렉터"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-700 text-zinc-100 placeholder:text-zinc-400"
               />
             </div>
 
@@ -356,7 +356,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.nameEn}
                 onChange={(e) => setFormData({ ...formData, nameEn: e.target.value })}
                 placeholder="예: Collector"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-700 text-zinc-100 placeholder:text-zinc-400"
               />
             </div>
 
@@ -384,7 +384,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                   type="color"
                   value={formData.color}
                   onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                  className="w-12 h-8 p-0 border-zinc-800 cursor-pointer"
+                  className="w-12 h-8 p-0 border-zinc-700 cursor-pointer"
                 />
               </div>
             </div>
@@ -396,7 +396,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.icon}
                 onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                 placeholder="예: 🎨"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-700 text-zinc-100 placeholder:text-zinc-400"
                 maxLength={4}
               />
             </div>
@@ -404,7 +404,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
             {/* Preview */}
             <div className="space-y-2">
               <Label className="text-zinc-50">미리보기</Label>
-              <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+              <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-700">
                 <span
                   className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium"
                   style={{
@@ -424,7 +424,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
             <Button
               variant="outline"
               onClick={() => setDialogOpen(false)}
-              className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
+              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
             >
               취소
             </Button>

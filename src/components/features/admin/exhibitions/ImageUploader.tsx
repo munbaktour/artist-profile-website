@@ -192,7 +192,7 @@ export function ImageUploader({
             border-2 border-dashed rounded-lg cursor-pointer transition-all
             ${dragOver
               ? 'border-zinc-500 bg-zinc-800/50'
-              : 'border-zinc-800 hover:border-zinc-600 bg-zinc-950'
+              : 'border-zinc-700 hover:border-zinc-600 bg-zinc-950'
             }
             ${uploading ? 'pointer-events-none opacity-60' : ''}
           `}
@@ -200,7 +200,7 @@ export function ImageUploader({
           {uploading ? (
             <Loader2 className="w-8 h-8 text-zinc-400 animate-spin" />
           ) : (
-            <Upload className="w-8 h-8 text-zinc-500" />
+            <Upload className="w-8 h-8 text-zinc-400" />
           )}
           <p className="text-sm text-zinc-400">
             {uploading
@@ -208,7 +208,7 @@ export function ImageUploader({
               : '이미지를 드래그하거나 클릭하여 업로드'
             }
           </p>
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-zinc-400">
             JPEG, PNG, WebP (최대 10MB)
           </p>
           <input
@@ -224,7 +224,7 @@ export function ImageUploader({
 
       {/* 단일 모드 미리보기 */}
       {mode === 'single' && urls.length > 0 && (
-        <div className="relative group rounded-lg overflow-hidden border border-zinc-800">
+        <div className="relative group rounded-lg overflow-hidden border border-zinc-700">
           <img
             src={urls[0]}
             alt="포스터 미리보기"
@@ -261,7 +261,7 @@ export function ImageUploader({
           {urls.map((url, idx) => (
             <div
               key={`${url}-${idx}`}
-              className="relative group aspect-square rounded-lg overflow-hidden border border-zinc-800"
+              className="relative group aspect-square rounded-lg overflow-hidden border border-zinc-700"
             >
               <img
                 src={url}
@@ -285,7 +285,7 @@ export function ImageUploader({
 
       {/* 힌트 */}
       {hint && !error && (
-        <p className="text-xs text-zinc-500">{hint}</p>
+        <p className="text-xs text-zinc-400">{hint}</p>
       )}
 
       {/* 파일 수 표시 (multiple 모드) */}

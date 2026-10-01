@@ -21,7 +21,7 @@ export function StatCardsGrid({ stats, columns = 4, className }: StatCardsGridPr
 
 function StatCard({ label, value, color, icon: Icon }: StatItem) {
   return (
-    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-800">
+    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-700">
       {Icon && (
         <Icon size={20} className="flex-shrink-0 text-zinc-400" style={color ? { color } : undefined} />
       )}
@@ -29,7 +29,7 @@ function StatCard({ label, value, color, icon: Icon }: StatItem) {
         <div className="text-2xl font-semibold text-zinc-100">
           {typeof value === 'number' ? value.toLocaleString() : value}
         </div>
-        <div className="text-xs text-zinc-500 mt-0.5">
+        <div className="text-xs text-zinc-400 mt-0.5">
           {label}
         </div>
       </div>

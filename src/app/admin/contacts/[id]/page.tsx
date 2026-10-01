@@ -284,8 +284,8 @@ export default function ContactDetailPage({ params }: PageProps) {
   }
 
   const inputClassName = cn(
-    'bg-zinc-950 border-zinc-800 text-zinc-100',
-    'placeholder:text-zinc-500',
+    'bg-zinc-950 border-zinc-700 text-zinc-100',
+    'placeholder:text-zinc-400',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -299,7 +299,7 @@ export default function ContactDetailPage({ params }: PageProps) {
             <Skeleton className="h-4 w-32 bg-zinc-800" />
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6">
           <Skeleton className="h-64 bg-zinc-800" />
         </div>
       </div>
@@ -314,7 +314,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           <Link href="/admin/contacts">
             <Button
               variant="outline"
-              className="mt-4 bg-transparent border-zinc-800 text-zinc-100"
+              className="mt-4 bg-transparent border-zinc-700 text-zinc-100"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               목록으로
@@ -358,7 +358,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           <Link href={`/admin/notifications/compose?contactId=${contact.id}`}>
             <Button
               variant="outline"
-              className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
+              className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
             >
               <Send className="w-4 h-4 mr-2" />
               알림 발송
@@ -370,7 +370,7 @@ export default function ContactDetailPage({ params }: PageProps) {
               <Button
                 variant="outline"
                 onClick={() => setIsEditing(false)}
-                className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-900"
+                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-900"
               >
                 취소
               </Button>
@@ -387,7 +387,7 @@ export default function ContactDetailPage({ params }: PageProps) {
               <Button
                 variant="outline"
                 onClick={() => setIsEditing(true)}
-                className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-900"
+                className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-900"
               >
                 <Pencil className="w-4 h-4 mr-2" />
                 수정
@@ -409,7 +409,7 @@ export default function ContactDetailPage({ params }: PageProps) {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Contact Info */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
             <h2 className="text-lg font-semibold text-zinc-100">연락처 정보</h2>
 
             {isEditing ? (
@@ -449,7 +449,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                       <SelectTrigger className={inputClassName}>
                         <SelectValue placeholder="선택 안함" />
                       </SelectTrigger>
-                      <SelectContent className="bg-zinc-900 border-zinc-800">
+                      <SelectContent className="bg-zinc-900 border-zinc-700">
                         <SelectItem value="none" className="text-zinc-100">
                           선택 안함
                         </SelectItem>
@@ -585,19 +585,19 @@ export default function ContactDetailPage({ params }: PageProps) {
           </div>
 
           {/* Notes Section */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
                 <MessageSquare className="w-5 h-5" />
                 메모
-                <span className="text-sm font-normal text-zinc-500">
+                <span className="text-sm font-normal text-zinc-400">
                   ({notes.length})
                 </span>
               </h2>
             </div>
 
             {/* Add Note Form */}
-            <div className="space-y-3 p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+            <div className="space-y-3 p-4 rounded-lg bg-zinc-950 border border-zinc-700">
               <div className="flex items-center gap-2">
                 <Select
                   value={newNoteType}
@@ -606,7 +606,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                   <SelectTrigger className={cn(inputClassName, 'w-[140px]')}>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-zinc-900 border-zinc-800">
+                  <SelectContent className="bg-zinc-900 border-zinc-700">
                     {noteTypes.map((type) => (
                       <SelectItem
                         key={type.value}
@@ -643,20 +643,20 @@ export default function ContactDetailPage({ params }: PageProps) {
             {/* Notes List */}
             <div className="space-y-3">
               {notes.length === 0 ? (
-                <p className="text-zinc-500 text-sm text-center py-8">
+                <p className="text-zinc-400 text-sm text-center py-8">
                   메모가 없습니다.
                 </p>
               ) : (
                 notes.map((note: Note) => (
                   <div
                     key={note.id}
-                    className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 group"
+                    className="p-4 rounded-lg bg-zinc-950 border border-zinc-700 group"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Badge
                           variant="outline"
-                          className="border-zinc-800 text-zinc-400"
+                          className="border-zinc-700 text-zinc-400"
                         >
                           {noteTypes.find((t) => t.value === note.type)?.icon}{' '}
                           {noteTypes.find((t) => t.value === note.type)?.label ||
@@ -676,14 +676,14 @@ export default function ContactDetailPage({ params }: PageProps) {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-zinc-500 hover:text-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="h-8 w-8 text-zinc-400 hover:text-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <MoreHorizontal className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                           align="end"
-                          className="bg-zinc-900 border-zinc-800"
+                          className="bg-zinc-900 border-zinc-700"
                         >
                           <DropdownMenuItem
                             className="text-red-400 hover:bg-zinc-800 cursor-pointer"
@@ -698,7 +698,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                     <p className="text-[#fafafa] whitespace-pre-wrap mb-3">
                       {note.content}
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-zinc-500">
+                    <div className="flex items-center gap-4 text-xs text-zinc-400">
                       {note.author && (
                         <span className="flex items-center gap-1">
                           <User className="w-3 h-3" />
@@ -731,44 +731,44 @@ export default function ContactDetailPage({ params }: PageProps) {
               'rounded-lg border p-6 space-y-4',
               contact.isVip
                 ? 'bg-zinc-900 border-zinc-700'
-                : 'bg-zinc-900 border-zinc-800'
+                : 'bg-zinc-900 border-zinc-700'
             )}
           >
             <h3 className="text-sm font-medium text-zinc-400">정보</h3>
 
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
-                <span className="text-zinc-500">카테고리</span>
+                <span className="text-zinc-400">카테고리</span>
                 <CategoryBadge category={contact.category} size="sm" />
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-500">VIP</span>
+                <span className="text-zinc-400">VIP</span>
                 {contact.isVip ? (
                   <VipBadge isVip={contact.isVip} size="sm" />
                 ) : (
-                  <span className="text-zinc-500">-</span>
+                  <span className="text-zinc-400">-</span>
                 )}
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-500">언어</span>
+                <span className="text-zinc-400">언어</span>
                 <span className="text-zinc-100">
                   {contact.preferredLanguage === 'ko' ? '한국어' : 'English'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-500">뉴스레터</span>
+                <span className="text-zinc-400">뉴스레터</span>
                 <span className="text-zinc-100">
                   {contact.newsletterSubscribed ? '구독 중' : '미구독'}
                 </span>
               </div>
               {contact.source && (
                 <div className="flex justify-between">
-                  <span className="text-zinc-500">유입 경로</span>
+                  <span className="text-zinc-400">유입 경로</span>
                   <span className="text-zinc-100">{contact.source}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span className="text-zinc-500">등록일</span>
+                <span className="text-zinc-400">등록일</span>
                 <span className="text-zinc-100">
                   {new Date(contact.createdAt).toLocaleDateString('ko-KR')}
                 </span>
@@ -777,7 +777,7 @@ export default function ContactDetailPage({ params }: PageProps) {
           </div>
 
           {/* Tags */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
             <h3 className="text-sm font-medium text-zinc-400">태그</h3>
 
             {contact.tags && contact.tags.length > 0 ? (
@@ -793,12 +793,12 @@ export default function ContactDetailPage({ params }: PageProps) {
                 ))}
               </div>
             ) : (
-              <p className="text-zinc-500 text-sm">태그가 없습니다.</p>
+              <p className="text-zinc-400 text-sm">태그가 없습니다.</p>
             )}
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-3">
+          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-3">
             <h3 className="text-sm font-medium text-zinc-400">빠른 작업</h3>
 
             {contact.email && (

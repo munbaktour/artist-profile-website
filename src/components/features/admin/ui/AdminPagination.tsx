@@ -20,11 +20,11 @@ export function AdminPagination({
   return (
     <div
       className={cn(
-        'flex items-center justify-between mt-8 pt-6 border-t border-zinc-800',
+        'flex items-center justify-between mt-8 pt-6 border-t border-zinc-700',
         className
       )}
     >
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-zinc-400">
         {startItem} - {endItem} / {total}
       </p>
       <div className="flex items-center gap-3">

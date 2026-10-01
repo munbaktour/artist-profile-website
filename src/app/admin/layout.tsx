@@ -27,7 +27,7 @@ export default function AdminLayout({
         {/* Mobile Menu Button */}
         <button
           onClick={() => setSidebarOpen(true)}
-          className="fixed top-4 left-4 z-30 lg:hidden p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:bg-zinc-800 transition-colors"
+          className="fixed top-4 left-4 z-30 lg:hidden p-3 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-400 hover:bg-zinc-800 transition-colors"
         >
           <Menu className="w-5 h-5" />
         </button>

@@ -143,7 +143,7 @@ export default function EditExhibitionPage() {
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* 기본 정보 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className="text-zinc-100 font-medium mb-2">기본 정보</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -156,7 +156,7 @@ export default function EditExhibitionPage() {
                 value={form.title_ko}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
             <div>
@@ -167,7 +167,7 @@ export default function EditExhibitionPage() {
                 name="title_en"
                 value={form.title_en}
                 onChange={handleChange}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
@@ -181,16 +181,16 @@ export default function EditExhibitionPage() {
               value={form.slug}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 font-mono"
+              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 font-mono"
             />
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               URL에 사용됩니다: /exhibition/{form.slug || 'slug'}
             </p>
           </div>
 
           <div>
             <label className="block text-sm text-zinc-400 mb-1.5">
-              작가 선택 <span className="text-zinc-500 text-xs">(체크인 시 작가 페이지로 이동)</span>
+              작가 선택 <span className="text-zinc-400 text-xs">(체크인 시 작가 페이지로 이동)</span>
             </label>
             <select
               name="artist_id"
@@ -204,7 +204,7 @@ export default function EditExhibitionPage() {
                   artist_name_en: selectedArtist?.name.en || prev.artist_name_en,
                 }))
               }}
-              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
             >
               <option value="">선택 안함 (그룹전 등)</option>
               {artistsData.map(artist => (
@@ -213,7 +213,7 @@ export default function EditExhibitionPage() {
                 </option>
               ))}
             </select>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               선택 시 체크인 완료 후 해당 작가 페이지로 자동 이동합니다.
             </p>
           </div>
@@ -225,7 +225,7 @@ export default function EditExhibitionPage() {
                 name="artist_name_ko"
                 value={form.artist_name_ko}
                 onChange={handleChange}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
             <div>
@@ -234,14 +234,14 @@ export default function EditExhibitionPage() {
                 name="artist_name_en"
                 value={form.artist_name_en}
                 onChange={handleChange}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
         </div>
 
         {/* 상태 및 기간 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className="text-zinc-100 font-medium mb-2">상태 및 기간</h2>
 
           <div>
@@ -250,7 +250,7 @@ export default function EditExhibitionPage() {
               name="status"
               value={form.status}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+              className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
             >
               <option value="upcoming">예정</option>
               <option value="current">진행 중</option>
@@ -269,7 +269,7 @@ export default function EditExhibitionPage() {
                 value={form.start_date}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
             <div>
@@ -282,14 +282,14 @@ export default function EditExhibitionPage() {
                 value={form.end_date}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
         </div>
 
         {/* 장소 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className="text-zinc-100 font-medium mb-2">장소</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -298,7 +298,7 @@ export default function EditExhibitionPage() {
                 name="location_ko"
                 value={form.location_ko}
                 onChange={handleChange}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
             <div>
@@ -307,14 +307,14 @@ export default function EditExhibitionPage() {
                 name="location_en"
                 value={form.location_en}
                 onChange={handleChange}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500"
               />
             </div>
           </div>
         </div>
 
         {/* 설명 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
           <h2 className="text-zinc-100 font-medium mb-2">설명</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -324,7 +324,7 @@ export default function EditExhibitionPage() {
                 value={form.description_ko}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 resize-none"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none"
               />
             </div>
             <div>
@@ -334,14 +334,14 @@ export default function EditExhibitionPage() {
                 value={form.description_en}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 resize-none"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 resize-none"
               />
             </div>
           </div>
         </div>
 
         {/* 이미지 */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-6">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-6">
           <h2 className="text-zinc-100 font-medium mb-2">이미지</h2>
 
           <ImageUploader
