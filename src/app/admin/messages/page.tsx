@@ -25,10 +25,17 @@ import {
   AdminSkeleton,
 } from '@/components/features/admin/ui'
 
+interface Recipient {
+  id?: string
+  name?: string
+  to?: string
+}
+
 interface MessageLog {
   id: string
   template_id: string
   channel: string
+  recipients: Recipient[]
   content: string
   recipient_count: number
   status: 'sent' | 'failed' | 'pending'
@@ -49,6 +56,28 @@ const channelLabels: Record<string, string> = {
   email: '이메일',
   alimtalk: '알림톡',
   sms: 'SMS',
+}
+
+
+/**
+ * "누구에게 보냈는지"를 한 줄로.
+ *
+ * 이름이 있으면 이름을, 없으면 주소나 번호를 쓴다. 2026-10-01 이전 기록은 이름이
+ * 저장되지 않아 주소만 나오고, 여러 명에게 보낸 옛 기록은 "2명"이라는 글자만 남아
+ * 있어 복원할 수 없다.
+ */
+function describeRecipients(recipients: Recipient[]): { label: string; title: string } {
+  if (!recipients || recipients.length === 0) return { label: '-', title: '' }
+
+  const names = recipients.map(r => r.name || r.to || '-')
+  const title = recipients
+    .map(r => (r.name && r.to ? `${r.name} (${r.to})` : r.name || r.to || '-'))
+    .join('\n')
+
+  return {
+    label: names.length === 1 ? names[0] : `${names[0]} 외 ${names.length - 1}명`,
+    title,
+  }
 }
 
 export default function MessagesPage() {
@@ -143,10 +172,16 @@ export default function MessagesPage() {
                     <TableCell className="text-zinc-400 text-sm">
                       {new Date(item.created_at).toLocaleString('ko-KR')}
                     </TableCell>
-                    <TableCell className="text-zinc-100">
-                      <span className="text-sm">
-                        {item.recipient_count}명
-                      </span>
+                    <TableCell className="text-zinc-100 max-w-[220px]">
+                      {(() => {
+                        const { label, title } = describeRecipients(item.recipients)
+                        return (
+                          // 여러 명이면 전체 목록을 마우스 올렸을 때 보여준다
+                          <span className="text-sm block truncate" title={title}>
+                            {label}
+                          </span>
+                        )
+                      })()}
                     </TableCell>
                     <TableCell className="text-zinc-400 text-sm">
                       {channelLabels[item.channel] || item.channel}

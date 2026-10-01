@@ -14,6 +14,12 @@ import { createClient } from '@/lib/supabase/server'
 // provider_response의 모양은 보낸 곳마다 다르다.
 //   Resend(메일)  { successCount, failCount }
 //   NHN(알림톡)   { message: { sendResults: [...] } }
+interface Recipient {
+  id?: string
+  name?: string
+  to?: string
+}
+
 interface ProviderResponse {
   successCount?: number
   failCount?: number
@@ -35,7 +41,7 @@ export async function GET() {
 
     const { data: logs, error } = await supabase
       .from('notification_logs')
-      .select('id, notification_type, channel, subject, content, status, provider_response, created_at')
+      .select('id, notification_type, channel, subject, content, status, provider_response, recipients, recipient_phone, created_at')
       .order('created_at', { ascending: false })
       .limit(100)
 
@@ -57,8 +63,20 @@ export async function GET() {
         (result?.successCount ?? 0) + (result?.failCount ?? 0) ||
         (result?.message?.sendResults?.length ?? 0)
 
+      // 2026-10-01 이전 기록에는 recipients가 없다. 그때는 수신자를 recipient_phone
+      // 한 칸에만 넣었고, 여러 명이면 "2명"이라는 글자로 뭉개 저장했다 — 그 기록은
+      // 누구에게 보냈는지 복원할 방법이 없다. 남아 있는 값이라도 그대로 보여준다.
+      const stored = (log.recipients ?? null) as Recipient[] | null
+      const recipients =
+        stored && stored.length > 0
+          ? stored
+          : log.recipient_phone
+            ? [{ name: undefined, to: String(log.recipient_phone) }]
+            : []
+
       return {
         id: log.id,
+        recipients,
         template_id: log.notification_type,
         channel: log.channel,
         subject: log.subject,
