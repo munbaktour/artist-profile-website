@@ -14,6 +14,8 @@ import {
   Link as LinkIcon,
   Check,
   X,
+  Upload,
+  Paperclip,
   Search,
   Loader2,
   Megaphone,
@@ -27,7 +29,8 @@ import {
   Mail,
 } from 'lucide-react'
 import { cn, formatFileSize } from '@/lib/utils'
-import { MAX_ATTACHMENT_BYTES } from '@/lib/constants'
+import { MAX_ATTACHMENT_BYTES, DOCUMENT_ALLOWED_TYPES, ATTACHMENT_UPLOAD_PREFIX } from '@/lib/constants'
+import { createClient } from '@/lib/supabase/client'
 
 // 메시지 타입
 type MessageType = 'alimtalk' | 'brandmessage' | 'sms' | 'kakao_sms' | 'email'
@@ -44,6 +47,13 @@ type AttachableDocument = {
   title: string
   fileName: string
   fileSize: number
+}
+
+// 발송 화면에서 바로 올린 파일. Storage 업로드까지 끝난 상태만 담는다.
+type UploadedAttachment = {
+  path: string
+  name: string
+  size: number
 }
 
 const targetingOptions = [
@@ -220,10 +230,17 @@ export default function MessageComposePage() {
   const [selectedDocIds, setSelectedDocIds] = useState<string[]>([])
   const [isLoadingDocs, setIsLoadingDocs] = useState(false)
 
-  // 선택한 첨부의 용량 합계
-  const attachmentBytes = documents
-    .filter(d => selectedDocIds.includes(d.id))
-    .reduce((sum, d) => sum + d.fileSize, 0)
+  // 발송 화면에서 바로 올린 파일
+  const [uploaded, setUploaded] = useState<UploadedAttachment[]>([])
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
+
+  // 선택한 첨부의 용량 합계 (두 출처를 합산)
+  const attachmentBytes =
+    documents
+      .filter(d => selectedDocIds.includes(d.id))
+      .reduce((sum, d) => sum + d.fileSize, 0) +
+    uploaded.reduce((sum, u) => sum + u.size, 0)
 
   // 발송 관련
   const [isSending, setIsSending] = useState(false)
@@ -350,6 +367,67 @@ export default function MessageComposePage() {
       setDocuments([])
     } finally {
       setIsLoadingDocs(false)
+    }
+  }, [])
+
+  // 내 컴퓨터에서 고른 파일을 Storage에 바로 올린다.
+  // API를 거치지 않는 이유: Vercel 서버리스 함수는 요청 본문이 4.5MB로 제한돼
+  // 그보다 큰 파일이 업로드 단계에서 막힌다. 브라우저에서 직접 올리면 그 제한을 받지 않는다.
+  const handleFilePick = useCallback(async (files: FileList | null) => {
+    if (!files || files.length === 0) return
+    setUploadError(null)
+
+    const picked = Array.from(files)
+
+    const badType = picked.find(f => !DOCUMENT_ALLOWED_TYPES.includes(f.type as never))
+    if (badType) {
+      setUploadError(`${badType.name} — PDF 또는 ZIP 파일만 첨부할 수 있습니다.`)
+      return
+    }
+
+    const nextTotal = attachmentBytes + picked.reduce((sum, f) => sum + f.size, 0)
+    if (nextTotal > MAX_ATTACHMENT_BYTES) {
+      setUploadError(
+        `첨부 용량이 한도를 넘습니다. 현재 ${formatFileSize(nextTotal)} / 최대 ${formatFileSize(MAX_ATTACHMENT_BYTES)}`
+      )
+      return
+    }
+
+    setIsUploading(true)
+    const supabase = createClient()
+    const done: UploadedAttachment[] = []
+
+    try {
+      for (const file of picked) {
+        const ext = file.name.split('.').pop()?.toLowerCase() || 'pdf'
+        const path = `${ATTACHMENT_UPLOAD_PREFIX}/${crypto.randomUUID()}.${ext}`
+        const { error } = await supabase.storage
+          .from('documents')
+          .upload(path, file, { contentType: file.type, upsert: false })
+
+        if (error) {
+          setUploadError(`${file.name} 업로드에 실패했습니다. ${error.message}`)
+          // 이번 호출에서 이미 올라간 것들은 되돌린다. 쓰이지 않을 파일을 남기지 않는다.
+          if (done.length > 0) {
+            await supabase.storage.from('documents').remove(done.map(d => d.path))
+          }
+          return
+        }
+        done.push({ path, name: file.name, size: file.size })
+      }
+      setUploaded(prev => [...prev, ...done])
+    } finally {
+      setIsUploading(false)
+    }
+  }, [attachmentBytes])
+
+  const removeUploaded = useCallback(async (target: UploadedAttachment) => {
+    setUploaded(prev => prev.filter(u => u.path !== target.path))
+    // 화면에서 뺐으면 Storage에도 남길 이유가 없다. 실패해도 발송에는 영향이 없다.
+    try {
+      await createClient().storage.from('documents').remove([target.path])
+    } catch {
+      /* 정리 실패는 무시 */
     }
   }, [])
 
@@ -564,6 +642,9 @@ export default function MessageComposePage() {
         requestBody.content = content
         if (selectedDocIds.length > 0) {
           requestBody.documentIds = selectedDocIds
+        }
+        if (uploaded.length > 0) {
+          requestBody.uploadedAttachments = uploaded
         }
       }
 
@@ -1258,12 +1339,63 @@ export default function MessageComposePage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-zinc-300 text-sm">첨부파일</Label>
-                    <Link
-                      href="/admin/documents"
-                      className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
-                    >
-                      문서 관리에서 업로드 →
-                    </Link>
+                    <span className="text-xs text-zinc-600">PDF · ZIP</span>
+                  </div>
+
+                  {/* 내 컴퓨터에서 바로 올리기 */}
+                  <label
+                    className={cn(
+                      'flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-dashed',
+                      'text-sm transition-colors',
+                      isUploading
+                        ? 'border-zinc-700 text-zinc-500 cursor-wait'
+                        : 'border-zinc-700 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200 cursor-pointer'
+                    )}
+                  >
+                    <Upload className="w-4 h-4" />
+                    {isUploading ? '올리는 중...' : '내 컴퓨터에서 파일 선택'}
+                    <input
+                      type="file"
+                      multiple
+                      accept=".pdf,.zip"
+                      disabled={isUploading}
+                      className="hidden"
+                      onChange={e => {
+                        handleFilePick(e.target.files)
+                        // 같은 파일을 다시 고를 수 있게 값을 비운다
+                        e.target.value = ''
+                      }}
+                    />
+                  </label>
+
+                  {uploadError && (
+                    <p className="text-xs text-red-400">{uploadError}</p>
+                  )}
+
+                  {uploaded.length > 0 && (
+                    <div className="rounded-lg border border-zinc-700 divide-y divide-zinc-800">
+                      {uploaded.map(u => (
+                        <div key={u.path} className="flex items-center gap-3 px-3 py-2">
+                          <Paperclip className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                          <span className="flex-1 min-w-0 text-sm text-zinc-300 truncate">{u.name}</span>
+                          <span className="text-xs text-zinc-500 shrink-0">{formatFileSize(u.size)}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeUploaded(u)}
+                            className="text-zinc-600 hover:text-red-400 transition-colors shrink-0"
+                            aria-label={`${u.name} 첨부 제거`}
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-3 pt-1">
+                    <span className="h-px flex-1 bg-zinc-800" />
+                    <span className="text-xs text-zinc-600">또는 문서 관리에서 선택</span>
+                    <span className="h-px flex-1 bg-zinc-800" />
                   </div>
 
                   {isLoadingDocs ? (

@@ -113,6 +113,18 @@ export const GALLERY_INFO = {
 // 도달률을 위해 낮게 잡는다. 초과 시 문서 링크로 안내하는 편이 낫다.
 export const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024
 
+// documents 버킷이 허용하는 형식. 버킷 설정(allowed_mime_types)과 반드시 일치해야 하며,
+// 어긋나면 업로드가 Storage 단계에서 거부된다.
+export const DOCUMENT_ALLOWED_TYPES = [
+  'application/pdf',
+  'application/zip',
+  'application/x-zip-compressed',
+] as const
+
+// 메일에 바로 첨부하려고 올린 파일이 모이는 경로.
+// 문서 관리에 보관하는 파일과 섞이지 않게 접두어로 구분한다.
+export const ATTACHMENT_UPLOAD_PREFIX = 'email-attachments'
+
 // ============================================
 // SEO 기본값
 // ============================================

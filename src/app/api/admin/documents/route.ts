@@ -3,13 +3,10 @@ import { createClient } from '@/lib/supabase/server'
 import { randomUUID } from 'crypto'
 import { dbDocumentToDocument } from '@/types/admin'
 import type { DbDocument, DbProfile } from '@/types/admin'
+import { DOCUMENT_ALLOWED_TYPES } from '@/lib/constants'
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB
-const ALLOWED_TYPES = [
-  'application/pdf',
-  'application/zip',
-  'application/x-zip-compressed',
-]
+const ALLOWED_TYPES: readonly string[] = DOCUMENT_ALLOWED_TYPES
 
 export async function GET(request: NextRequest) {
   try {
