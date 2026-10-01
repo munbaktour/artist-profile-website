@@ -84,7 +84,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between h-16 px-5 border-b border-zinc-700">
+        <div className="flex items-center justify-between h-16 px-5 border-b border-zinc-600">
           <Link
             href="/admin/contacts"
             className="flex flex-col"
@@ -142,7 +142,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         </nav>
 
         {/* User Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-zinc-700">
+        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-zinc-600">
           {profile && (
             <div className="flex items-center gap-3 px-3 py-2.5 mb-1">
               <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center">

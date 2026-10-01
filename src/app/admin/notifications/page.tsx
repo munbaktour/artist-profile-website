@@ -198,7 +198,7 @@ export default function NotificationsPage() {
 
         {/* History */}
         <div className="bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden">
-          <div className="p-5 border-b border-zinc-700">
+          <div className="p-5 border-b border-zinc-600">
             <h2 className={ADMIN_TYPE.sectionTitle}>발송 내역</h2>
             <p className="text-xs text-zinc-400 mt-1">
               총 {total}건
@@ -227,7 +227,7 @@ export default function NotificationsPage() {
               description="메시지 메뉴에서 알림을 발송해보세요."
             />
           ) : (
-            <div className="divide-y divide-zinc-700">
+            <div className="divide-y divide-zinc-600">
               {notifications.map((notification) => (
                 <div
                   key={notification.id}

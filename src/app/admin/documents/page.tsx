@@ -262,7 +262,7 @@ export default function DocumentsPage() {
             )}
           </div>
         ) : (
-          <div className="divide-y divide-zinc-700">
+          <div className="divide-y divide-zinc-600">
             {documents.map((doc) => (
               <div
                 key={doc.id}

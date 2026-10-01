@@ -140,7 +140,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
         <div className="rounded-md border border-zinc-700 overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="border-zinc-700 hover:bg-transparent">
+              <TableRow className="border-zinc-600 hover:bg-transparent">
                 <TableHead className="text-zinc-400">이메일</TableHead>
                 <TableHead className="text-zinc-400">이름</TableHead>
                 <TableHead className="text-zinc-400">역할</TableHead>

@@ -764,7 +764,7 @@ export default function MessageComposePage() {
             <h3 className="text-sm font-medium text-zinc-100 mb-3">실패 상세</h3>
             <div className="space-y-2 max-h-48 overflow-y-auto">
               {sendResult.failedRecipients.map((r, i) => (
-                <div key={i} className="flex items-center justify-between text-sm py-2 border-b border-zinc-700 last:border-0">
+                <div key={i} className="flex items-center justify-between text-sm py-2 border-b border-zinc-600 last:border-0">
                   <div>
                     <span className="text-zinc-300">{r.name}</span>
                     {r.phone && <span className="text-zinc-400 ml-2">{r.phone}</span>}
@@ -848,7 +848,7 @@ export default function MessageComposePage() {
           <h2 className={ADMIN_TYPE.sectionTitle}>수신자 목록 ({previewContacts.length}명)</h2>
           <div className="max-h-48 overflow-y-auto space-y-1">
             {previewContacts.slice(0, 20).map(contact => (
-              <div key={contact.id} className="flex items-center justify-between py-2 border-b border-zinc-700 last:border-0">
+              <div key={contact.id} className="flex items-center justify-between py-2 border-b border-zinc-600 last:border-0">
                 <span className="text-sm text-zinc-300">{contact.name}</span>
                 <span className="text-xs text-zinc-400">{contact.phone}</span>
               </div>
@@ -1234,7 +1234,7 @@ export default function MessageComposePage() {
 
                 {/* 카카오+SMS일 때 SMS 내용 */}
                 {messageType === 'kakao_sms' && (
-                  <div className="space-y-2 pt-4 border-t border-zinc-700">
+                  <div className="space-y-2 pt-4 border-t border-zinc-600">
                     <Label className="text-zinc-300 text-sm flex items-center gap-2">
                       <Phone className="w-3.5 h-3.5" />
                       SMS 대체 발송 내용
@@ -1353,7 +1353,7 @@ export default function MessageComposePage() {
                   )}
 
                   {uploaded.length > 0 && (
-                    <div className="rounded-lg border border-zinc-700 divide-y divide-zinc-700">
+                    <div className="rounded-lg border border-zinc-700 divide-y divide-zinc-600">
                       {uploaded.map(u => (
                         <div key={u.path} className="flex items-center gap-3 px-3 py-2">
                           <Paperclip className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
@@ -1386,7 +1386,7 @@ export default function MessageComposePage() {
                     </p>
                   ) : (
                     <>
-                      <div className="max-h-48 overflow-y-auto rounded-lg border border-zinc-700 divide-y divide-zinc-700">
+                      <div className="max-h-48 overflow-y-auto rounded-lg border border-zinc-700 divide-y divide-zinc-600">
                         {documents.map(doc => {
                           const checked = selectedDocIds.includes(doc.id)
                           return (
@@ -1748,7 +1748,7 @@ export default function MessageComposePage() {
           />
           <div className="relative w-full max-w-lg mx-4 bg-zinc-800 border border-zinc-700 rounded-xl shadow-2xl flex flex-col max-h-[80vh]">
             {/* 모달 헤더 */}
-            <div className="flex items-center justify-between p-4 border-b border-zinc-700">
+            <div className="flex items-center justify-between p-4 border-b border-zinc-600">
               <h3 className="text-sm font-medium text-zinc-100">연락처 선택</h3>
               <button
                 onClick={() => setShowContactModal(false)}
@@ -1759,7 +1759,7 @@ export default function MessageComposePage() {
             </div>
 
             {/* 검색 */}
-            <div className="p-4 border-b border-zinc-700">
+            <div className="p-4 border-b border-zinc-600">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                 <input
@@ -1774,7 +1774,7 @@ export default function MessageComposePage() {
 
             {/* 전체 선택 */}
             {!loadingContacts && filteredContacts.length > 0 && (
-              <div className="px-4 py-2.5 border-b border-zinc-700">
+              <div className="px-4 py-2.5 border-b border-zinc-600">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
@@ -1802,7 +1802,7 @@ export default function MessageComposePage() {
                   </p>
                 </div>
               ) : (
-                <div className="divide-y divide-zinc-700">
+                <div className="divide-y divide-zinc-600">
                   {filteredContacts.map(contact => (
                     <label
                       key={contact.id}
@@ -1832,7 +1832,7 @@ export default function MessageComposePage() {
             </div>
 
             {/* 모달 푸터 */}
-            <div className="p-4 border-t border-zinc-700">
+            <div className="p-4 border-t border-zinc-600">
               <Button
                 onClick={() => setShowContactModal(false)}
                 className="w-full bg-[#D4AF37] hover:bg-[#C49B30] text-black font-medium"

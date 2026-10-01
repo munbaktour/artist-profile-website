@@ -252,7 +252,7 @@ export default function ContactsPage() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-zinc-700">
+        <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-zinc-600">
           <button
             onClick={() => {
               setSelectedCategory('all')
@@ -382,7 +382,7 @@ export default function ContactsPage() {
                 </div>
 
                 {/* Action Buttons — mt-auto로 카드 하단에 붙인다 */}
-                <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-700">
+                <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-600">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
@@ -422,7 +422,7 @@ export default function ContactsPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-700">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-600">
             <p className="text-sm text-zinc-400">
               {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, total)} / {total}
             </p>

@@ -256,7 +256,7 @@ export default function AdminCheckinsPage() {
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-zinc-700">
+          <div className="divide-y divide-zinc-600">
             {/* 통합 목록: 체크인 + 익명 방문을 시간순 정렬 */}
             {[
               ...checkins.map(c => ({ ...c, type: 'checkin' as const })),
