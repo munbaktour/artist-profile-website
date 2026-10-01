@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import type { Contact, Category } from '@/types/admin'
 import { isAbortError } from '@/hooks/useAbortableFetch'
+import { AdminPageHeader, StatCardsGrid } from '@/components/features/admin/ui'
 
 // 카테고리 아이콘 매핑
 const categoryIcons: Record<string, React.ElementType> = {
@@ -194,56 +195,30 @@ export default function ContactsPage() {
 
 
   return (
-    <div className="min-h-screen bg-zinc-950">
-      {/* Page Header */}
-      <div className="sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-700">
-        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-lg font-semibold text-zinc-100">
-              연락처 관리
-            </h1>
-            <p className="text-xs text-zinc-400 mt-0.5">
-              Collector & Relations Management
-            </p>
-          </div>
-          <button
-            onClick={() => router.push('/admin/contacts/new')}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4AF37] text-black text-sm font-medium hover:bg-[#C49B30] transition-colors"
-          >
-            <Plus size={16} />
-            새 연락처 추가
-          </button>
-        </div>
-      </div>
+    <div className="space-y-6">
+      <AdminPageHeader
+        title="연락처 관리"
+        subtitle="Collector & Relations Management"
+        actionButton={{
+          label: '새 연락처 추가',
+          icon: Plus,
+          onClick: () => router.push('/admin/contacts/new'),
+        }}
+      />
 
-      <main className="max-w-[1600px] mx-auto px-6 pb-12">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          {[
-            { label: '전체 연락처', value: stats.total, icon: Users },
-            { label: 'VIP', value: stats.vip, icon: Star },
-            { label: '컬렉터', value: stats.collectors, icon: Star },
-            { label: '작가', value: stats.artists, icon: Palette },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-700"
-            >
-              <stat.icon size={20} className="flex-shrink-0 text-zinc-400" />
-              <div>
-                <div className="text-2xl font-semibold text-zinc-100">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-zinc-400 mt-0.5">
-                  {stat.label}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Stats */}
+      <StatCardsGrid
+        columns={4}
+        stats={[
+          { label: '전체 연락처', value: stats.total, icon: Users },
+          { label: 'VIP', value: stats.vip, icon: Star },
+          { label: '컬렉터', value: stats.collectors, icon: Star },
+          { label: '작가', value: stats.artists, icon: Palette },
+        ]}
+      />
 
         {/* Search & Filters */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row gap-3">
           <div className="flex-1 min-w-[300px] relative">
             <Search
               size={16}
@@ -472,7 +447,6 @@ export default function ContactsPage() {
             </div>
           </div>
         )}
-      </main>
 
       {/* Contact Detail Modal */}
       {isModalOpen && selectedContact && (

@@ -41,6 +41,7 @@ import { VipBadge } from '@/components/features/admin/contacts/VipBadge'
 import { CategoryBadge } from '@/components/features/admin/contacts/CategoryBadge'
 import type { Contact, Category } from '@/types/admin'
 import { isAbortError } from '@/hooks/useAbortableFetch'
+import { ADMIN_TYPE } from '@/components/features/admin/ui'
 
 interface SelectedRecipient {
   id: string
@@ -308,7 +309,7 @@ export default function NotificationComposePage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-zinc-100">새 알림 작성</h1>
+          <h1 className={ADMIN_TYPE.pageTitle}>새 알림 작성</h1>
           <p className="text-zinc-400 text-sm mt-1">
             이메일 또는 SMS를 작성하여 연락처에게 발송합니다.
           </p>

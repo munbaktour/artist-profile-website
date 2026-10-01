@@ -15,6 +15,8 @@ import {
 import { cn, formatFileSize } from '@/lib/utils'
 import { AdminSkeleton } from '@/components/features/admin/ui'
 import type { GalleryDocument } from '@/types/admin'
+import { AdminPageHeader } from '@/components/features/admin/ui'
+import { ADMIN_TYPE } from '@/components/features/admin/ui'
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr)
@@ -189,20 +191,15 @@ export default function DocumentsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-semibold text-zinc-100">문서 관리</h1>
-          <p className="text-sm text-zinc-400 mt-1">총 {total}개의 문서</p>
-        </div>
-        <button
-          onClick={() => setShowUploadModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-black text-sm font-medium rounded-lg hover:bg-[#C49B30] transition-colors"
-        >
-          <Upload size={16} />
-          업로드
-        </button>
-      </div>
+      <AdminPageHeader
+        title="문서 관리"
+        subtitle={`총 ${total}개의 문서`}
+        actionButton={{
+          label: '업로드',
+          icon: Upload,
+          onClick: () => setShowUploadModal(true),
+        }}
+      />
 
       {/* Search */}
       <div className="relative">
@@ -364,7 +361,7 @@ export default function DocumentsPage() {
           />
           <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-semibold text-zinc-100">문서 업로드</h2>
+              <h2 className={ADMIN_TYPE.sectionTitle}>문서 업로드</h2>
               <button
                 onClick={() => !uploading && setShowUploadModal(false)}
                 className="p-1 text-zinc-400 hover:text-zinc-100 transition-colors"

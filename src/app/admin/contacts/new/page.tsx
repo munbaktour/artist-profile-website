@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
-  ArrowLeft,
   Save,
   User,
   Phone,
@@ -21,6 +20,7 @@ import {
 } from 'lucide-react'
 import type { Category } from '@/types/admin'
 import { isAbortError } from '@/hooks/useAbortableFetch'
+import { ADMIN_TYPE, AdminPageHeader} from '@/components/features/admin/ui'
 
 interface ExtractedContact {
   name?: string
@@ -248,16 +248,10 @@ export default function NewContactPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <Link
-          href="/admin/contacts"
-          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 text-sm mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          연락처 목록
-        </Link>
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-zinc-100">새 연락처</h1>
+      <AdminPageHeader
+        title="새 연락처"
+        backHref="/admin/contacts"
+        actions={
           <button
             type="button"
             onClick={() => setShowScanModal(true)}
@@ -266,8 +260,8 @@ export default function NewContactPage() {
             <Camera size={16} />
             명함 스캔
           </button>
-        </div>
-      </div>
+        }
+      />
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Error Message */}
@@ -281,7 +275,7 @@ export default function NewContactPage() {
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <User size={16} className="text-zinc-400" />
-            <h2 className="text-sm font-medium text-zinc-100">기본 정보</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>기본 정보</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -350,7 +344,7 @@ export default function NewContactPage() {
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Phone size={16} className="text-zinc-400" />
-            <h2 className="text-sm font-medium text-zinc-100">연락처 정보</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>연락처 정보</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -396,7 +390,7 @@ export default function NewContactPage() {
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Building size={16} className="text-zinc-400" />
-            <h2 className="text-sm font-medium text-zinc-100">소속 정보</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>소속 정보</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -428,7 +422,7 @@ export default function NewContactPage() {
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <MapPin size={16} className="text-zinc-400" />
-            <h2 className="text-sm font-medium text-zinc-100">주소</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>주소</h2>
           </div>
 
           <div className="space-y-4">
@@ -482,7 +476,7 @@ export default function NewContactPage() {
 
         {/* Notes */}
         <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
-          <h2 className="text-sm font-medium text-zinc-100">메모</h2>
+          <h2 className={ADMIN_TYPE.sectionTitle}>메모</h2>
           <textarea
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}

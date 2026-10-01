@@ -6,6 +6,8 @@ import { AdminManagement } from '@/components/features/admin/settings/AdminManag
 import { Users, Mail, Shield, Bell, Tags } from 'lucide-react'
 import { hasPermission } from '@/types/admin'
 import type { AdminRole } from '@/types/admin'
+import { AdminPageHeader } from '@/components/features/admin/ui'
+import { ADMIN_TYPE } from '@/components/features/admin/ui'
 
 export default function SettingsPage() {
   const { profile } = useAuth()
@@ -20,20 +22,17 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-lg font-semibold text-zinc-100">설정</h1>
-        <p className="text-zinc-400 text-sm mt-0.5">
-          계정 및 시스템 설정을 관리합니다.
-        </p>
-      </div>
+      <AdminPageHeader
+        title="설정"
+        subtitle="계정 및 시스템 설정을 관리합니다."
+      />
 
       {/* Admin Management Section */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-5">
         <div className="flex items-center gap-3">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
-            <h2 className="text-sm font-medium text-zinc-100">관리자 목록</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>관리자 목록</h2>
             <p className="text-xs text-zinc-400">시스템에 등록된 관리자를 관리합니다.</p>
           </div>
         </div>
@@ -46,7 +45,7 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3">
           <Tags className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
-            <h2 className="text-sm font-medium text-zinc-100">카테고리 관리</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>카테고리 관리</h2>
             <p className="text-xs text-zinc-400">연락처 분류를 위한 카테고리를 관리합니다.</p>
           </div>
         </div>
@@ -59,7 +58,7 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3">
           <Bell className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
-            <h2 className="text-sm font-medium text-zinc-100">알림 설정</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>알림 설정</h2>
             <p className="text-xs text-zinc-400">이메일 및 SMS 발송 설정</p>
           </div>
         </div>
@@ -98,7 +97,7 @@ export default function SettingsPage() {
         <div className="flex items-center gap-3">
           <Shield className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
-            <h2 className="text-sm font-medium text-zinc-100">데이터베이스</h2>
+            <h2 className={ADMIN_TYPE.sectionTitle}>데이터베이스</h2>
             <p className="text-xs text-zinc-400">Supabase 연결 정보</p>
           </div>
         </div>

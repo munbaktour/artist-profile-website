@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AdminSkeleton } from '@/components/features/admin/ui'
+import { AdminPageHeader } from '@/components/features/admin/ui'
 
 interface ExhibitionRow {
   id: string
@@ -101,22 +102,15 @@ export default function AdminExhibitionsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-semibold text-zinc-100">전시 관리</h1>
-          <p className="text-zinc-400 text-sm mt-0.5">
-            전시를 등록하고 관리합니다.
-          </p>
-        </div>
-        <Link
-          href="/admin/exhibitions/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-black rounded-lg font-medium text-sm hover:bg-[#C49B30] transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          새 전시 등록
-        </Link>
-      </div>
+      <AdminPageHeader
+        title="전시 관리"
+        subtitle="전시를 등록하고 관리합니다."
+        actionButton={{
+          label: '새 전시 등록',
+          icon: Plus,
+          href: '/admin/exhibitions/new',
+        }}
+      />
 
       {/* Filter Tabs */}
       <div className="flex gap-2">
