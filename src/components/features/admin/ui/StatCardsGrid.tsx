@@ -21,7 +21,7 @@ export function StatCardsGrid({ stats, columns = 4, className }: StatCardsGridPr
 
 function StatCard({ label, value, color, icon: Icon }: StatItem) {
   return (
-    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-800">
+    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-700">
       {Icon && (
         <Icon size={20} className="flex-shrink-0 text-zinc-400" style={color ? { color } : undefined} />
       )}

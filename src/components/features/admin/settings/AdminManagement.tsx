@@ -116,7 +116,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
           variant="outline"
           size="sm"
           onClick={() => window.location.reload()}
-          className="text-zinc-400 border-zinc-800"
+          className="text-zinc-400 border-zinc-700"
         >
           다시 시도
         </Button>
@@ -137,10 +137,10 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
           </p>
         </div>
       ) : (
-        <div className="rounded-md border border-zinc-800 overflow-hidden">
+        <div className="rounded-md border border-zinc-700 overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="border-zinc-800 hover:bg-transparent">
+              <TableRow className="border-zinc-700 hover:bg-transparent">
                 <TableHead className="text-zinc-400">이메일</TableHead>
                 <TableHead className="text-zinc-400">이름</TableHead>
                 <TableHead className="text-zinc-400">역할</TableHead>
@@ -158,7 +158,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                   <TableRow
                     key={admin.id}
                     className={cn(
-                      'border-zinc-800 hover:bg-zinc-800/50',
+                      'border-zinc-700 hover:bg-zinc-800',
                       isCurrentUser && 'bg-blue-500/5'
                     )}
                   >
@@ -203,7 +203,7 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                               align="end"
-                              className="bg-zinc-900 border-zinc-800"
+                              className="bg-zinc-900 border-zinc-700"
                             >
                               <DropdownMenuItem
                                 className="text-red-400 focus:text-red-400 focus:bg-red-500/10"

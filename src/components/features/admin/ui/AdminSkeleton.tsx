@@ -40,7 +40,7 @@ export function AdminSkeleton({
 
 function StatSkeleton() {
   return (
-    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse">
+    <div className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-700 animate-pulse">
       <div className="w-5 h-5 rounded bg-zinc-800" />
       <div className="space-y-2">
         <div className="h-7 w-14 bg-zinc-800 rounded" />
@@ -52,7 +52,7 @@ function StatSkeleton() {
 
 function CardSkeleton() {
   return (
-    <div className="p-5 rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse">
+    <div className="p-5 rounded-lg bg-zinc-900 border border-zinc-700 animate-pulse">
       <div className="flex items-center gap-4 mb-4">
         <div className="w-10 h-10 rounded-full bg-zinc-800" />
         <div className="flex-1 space-y-2">

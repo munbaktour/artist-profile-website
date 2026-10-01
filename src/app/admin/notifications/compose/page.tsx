@@ -289,7 +289,7 @@ export default function NotificationComposePage() {
   }
 
   const inputClassName = cn(
-    'bg-zinc-950 border-zinc-800 text-zinc-100',
+    'bg-zinc-950 border-zinc-700 text-zinc-100',
     'placeholder:text-zinc-400',
     'focus:ring-white/20 focus:border-white/20'
   )
@@ -351,7 +351,7 @@ export default function NotificationComposePage() {
       )}
 
       {/* Channel Selection */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
         <Label className="text-[#fafafa]">발송 채널</Label>
         <div className="flex gap-4">
           <button
@@ -361,7 +361,7 @@ export default function NotificationComposePage() {
               'flex-1 p-4 rounded-lg border-2 transition-all',
               channel === 'email'
                 ? 'border-blue-500 bg-blue-500/10'
-                : 'border-zinc-800 bg-zinc-950 hover:border-zinc-600'
+                : 'border-zinc-700 bg-zinc-950 hover:border-zinc-600'
             )}
           >
             <Mail className={cn(
@@ -382,7 +382,7 @@ export default function NotificationComposePage() {
               'flex-1 p-4 rounded-lg border-2 transition-all',
               channel === 'sms'
                 ? 'border-green-500 bg-green-500/10'
-                : 'border-zinc-800 bg-zinc-950 hover:border-zinc-600'
+                : 'border-zinc-700 bg-zinc-950 hover:border-zinc-600'
             )}
           >
             <MessageSquare className={cn(
@@ -401,7 +401,7 @@ export default function NotificationComposePage() {
       </div>
 
       {/* Notification Type */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
         <Label className="text-[#fafafa]">알림 유형</Label>
         <Select
           value={notificationType}
@@ -410,7 +410,7 @@ export default function NotificationComposePage() {
           <SelectTrigger className={inputClassName}>
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-zinc-900 border-zinc-800">
+          <SelectContent className="bg-zinc-900 border-zinc-700">
             <SelectItem value="general_notice" className="text-zinc-100">
               일반 공지
             </SelectItem>
@@ -422,14 +422,14 @@ export default function NotificationComposePage() {
       </div>
 
       {/* Recipients */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
         <div className="flex items-center justify-between">
           <Label className="text-[#fafafa]">수신자</Label>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setRecipientDialogOpen(true)}
-            className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
+            className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
           >
             <Users className="w-4 h-4 mr-2" />
             수신자 선택
@@ -437,7 +437,7 @@ export default function NotificationComposePage() {
         </div>
 
         {selectedRecipients.length === 0 ? (
-          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-center">
+          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-700 text-center">
             <Users className="w-8 h-8 text-zinc-400 mx-auto mb-2" />
             <p className="text-zinc-400 text-sm">수신자를 선택해주세요.</p>
           </div>
@@ -484,7 +484,7 @@ export default function NotificationComposePage() {
 
       {/* Exhibition Details (if exhibition invite) */}
       {notificationType === 'exhibition_invite' && (
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
           <Label className="text-[#fafafa]">전시 정보</Label>
 
           <div className="space-y-2">
@@ -531,7 +531,7 @@ export default function NotificationComposePage() {
       )}
 
       {/* Content */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 space-y-4">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-6 space-y-4">
         {channel === 'email' && (
           <div className="space-y-2">
             <Label className="text-[#fafafa]">제목 <span className="text-red-400">*</span></Label>
@@ -561,7 +561,7 @@ export default function NotificationComposePage() {
         <Link href="/admin/notifications">
           <Button
             variant="outline"
-            className="bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800"
+            className="bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800"
           >
             취소
           </Button>
@@ -587,7 +587,7 @@ export default function NotificationComposePage() {
 
       {/* Recipient Selection Dialog */}
       <Dialog open={recipientDialogOpen} onOpenChange={setRecipientDialogOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100 max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+        <DialogContent className="bg-zinc-900 border-zinc-700 text-zinc-100 max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
           <DialogHeader>
             <DialogTitle>수신자 선택</DialogTitle>
           </DialogHeader>
@@ -606,10 +606,10 @@ export default function NotificationComposePage() {
               </div>
 
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger className="w-[140px] bg-zinc-950 border-zinc-800 text-zinc-100">
+                <SelectTrigger className="w-[140px] bg-zinc-950 border-zinc-700 text-zinc-100">
                   <SelectValue placeholder="카테고리" />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-800">
+                <SelectContent className="bg-zinc-900 border-zinc-700">
                   <SelectItem value="all" className="text-zinc-100">전체</SelectItem>
                   {categories.map((cat) => (
                     <SelectItem key={cat.id} value={cat.id} className="text-zinc-100">
@@ -626,7 +626,7 @@ export default function NotificationComposePage() {
                 className={cn(
                   vipOnly
                     ? 'bg-[#D4AF37] text-black border-0'
-                    : 'bg-transparent border-zinc-800 text-zinc-100 hover:bg-zinc-800'
+                    : 'bg-transparent border-zinc-700 text-zinc-100 hover:bg-zinc-800'
                 )}
               >
                 <Crown className="w-4 h-4" />
@@ -649,7 +649,7 @@ export default function NotificationComposePage() {
             </div>
 
             {/* Contact List */}
-            <div className="border border-zinc-800 rounded-lg overflow-hidden max-h-[400px] overflow-y-auto">
+            <div className="border border-zinc-700 rounded-lg overflow-hidden max-h-[400px] overflow-y-auto">
               {loadingContacts ? (
                 <div className="p-4 space-y-3">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -665,7 +665,7 @@ export default function NotificationComposePage() {
                   검색 결과가 없습니다.
                 </div>
               ) : (
-                <div className="divide-y divide-zinc-800">
+                <div className="divide-y divide-zinc-700">
                   {contacts.map((contact) => {
                     const isSelected = selectedRecipients.some(r => r.id === contact.id)
                     const hasValidContact = channel === 'email' ? !!contact.email : !!contact.phone
@@ -674,7 +674,7 @@ export default function NotificationComposePage() {
                       <label
                         key={contact.id}
                         className={cn(
-                          'flex items-center gap-3 p-3 cursor-pointer hover:bg-zinc-800/50 transition-colors',
+                          'flex items-center gap-3 p-3 cursor-pointer hover:bg-zinc-800 transition-colors',
                           !hasValidContact && 'opacity-50 cursor-not-allowed'
                         )}
                       >

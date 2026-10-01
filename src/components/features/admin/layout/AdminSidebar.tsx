@@ -79,12 +79,12 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
           'fixed top-0 left-0 h-full w-64 z-50',
           'transform transition-transform duration-300 ease-in-out',
           'lg:translate-x-0',
-          'bg-zinc-900 border-r border-zinc-800',
+          'bg-zinc-900 border-r border-zinc-700',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between h-16 px-5 border-b border-zinc-800">
+        <div className="flex items-center justify-between h-16 px-5 border-b border-zinc-700">
           <Link
             href="/admin/contacts"
             className="flex flex-col"
@@ -142,7 +142,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         </nav>
 
         {/* User Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-zinc-800">
+        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-zinc-700">
           {profile && (
             <div className="flex items-center gap-3 px-3 py-2.5 mb-1">
               <div className="w-8 h-8 rounded-full bg-zinc-700 flex items-center justify-center">

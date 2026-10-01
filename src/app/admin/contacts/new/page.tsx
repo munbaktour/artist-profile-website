@@ -243,7 +243,7 @@ export default function NewContactPage() {
     setIsScanning(false)
   }
 
-  const inputClassName = 'w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm outline-none focus:border-zinc-600 placeholder:text-zinc-400 transition-colors'
+  const inputClassName = 'w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm outline-none focus:border-zinc-500 placeholder:text-zinc-400 transition-colors'
 
   return (
     <div className="space-y-6">
@@ -278,7 +278,7 @@ export default function NewContactPage() {
         )}
 
         {/* Basic Info */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <User size={16} className="text-zinc-400" />
             <h2 className="text-sm font-medium text-zinc-100">기본 정보</h2>
@@ -336,7 +336,7 @@ export default function NewContactPage() {
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
                   formData.isVip
                     ? 'bg-[#D4AF37]/10 border border-[#D4AF37] text-[#D4AF37]'
-                    : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
+                    : 'bg-zinc-950 border border-zinc-700 text-zinc-400'
                 }`}
               >
                 <Star size={16} fill={formData.isVip ? '#D4AF37' : 'none'} />
@@ -347,7 +347,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Contact Info */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Phone size={16} className="text-zinc-400" />
             <h2 className="text-sm font-medium text-zinc-100">연락처 정보</h2>
@@ -393,7 +393,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Organization */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Building size={16} className="text-zinc-400" />
             <h2 className="text-sm font-medium text-zinc-100">소속 정보</h2>
@@ -425,7 +425,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Address */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <MapPin size={16} className="text-zinc-400" />
             <h2 className="text-sm font-medium text-zinc-100">주소</h2>
@@ -481,7 +481,7 @@ export default function NewContactPage() {
         </div>
 
         {/* Notes */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-4">
           <h2 className="text-sm font-medium text-zinc-100">메모</h2>
           <textarea
             value={formData.notes}
@@ -493,10 +493,10 @@ export default function NewContactPage() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-700">
           <Link
             href="/admin/contacts"
-            className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-800 hover:bg-zinc-800 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-800 transition-colors"
           >
             취소
           </Link>
@@ -528,9 +528,9 @@ export default function NewContactPage() {
             if (e.target === e.currentTarget) resetScanModal()
           }}
         >
-          <div className="w-full max-w-xl bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+          <div className="w-full max-w-xl bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-700">
               <div className="flex items-center gap-3">
                 <Sparkles size={18} className="text-zinc-400" />
                 <div>
@@ -558,7 +558,7 @@ export default function NewContactPage() {
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ocr'
                       ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
-                      : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
+                      : 'bg-zinc-950 border border-zinc-700 text-zinc-400'
                   }`}
                 >
                   <span className="text-lg">🇰🇷</span>
@@ -573,7 +573,7 @@ export default function NewContactPage() {
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ai'
                       ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
-                      : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
+                      : 'bg-zinc-950 border border-zinc-700 text-zinc-400'
                   }`}
                 >
                   <Sparkles size={16} />
@@ -615,7 +615,7 @@ export default function NewContactPage() {
               {/* Preview Image */}
               {previewImage && (
                 <div className="space-y-4">
-                  <div className="relative rounded-lg overflow-hidden border border-zinc-800">
+                  <div className="relative rounded-lg overflow-hidden border border-zinc-700">
                     <img
                       src={previewImage}
                       alt="Business card preview"
@@ -692,7 +692,7 @@ export default function NewContactPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-zinc-800">
+            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-zinc-700">
               {previewImage && !isScanning && (
                 <button
                   onClick={() => {
@@ -700,7 +700,7 @@ export default function NewContactPage() {
                     setExtractedData(null)
                     setScanError(null)
                   }}
-                  className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-800 hover:bg-zinc-800 transition-colors"
+                  className="px-4 py-2 rounded-lg text-sm text-zinc-400 border border-zinc-700 hover:bg-zinc-800 transition-colors"
                 >
                   다시 업로드
                 </button>

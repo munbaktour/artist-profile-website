@@ -137,7 +137,7 @@ export default function AdminCheckinsPage() {
               <button
                 key={exhibition.id}
                 onClick={() => setSelectedExhibition(exhibition.slug)}
-                className="w-full bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors text-left"
+                className="w-full bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors text-left"
               >
                 <QrCode className="w-5 h-5 text-zinc-400 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -191,21 +191,21 @@ export default function AdminCheckinsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Eye className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{visitCount}</p>
             <p className="text-xs text-zinc-400">QR 스캔 횟수</p>
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{checkins.length}</p>
             <p className="text-xs text-zinc-400">정보 입력 체크인</p>
           </div>
         </div>
-        <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
+        <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4">
           <Clock className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">
@@ -221,7 +221,7 @@ export default function AdminCheckinsPage() {
       </div>
 
       {/* QR 코드 */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5">
         <h2 className="text-sm font-medium text-zinc-100 mb-4">체크인 QR코드</h2>
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <div ref={qrRef} className="bg-white p-4 rounded-lg">
@@ -252,7 +252,7 @@ export default function AdminCheckinsPage() {
       </div>
 
       {/* 방문자 목록 (체크인 + 익명 방문 통합) */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <AdminSkeleton variant="list-item" count={4} />
         ) : error ? (
@@ -268,7 +268,7 @@ export default function AdminCheckinsPage() {
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-zinc-800">
+          <div className="divide-y divide-zinc-700">
             {/* 통합 목록: 체크인 + 익명 방문을 시간순 정렬 */}
             {[
               ...checkins.map(c => ({ ...c, type: 'checkin' as const })),

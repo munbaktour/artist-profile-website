@@ -29,7 +29,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Admin Management Section */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-5">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-5">
         <div className="flex items-center gap-3">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
@@ -42,7 +42,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Category Management Section */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-5">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-5">
         <div className="flex items-center gap-3">
           <Tags className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
@@ -55,7 +55,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Notification Settings */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-5">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-5">
         <div className="flex items-center gap-3">
           <Bell className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
@@ -65,7 +65,7 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-3">
-          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-700">
             <div className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-zinc-400" />
               <div>
@@ -78,7 +78,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+          <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-700">
             <div className="flex items-center gap-3">
               <Shield className="w-4 h-4 text-zinc-400" />
               <div>
@@ -94,7 +94,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Database Info */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-5 space-y-5">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-5 space-y-5">
         <div className="flex items-center gap-3">
           <Shield className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
@@ -103,7 +103,7 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+        <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-700">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-zinc-100 text-sm font-medium">Supabase</p>

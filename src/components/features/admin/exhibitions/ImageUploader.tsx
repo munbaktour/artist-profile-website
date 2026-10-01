@@ -192,7 +192,7 @@ export function ImageUploader({
             border-2 border-dashed rounded-lg cursor-pointer transition-all
             ${dragOver
               ? 'border-zinc-500 bg-zinc-800/50'
-              : 'border-zinc-800 hover:border-zinc-600 bg-zinc-950'
+              : 'border-zinc-700 hover:border-zinc-600 bg-zinc-950'
             }
             ${uploading ? 'pointer-events-none opacity-60' : ''}
           `}
@@ -224,7 +224,7 @@ export function ImageUploader({
 
       {/* 단일 모드 미리보기 */}
       {mode === 'single' && urls.length > 0 && (
-        <div className="relative group rounded-lg overflow-hidden border border-zinc-800">
+        <div className="relative group rounded-lg overflow-hidden border border-zinc-700">
           <img
             src={urls[0]}
             alt="포스터 미리보기"
@@ -261,7 +261,7 @@ export function ImageUploader({
           {urls.map((url, idx) => (
             <div
               key={`${url}-${idx}`}
-              className="relative group aspect-square rounded-lg overflow-hidden border border-zinc-800"
+              className="relative group aspect-square rounded-lg overflow-hidden border border-zinc-700"
             >
               <img
                 src={url}

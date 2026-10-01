@@ -196,7 +196,7 @@ export default function ContactsPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       {/* Page Header */}
-      <div className="sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-800">
+      <div className="sticky top-0 z-40 px-6 py-4 mb-6 bg-zinc-950 border-b border-zinc-700">
         <div className="max-w-[1600px] mx-auto flex justify-between items-center">
           <div>
             <h1 className="text-lg font-semibold text-zinc-100">
@@ -227,7 +227,7 @@ export default function ContactsPage() {
           ].map((stat, i) => (
             <div
               key={i}
-              className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-800"
+              className="flex items-center gap-4 p-5 rounded-lg bg-zinc-900 border border-zinc-700"
             >
               <stat.icon size={20} className="flex-shrink-0 text-zinc-400" />
               <div>
@@ -257,7 +257,7 @@ export default function ContactsPage() {
                 setSearchTerm(e.target.value)
                 setPage(1)
               }}
-              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder:text-zinc-400 outline-none focus:border-zinc-600 transition-colors"
+              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-700 text-zinc-100 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors"
             />
           </div>
           <button
@@ -268,7 +268,7 @@ export default function ContactsPage() {
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors ${
               showVIPOnly
                 ? 'bg-[#D4AF37] text-black'
-                : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+                : 'bg-zinc-900 border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
             }`}
           >
             <Star size={14} fill={showVIPOnly ? 'currentColor' : 'none'} />
@@ -277,7 +277,7 @@ export default function ContactsPage() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-zinc-800">
+        <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-zinc-700">
           <button
             onClick={() => {
               setSelectedCategory('all')
@@ -286,7 +286,7 @@ export default function ContactsPage() {
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
               selectedCategory === 'all'
                 ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
             }`}
           >
             <Users size={14} />
@@ -305,7 +305,7 @@ export default function ContactsPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
                   isActive
                     ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                    : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                    : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
                 }`}
               >
                 <Icon size={14} />
@@ -321,7 +321,7 @@ export default function ContactsPage() {
             {Array.from({ length: 8 }).map((_, i) => (
               <div
                 key={i}
-                className="p-5 rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse"
+                className="p-5 rounded-lg bg-zinc-900 border border-zinc-700 animate-pulse"
               >
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full bg-zinc-800" />
@@ -352,7 +352,7 @@ export default function ContactsPage() {
               <div
                 key={contact.id}
                 onClick={() => handleView(contact)}
-                className="relative flex flex-col p-5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:bg-zinc-800/70 transition-colors"
+                className="relative flex flex-col p-5 rounded-lg bg-zinc-900 border border-zinc-700 cursor-pointer hover:bg-zinc-800/70 transition-colors"
               >
                 {/* VIP Badge */}
                 {contact.isVip && (
@@ -407,7 +407,7 @@ export default function ContactsPage() {
                 </div>
 
                 {/* Action Buttons — mt-auto로 카드 하단에 붙인다 */}
-                <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-800">
+                <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-700">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
@@ -447,7 +447,7 @@ export default function ContactsPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-800">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-700">
             <p className="text-sm text-zinc-400">
               {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, total)} / {total}
             </p>
@@ -481,7 +481,7 @@ export default function ContactsPage() {
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto rounded-xl p-6 bg-zinc-900 border border-zinc-800"
+            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto rounded-xl p-6 bg-zinc-900 border border-zinc-700"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

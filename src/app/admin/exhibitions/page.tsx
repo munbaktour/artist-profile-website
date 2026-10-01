@@ -170,7 +170,7 @@ export default function AdminExhibitionsPage() {
           filtered.map(exhibition => (
             <div
               key={exhibition.id}
-              className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors"
+              className="bg-zinc-900 rounded-lg border border-zinc-700 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors"
             >
               <ImageIcon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
               <div

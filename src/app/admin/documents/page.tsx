@@ -212,12 +212,12 @@ export default function DocumentsPage() {
           value={search}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="문서 제목 또는 파일명으로 검색..."
-          className="w-full pl-9 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400"
+          className="w-full pl-9 pr-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 placeholder:text-zinc-400"
         />
       </div>
 
       {/* Document List */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <div className="p-5">
             <AdminSkeleton variant="list-item" count={5} />
@@ -265,11 +265,11 @@ export default function DocumentsPage() {
             )}
           </div>
         ) : (
-          <div className="divide-y divide-zinc-800">
+          <div className="divide-y divide-zinc-700">
             {documents.map((doc) => (
               <div
                 key={doc.id}
-                className="p-4 flex items-center gap-4 hover:bg-zinc-800/50 transition-colors"
+                className="p-4 flex items-center gap-4 hover:bg-zinc-800 transition-colors"
               >
                 <div className="flex-shrink-0">
                   {getFileIcon(doc.fileType)}
@@ -338,7 +338,7 @@ export default function DocumentsPage() {
           <button
             onClick={() => { setPage(page - 1); fetchDocuments(search, page - 1) }}
             disabled={page <= 1}
-            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-700 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             이전
           </button>
@@ -348,7 +348,7 @@ export default function DocumentsPage() {
           <button
             onClick={() => { setPage(page + 1); fetchDocuments(search, page + 1) }}
             disabled={page >= totalPages}
-            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-sm text-zinc-400 bg-zinc-900 border border-zinc-700 rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             다음
           </button>
@@ -362,7 +362,7 @@ export default function DocumentsPage() {
             className="absolute inset-0 bg-black/60"
             onClick={() => !uploading && setShowUploadModal(false)}
           />
-          <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-800 rounded-xl p-6 space-y-5">
+          <div className="relative w-full max-w-lg mx-4 bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-5">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-semibold text-zinc-100">문서 업로드</h2>
               <button
@@ -381,7 +381,7 @@ export default function DocumentsPage() {
                 value={uploadTitle}
                 onChange={(e) => setUploadTitle(e.target.value)}
                 placeholder="문서 제목을 입력하세요"
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 placeholder:text-zinc-400"
               />
             </div>
 
@@ -393,7 +393,7 @@ export default function DocumentsPage() {
                 onChange={(e) => setUploadDescription(e.target.value)}
                 placeholder="문서에 대한 간단한 설명 (선택)"
                 rows={2}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400 resize-none"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-500 placeholder:text-zinc-400 resize-none"
               />
             </div>
 

@@ -26,7 +26,7 @@ export function AdminFilterTabs({
               variant === 'default' && 'rounded-lg',
               isActive
                 ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800'
             )}
           >
             {Icon && <Icon size={14} />}
