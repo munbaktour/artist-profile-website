@@ -28,6 +28,7 @@ import {
 interface MessageLog {
   id: string
   template_id: string
+  channel: string
   content: string
   recipient_count: number
   status: 'sent' | 'failed' | 'pending'
@@ -42,12 +43,12 @@ const statusConfig = {
 }
 
 // 템플릿 ID → 라벨 매핑
-const templateLabels: Record<string, string> = {
-  exhibition_invite: '전시 초대',
-  general_notice: '일반 공지',
-  event_invite: '행사 안내',
-  thanks: '감사 인사',
-  custom: '직접 작성',
+// 발송 쪽이 notification_type에 늘 'general_notice'를 넣는다. 템플릿을 칼럼으로 보여줘도
+// 모든 줄이 같은 값이라 읽을 게 없다. 실제로 구분이 되는 건 채널이다.
+const channelLabels: Record<string, string> = {
+  email: '이메일',
+  alimtalk: '알림톡',
+  sms: 'SMS',
 }
 
 export default function MessagesPage() {
@@ -124,7 +125,7 @@ export default function MessagesPage() {
               <TableRow className="border-zinc-600 hover:bg-transparent">
                 <TableHead className="text-zinc-400">발송일시</TableHead>
                 <TableHead className="text-zinc-400">수신자</TableHead>
-                <TableHead className="text-zinc-400">템플릿</TableHead>
+                <TableHead className="text-zinc-400">채널</TableHead>
                 <TableHead className="text-zinc-400">메시지</TableHead>
                 <TableHead className="text-zinc-400">상태</TableHead>
               </TableRow>
@@ -148,7 +149,7 @@ export default function MessagesPage() {
                       </span>
                     </TableCell>
                     <TableCell className="text-zinc-400 text-sm">
-                      {templateLabels[item.template_id] || item.template_id}
+                      {channelLabels[item.channel] || item.channel}
                     </TableCell>
                     <TableCell className="text-zinc-400 text-sm max-w-[200px] truncate">
                       {item.content}

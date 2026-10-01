@@ -189,6 +189,22 @@ interface SendResult {
   requestId?: string
 }
 
+// 인증 탭 잠금이 풀리길 기다리는 시간. 잠금 자체의 제한이 10초라 그보다 짧게 잡는다.
+const AUTH_LOCK_RETRY_DELAY_MS = 1500
+
+/**
+ * Web Locks 취소인지 가린다. 브라우저는 "signal is aborted without reason"을 주고,
+ * Supabase는 LockAcquireTimeoutError를 주기도 한다. 둘 다 같은 상황이다.
+ */
+function isAuthLockTimeout(error: { message?: string; name?: string }) {
+  const message = error?.message ?? ''
+  return (
+    error?.name === 'AbortError' ||
+    message.includes('aborted') ||
+    message.includes('LockManager')
+  )
+}
+
 export default function MessageComposePage() {
   // 발송 단계
   const [sendStep, setSendStep] = useState<SendStep>('compose')
@@ -371,6 +387,17 @@ export default function MessageComposePage() {
   }, [])
 
   // 내 컴퓨터에서 고른 파일을 Storage에 바로 올린다.
+  //
+  // 업로드가 "signal is aborted without reason"으로 실패하는 일이 있었다. 서버 로그를
+  // 보니 storage 요청이 아예 도착하지 않았다 — 브라우저 안에서 끊긴 것이다.
+  //
+  // 원인은 파일이 아니라 인증이다. 업로드에는 로그인 토큰이 필요한데, Supabase 인증
+  // 라이브러리는 토큰을 읽을 때 Web Locks로 탭 사이에 배타 잠금을 건다(기본 10초,
+  // lockAcquireTimeout). 관리자 페이지가 여러 탭에 떠 있으면 10초 안에 잠금을 못 얻고
+  // AbortController가 취소한다. 라이브러리가 이 오류를 감싸지 않아 브라우저 원문이
+  // 그대로 화면까지 올라왔다.
+  //
+  // 잠금은 대개 몇 초면 풀리므로 한 번 더 시도하고, 그래도 안 되면 할 일을 알려준다.
   // API를 거치지 않는 이유: Vercel 서버리스 함수는 요청 본문이 4.5MB로 제한돼
   // 그보다 큰 파일이 업로드 단계에서 막힌다. 브라우저에서 직접 올리면 그 제한을 받지 않는다.
   const handleFilePick = useCallback(async (files: FileList | null) => {
@@ -401,12 +428,26 @@ export default function MessageComposePage() {
       for (const file of picked) {
         const ext = file.name.split('.').pop()?.toLowerCase() || 'pdf'
         const path = `${ATTACHMENT_UPLOAD_PREFIX}/${crypto.randomUUID()}.${ext}`
-        const { error } = await supabase.storage
-          .from('documents')
-          .upload(path, file, { contentType: file.type, upsert: false })
+
+        // 한 번 더 시도하는 이유는 코드 위 주석(인증 탭 잠금) 참고.
+        let error: { message: string; name?: string } | null = null
+        for (let attempt = 0; attempt < 2; attempt++) {
+          ;({ error } = await supabase.storage
+            .from('documents')
+            .upload(path, file, { contentType: file.type, upsert: false }))
+
+          if (!error || !isAuthLockTimeout(error)) break
+          if (attempt === 0) {
+            await new Promise(resolve => setTimeout(resolve, AUTH_LOCK_RETRY_DELAY_MS))
+          }
+        }
 
         if (error) {
-          setUploadError(`${file.name} 업로드에 실패했습니다. ${error.message}`)
+          setUploadError(
+            isAuthLockTimeout(error)
+              ? `${file.name} 업로드가 지연됐습니다. 관리자 페이지가 여러 탭에 열려 있으면 생길 수 있습니다. 다른 탭을 닫고 다시 시도해 주세요.`
+              : `${file.name} 업로드에 실패했습니다. ${error.message}`
+          )
           // 이번 호출에서 이미 올라간 것들은 되돌린다. 쓰이지 않을 파일을 남기지 않는다.
           if (done.length > 0) {
             await supabase.storage.from('documents').remove(done.map(d => d.path))
