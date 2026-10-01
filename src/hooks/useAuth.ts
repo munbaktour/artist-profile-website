@@ -78,11 +78,24 @@ export function useAuth(): UseAuthReturn {
     getInitialSession()
 
     // Listen for auth changes
+    //
+    // 이 콜백은 Supabase가 인증 잠금(Web Locks)을 쥔 채로 호출한다. 그래서 콜백 안에서
+    // 토큰이 필요한 Supabase 호출을 await 하면 같은 잠금을 기다리다 자기 자신과 교착된다.
+    // 10초 뒤 AbortController가 끊고 "signal is aborted without reason"이 올라온다.
+    //
+    // 실제로 이 화면에서 getSession이 계속 실패했고, 첨부 업로드도 토큰을 못 얻어
+    // 막혔다. 원인은 아래 fetchProfile을 콜백 안에서 await 한 것이었다.
+    //
+    // 콜백은 동기로 끝내 잠금을 바로 돌려주고, Supabase를 쓰는 일은 밖으로 미룬다.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         if (session?.user) {
           setUser(session.user)
-          await fetchProfile(session.user.id)
+          const userId = session.user.id
+          // setTimeout 0 — 콜백이 반환돼 잠금이 풀린 뒤에 실행된다
+          setTimeout(() => {
+            void fetchProfile(userId)
+          }, 0)
         } else {
           setUser(null)
           setProfile(null)
