@@ -358,6 +358,7 @@ export async function POST(request: NextRequest) {
           ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
           : `${validContacts.length}명`,
         recipientCount: validContacts.length,
+        recipients: toRecipientList(validContacts, 'alimtalk'),
         status: successCount > 0 ? 'sent' : 'failed',
         errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
         provider: 'nhn_cloud',
@@ -443,6 +444,7 @@ export async function POST(request: NextRequest) {
           ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
           : `${validContacts.length}명`,
         recipientCount: validContacts.length,
+        recipients: toRecipientList(validContacts, 'alimtalk'),
         status: successCount > 0 ? 'sent' : 'failed',
         errorMessage: failCount > 0 ? apiResult.header?.resultMessage : null,
         provider: 'nhn_cloud',
@@ -483,6 +485,7 @@ export async function POST(request: NextRequest) {
           ? (validContacts[0].phone || validContacts[0].mobile || '').replace(/[^0-9]/g, '')
           : `${validContacts.length}명`,
         recipientCount: validContacts.length,
+        recipients: toRecipientList(validContacts, 'sms'),
         status: successCount > 0 ? 'sent' : 'failed',
         errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
         provider: 'nhn_cloud',
@@ -633,6 +636,7 @@ export async function POST(request: NextRequest) {
           ? validContacts[0].email || ''
           : `${validContacts.length}명`,
         recipientCount: validContacts.length,
+        recipients: toRecipientList(validContacts, 'email'),
         status: successCount > 0 ? 'sent' : 'failed',
         errorMessage: failCount > 0 ? `${failCount}건 실패` : null,
         provider: 'resend',
@@ -739,6 +743,27 @@ async function sendSms(
   }
 }
 
+/**
+ * 발송 내역 화면의 "수신자" 칸에 쓸 목록.
+ *
+ * 이전에는 recipient_phone 한 칸에만 넣어서, 여러 명이면 "2명"으로 뭉개져
+ * 누구에게 보냈는지 알 수 없었다. 이름은 저장조차 하지 않았다 — 여기서 들고
+ * 있는데도. 채널마다 보낸 주소가 달라 to를 따로 고른다.
+ */
+function toRecipientList(
+  contacts: Contact[],
+  channel: 'email' | 'sms' | 'alimtalk'
+): { id: string; name: string; to: string }[] {
+  return contacts.map(c => ({
+    id: c.id,
+    name: c.name,
+    to:
+      channel === 'email'
+        ? c.email ?? ''
+        : (c.phone || c.mobile || '').replace(/[^0-9]/g, ''),
+  }))
+}
+
 // 알림 로그 저장 함수 (notification_logs 테이블 사용)
 async function saveNotificationLog(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -748,6 +773,8 @@ async function saveNotificationLog(
     content: string
     recipientPhone: string | null
     recipientCount: number
+    /** 누구에게 보냈는지. 화면의 '수신자' 칸이 이걸 쓴다. */
+    recipients: { id: string; name: string; to: string }[]
     status: 'sent' | 'failed' | 'pending'
     errorMessage: string | null
     provider: string
@@ -762,6 +789,7 @@ async function saveNotificationLog(
       recipient_id: null,
       recipient_email: null,
       recipient_phone: data.recipientPhone,
+      recipients: data.recipients,
       subject: data.subject,
       content: data.content,
       status: data.status,
