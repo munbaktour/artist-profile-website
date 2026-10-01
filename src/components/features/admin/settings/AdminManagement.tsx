@@ -129,10 +129,10 @@ export function AdminManagement({ canEdit = false, currentUserId }: AdminManagem
       {admins.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <div className="p-3 rounded-full bg-zinc-800 mb-4">
-            <UserPlus className="w-6 h-6 text-zinc-500" />
+            <UserPlus className="w-6 h-6 text-zinc-400" />
           </div>
           <p className="text-zinc-400 mb-1">등록된 관리자가 없습니다</p>
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-zinc-400">
             관리자를 초대하여 시스템을 함께 관리하세요.
           </p>
         </div>

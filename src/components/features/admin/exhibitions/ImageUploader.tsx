@@ -200,7 +200,7 @@ export function ImageUploader({
           {uploading ? (
             <Loader2 className="w-8 h-8 text-zinc-400 animate-spin" />
           ) : (
-            <Upload className="w-8 h-8 text-zinc-500" />
+            <Upload className="w-8 h-8 text-zinc-400" />
           )}
           <p className="text-sm text-zinc-400">
             {uploading
@@ -208,7 +208,7 @@ export function ImageUploader({
               : '이미지를 드래그하거나 클릭하여 업로드'
             }
           </p>
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-zinc-400">
             JPEG, PNG, WebP (최대 10MB)
           </p>
           <input
@@ -285,7 +285,7 @@ export function ImageUploader({
 
       {/* 힌트 */}
       {hint && !error && (
-        <p className="text-xs text-zinc-500">{hint}</p>
+        <p className="text-xs text-zinc-400">{hint}</p>
       )}
 
       {/* 파일 수 표시 (multiple 모드) */}

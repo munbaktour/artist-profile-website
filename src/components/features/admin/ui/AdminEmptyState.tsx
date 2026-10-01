@@ -21,7 +21,7 @@ export function AdminEmptyState({
       />
       <p className="text-zinc-400">{title}</p>
       {description && (
-        <p className="text-sm mt-1 text-zinc-500">
+        <p className="text-sm mt-1 text-zinc-400">
           {description}
         </p>
       )}

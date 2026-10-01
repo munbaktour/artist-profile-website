@@ -155,14 +155,14 @@ export default function NewExhibitionPage() {
                 자동 생성
               </button>
             </div>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               URL에 사용됩니다: /exhibition/{form.slug || 'slug'}
             </p>
           </div>
 
           <div>
             <label className="block text-sm text-zinc-400 mb-1.5">
-              작가 선택 <span className="text-zinc-500 text-xs">(체크인 시 작가 페이지로 이동)</span>
+              작가 선택 <span className="text-zinc-400 text-xs">(체크인 시 작가 페이지로 이동)</span>
             </label>
             <select
               name="artist_id"
@@ -185,7 +185,7 @@ export default function NewExhibitionPage() {
                 </option>
               ))}
             </select>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               선택 시 체크인 완료 후 해당 작가 페이지로 자동 이동합니다.
             </p>
           </div>

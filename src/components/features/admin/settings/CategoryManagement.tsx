@@ -247,7 +247,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
           <TableBody>
             {categories.length === 0 ? (
               <TableRow className="border-zinc-800">
-                <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-500 py-8">
+                <TableCell colSpan={canEdit ? 5 : 4} className="text-center text-zinc-400 py-8">
                   카테고리가 없습니다.
                 </TableCell>
               </TableRow>
@@ -258,7 +258,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                   className="border-zinc-800 hover:bg-zinc-900"
                 >
                   <TableCell>
-                    <GripVertical className="w-4 h-4 text-zinc-500" />
+                    <GripVertical className="w-4 h-4 text-zinc-400" />
                   </TableCell>
                   <TableCell className="font-medium text-zinc-100">
                     <div className="flex items-center gap-2">
@@ -345,7 +345,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="예: 컬렉터"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-400"
               />
             </div>
 
@@ -356,7 +356,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.nameEn}
                 onChange={(e) => setFormData({ ...formData, nameEn: e.target.value })}
                 placeholder="예: Collector"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-400"
               />
             </div>
 
@@ -396,7 +396,7 @@ export function CategoryManagement({ canEdit = true }: CategoryManagementProps) 
                 value={formData.icon}
                 onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                 placeholder="예: 🎨"
-                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-500"
+                className="bg-zinc-950 border-zinc-800 text-zinc-100 placeholder:text-zinc-400"
                 maxLength={4}
               />
             </div>

@@ -169,7 +169,7 @@ export default function TagsPage() {
 
   const inputClassName = cn(
     'bg-zinc-950 border-zinc-800 text-zinc-100',
-    'placeholder:text-zinc-500',
+    'placeholder:text-zinc-400',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -317,8 +317,8 @@ export default function TagsPage() {
         </div>
       ) : tags.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-zinc-500">태그가 없습니다.</p>
-          <p className="text-zinc-500 text-sm mt-1">
+          <p className="text-zinc-400">태그가 없습니다.</p>
+          <p className="text-zinc-400 text-sm mt-1">
             새 태그를 추가하여 연락처를 분류해보세요.
           </p>
         </div>
@@ -337,7 +337,7 @@ export default function TagsPage() {
                 <div>
                   <p className="text-zinc-100 font-medium">{tag.name}</p>
                   {tag.category && (
-                    <p className="text-zinc-500 text-xs">
+                    <p className="text-zinc-400 text-xs">
                       {tagCategories.find((c) => c.value === tag.category)?.label}
                     </p>
                   )}

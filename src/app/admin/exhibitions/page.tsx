@@ -105,7 +105,7 @@ export default function AdminExhibitionsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold text-zinc-100">전시 관리</h1>
-          <p className="text-zinc-500 text-sm mt-0.5">
+          <p className="text-zinc-400 text-sm mt-0.5">
             전시를 등록하고 관리합니다.
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function AdminExhibitionsPage() {
               'px-3 py-1.5 rounded-lg text-sm transition-colors',
               filter === tab.id
                 ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-500 hover:text-zinc-300 border border-transparent'
+                : 'text-zinc-400 hover:text-zinc-300 border border-transparent'
             )}
           >
             {tab.label}
@@ -152,7 +152,7 @@ export default function AdminExhibitionsPage() {
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
             <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
-              <ImageIcon className="w-6 h-6 text-zinc-500" />
+              <ImageIcon className="w-6 h-6 text-zinc-400" />
             </div>
             <p className="text-base font-medium text-zinc-100">등록된 전시가 없습니다</p>
             <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">
@@ -172,7 +172,7 @@ export default function AdminExhibitionsPage() {
               key={exhibition.id}
               className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors"
             >
-              <ImageIcon className="w-5 h-5 text-zinc-500 flex-shrink-0" />
+              <ImageIcon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
               <div
                 className="flex-1 min-w-0 cursor-pointer"
                 onClick={() => router.push(`/admin/exhibitions/${exhibition.id}/edit`)}
@@ -186,7 +186,7 @@ export default function AdminExhibitionsPage() {
                       {exhibition.artist_name_ko}
                     </span>
                   )}
-                  <span className="text-xs text-zinc-500 flex items-center gap-1">
+                  <span className="text-xs text-zinc-400 flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {exhibition.start_date} ~ {exhibition.end_date}
                   </span>
@@ -202,7 +202,7 @@ export default function AdminExhibitionsPage() {
                 <button
                   onClick={() => handleDelete(exhibition.id, exhibition.title_ko)}
                   disabled={deletingId === exhibition.id}
-                  className="p-2 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-500/5 transition-colors disabled:opacity-50"
+                  className="p-2 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-red-500/5 transition-colors disabled:opacity-50"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>

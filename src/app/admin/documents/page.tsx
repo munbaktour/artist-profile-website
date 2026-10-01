@@ -193,7 +193,7 @@ export default function DocumentsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold text-zinc-100">문서 관리</h1>
-          <p className="text-sm text-zinc-500 mt-1">총 {total}개의 문서</p>
+          <p className="text-sm text-zinc-400 mt-1">총 {total}개의 문서</p>
         </div>
         <button
           onClick={() => setShowUploadModal(true)}
@@ -206,13 +206,13 @@ export default function DocumentsPage() {
 
       {/* Search */}
       <div className="relative">
-        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
         <input
           type="text"
           value={search}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="문서 제목 또는 파일명으로 검색..."
-          className="w-full pl-9 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-600"
+          className="w-full pl-9 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400"
         />
       </div>
 
@@ -228,7 +228,7 @@ export default function DocumentsPage() {
               <FolderOpen size={24} className="text-red-400" />
             </div>
             <p className="text-red-400 text-sm font-medium mb-1">오류 발생</p>
-            <p className="text-zinc-500 text-xs">{fetchError}</p>
+            <p className="text-zinc-400 text-xs">{fetchError}</p>
             <button
               onClick={() => fetchDocuments(search, page)}
               className="mt-3 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
@@ -239,7 +239,7 @@ export default function DocumentsPage() {
         ) : documents.length === 0 ? (
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
             <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
-              <FolderOpen size={24} className="text-zinc-500" />
+              <FolderOpen size={24} className="text-zinc-400" />
             </div>
             {search ? (
               <>
@@ -279,28 +279,28 @@ export default function DocumentsPage() {
                     {doc.title}
                   </p>
                   <div className="flex items-center gap-3 mt-1">
-                    <span className="text-xs text-zinc-500 truncate max-w-[200px]">
+                    <span className="text-xs text-zinc-400 truncate max-w-[200px]">
                       {doc.fileName}
                     </span>
-                    <span className="text-xs text-zinc-600">·</span>
-                    <span className="text-xs text-zinc-500">
+                    <span className="text-xs text-zinc-400">·</span>
+                    <span className="text-xs text-zinc-400">
                       {formatFileSize(doc.fileSize)}
                     </span>
-                    <span className="text-xs text-zinc-600">·</span>
-                    <span className="text-xs text-zinc-500">
+                    <span className="text-xs text-zinc-400">·</span>
+                    <span className="text-xs text-zinc-400">
                       {formatDate(doc.createdAt)}
                     </span>
                     {doc.uploader && (
                       <>
-                        <span className="text-xs text-zinc-600">·</span>
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs text-zinc-400">·</span>
+                        <span className="text-xs text-zinc-400">
                           {doc.uploader.fullName || doc.uploader.email}
                         </span>
                       </>
                     )}
                   </div>
                   {doc.description && (
-                    <p className="text-xs text-zinc-500 mt-1 truncate">
+                    <p className="text-xs text-zinc-400 mt-1 truncate">
                       {doc.description}
                     </p>
                   )}
@@ -342,7 +342,7 @@ export default function DocumentsPage() {
           >
             이전
           </button>
-          <span className="text-sm text-zinc-500">
+          <span className="text-sm text-zinc-400">
             {page} / {totalPages}
           </span>
           <button
@@ -381,7 +381,7 @@ export default function DocumentsPage() {
                 value={uploadTitle}
                 onChange={(e) => setUploadTitle(e.target.value)}
                 placeholder="문서 제목을 입력하세요"
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-600"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400"
               />
             </div>
 
@@ -393,7 +393,7 @@ export default function DocumentsPage() {
                 onChange={(e) => setUploadDescription(e.target.value)}
                 placeholder="문서에 대한 간단한 설명 (선택)"
                 rows={2}
-                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-600 resize-none"
+                className="w-full px-3 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm focus:outline-none focus:border-zinc-600 placeholder:text-zinc-400 resize-none"
               />
             </div>
 
@@ -419,7 +419,7 @@ export default function DocumentsPage() {
                       <p className="text-sm text-zinc-200 truncate max-w-[250px]">
                         {uploadFile.name}
                       </p>
-                      <p className="text-xs text-zinc-500">
+                      <p className="text-xs text-zinc-400">
                         {formatFileSize(uploadFile.size)}
                       </p>
                     </div>
@@ -432,11 +432,11 @@ export default function DocumentsPage() {
                   </div>
                 ) : (
                   <>
-                    <Upload size={24} className="mx-auto text-zinc-600 mb-2" />
+                    <Upload size={24} className="mx-auto text-zinc-500 mb-2" />
                     <p className="text-sm text-zinc-400">
                       파일을 드래그하거나 클릭하여 선택
                     </p>
-                    <p className="text-xs text-zinc-600 mt-1">
+                    <p className="text-xs text-zinc-400 mt-1">
                       PDF, ZIP · 최대 50MB
                     </p>
                   </>

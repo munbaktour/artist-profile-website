@@ -243,7 +243,7 @@ export default function NewContactPage() {
     setIsScanning(false)
   }
 
-  const inputClassName = 'w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm outline-none focus:border-zinc-600 placeholder:text-zinc-600 transition-colors'
+  const inputClassName = 'w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-100 text-sm outline-none focus:border-zinc-600 placeholder:text-zinc-400 transition-colors'
 
   return (
     <div className="space-y-6">
@@ -336,7 +336,7 @@ export default function NewContactPage() {
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
                   formData.isVip
                     ? 'bg-[#D4AF37]/10 border border-[#D4AF37] text-[#D4AF37]'
-                    : 'bg-zinc-950 border border-zinc-800 text-zinc-500'
+                    : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
                 }`}
               >
                 <Star size={16} fill={formData.isVip ? '#D4AF37' : 'none'} />
@@ -357,7 +357,7 @@ export default function NewContactPage() {
             <div className="space-y-1.5">
               <label className="block text-xs text-zinc-400">이메일</label>
               <div className="relative">
-                <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600" />
+                <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
                   type="email"
                   value={formData.email}
@@ -535,14 +535,14 @@ export default function NewContactPage() {
                 <Sparkles size={18} className="text-zinc-400" />
                 <div>
                   <h3 className="text-sm font-medium text-zinc-100">명함 스캔</h3>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-zinc-400">
                     AI가 명함을 분석하여 정보를 추출합니다
                   </p>
                 </div>
               </div>
               <button
                 onClick={resetScanModal}
-                className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
               >
                 <X size={18} />
               </button>
@@ -558,7 +558,7 @@ export default function NewContactPage() {
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ocr'
                       ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
-                      : 'bg-zinc-950 border border-zinc-800 text-zinc-500'
+                      : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
                   }`}
                 >
                   <span className="text-lg">🇰🇷</span>
@@ -573,7 +573,7 @@ export default function NewContactPage() {
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors ${
                     scanEngine === 'ai'
                       ? 'bg-zinc-800 border border-zinc-700 text-zinc-100'
-                      : 'bg-zinc-950 border border-zinc-800 text-zinc-500'
+                      : 'bg-zinc-950 border border-zinc-800 text-zinc-400'
                   }`}
                 >
                   <Sparkles size={16} />
@@ -602,11 +602,11 @@ export default function NewContactPage() {
                       if (file) handleFileSelect(file)
                     }}
                   />
-                  <Upload size={40} className="mx-auto mb-3 text-zinc-600" />
+                  <Upload size={40} className="mx-auto mb-3 text-zinc-500" />
                   <p className="text-sm text-zinc-300 mb-1">
                     명함 이미지를 드래그하거나 클릭하여 업로드
                   </p>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-zinc-400">
                     JPG, PNG, WebP 지원 (최대 10MB)
                   </p>
                 </div>
@@ -650,37 +650,37 @@ export default function NewContactPage() {
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         {extractedData.name && (
                           <div>
-                            <span className="text-zinc-500">이름: </span>
+                            <span className="text-zinc-400">이름: </span>
                             <span className="text-zinc-200">{extractedData.name}</span>
                           </div>
                         )}
                         {extractedData.company && (
                           <div>
-                            <span className="text-zinc-500">회사: </span>
+                            <span className="text-zinc-400">회사: </span>
                             <span className="text-zinc-200">{extractedData.company}</span>
                           </div>
                         )}
                         {extractedData.position && (
                           <div>
-                            <span className="text-zinc-500">직위: </span>
+                            <span className="text-zinc-400">직위: </span>
                             <span className="text-zinc-200">{extractedData.position}</span>
                           </div>
                         )}
                         {extractedData.email && (
                           <div>
-                            <span className="text-zinc-500">이메일: </span>
+                            <span className="text-zinc-400">이메일: </span>
                             <span className="text-zinc-200">{extractedData.email}</span>
                           </div>
                         )}
                         {extractedData.mobile && (
                           <div>
-                            <span className="text-zinc-500">휴대폰: </span>
+                            <span className="text-zinc-400">휴대폰: </span>
                             <span className="text-zinc-200">{extractedData.mobile}</span>
                           </div>
                         )}
                         {extractedData.phone && (
                           <div>
-                            <span className="text-zinc-500">전화: </span>
+                            <span className="text-zinc-400">전화: </span>
                             <span className="text-zinc-200">{extractedData.phone}</span>
                           </div>
                         )}

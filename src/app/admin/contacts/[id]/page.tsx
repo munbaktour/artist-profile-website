@@ -285,7 +285,7 @@ export default function ContactDetailPage({ params }: PageProps) {
 
   const inputClassName = cn(
     'bg-zinc-950 border-zinc-800 text-zinc-100',
-    'placeholder:text-zinc-500',
+    'placeholder:text-zinc-400',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -590,7 +590,7 @@ export default function ContactDetailPage({ params }: PageProps) {
               <h2 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
                 <MessageSquare className="w-5 h-5" />
                 메모
-                <span className="text-sm font-normal text-zinc-500">
+                <span className="text-sm font-normal text-zinc-400">
                   ({notes.length})
                 </span>
               </h2>
@@ -643,7 +643,7 @@ export default function ContactDetailPage({ params }: PageProps) {
             {/* Notes List */}
             <div className="space-y-3">
               {notes.length === 0 ? (
-                <p className="text-zinc-500 text-sm text-center py-8">
+                <p className="text-zinc-400 text-sm text-center py-8">
                   메모가 없습니다.
                 </p>
               ) : (
@@ -676,7 +676,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-zinc-500 hover:text-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="h-8 w-8 text-zinc-400 hover:text-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <MoreHorizontal className="w-4 h-4" />
                           </Button>
@@ -698,7 +698,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                     <p className="text-[#fafafa] whitespace-pre-wrap mb-3">
                       {note.content}
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-zinc-500">
+                    <div className="flex items-center gap-4 text-xs text-zinc-400">
                       {note.author && (
                         <span className="flex items-center gap-1">
                           <User className="w-3 h-3" />
@@ -738,37 +738,37 @@ export default function ContactDetailPage({ params }: PageProps) {
 
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
-                <span className="text-zinc-500">카테고리</span>
+                <span className="text-zinc-400">카테고리</span>
                 <CategoryBadge category={contact.category} size="sm" />
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-500">VIP</span>
+                <span className="text-zinc-400">VIP</span>
                 {contact.isVip ? (
                   <VipBadge isVip={contact.isVip} size="sm" />
                 ) : (
-                  <span className="text-zinc-500">-</span>
+                  <span className="text-zinc-400">-</span>
                 )}
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-500">언어</span>
+                <span className="text-zinc-400">언어</span>
                 <span className="text-zinc-100">
                   {contact.preferredLanguage === 'ko' ? '한국어' : 'English'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-500">뉴스레터</span>
+                <span className="text-zinc-400">뉴스레터</span>
                 <span className="text-zinc-100">
                   {contact.newsletterSubscribed ? '구독 중' : '미구독'}
                 </span>
               </div>
               {contact.source && (
                 <div className="flex justify-between">
-                  <span className="text-zinc-500">유입 경로</span>
+                  <span className="text-zinc-400">유입 경로</span>
                   <span className="text-zinc-100">{contact.source}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span className="text-zinc-500">등록일</span>
+                <span className="text-zinc-400">등록일</span>
                 <span className="text-zinc-100">
                   {new Date(contact.createdAt).toLocaleDateString('ko-KR')}
                 </span>
@@ -793,7 +793,7 @@ export default function ContactDetailPage({ params }: PageProps) {
                 ))}
               </div>
             ) : (
-              <p className="text-zinc-500 text-sm">태그가 없습니다.</p>
+              <p className="text-zinc-400 text-sm">태그가 없습니다.</p>
             )}
           </div>
 

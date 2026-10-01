@@ -116,7 +116,7 @@ export default function AdminCheckinsPage() {
         {/* Header */}
         <div>
           <h1 className="text-lg font-semibold text-zinc-100">체크인 관리</h1>
-          <p className="text-zinc-500 text-sm mt-0.5">
+          <p className="text-zinc-400 text-sm mt-0.5">
             전시별 방문자 체크인 현황을 확인합니다.
           </p>
         </div>
@@ -139,12 +139,12 @@ export default function AdminCheckinsPage() {
                 onClick={() => setSelectedExhibition(exhibition.slug)}
                 className="w-full bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4 hover:bg-zinc-800/70 transition-colors text-left"
               >
-                <QrCode className="w-5 h-5 text-zinc-500 flex-shrink-0" />
+                <QrCode className="w-5 h-5 text-zinc-400 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-zinc-100 font-medium truncate">
                     {exhibition.title_ko}
                   </p>
-                  <p className="text-xs text-zinc-500 mt-0.5">
+                  <p className="text-xs text-zinc-400 mt-0.5">
                     {exhibition.start_date} ~ {exhibition.end_date}
                   </p>
                 </div>
@@ -159,7 +159,7 @@ export default function AdminCheckinsPage() {
                   )}>
                     {exhibition.status === 'current' ? '진행 중' : exhibition.status === 'upcoming' ? '예정' : '종료'}
                   </span>
-                  <ChevronRight className="w-4 h-4 text-zinc-500" />
+                  <ChevronRight className="w-4 h-4 text-zinc-400" />
                 </div>
               </button>
             ))
@@ -184,7 +184,7 @@ export default function AdminCheckinsPage() {
         <h1 className="text-lg font-semibold text-zinc-100">
           {selectedExhibitionData?.title_ko}
         </h1>
-        <p className="text-zinc-500 text-sm mt-0.5">
+        <p className="text-zinc-400 text-sm mt-0.5">
           {selectedExhibitionData?.start_date} ~ {selectedExhibitionData?.end_date}
         </p>
       </div>
@@ -195,14 +195,14 @@ export default function AdminCheckinsPage() {
           <Eye className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{visitCount}</p>
-            <p className="text-xs text-zinc-500">QR 스캔 횟수</p>
+            <p className="text-xs text-zinc-400">QR 스캔 횟수</p>
           </div>
         </div>
         <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
           <Users className="w-5 h-5 text-zinc-400 flex-shrink-0" />
           <div>
             <p className="text-2xl font-semibold text-zinc-100">{checkins.length}</p>
-            <p className="text-xs text-zinc-500">정보 입력 체크인</p>
+            <p className="text-xs text-zinc-400">정보 입력 체크인</p>
           </div>
         </div>
         <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-4 flex items-center gap-4">
@@ -215,7 +215,7 @@ export default function AdminCheckinsPage() {
                 ? new Date(checkins[0].checked_in_at).toLocaleDateString('ko-KR')
                 : '-'}
             </p>
-            <p className="text-xs text-zinc-500">최근 방문</p>
+            <p className="text-xs text-zinc-400">최근 방문</p>
           </div>
         </div>
       </div>
@@ -234,7 +234,7 @@ export default function AdminCheckinsPage() {
           </div>
           <div className="flex-1 text-center sm:text-left">
             <p className="text-sm text-zinc-400 mb-2">체크인 URL</p>
-            <p className="text-xs text-zinc-500 break-all mb-4 font-mono">
+            <p className="text-xs text-zinc-400 break-all mb-4 font-mono">
               {checkinUrl}
             </p>
             <button
@@ -244,7 +244,7 @@ export default function AdminCheckinsPage() {
               <Download className="w-4 h-4" />
               QR 다운로드 (PNG)
             </button>
-            <p className="text-xs text-zinc-500 mt-2">
+            <p className="text-xs text-zinc-400 mt-2">
               고해상도 이미지로 인쇄하여 전시장에 비치하세요.
             </p>
           </div>
@@ -263,7 +263,7 @@ export default function AdminCheckinsPage() {
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <Users className="w-8 h-8 text-zinc-700 mb-4" />
             <p className="text-zinc-400 mb-1">아직 방문자가 없습니다</p>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-400">
               QR코드를 통해 방문자가 체크인하면 여기에 표시됩니다.
             </p>
           </div>
@@ -286,9 +286,9 @@ export default function AdminCheckinsPage() {
                     item.type === 'checkin' ? "bg-zinc-800" : "bg-zinc-800/50"
                   )}>
                     {item.type === 'checkin' ? (
-                      <User className="w-4 h-4 text-zinc-500" />
+                      <User className="w-4 h-4 text-zinc-400" />
                     ) : (
-                      <Eye className="w-4 h-4 text-zinc-600" />
+                      <Eye className="w-4 h-4 text-zinc-500" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -297,7 +297,7 @@ export default function AdminCheckinsPage() {
                         <p className="text-zinc-100 text-sm font-medium truncate">
                           {item.name || '이름 없음'}
                         </p>
-                        <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+                        <div className="flex items-center gap-1.5 text-xs text-zinc-400">
                           <Phone className="w-3 h-3" />
                           <span>{formatPhone(item.phone)}</span>
                         </div>
@@ -307,7 +307,7 @@ export default function AdminCheckinsPage() {
                         <p className="text-zinc-400 text-sm font-medium">
                           익명 방문자
                         </p>
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs text-zinc-400">
                           QR 스캔
                         </p>
                       </>
@@ -317,7 +317,7 @@ export default function AdminCheckinsPage() {
                     <p className="text-xs text-zinc-400">
                       {new Date(item.type === 'checkin' ? item.checked_in_at : item.visited_at).toLocaleDateString('ko-KR')}
                     </p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-zinc-400">
                       {new Date(item.type === 'checkin' ? item.checked_in_at : item.visited_at).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>

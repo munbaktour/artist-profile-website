@@ -290,7 +290,7 @@ export default function NotificationComposePage() {
 
   const inputClassName = cn(
     'bg-zinc-950 border-zinc-800 text-zinc-100',
-    'placeholder:text-zinc-500',
+    'placeholder:text-zinc-400',
     'focus:ring-white/20 focus:border-white/20'
   )
 
@@ -395,7 +395,7 @@ export default function NotificationComposePage() {
             )}>
               SMS
             </p>
-            <p className="text-xs text-zinc-500 mt-1">(설정 필요)</p>
+            <p className="text-xs text-zinc-400 mt-1">(설정 필요)</p>
           </button>
         </div>
       </div>
@@ -438,7 +438,7 @@ export default function NotificationComposePage() {
 
         {selectedRecipients.length === 0 ? (
           <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-center">
-            <Users className="w-8 h-8 text-zinc-500 mx-auto mb-2" />
+            <Users className="w-8 h-8 text-zinc-400 mx-auto mb-2" />
             <p className="text-zinc-400 text-sm">수신자를 선택해주세요.</p>
           </div>
         ) : (
@@ -596,7 +596,7 @@ export default function NotificationComposePage() {
             {/* Search and Filters */}
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                 <Input
                   placeholder="이름, 이메일, 회사로 검색..."
                   value={searchQuery}

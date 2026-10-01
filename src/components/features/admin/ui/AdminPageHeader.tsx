@@ -34,7 +34,7 @@ export function AdminPageHeader({
               {title}
             </h1>
             {subtitle && (
-              <p className="text-sm text-zinc-500 mt-0.5">
+              <p className="text-sm text-zinc-400 mt-0.5">
                 {subtitle}
               </p>
             )}

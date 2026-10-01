@@ -24,7 +24,7 @@ export function AdminPagination({
         className
       )}
     >
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-zinc-400">
         {startItem} - {endItem} / {total}
       </p>
       <div className="flex items-center gap-3">

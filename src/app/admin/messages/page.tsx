@@ -136,7 +136,7 @@ export default function MessagesPage() {
           <div className="flex flex-col items-center justify-center px-6 py-24 text-center">
             {/* 아이콘을 원형 배경에 담아 빈 화면에 시선이 머물 지점을 만든다 */}
             <div className="w-14 h-14 rounded-full bg-zinc-800/60 flex items-center justify-center mb-5">
-              <MessageSquare className="w-6 h-6 text-zinc-500" />
+              <MessageSquare className="w-6 h-6 text-zinc-400" />
             </div>
             <p className="text-base font-medium text-zinc-100">아직 보낸 메시지가 없습니다</p>
             <p className="text-sm text-zinc-400 mt-1.5 max-w-sm">

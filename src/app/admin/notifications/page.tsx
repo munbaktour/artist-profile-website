@@ -202,7 +202,7 @@ export default function NotificationsPage() {
         <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
           <div className="p-5 border-b border-zinc-800">
             <h2 className="text-sm font-medium text-zinc-100">발송 내역</h2>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               총 {total}건
             </p>
           </div>
@@ -248,7 +248,7 @@ export default function NotificationsPage() {
                         <p className="text-zinc-100 text-sm font-medium">
                           {notification.subject || '(제목 없음)'}
                         </p>
-                        <p className="text-xs text-zinc-500 mt-0.5">
+                        <p className="text-xs text-zinc-400 mt-0.5">
                           {notification.recipientCount > 1
                             ? `${notification.recipientCount}명에게 발송`
                             : notification.recipientEmail || notification.recipientPhone || '1명에게 발송'}
@@ -278,7 +278,7 @@ export default function NotificationsPage() {
                           대기 중
                         </span>
                       )}
-                      <span className="text-xs text-zinc-500">
+                      <span className="text-xs text-zinc-400">
                         {formatDate(notification.createdAt)}
                       </span>
                     </div>

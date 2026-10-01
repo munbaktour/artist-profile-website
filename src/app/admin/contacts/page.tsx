@@ -202,7 +202,7 @@ export default function ContactsPage() {
             <h1 className="text-lg font-semibold text-zinc-100">
               연락처 관리
             </h1>
-            <p className="text-xs text-zinc-500 mt-0.5">
+            <p className="text-xs text-zinc-400 mt-0.5">
               Collector & Relations Management
             </p>
           </div>
@@ -234,7 +234,7 @@ export default function ContactsPage() {
                 <div className="text-2xl font-semibold text-zinc-100">
                   {stat.value}
                 </div>
-                <div className="text-xs text-zinc-500 mt-0.5">
+                <div className="text-xs text-zinc-400 mt-0.5">
                   {stat.label}
                 </div>
               </div>
@@ -247,7 +247,7 @@ export default function ContactsPage() {
           <div className="flex-1 min-w-[300px] relative">
             <Search
               size={16}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400"
             />
             <input
               type="text"
@@ -257,7 +257,7 @@ export default function ContactsPage() {
                 setSearchTerm(e.target.value)
                 setPage(1)
               }}
-              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-zinc-600 transition-colors"
+              className="w-full py-2.5 pl-10 pr-4 rounded-lg text-sm bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder:text-zinc-400 outline-none focus:border-zinc-600 transition-colors"
             />
           </div>
           <button
@@ -286,7 +286,7 @@ export default function ContactsPage() {
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
               selectedCategory === 'all'
                 ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                : 'text-zinc-500 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
             }`}
           >
             <Users size={14} />
@@ -305,7 +305,7 @@ export default function ContactsPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
                   isActive
                     ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
-                    : 'text-zinc-500 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
+                    : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-zinc-800/50'
                 }`}
               >
                 <Icon size={14} />
@@ -376,13 +376,13 @@ export default function ContactsPage() {
                       {contact.position || contact.category?.name || ''}
                     </p>
                     {contact.company && (
-                      <p className="text-xs text-zinc-500 mb-2">
+                      <p className="text-xs text-zinc-400 mb-2">
                         {contact.company}
                       </p>
                     )}
 
                     {/* Contact Info */}
-                    <div className="text-xs space-y-1 text-zinc-500 mb-2">
+                    <div className="text-xs space-y-1 text-zinc-400 mb-2">
                       {contact.phone && (
                         <div className="flex items-center gap-1.5">
                           <Phone size={11} />
@@ -431,7 +431,7 @@ export default function ContactsPage() {
                   <button
                     onClick={(e) => handleDelete(contact.id, e)}
                     disabled={deletingId === contact.id}
-                    className="flex items-center justify-center px-3 py-1.5 rounded text-xs text-zinc-500 hover:text-red-400 hover:bg-red-500/5 transition-colors disabled:opacity-50"
+                    className="flex items-center justify-center px-3 py-1.5 rounded text-xs text-zinc-400 hover:text-red-400 hover:bg-red-500/5 transition-colors disabled:opacity-50"
                   >
                     {deletingId === contact.id ? (
                       <Loader2 size={13} className="animate-spin" />
@@ -448,7 +448,7 @@ export default function ContactsPage() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-800">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-400">
               {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, total)} / {total}
             </p>
             <div className="flex items-center gap-3">
@@ -487,7 +487,7 @@ export default function ContactsPage() {
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="absolute top-4 right-4 p-1.5 text-zinc-400 hover:text-zinc-300 transition-colors"
             >
               <X size={18} />
             </button>
@@ -508,7 +508,7 @@ export default function ContactsPage() {
                 </h3>
                 <p className="text-sm text-zinc-400">{selectedContact.position}</p>
                 {selectedContact.company && (
-                  <p className="text-xs text-zinc-500">{selectedContact.company}</p>
+                  <p className="text-xs text-zinc-400">{selectedContact.company}</p>
                 )}
               </div>
             </div>
@@ -517,19 +517,19 @@ export default function ContactsPage() {
             <div className="p-4 rounded-lg mb-4 space-y-3 bg-zinc-800/50">
               {selectedContact.phone && (
                 <div className="flex items-center gap-3">
-                  <Phone size={16} className="text-zinc-500" />
+                  <Phone size={16} className="text-zinc-400" />
                   <span className="text-sm text-zinc-200">{selectedContact.phone}</span>
                 </div>
               )}
               {selectedContact.email && (
                 <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-zinc-500" />
+                  <Mail size={16} className="text-zinc-400" />
                   <span className="text-sm text-zinc-200">{selectedContact.email}</span>
                 </div>
               )}
               {selectedContact.company && (
                 <div className="flex items-center gap-3">
-                  <Building size={16} className="text-zinc-500" />
+                  <Building size={16} className="text-zinc-400" />
                   <span className="text-sm text-zinc-200">{selectedContact.company}</span>
                 </div>
               )}
@@ -538,7 +538,7 @@ export default function ContactsPage() {
             {/* Category */}
             {selectedContact.category && (
               <div className="mb-4">
-                <h4 className="text-xs text-zinc-500 mb-1.5">카테고리</h4>
+                <h4 className="text-xs text-zinc-400 mb-1.5">카테고리</h4>
                 <span className="inline-block px-3 py-1 rounded text-sm bg-zinc-800 text-zinc-300">
                   {selectedContact.category.name}
                 </span>
@@ -548,7 +548,7 @@ export default function ContactsPage() {
             {/* Notes */}
             {selectedContact.notes && (
               <div className="mb-4">
-                <h4 className="text-xs text-zinc-500 mb-1.5">메모</h4>
+                <h4 className="text-xs text-zinc-400 mb-1.5">메모</h4>
                 <p className="p-3 rounded-lg text-sm leading-relaxed bg-zinc-800/50 text-zinc-300">
                   {selectedContact.notes}
                 </p>

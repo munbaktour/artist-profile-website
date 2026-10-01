@@ -29,7 +29,7 @@ function StatCard({ label, value, color, icon: Icon }: StatItem) {
         <div className="text-2xl font-semibold text-zinc-100">
           {typeof value === 'number' ? value.toLocaleString() : value}
         </div>
-        <div className="text-xs text-zinc-500 mt-0.5">
+        <div className="text-xs text-zinc-400 mt-0.5">
           {label}
         </div>
       </div>
