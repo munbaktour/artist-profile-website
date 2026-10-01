@@ -191,7 +191,7 @@ export function ImageUploader({
             relative flex flex-col items-center justify-center gap-2 p-6
             border-2 border-dashed rounded-lg cursor-pointer transition-all
             ${dragOver
-              ? 'border-zinc-500 bg-zinc-800/50'
+              ? 'border-zinc-500 bg-zinc-700/50'
               : 'border-zinc-700 hover:border-zinc-600 bg-zinc-950'
             }
             ${uploading ? 'pointer-events-none opacity-60' : ''}

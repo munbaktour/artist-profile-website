@@ -102,7 +102,7 @@ export default function MessagesPage() {
       </div>
 
       {/* 발송 내역 테이블 */}
-      <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
+      <div className="bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden">
         {loading ? (
           <div className="p-5">
             <AdminSkeleton variant="table-row" count={5} />
@@ -137,7 +137,7 @@ export default function MessagesPage() {
                 return (
                   <TableRow
                     key={item.id}
-                    className="border-zinc-700 hover:bg-zinc-800"
+                    className="border-zinc-700 hover:bg-zinc-700"
                   >
                     <TableCell className="text-zinc-400 text-sm">
                       {new Date(item.created_at).toLocaleString('ko-KR')}

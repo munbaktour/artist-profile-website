@@ -33,9 +33,9 @@ export function StatCardsGrid({ stats, columns = 4, className }: StatCardsGridPr
 
 function StatCard({ label, value, color, icon: Icon }: StatItem) {
   return (
-    <div className="flex items-center gap-4 p-5 rounded-xl bg-zinc-900 border border-zinc-700">
+    <div className="flex items-center gap-4 p-5 rounded-xl bg-zinc-800 border border-zinc-700">
       {Icon && (
-        <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0">
+        <div className="w-10 h-10 rounded-lg bg-zinc-700 flex items-center justify-center shrink-0">
           <Icon
             className="w-5 h-5 text-zinc-400"
             style={color ? { color } : undefined}

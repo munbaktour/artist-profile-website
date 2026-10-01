@@ -197,7 +197,7 @@ export default function NotificationsPage() {
         </div>
 
         {/* History */}
-        <div className="bg-zinc-900 rounded-lg border border-zinc-700 overflow-hidden">
+        <div className="bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden">
           <div className="p-5 border-b border-zinc-700">
             <h2 className={ADMIN_TYPE.sectionTitle}>발송 내역</h2>
             <p className="text-xs text-zinc-400 mt-1">
@@ -215,7 +215,7 @@ export default function NotificationsPage() {
               <p className="text-red-400">{error}</p>
               <button
                 onClick={() => fetchNotifications()}
-                className="mt-4 px-6 py-2.5 rounded-lg text-sm transition-colors bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700"
+                className="mt-4 px-6 py-2.5 rounded-lg text-sm transition-colors bg-zinc-700 border border-zinc-700 text-zinc-300 hover:bg-zinc-700"
               >
                 다시 시도
               </button>
@@ -231,7 +231,7 @@ export default function NotificationsPage() {
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="p-4 transition-colors hover:bg-zinc-800"
+                  className="p-4 transition-colors hover:bg-zinc-700"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">

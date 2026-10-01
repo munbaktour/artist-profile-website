@@ -104,7 +104,7 @@ const tierStyles: Record<VipTier, { bg: string; text: string; label: string }> =
     label: 'Bronze',
   },
   standard: {
-    bg: 'bg-zinc-800',
+    bg: 'bg-zinc-700',
     text: 'text-zinc-400',
     label: 'Standard',
   },
