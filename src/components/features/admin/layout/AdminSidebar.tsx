@@ -116,14 +116,25 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                 href={item.href}
                 onClick={onClose}
                 className={cn(
-                  'flex items-center gap-3 px-3 py-2.5',
+                  // 활성 표시선을 before 가상요소로 띄운다.
+                  // border-l-2를 쓰면 활성 항목만 박스가 2px 넓어져
+                  // 메뉴를 옮길 때마다 글자가 좌우로 흔들린다.
+                  'group relative flex items-center gap-3 rounded-lg px-3 py-2.5',
                   'text-sm font-medium transition-colors',
+                  'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
+                  'before:h-5 before:w-0.5 before:rounded-r before:transition-colors',
                   isActive
-                    ? 'text-zinc-50 border-l-2 border-[#D4AF37] rounded-r-lg bg-zinc-800/50'
-                    : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 rounded-lg'
+                    ? 'bg-zinc-800/60 text-zinc-50 before:bg-[#D4AF37]'
+                    : 'text-zinc-500 hover:bg-zinc-800/40 hover:text-zinc-300 before:bg-transparent'
                 )}
+                aria-current={isActive ? 'page' : undefined}
               >
-                <Icon className="w-[18px] h-[18px]" />
+                <Icon
+                  className={cn(
+                    'w-[18px] h-[18px] transition-colors',
+                    isActive ? 'text-[#D4AF37]' : 'text-zinc-500 group-hover:text-zinc-300'
+                  )}
+                />
                 {item.label}
               </Link>
             )

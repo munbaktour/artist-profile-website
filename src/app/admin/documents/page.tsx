@@ -13,6 +13,7 @@ import {
   FolderOpen,
 } from 'lucide-react'
 import { cn, formatFileSize } from '@/lib/utils'
+import { AdminSkeleton } from '@/components/features/admin/ui'
 import type { GalleryDocument } from '@/types/admin'
 
 function formatDate(dateStr: string): string {
@@ -218,8 +219,8 @@ export default function DocumentsPage() {
       {/* Document List */}
       <div className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
         {loading ? (
-          <div className="p-12 flex items-center justify-center">
-            <Loader2 size={24} className="animate-spin text-zinc-500" />
+          <div className="p-5">
+            <AdminSkeleton variant="list-item" count={5} />
           </div>
         ) : fetchError ? (
           <div className="p-12 text-center">
